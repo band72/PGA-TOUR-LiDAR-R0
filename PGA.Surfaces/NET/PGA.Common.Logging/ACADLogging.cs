@@ -56,7 +56,9 @@ namespace PGA.Civil.Logging
         {
 
             // Add the event log trace listener to the collection.
-            SystemLogger.Trace.Listeners.Add(myTraceListener);
+            // Register once; adding on every call duplicated each message N times.
+            if (!SystemLogger.Trace.Listeners.Contains(myTraceListener))
+                SystemLogger.Trace.Listeners.Add(myTraceListener);
 
             // Write output to the event log.
             SystemLogger.Trace.WriteLine(message);
