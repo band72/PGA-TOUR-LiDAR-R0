@@ -10,10 +10,9 @@ namespace PGA.Autodesk.Utils
 {
     using Database = global::Autodesk.AutoCAD.DatabaseServices.Database;
 
-
     public class PLineToLayers
     {
-       
+
         private static bool IsLayerDefined(Database db,string layername)
         {
             try
@@ -31,12 +30,10 @@ namespace PGA.Autodesk.Utils
 
         public static string GetPolylineLayer(ObjectId selectedObjectId)
         {
-  
+
             var db = Active.Database;
             var doc = Active.Document;
             var ed = Active.Editor;
-
-            
 
             using (Transaction tr = db.TransactionManager.StartTransaction())
             {
@@ -94,7 +91,6 @@ namespace PGA.Autodesk.Utils
             {
                 DBObject obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
-
 
                 // If a "lightweight" (or optimized) polyline
 
@@ -264,7 +260,6 @@ namespace PGA.Autodesk.Utils
             }
             return null;
         }
-
 
         public static void ProcessLayers(ObjectIdCollection objs, Database db)
         {

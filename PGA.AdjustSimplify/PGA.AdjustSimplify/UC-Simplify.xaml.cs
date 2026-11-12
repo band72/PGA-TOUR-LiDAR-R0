@@ -34,7 +34,6 @@ namespace PGA.AdjustSimplify
         public static double SimplifyValue  { get; set; }
         public static TextBox placeholder;
 
-
         private void Placeholder_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -57,15 +56,12 @@ namespace PGA.AdjustSimplify
                 }
 
             }
-           
+
             catch (Exception ex)
             {
                 PGA.MessengerManager.MessengerManager.LogException(ex);
             }
         }
-
-       
-
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

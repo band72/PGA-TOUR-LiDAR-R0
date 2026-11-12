@@ -18,14 +18,10 @@ using Polyline = global::Autodesk.AutoCAD.DatabaseServices.Polyline;
 namespace ProcessPolylines
 {
 
-
-
     public class ProcessPolylines
     {
         public static IList<DrawingStack> DwDrawingStacks { get; set; } = new List<DrawingStack>();
         public static string GDwgPath { get; set; }
-
-
 
         /// <summary>
         /// Gets the type of the ids by.
@@ -60,7 +56,7 @@ namespace ProcessPolylines
 
         public static ObjectIdCollection GetIdsByTypeTypeValue(params string[] types)
         {
-            
+
             // Get the document
             var doc = Application.DocumentManager.MdiActiveDocument;
 
@@ -118,12 +114,10 @@ namespace ProcessPolylines
                     collection.Add(id);
                 }
 
-
                 trans.Commit();
                 return collection;
             }
         }
-
 
         [CommandMethod("PGA-ProcessPolylines")]
         public static void LoadandProcessPolys()
@@ -156,7 +150,6 @@ namespace ProcessPolylines
                         string path = Path.Combine(gpath, dwg.PolylineDwgName);
 
                         if (path == null) throw new ArgumentNullException(nameof(path));
-
 
                         if (!File.Exists(path))
                         {
@@ -203,7 +196,7 @@ namespace ProcessPolylines
                                 ObjectIdCollection collection = GetIdsByTypeTypeValue("POLYLINE", "LWPOLYLINE", "POLYLINE2D", "POLYLINE3d");
 
                                 CopyPolylinesBetweenDatabases(db,collection);
-                                
+
                                 // Still need to reset the working database
 
                                 HostApplicationServices.WorkingDatabase = wdb;
@@ -215,15 +208,10 @@ namespace ProcessPolylines
                                 output = Path.Combine(output, dwg.PolylineDwgName);
                                 doc.Database.SaveAs(output,DwgVersion.Current);
 
-
                                 //        var ver =
                                 //            (db.LastSavedAsVersion == DwgVersion.MC0To0
                                 //                ? DwgVersion.Current
                                 //                : db.LastSavedAsVersion
-
-
-
-
 
                             }
 
@@ -238,7 +226,6 @@ namespace ProcessPolylines
                 }
             }
         }
-
 
         [CommandMethod("PGA-ChangeLayers")]
         public static void ChangePolylineLayers()
@@ -272,7 +259,6 @@ namespace ProcessPolylines
 
                         if (path == null) throw new ArgumentNullException(nameof(path));
 
-
                         if (!File.Exists(path))
                         {
                             DatabaseLogs.FormatLogs("File Not Found", path);
@@ -293,16 +279,16 @@ namespace ProcessPolylines
 
                             using (var db = doc.Database)
                             {
-                                                
+
                                 ObjectIdCollection collection = GetIdsByTypeTypeValue("POLYLINE", "LWPOLYLINE", "POLYLINE2D", "POLYLINE3d");
- 
+
                                 string date = dwg.DateStamp.Value.ToFileTime().ToString();
                                 string output = Path.Combine(commands.GetGlobalDestinationPath(dwg.DateStamp.Value), String.Format("HOLES-{0}", date));
                                 Pge.Common.Framework.FileUtilities.CreateDirectory(output);
                                 PLineToLayers.ProcessLayers(collection, db);
                                 output = Path.Combine(output, dwg.PolylineDwgName);
                                 doc.Database.SaveAs(output, DwgVersion.Current);
- 
+
                             }
 
                         }
@@ -316,8 +302,6 @@ namespace ProcessPolylines
                 }
             }
         }
-
-
 
         [CommandMethod("DGNPURGEEXT")]
         public static void PurgeDgnLinetypesExt()
@@ -431,25 +415,21 @@ namespace ProcessPolylines
             throw new NotImplementedException();
         }
 
-
         public static void CopyPolylinesBetweenDatabases(Database _sourcedb, ObjectIdCollection _collection)
         {
             ObjectIdCollection acObjIdColl = new ObjectIdCollection();
             acObjIdColl = _collection;
 
-            // Get the current document and database 
+            // Get the current document and database
             Database acCurDb = _sourcedb;// acDoc.Database;
-            // Lock the current document 
+            // Lock the current document
 
-
-
-
-            // Create a new drawing to copy the objects to DocumentCollection 
+            // Create a new drawing to copy the objects to DocumentCollection
             var acDocMgr = Application.DocumentManager;
             Document acNewDoc = Application.DocumentManager.MdiActiveDocument;
             Database acDbNewDoc = acNewDoc.Database;
 
-            // Lock the new document 
+            // Lock the new document
             using (DocumentLock acLckDoc = acNewDoc.LockDocument())
             {
                 // Start a transaction in the new database
@@ -470,25 +450,24 @@ namespace ProcessPolylines
                     // Save the copied objects to the database
                     acTrans.Commit();
                 }
-                // Unlock the document 
+                // Unlock the document
             }
-            // Set the new document current 
+            // Set the new document current
 
             acDocMgr.MdiActiveDocument = acNewDoc;
         }
-
 
         [CommandMethod("CopyObjectsBetweenDatabases", CommandFlags.Session)]
         public static void CopyObjectsBetweenDatabases()
         {
             ObjectIdCollection acObjIdColl = new ObjectIdCollection();
-            // Get the current document and database 
+            // Get the current document and database
             Document acDoc = Application.DocumentManager.MdiActiveDocument;
             Database acCurDb = acDoc.Database;
-            // Lock the current document 
+            // Lock the current document
             using (DocumentLock acLckDocCur = acDoc.LockDocument())
             {
-                // Start a transaction 
+                // Start a transaction
                 using (Transaction acTrans = acCurDb.TransactionManager.StartTransaction())
                 {
                     // Open the Block table record for read
@@ -520,16 +499,16 @@ namespace ProcessPolylines
                     // Save the new objects to the database
                     acTrans.Commit();
                 }
-                // Unlock the document 
+                // Unlock the document
             }
-            // Change the file and path to match a drawing template on your workstation 
+            // Change the file and path to match a drawing template on your workstation
             string sLocalRoot = Application.GetSystemVariable("LOCALROOTPREFIX") as string;
             string sTemplatePath = sLocalRoot + "Template\\acad.dwt";
-            // Create a new drawing to copy the objects to DocumentCollection 
+            // Create a new drawing to copy the objects to DocumentCollection
             var acDocMgr = Application.DocumentManager;
             Document acNewDoc = acDocMgr.Add(sTemplatePath);
             Database acDbNewDoc = acNewDoc.Database;
-            // Lock the new document 
+            // Lock the new document
             using (DocumentLock acLckDoc = acNewDoc.LockDocument())
             {
                 // Start a transaction in the new database
@@ -550,52 +529,21 @@ namespace ProcessPolylines
                     // Save the copied objects to the database
                     acTrans.Commit();
                 }
-                // Unlock the document 
+                // Unlock the document
             }
-            // Set the new document current 
+            // Set the new document current
 
             acDocMgr.MdiActiveDocument = acNewDoc;
         }
 
-
-
-
-
-
         // Helper function to be shared between our command
         // implementations
 
-
-
-
-
-
         //        var ltsToKeep =
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //        var nod =
 
-
-
         //            var dgnLsDict =
-
-
-
-
-
 
     }
 }

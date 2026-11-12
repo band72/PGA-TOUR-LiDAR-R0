@@ -61,13 +61,13 @@ namespace PGA.SportVisionGUI
         {
             folderBrowserDialog1 = new FolderBrowserDialog();
             try
-            {   
+            {
                 DialogResult result = folderBrowserDialog1.ShowDialog();
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
- 
+
                     txtDirectory.Text = folderBrowserDialog1.SelectedPath;
- 
+
                 }
             }
             catch (Exception ex)
@@ -92,7 +92,6 @@ namespace PGA.SportVisionGUI
             }
         }
 
-
         public async Task<int> ClearData(object sender)
         {
 
@@ -105,7 +104,7 @@ namespace PGA.SportVisionGUI
                         var delete = commands.DeleteAllFromGUStack();
                     }
                 }
-      
+
             }
             catch (Exception ex)
             {

@@ -4,7 +4,7 @@ namespace PGA.Model.DAL
 {
     public partial class EntitiesModel
     {
-     
+
         IList<string> Layerstates = new List<string>();
 
         public void LoadLayerStates()
@@ -33,7 +33,7 @@ namespace PGA.Model.DAL
             Layerstates.Add("WALL,OWL,S-WALL");
             Layerstates.Add("WATER,OWA,S-WATER");
             Layerstates.Add("WATER DROP,OWD,S-WATER-DROP");
-            
+
         }
 
     }

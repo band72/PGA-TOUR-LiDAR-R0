@@ -6,7 +6,6 @@ using global::Autodesk.AutoCAD.DatabaseServices;
 
 #endregion
 
-
 namespace BBC.Common.AutoCAD
 {
     /// <summary>
@@ -430,7 +429,7 @@ namespace BBC.Common.AutoCAD
                         var targetBtr = new BlockTableRecord();
                         targetBtr.Name = nextPaperSpaceLayoutName;
 
-                        // Note that this does not work as expected - 
+                        // Note that this does not work as expected -
                         // the name is redefined at .Add. No error is thrown and the layout name sorts itself out on save / close / open?
                         targetBt.Add(targetBtr);
                         trans.AddNewlyCreatedDBObject(targetBtr, true);
@@ -553,12 +552,6 @@ namespace BBC.Common.AutoCAD
         /// <param name="pointList">The point list.</param>
         /// <param name="viewportObjectId">The viewport object id.</param>
         /// <returns></returns>
-
-
-
-
-
-
 
         /// <summary>
         /// Sets the viewport view.

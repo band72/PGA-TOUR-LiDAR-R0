@@ -110,7 +110,7 @@ namespace Pge.Common.AutoCAD
         public static IList<GemsPoint2d> BuildPolygonFromMinMax(GemsPoint2d lowerLeft, GemsPoint2d upperRight)
         {
             IList<GemsPoint2d> polyPoints = new List<GemsPoint2d>();
-            
+
             polyPoints.Add(new GemsPoint2d(lowerLeft.X, lowerLeft.Y));
             polyPoints.Add(new GemsPoint2d(upperRight.X, lowerLeft.Y));
             polyPoints.Add(new GemsPoint2d(upperRight.X, upperRight.Y));
@@ -173,7 +173,7 @@ namespace Pge.Common.AutoCAD
         public static bool GetStatePlaneFromLatLong(IDataManager manager, GemsPoint2d source, ref GemsPoint2d dest, ref string statePlane)
         {
             bool result = false;
-            
+
             string statePlaneUsed = String.Empty;
             foreach (string sp in CoordinateService.GetStatePlanes())
             {
@@ -184,7 +184,7 @@ namespace Pge.Common.AutoCAD
                     statePlane = sp;
                     break;
                 }
-                catch(System.Exception ex) 
+                catch(System.Exception ex)
                 {
                     throw;
                 }
@@ -207,7 +207,7 @@ namespace Pge.Common.AutoCAD
             try
             {
                 dest = CoordinateService.TranslateStatePlaneToWGS84(manager, statePlane, source);
-                result = true;                    
+                result = true;
             }
             catch (System.Exception ex)
             {
@@ -288,6 +288,6 @@ namespace Pge.Common.AutoCAD
             }
             return scaledPoints;
         }
-    
+
     }
 }

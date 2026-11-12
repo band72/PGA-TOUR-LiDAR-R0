@@ -44,7 +44,6 @@ namespace PGA.DatabaseManager
             dgTasks.CanUserDeleteRows = false;
         }
 
-
         /// <summary>
         /// Loads the settings data.
         /// </summary>
@@ -67,17 +66,16 @@ namespace PGA.DatabaseManager
                     IList<TaskManager> task=
                      commands.GetTasksProjectName();
                     if (task == null) return false;
-                    dgTasks.ItemsSource = task; 
+                    dgTasks.ItemsSource = task;
                     return true;
                 }
             }
             catch (Exception ex)
-            {                
+            {
                 COMS.MessengerManager.LogException(ex);
             }
             return false;
         }
-
 
         /// <summary>
         /// Handles the Loaded event of the Grid control.
@@ -123,7 +121,7 @@ namespace PGA.DatabaseManager
             {
                 COMS.MessengerManager.ShowMessageAndLog("dgTasks_SelectionChanged " + ex.Message);
             }
-         
+
         }
 
         /// <summary>
@@ -131,7 +129,6 @@ namespace PGA.DatabaseManager
         /// </summary>
         /// <value>The date selected.</value>
         public DateTime DateSelected { get; set; }
-
 
         /// <summary>
         /// Gets the current row.
@@ -245,7 +242,6 @@ namespace PGA.DatabaseManager
             return row;
         }
 
-
         /// <summary>
         /// Handles the Click event of the cmdPause control.
         /// </summary>
@@ -264,8 +260,6 @@ namespace PGA.DatabaseManager
            this.Close();
         }
 
-
-
         /// <summary>
         /// Handles the Click event of the cmdRunTask control.
         /// </summary>
@@ -281,7 +275,7 @@ namespace PGA.DatabaseManager
             //load template
             //create point cloud
             //create "All" surface
-            //process surfaces with dll. 
+            //process surfaces with dll.
             #endregion
 
             using (DatabaseCommands commands = new DatabaseCommands())
@@ -295,7 +289,6 @@ namespace PGA.DatabaseManager
                 this.Close();
             }
 
-
         }
 
         /// <summary>
@@ -305,7 +298,6 @@ namespace PGA.DatabaseManager
         /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs" /> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-         
 
             try
             {

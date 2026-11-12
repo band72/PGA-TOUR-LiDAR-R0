@@ -44,9 +44,9 @@ namespace BBC.CloudManager
 
             string ServiceAccountEmail = "bbc-gen-svc-p12@cloudupdate-1331.iam.gserviceaccount.com";
             string AppDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string serviceAccountkeyFile = System.IO.Path.Combine(AppDataDir, 
+            string serviceAccountkeyFile = System.IO.Path.Combine(AppDataDir,
                 @"Autodesk\ApplicationPlugins\PGA-CivilTinSurf2018.bundle\Cert\CloudUpdate-5a0a72353113.p12");
-            
+
               DriveService service = Authentication.AuthenticateServiceAccount(ServiceAccountEmail, serviceAccountkeyFile);
 
             if (service == null)
@@ -55,12 +55,11 @@ namespace BBC.CloudManager
                 goto End;
             }
 
-           
             try
             {
                 Console.WriteLine("Starting Update Application!");
 
-                // Listing files with search.  
+                // Listing files with search.
                 // This searches for a directory with the name DiamtoSample
 
                 Console.WriteLine("Contacting Google Cloud!");
@@ -71,7 +70,6 @@ namespace BBC.CloudManager
 
                 Console.WriteLine("Receiving response From Google Cloud!");
 
-
                 if (_Files == null || _Files.Count == 0)
                 {
                     Console.WriteLine("Could not find any Updates!");
@@ -79,7 +77,6 @@ namespace BBC.CloudManager
                 }
 
                 IList<File> selected = AddSelectedFiles(_Files);
-          
 
                 if (selected.FirstOrDefault() == null)
                 {
@@ -118,12 +115,10 @@ namespace BBC.CloudManager
                     break;
                 }
 
-
                 # region MyRegion
                 //// If there isn't a directory with this name lets create one.
 
                 // We should have a directory now because we either had it to begin with or we just created one.
-
 
 # endregion
 
@@ -134,7 +129,7 @@ namespace BBC.CloudManager
                     {
                         Console.WriteLine(item.Title + " " + item.MimeType);
                     }
-                }            
+                }
             }
             catch (Exception ex)
             {
@@ -172,7 +167,7 @@ namespace BBC.CloudManager
         private static void SetCurrentMD5(string md5Checksum)
         {
             try
-            {                
+            {
                 using (DatabaseCommands commands = new DatabaseCommands())
                 {
                     commands.SetUpdateCurrentVersionMD5(md5Checksum);
@@ -193,7 +188,7 @@ namespace BBC.CloudManager
 
                 using (DatabaseCommands commands = new DatabaseCommands())
                 {
-                
+
                     var v1BuildDay = commands.ConvertInt32(v1.Substring(0, 5));
                     var v1BuildMin = commands.ConvertInt32(v1.Substring(12, 3));
                     var v2BuildDay = commands.ConvertInt32(v2.Substring(0, 5));
@@ -371,9 +366,9 @@ namespace BBC.CloudManager
                 var ordered = BuildVersion.Where(p => p.civil == "18").OrderByDescending(p =>
                               String.Format("{0}.{1}", p.majbuild, p.minbuild)).FirstOrDefault();
                 #region Advanced
-                //	
+                //
                 #endregion
-                
+
                 var selected =  String.Format("DatabaseManager-{0}.exe", ordered.build);
 
                 var output = Version.Where(p => p.Title == selected).Select(p => p).FirstOrDefault();
@@ -386,7 +381,6 @@ namespace BBC.CloudManager
             }
             return null;
         }
-
 
         public static DriveService GetService()
         {

@@ -15,7 +15,6 @@ namespace Pge.Common.Framework
         //private static readonly ILog //_logger = LogManager.GetLogger(typeof(Framework));
         private const string BATCH_PLOT_PATH = @"C:\Program Files\mapping2009\gems\support\BatchPlot.exe";
         #endregion
-        
 
         #region Public Methods
 
@@ -27,10 +26,10 @@ namespace Pge.Common.Framework
         public static bool LaunchAutoCAD(string profile, string scriptFile, string workingFolder, string support, bool showLogo)
         {
             StringBuilder args = new StringBuilder();
-            
+
             if (!String.IsNullOrEmpty(profile))
             {
-                args.Append("/p " + profile + " ");                
+                args.Append("/p " + profile + " ");
             }
 
             if (!String.IsNullOrEmpty(scriptFile))

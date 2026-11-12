@@ -352,7 +352,6 @@ namespace BBC.Common.AutoCAD
             return retval;
         }
 
-
         /// <summary>
         ///     Gets a dimension style Dimexe property
         /// </summary>

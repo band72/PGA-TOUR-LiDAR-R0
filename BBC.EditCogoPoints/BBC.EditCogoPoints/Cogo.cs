@@ -7,14 +7,12 @@ using Autodesk.AutoCAD.Interop;
 using Autodesk.AECC.Interop.Survey;
 using Autodesk.AECC.Interop.UiSurvey;
 
-
 namespace PGA.EditCogoPoints
 {
     public static class Cogo
     {
 
        public static Editor ed = Active.Active.Editor;
-
 
         public static void GetCogoPoints()
         {
@@ -155,29 +153,6 @@ namespace PGA.EditCogoPoints
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
-
 }
-    

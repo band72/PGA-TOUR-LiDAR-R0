@@ -79,12 +79,11 @@ namespace PGA.LogManagerUC
             }
         }
 
-
         private async Task ClearLogs()
         {
             try
             {
-              
+
                     await Task.Run(() =>
                 {
                     using (DatabaseCommands commands = new DatabaseCommands())
@@ -94,7 +93,7 @@ namespace PGA.LogManagerUC
                     }
                 }
                 );
-               
+
             }
             catch (System.Exception ex)
             {
@@ -110,15 +109,12 @@ namespace PGA.LogManagerUC
 
                 dgTasks.ItemsSource = _Logs;
 
-
             }
             catch (Exception ex)
             {
                 PGA.MessengerManager.MessengerManager.LogException(ex);
             }
         }
-
-  
 
         private static async void cmdRefreshCtrl()
         {
@@ -127,7 +123,7 @@ namespace PGA.LogManagerUC
                 bool filter = false;
 
                 _Logs.Clear();
-               
+
                 await Task.Run(() =>
                 {
                     using (DatabaseCommands commands = new DatabaseCommands())
@@ -176,7 +172,6 @@ namespace PGA.LogManagerUC
             }
 
         }
-    
 
         private bool IsFileLocked(string filename)
         {
@@ -204,8 +199,6 @@ namespace PGA.LogManagerUC
                 {
                     filename = commands.GetLogFilePath();
                     var logs = commands.GetLastAllLogs().ToArray();
-
-
 
                     StreamWriter writer = new StreamWriter(filename, false);
                     foreach (var line in logs)
@@ -244,8 +237,6 @@ namespace PGA.LogManagerUC
                 using (DatabaseCommands commands = new DatabaseCommands())
                 {
                     var logs = commands.GetLastAllLogs().ToArray();
-
-
 
                     StreamWriter writer = new StreamWriter(commands.GetLogFilePath(), false);
                     foreach (var line in logs)
@@ -334,7 +325,6 @@ namespace PGA.LogManagerUC
             {
                 PGA.MessengerManager.MessengerManager.LogException(ex);
             }
-
 
             return 1;
         }

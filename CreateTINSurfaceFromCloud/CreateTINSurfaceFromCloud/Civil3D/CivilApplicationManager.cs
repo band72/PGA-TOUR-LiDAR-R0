@@ -7,7 +7,7 @@ namespace C3DApplicationDocuments
 {
     public class CivilApplicationManager
     {
-        public static CivilDocument ActiveCivilDocument 
+        public static CivilDocument ActiveCivilDocument
         {
             get { return CivilApplication.ActiveDocument; }
         }
@@ -21,8 +21,6 @@ namespace C3DApplicationDocuments
         {
             return HostApplicationServices.WorkingDatabase.TransactionManager.StartTransaction();
         }
-
-      
 
     }
 }

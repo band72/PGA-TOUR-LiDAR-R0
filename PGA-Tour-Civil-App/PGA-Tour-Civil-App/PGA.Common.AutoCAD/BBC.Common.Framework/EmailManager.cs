@@ -4,7 +4,6 @@ using System.Text;
 using System.Net;
 using System.Net.Mail;
 
-
 namespace BBC.Common.Framework
 {
     /// <summary>
@@ -46,7 +45,7 @@ namespace BBC.Common.Framework
             {
                 PGA.MessengerManager.MessengerManager.AddLog("Error sending email. Please check configuration in file EmailManager.cs", smtpEx);
             }
-        } 
+        }
 
         #endregion
     }

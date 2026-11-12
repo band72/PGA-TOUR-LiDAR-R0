@@ -23,12 +23,12 @@ namespace Pge.Common.Framework
                     return true;
                 }
             }
-           
+
             return false;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="name"></param>
         /// <param name="killAll"></param>

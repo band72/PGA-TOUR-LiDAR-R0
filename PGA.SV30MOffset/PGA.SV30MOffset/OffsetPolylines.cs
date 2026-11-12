@@ -84,7 +84,6 @@ namespace PGA.SV30MOffset
             }
         }
 
-
         public interface IDisposableCollection<T> : ICollection<T>, IDisposable
             where T : IDisposable
         {
@@ -141,13 +140,10 @@ namespace PGA.SV30MOffset
             {
                 if (items == null)
                     throw new ArgumentNullException("items");
-               
+
                 ExceptWith(items);
                 return items;
             }
         }
     }
 }
-
-    
-

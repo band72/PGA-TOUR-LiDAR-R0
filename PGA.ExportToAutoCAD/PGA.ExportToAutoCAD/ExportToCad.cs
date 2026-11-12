@@ -142,7 +142,6 @@ namespace PGA.ExportToAutoCAD
                 name = "ACAD-" + name;
                 var completepath = Path.Combine(dir, name);
 
-
                  doc.SendStringToExecute("ExportToAutoCAD " + completepath + "\n", true, false, false);
             }
         }
@@ -219,7 +218,7 @@ namespace PGA.ExportToAutoCAD
                                     commands.UnLockFileExportToCad(file.Id);
                                     break;
                                 }
-                               
+
                                 // Skip DXF and ACAD
                                 if (SkipSDxf)
                                     if (!(IsZDrawing(file.CompletePath)))
@@ -229,7 +228,7 @@ namespace PGA.ExportToAutoCAD
                                         break;
                                     }
                                 if (File.Exists(file.CompletePath))
-                                {   
+                                {
                                     var doc = Application.DocumentManager.Open
                                         (file.CompletePath, true);
                                     Application.DocumentManager.MdiActiveDocument = doc;
@@ -238,15 +237,6 @@ namespace PGA.ExportToAutoCAD
                                     {
                                         try
                                         {
-
-
-
-                                            
-
-
-
-
-
 
                                         }
                                         catch (System.Exception ex)
@@ -267,7 +257,7 @@ namespace PGA.ExportToAutoCAD
                                             {
                                                 ExportToAutoCADCurrentDWG(file.CompletePath, file.Hole);
                                             }
-                                            
+
                                             commands.SetCompletedFlagDWGExportToCad(file.Id);
                                             commands.UnLockFileExportToCad(file.Id);
                                             break;
@@ -278,7 +268,7 @@ namespace PGA.ExportToAutoCAD
                         }
                     }
                 }
-            
+
             }
             catch (Autodesk.AutoCAD.Runtime.Exception ex)
             {
@@ -298,7 +288,7 @@ namespace PGA.ExportToAutoCAD
                 using (DatabaseCommands commands = new DatabaseCommands())
                 {
                     allExportToCadRecords = commands.GetAllExportToCadRecords();
-             
+
                     if (allExportToCadRecords != null)
                     {
                         Application.SetSystemVariable("FILEDIA", 0);
@@ -315,7 +305,6 @@ namespace PGA.ExportToAutoCAD
                                 commands.LockFileExportToCad(file.Id);
 
                                 var s = commands.GetSettingsByDate((DateTime)file.DateStamp);
-                               
 
                                 SkipSDxf = commands.IsSkipDXFByDate
                                     ((DateTime) file.DateStamp);
@@ -413,10 +402,10 @@ namespace PGA.ExportToAutoCAD
             {
                 var dir = Path.GetDirectoryName(CompletePath);
 
-                var name = String.Format("{0}{1}{2}{3}.dxf", 
+                var name = String.Format("{0}{1}{2}{3}.dxf",
                     TourCode,
-                    DateTime.Now.Year, 
-                    CourseCode, 
+                    DateTime.Now.Year,
+                    CourseCode,
                     Hole);
 
                 var modified = Path.Combine(dir, name);
@@ -487,7 +476,7 @@ namespace PGA.ExportToAutoCAD
                         }
                     }
                     commands.SetDXFFlagExportToCad(file.Id);
-                    commands.SetCompletedFlagExportToCad(file.Id);  
+                    commands.SetCompletedFlagExportToCad(file.Id);
                 }
                 commands.DeleteAllExportToCadRecords();
             }
@@ -522,7 +511,7 @@ namespace PGA.ExportToAutoCAD
 
         public static void CreateFaces(DBObjectCollection faces, string filename,Autodesk.AutoCAD.DatabaseServices.Database db)
         {
-           
+
             try
             {
                 using (Transaction trans = db.TransactionManager.StartTransaction())
@@ -562,7 +551,7 @@ namespace PGA.ExportToAutoCAD
                //Todo: originalname to name ?
 
                 if (IsZDrawing(filename))
-                {  
+                {
                     name = string.Format("z_{0}_{1}.dxf", coursecode, hole);
                     filename = Path.Combine(Path.GetDirectoryName(filename), name);
                     COMS.AddLog("Creating file Z-Surface DXF: " + name);
@@ -572,7 +561,7 @@ namespace PGA.ExportToAutoCAD
                     COMS.AddLog("Creating file S-Surface DXF: " + name);
 
                 if (!Is2013DXF)
-                {                 
+                {
                     db.DxfOut(originalname.Replace(".DWG", ".dxf"), 16, DwgVersion.Current);
                 }
                 else
@@ -613,7 +602,7 @@ namespace PGA.ExportToAutoCAD
                     }
                     trans.Commit();
                 }
-               
+
                 using (Transaction trans = db.TransactionManager.StartTransaction())
                 {
                     db.SaveAs(filename, DwgVersion.Current);
@@ -672,19 +661,6 @@ namespace PGA.ExportToAutoCAD
             return new ObjectIdCollection(promptSelectionResult.Value.GetObjectIds());
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         double Area(Point3d p1, Point3d p2, Point3d p3)
         {
             return Math.Abs(
@@ -726,4 +702,3 @@ namespace PGA.ExportToAutoCAD
         }
     }
 }
-

@@ -44,8 +44,6 @@ namespace PGA.Surfaces
 
     #region New Snippet Insert
 
-
-
     public class C3DSurfacesDemoCommands
         {
 
@@ -132,18 +130,15 @@ namespace PGA.Surfaces
                     //5 Add Boundary to New Surface
                     //1 Select All Polylines
                     //2 Determine if boundaries are needed to be type inner or outer
-                    //3 Filter Polylines based on layer name. May be able to know the type. 
+                    //3 Filter Polylines based on layer name. May be able to know the type.
                     #endregion
 
-     
                     if (CivilTinSurface.FindCivilTinSurface("All"))
                     {
-
 
                     #region get polylines and generate surfaces and boundaries
 
                      polylines = GetIdsByTypeTypeValue("POLYLINE", "LWPOLYLINE", "POLYLINE2D", "POLYLINE3D");
-                    
 
                     //Create a surface hive to generate a TIN surface
                     if (!surfaceManager.CreateSurfaceForPolylines(polylines))
@@ -154,7 +149,7 @@ namespace PGA.Surfaces
                             throw new SystemException("Add overall Boundaries for surfaces failed!");
 
                     #endregion
-                    PGA.MessengerManager.MessengerManager.AddLog 
+                    PGA.MessengerManager.MessengerManager.AddLog
                        ("Store boundaries to Object Dictionary");
                         ObjectIdCollection internalPLines = null;
                         foreach (ObjectId baseObj in polylines)
@@ -167,10 +162,8 @@ namespace PGA.Surfaces
                             continue;
 
                         internalPLines = surfaceManager.GetAllInternalPolyLinesToSelected(baseObj, polylines);
-            
 
                             m_dict.Add(baseObj, internalPLines);
-
 
                             #endregion
                         }
@@ -185,7 +178,6 @@ namespace PGA.Surfaces
 
                             ObjectId outerPline = innerbdy.Key;
                             ObjectIdCollection innerIdCollection = innerbdy.Value;
-
 
                             lsurface = PasteSurfaces.FindSurfaceIdForPolylineV2(outerPline);
 
@@ -228,7 +220,6 @@ namespace PGA.Surfaces
 
                         #endregion
 
-
                         internalPLines = null;
                     PGA.MessengerManager.MessengerManager.AddLog
                       ("End Iterate through inner boundaries");
@@ -257,7 +248,6 @@ namespace PGA.Surfaces
                 }
             }
 
-         
             [CommandMethod("PGA-CreateAllSurfaces", CommandFlags.UsePickSet)]
             public void CreateSingleSurface()
             {
@@ -274,9 +264,8 @@ namespace PGA.Surfaces
                     //5 Add Boundary to New Surface
                     //1 Select All Polylines
                     //2 Determine if boundaries are needed to be type inner or outer
-                    //3 Filter Polylines based on layer name. May be able to know the type. 
+                    //3 Filter Polylines based on layer name. May be able to know the type.
                     #endregion
-
 
                     if (CivilTinSurface.FindCivilTinSurface("All"))
                     {
@@ -344,7 +333,7 @@ namespace PGA.Surfaces
                             if (!surfaceManager.CreateSurfaceForPolylines(selectedpolyline))
                                 throw new SystemException("Create surface for polylines failed!");
                             if (!surfaceManager.PasteAllSurfaces(CivilTinSurface.GetCivilSurfaceBySurfaceName("All")))
-                                    throw new SystemException("Pasting Surfaces failed!");                     
+                                    throw new SystemException("Pasting Surfaces failed!");
                             if (!surfaceManager.AddBoundariesForSurfaces(selectedpolyline))
                                     throw new SystemException("Add overall Boundaries for surfaces failed!");
 
@@ -367,7 +356,6 @@ namespace PGA.Surfaces
 
                                         m_dict.Add(selected, internalPLines);
 
-
                                         #endregion
                                 }
 
@@ -381,7 +369,6 @@ namespace PGA.Surfaces
                                 lsurface = PasteSurfaces.FindSurfaceIdForPolylineV2(boundary.Key);
 
                                 if (boundary.Value == null) continue;
-
 
                                 #region Interate Internal Polylines to add breaklines and boundaries
 
@@ -407,9 +394,7 @@ namespace PGA.Surfaces
                                                 }
 
                                             }
-                                        
 
-                                        
                                             catch (NullReferenceException e)
                                             {
                                                 PGA.MessengerManager.MessengerManager.AddLog(
@@ -438,7 +423,6 @@ namespace PGA.Surfaces
 
                             ed.Regen();
                             #endregion
-
 
                             internalPLines = null;
                             }
@@ -519,7 +503,6 @@ namespace PGA.Surfaces
                             ObjectId outerPline = innerbdy.Key;
                             ObjectIdCollection innerIdCollection = innerbdy.Value;
 
-
                             lsurface = PasteSurfaces.FindSurfaceIdForPolylineV2(outerPline);
 
                             if (lsurface == null)
@@ -557,7 +540,6 @@ namespace PGA.Surfaces
                         }
 
                         #endregion
-
 
                         internalPLines = null;
 
@@ -610,7 +592,6 @@ namespace PGA.Surfaces
 
                             surface.GetTriangles(true);
 
-
                             trans.Commit();
                         }
 
@@ -622,7 +603,7 @@ namespace PGA.Surfaces
                 }
 
             }
- 
+
             public static global::Autodesk.AutoCAD.DatabaseServices.ObjectIdCollection CloseSelectedPolylines()
             {
 
@@ -682,8 +663,7 @@ namespace PGA.Surfaces
                 return null;
             }
 
- 
         }
-    
+
     #endregion
 }

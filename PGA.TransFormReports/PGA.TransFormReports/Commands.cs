@@ -33,7 +33,6 @@ namespace PGA.TransFormReports
             }
         }
 
-
         public static Collection<List<Logs>> GetReportsToWrite()
         {
             TransformReports report = new TransformReports();
@@ -45,7 +44,7 @@ namespace PGA.TransFormReports
                     var logs   = commands.GetLastAllLogs();
                     var errors = report.FiltersCombinedAllErrors(logs.ToList());
 
-                    return errors; 
+                    return errors;
                 }
             }
             catch (System.Exception ex)

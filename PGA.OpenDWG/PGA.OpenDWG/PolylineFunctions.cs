@@ -529,7 +529,6 @@ namespace PGA.OpenDWG
         }
     }
 
-
         public class ReferenceFiler : DwgFiler
         {
             public ObjectIdCollection HardPointerIds;
@@ -656,4 +655,3 @@ namespace PGA.OpenDWG
             }
         }
     }
-

@@ -76,7 +76,6 @@ namespace TestFeatureLineIssues
                     collection.Add(id);
                 }
 
-
                 trans.Commit();
                 return collection;
             }

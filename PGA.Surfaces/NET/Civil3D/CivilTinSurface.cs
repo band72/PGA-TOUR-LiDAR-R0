@@ -14,7 +14,7 @@ using C3DLandDb = Autodesk.Civil.DatabaseServices;
 namespace C3DSurfacesDemo
 {
     public class CivilTinSurface
-    { 
+    {
         public CivilTinSurface(string surfaceName, string surfaceStyleName)
         {
             using (Transaction tr = CivilApplicationManager.StartTransaction())
@@ -32,7 +32,7 @@ namespace C3DSurfacesDemo
             }
         }
         public static void SetBaseLayerCivilTinSurface(string surfaceStyleName)
-        { 
+        {
             Database db = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Database;
             Document doc = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.GetDocument(db);
 
@@ -88,18 +88,18 @@ namespace C3DSurfacesDemo
 
             return true;
         }
-        public string Name 
+        public string Name
         {
-            get 
-            { 
+            get
+            {
                 using(Transaction tr = CivilApplicationManager.StartTransaction())
                 {
                     C3DLandDb.TinSurface surface = m_TheSurfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
-                    return surface.Name; 
+                    return surface.Name;
                 }
-                
+
             }
-            set 
+            set
             {
                 using (Transaction tr = CivilApplicationManager.StartTransaction())
                 {
@@ -110,7 +110,7 @@ namespace C3DSurfacesDemo
             }
         }
 
-        public IEnumerable<Point3d> Points 
+        public IEnumerable<Point3d> Points
         {
             get { return new Point3dEnumerable(m_TheSurfaceId); }
         }
@@ -159,14 +159,14 @@ namespace C3DSurfacesDemo
             C3DLandDb.TinSurface surface;
             try
             {
-               
+
                 using (Transaction tr = CivilApplicationManager.StartTransaction())
-                {               
-                    surface = surIdId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;                  
+                {
+                    surface = surIdId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
                     tr.Commit();
                 }
                 return surface;
-               
+
             }
             catch (System.Exception e)
             {
@@ -222,7 +222,7 @@ namespace C3DSurfacesDemo
             {
                 using (Transaction tr = CivilApplicationManager.StartTransaction())
                 {
-                    //1. Create new surface if no existing surface passed in 
+                    //1. Create new surface if no existing surface passed in
                     C3DLandDb.TinSurface surface = m_TheSurfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
                     if (surface == null)
                         surface = m_TheSurfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
@@ -235,12 +235,8 @@ namespace C3DSurfacesDemo
 
                     //4. now add the boundary to the surface
                     surfaceBoundaries.AddBoundaries(boundaryEntities, 1.0, SurfaceBoundaryType.Outer, true);
-                
-                   
+
                     tr.Commit();
-
-               
-
 
                     //// Add the selected polyline's ObjectId to a collection
 
@@ -257,7 +253,7 @@ namespace C3DSurfacesDemo
             {
                 using (Transaction tr = CivilApplicationManager.StartTransaction())
                 {
-                    //1. Create new surface if no existing surface passed in 
+                    //1. Create new surface if no existing surface passed in
                     C3DLandDb.TinSurface surface = m_TheSurfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
                     if (surface == null)
                         surface = m_TheSurfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
@@ -267,11 +263,11 @@ namespace C3DSurfacesDemo
 
                     //3. Access the BoundariesDefinition object from the surface object
                     C3DLandDb.SurfaceDefinitionBoundaries surfaceBoundaries = surface.BoundariesDefinition;
-                   
+
                     //4. now add the boundary to the surface
                     var sbo = surfaceBoundaries.AddBoundaries(boundaryEntities, 1.0, SurfaceBoundaryType.Hide, true);
                     sbo.Name = layername + "-" + DateTime.Now.Millisecond;
-                    
+
                     tr.Commit();
 
                 }
@@ -300,16 +296,16 @@ namespace C3DSurfacesDemo
                     }
                 }
             }
-            
+
             return ObjectId.Null;
         }
 
         private ObjectId createPolylineFromPoints(Point3dCollection points)
         {
-            ObjectId polyId = ObjectId.Null;    
+            ObjectId polyId = ObjectId.Null;
             Polyline3d polyline = new Polyline3d(Poly3dType.SimplePoly, points, false);
             polyId = addEntityToCurrentDatabase(polyline);
-            return polyId;           
+            return polyId;
         }
 
         private ObjectId addEntityToCurrentDatabase(Entity entity)
@@ -355,7 +351,6 @@ namespace C3DSurfacesDemo
             }
         }
 
-
         /// <summary>
         ///     Sets the default build options.
         ///     Date: 2/19/2017
@@ -381,7 +376,7 @@ namespace C3DSurfacesDemo
 
                         surface.UpgradeOpen();
                         ///Todo:Handle Breaklines for Water and Bulkhead
-                        /// 
+                        ///
                         if (surface.Name.Contains("WATER"))
                             surface.BuildOptions.MaximumTriangleLength = 100;
                         else if (surface.Name.Contains("All"))
@@ -396,7 +391,7 @@ namespace C3DSurfacesDemo
                         surface.BuildOptions.MinimumElevation = 0.1;
                         surface.BuildOptions.CrossingBreaklinesElevationOption =
                             CrossingBreaklinesElevationType.UseLast; ///Todo: Changed 2/19/17 from None.
-                       
+
                         surface.DowngradeOpen();
 
                         tr.Commit();
@@ -460,17 +455,14 @@ namespace C3DSurfacesDemo
                     PGA.MessengerManager.MessengerManager.AddLog(String.Format("Smoothing Region Failed to get Points!"));
                 }
 
-
             }
             catch (Exception ex)
             {
                 PGA.MessengerManager.MessengerManager.AddLog(String.Format("Smoothing Region Failed {0}", ex));
             }
 
-
             return null;
         }
-
 
         /// <summary>
         /// Sets the smoothing to 0.5 ft for select surfaces
@@ -494,7 +486,7 @@ namespace C3DSurfacesDemo
 
                     using (Transaction ts = CivilApplicationManager.StartTransaction())
                     {
-                  
+
                         C3DLandDb.SurfacePointOutputOptions pointOutputOptions =
                             new C3DLandDb.SurfacePointOutputOptions();
                         pointOutputOptions.GridSpacingX = 0.5;
@@ -514,7 +506,6 @@ namespace C3DSurfacesDemo
                 }
                 return surface;
 
-
             }
             catch (System.Exception ex)
             {
@@ -528,13 +519,6 @@ namespace C3DSurfacesDemo
     /// <summary>
     /// Illustrates Smoothing a TIN Surface
     /// </summary>
-
-
-
-
-
-
-
 
     public class Point3dEnumerable  : IEnumerable<Point3d>
     {
@@ -621,7 +605,7 @@ namespace C3DSurfacesDemo
         public TriangleEnumerator(C3DLandDb.TinSurface surface)
         {
             m_TriangleEnumerator = surface.Triangles.GetEnumerator();
-            
+
         }
 
         public SurfaceTriangle Current
@@ -678,6 +662,5 @@ namespace C3DSurfacesDemo
             }
         }
 
-   
     }
 }

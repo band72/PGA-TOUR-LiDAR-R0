@@ -78,7 +78,6 @@ namespace PGA.Breaklines
                     collection.Add(id);
                 }
 
-
                 trans.Commit();
                 return collection;
             }

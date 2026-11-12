@@ -58,11 +58,9 @@ namespace PGA.UpdateManager
             string filename = @"Autodesk\ApplicationPlugins\PGA-CivilTinSurf2018.bundle\" +
                               @"DB_Loader\Bin\Update\BBC.CloudManager.exe";
 
-
             var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             PGA.MessengerManager.MessengerManager.AddLog("Set Path: " + System.IO.Path.Combine(path, filename));
-
 
             if (File.Exists(System.IO.Path.Combine(path, filename)))
             {
@@ -75,7 +73,6 @@ namespace PGA.UpdateManager
                 throw new FileNotFoundException(System.IO.Path.Combine(path, filename));
             }
         }
-
 
         /// <summary>
         /// Handles the Click event of the cmdUpdate control.
@@ -124,7 +121,7 @@ namespace PGA.UpdateManager
                 }
 
             }
-        
+
             catch (InvalidOperationException)
             {
                  PGA.MessengerManager.MessengerManager.AddLog("Program not installed! Patch to install update!");
@@ -133,7 +130,7 @@ namespace PGA.UpdateManager
             {
                  PGA.MessengerManager.MessengerManager.LogException(ex);
             }
-           
+
              PGA.MessengerManager.MessengerManager.AddLog("Ending Update Function!");
         }
 
@@ -151,7 +148,6 @@ namespace PGA.UpdateManager
 
                     if (record == null)
                         return true;
-
 
                     if (record.CurrentVersion == null ||
                         record.DownloadPath   == null ||

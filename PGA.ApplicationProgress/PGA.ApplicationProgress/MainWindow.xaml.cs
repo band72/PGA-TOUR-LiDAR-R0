@@ -23,8 +23,8 @@ namespace PGA.ApplicationProgress
         public MainWindow()
         {
             InitializeComponent();
- 
+
         }
-        
+
     }
 }

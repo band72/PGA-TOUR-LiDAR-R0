@@ -13,7 +13,7 @@ namespace PGA.DatabaseManager
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    /// 
+    ///
 
     public partial class MainWindow : Window
     {
@@ -26,7 +26,7 @@ namespace PGA.DatabaseManager
         public string MyconnectionString { get; private set; }
 
         public MainWindow()
-        {   
+        {
             InitializeComponent();
 
             PointFilePath = new WinForms.FolderBrowserDialog();
@@ -37,7 +37,6 @@ namespace PGA.DatabaseManager
             DxfFolderFilePath = new WinForms.FolderBrowserDialog();
 
             InitializeTaskManager();
-         
 
         }
 
@@ -64,20 +63,10 @@ namespace PGA.DatabaseManager
         public int TaskId { get; set; }
         public int SettingID { get; set; }
 
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-       
+
         }
-
-
-
-
-
-
-                
-       
-
 
         private void cmdPointPath_Click(object sender, RoutedEventArgs e)
         {
@@ -96,10 +85,10 @@ namespace PGA.DatabaseManager
 
             if (CheckTimeStamp())
                 return;
-   
+
             using (CleanUp clean = new CleanUp())
             {
-                  
+
                 Settings settings = new Settings();
 
                 if (txtDateCreated.Text != null)
@@ -120,7 +109,7 @@ namespace PGA.DatabaseManager
                     settings.ProjectName = txtProjectName.Text;
                     settings.TemplateDWG = txtTemplatePath.Text;
                 }
-                
+
                 DatabaseCommands commands = new DatabaseCommands();
                 commands.NewTask(DateCreated, settings );
 
@@ -136,13 +125,11 @@ namespace PGA.DatabaseManager
             return false;
         }
 
-
-
         private static void CreateIfNotExists(string fileName)
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            // Set the data directory to the users %AppData% folder            
-            // So the database file will be placed in:  C:\\Users\\<Username>\\AppData\\Roaming\\            
+            // Set the data directory to the users %AppData% folder
+            // So the database file will be placed in:  C:\\Users\\<Username>\\AppData\\Roaming\\
             AppDomain.CurrentDomain.SetData("DataDirectory", path);
 
             // Enure that the database file is present
@@ -230,8 +217,8 @@ namespace PGA.DatabaseManager
         }
 
         private void cmdLoadData_Click(object sender, RoutedEventArgs e)
-        {    
-           
+        {
+
             using (CleanUp clean = new CleanUp())
             {
                 DatabaseCommands commands = new DatabaseCommands();
@@ -240,21 +227,19 @@ namespace PGA.DatabaseManager
                 commands.LoadData(DateCreated, Pointfiles, PolyLinefiles, DestFolderPath.SelectedPath);
                 #region MyRegion
 
-                // renew DateStamp 
+                // renew DateStamp
                 #endregion
                 DateCreated = DateTime.Now;
             }
             MessageBox.Show("Load Completed!");
         }
 
-
-
         private bool TestAccess(string path)
         {
             if (String.IsNullOrEmpty(path)) return false;//throw new ArgumentNullException("path");
-            
+
             ReadWriteTest.CurrentUserSecurity security = new ReadWriteTest.CurrentUserSecurity();
-            
+
             DirectoryInfo directory = new DirectoryInfo(path);
 
             if (!security.HasAccess(directory, FileSystemRights.Read))
@@ -381,13 +366,13 @@ namespace PGA.DatabaseManager
                 return inheritedAllow && !inheritedDeny;
             }
         }
-        
+
     }
 
     public static class Parser
     {
         public static string ParseConnectionString(string conn)
-        {  
+        {
             string[] str =  conn.Split(new string[] { ";" }, StringSplitOptions.None);
 
             foreach (string s in str)
@@ -404,7 +389,7 @@ namespace PGA.DatabaseManager
         public static string strdelimiter()
         {
             string s =  ";";
-            return s.ToString(); 
+            return s.ToString();
         }
 
         public static char cdelimiter()
@@ -423,7 +408,7 @@ namespace PGA.DatabaseManager
                 CultureInfo culture = new CultureInfo("en");
                 if (culture.CompareInfo.IndexOf(s.ToUpper(), "Data Source", CompareOptions.IgnoreCase) > 0)
                     return true;
- 
+
             }
             return false;
         }

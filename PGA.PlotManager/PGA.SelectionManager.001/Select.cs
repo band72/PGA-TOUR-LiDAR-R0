@@ -59,7 +59,7 @@ namespace PGA.SelectionManager
             return retVal;
 
         }
- 
+
         public static ObjectIdCollection GetIdsByTypeTypeValue(params string[] types)
         {
 
@@ -99,16 +99,13 @@ namespace PGA.SelectionManager
         }
         public static double? GetPolyLineArea(ObjectId selectedObjectId, global::Autodesk.AutoCAD.DatabaseServices.Database db)
         {
- 
-            Transaction tr = db.TransactionManager.StartTransaction();
 
- 
+            Transaction tr = db.TransactionManager.StartTransaction();
 
             using (tr)
             {
                 DBObject obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
-
 
                 // If a "lightweight" (or optimized) polyline
 
@@ -154,7 +151,7 @@ namespace PGA.SelectionManager
         }
         public static Polyline GetPolyLineObject(ObjectId selectedObjectId, global::Autodesk.AutoCAD.DatabaseServices.Database db)
         {
- 
+
             Transaction tr = db.TransactionManager.StartTransaction();
 
             // Get the current UCS
@@ -201,12 +198,10 @@ namespace PGA.SelectionManager
 
                     var b = br.Cast<ObjectId>();
 
-
                     ids = (from id in b
                            where id.ObjectClass.Name == "AcDb2dPolyline" // DXF "POLYLINE" covers 2D and 3D; class name distinguishes them
 
                            select id).ToList();
-
 
                     tran.Commit();
                 }
@@ -238,12 +233,10 @@ namespace PGA.SelectionManager
                             tran.GetObject(tbl[Acaddb.BlockTableRecord.ModelSpace], Acaddb.OpenMode.ForRead);
 
                     var b = br.Cast<Acaddb.ObjectId>();
- 
 
                     ids = (from id in b
                            where id.ObjectClass.DxfName.ToUpper() == "LWPOLYLINE"
                            select id).ToList();
-
 
                     tran.Commit();
                 }
@@ -275,9 +268,8 @@ namespace PGA.SelectionManager
 
                     var b = br.Cast<Acaddb.ObjectId>();
 
-
                     var pids = (from id in b
-                           where id.ObjectClass.DxfName.ToUpper() == "LWPOLYLINE"                 
+                           where id.ObjectClass.DxfName.ToUpper() == "LWPOLYLINE"
                            select id).ToList();
 
                     ids = new List<ObjectId>();
@@ -340,17 +332,13 @@ namespace PGA.SelectionManager
 
                     //============================================================//
 
-
                     //Use lambda extension method
-
-
 
                     #endregion
 
                     ids = (from id in b
                            where id.ObjectClass.DxfName.ToUpper() == "AECC_FEATURE_LINE"
                            select id).ToList();
-
 
                     tran.Commit();
                 }
@@ -381,12 +369,10 @@ namespace PGA.SelectionManager
                             tran.GetObject(tbl[Acaddb.BlockTableRecord.ModelSpace], Acaddb.OpenMode.ForRead);
 
                     var b = br.Cast<Acaddb.ObjectId>();
- 
 
                     ids = (from id in b
                            where id.ObjectClass.Name == "AcDb3dPolyline"
                            select id).ToList();
-
 
                     tran.Commit();
                 }

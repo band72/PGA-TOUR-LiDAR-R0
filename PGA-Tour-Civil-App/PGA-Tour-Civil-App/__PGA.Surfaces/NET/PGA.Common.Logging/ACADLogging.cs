@@ -5,7 +5,6 @@ using System.IO;
 using Exception = System.Exception;
 using SystemLogger = System.Diagnostics;
 
-
 namespace PGA.Civil.Logging
 {
     public static class ACADLogging
@@ -64,7 +63,7 @@ namespace PGA.Civil.Logging
 
             if (!String.IsNullOrEmpty(message))
                 message = string.Format("{0}\n", message);
-              
+
             // Create a file for output named TestFile.txt.
             if (myFile == null)
             {
@@ -80,7 +79,6 @@ namespace PGA.Civil.Logging
             }
             // Write output to the file.
             SystemLogger.Trace.WriteLine(message);
-
 
             // Flush the output.
             SystemLogger.Trace.Flush();

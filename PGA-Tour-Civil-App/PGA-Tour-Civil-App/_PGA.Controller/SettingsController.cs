@@ -24,8 +24,6 @@ namespace PGA.Controller
             view.SetController(this);
         }
 
-
-
         public void Save(LayerStatesBLL changed_states)
         {
             try
@@ -56,7 +54,6 @@ namespace PGA.Controller
                 model.WriteDataToRegistry("Water", changed_states.Water);
                 model.WriteDataToRegistry("WaterDrop", changed_states.WaterDrop);
             }
-
 
             catch (Exception ex)
             {
@@ -133,7 +130,6 @@ namespace PGA.Controller
             }
             return null;
         }
-
 
     }
 }

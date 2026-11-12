@@ -26,16 +26,16 @@ namespace PGA.Database
         public static string CreateIfNotExists(string fileName)
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            // Set the data directory to the users %AppData% folder               
-            // So the database file will be placed in:  C:\\Users\\<Username>\\AppData\\Roaming\\                
-            AppDomain.CurrentDomain.SetData("DataDirectory", path); // Enure that the database file is present    
+            // Set the data directory to the users %AppData% folder
+            // So the database file will be placed in:  C:\\Users\\<Username>\\AppData\\Roaming\\
+            AppDomain.CurrentDomain.SetData("DataDirectory", path); // Enure that the database file is present
             if (!File.Exists(Path.Combine(path, fileName)))
             {
-                //Get path to our .exe, which also has a copy of the database file      
+                //Get path to our .exe, which also has a copy of the database file
                 var location = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                 var codebase = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
                 var exePath = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-                //Copy the file from the .exe location to the %AppData% folder       
+                //Copy the file from the .exe location to the %AppData% folder
 
                 return Path.Combine(path, fileName);
             }
@@ -61,12 +61,12 @@ namespace PGA.Database
 
             var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             path = Path.Combine(path, PathDb);
-            // Set the data directory to the users %AppData% folder               
-            // So the database file will be placed in:  C:\\Users\\<Username>\\AppData\\Roaming\\                
-            //AppDomain.CurrentDomain.SetData("DataDirectory", path); // Enure that the database file is present    
+            // Set the data directory to the users %AppData% folder
+            // So the database file will be placed in:  C:\\Users\\<Username>\\AppData\\Roaming\\
+            //AppDomain.CurrentDomain.SetData("DataDirectory", path); // Enure that the database file is present
             if (File.Exists(Path.Combine(path, fileName)))
             {
-                //Get path to our .exe, which also has a copy of the database file      
+                //Get path to our .exe, which also has a copy of the database file
 
                 return Path.Combine(path, fileName);
             }
@@ -119,16 +119,16 @@ namespace PGA.Database
 
             var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             path = Path.Combine(path, Path.GetDirectoryName(TemplatePath));
-            // Set the data directory to the users %AppData% folder               
-            // So the database file will be placed in:  C:\\Users\\<Username>\\AppData\\Roaming\\                
-            //AppDomain.CurrentDomain.SetData("DataDirectory", path); // Enure that the database file is present    
+            // Set the data directory to the users %AppData% folder
+            // So the database file will be placed in:  C:\\Users\\<Username>\\AppData\\Roaming\\
+            //AppDomain.CurrentDomain.SetData("DataDirectory", path); // Enure that the database file is present
             if (File.Exists(Path.Combine(path, fileName)))
             {
-                //Get path to our .exe, which also has a copy of the database file      
+                //Get path to our .exe, which also has a copy of the database file
                 var location = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                 var codebase = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
                 var exePath = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-                //Copy the file from the .exe location to the %AppData% folder       
+                //Copy the file from the .exe location to the %AppData% folder
                 File.Copy(Path.Combine(exePath, fileName), Path.Combine(path, fileName));
 
                 return Path.Combine(path, fileName);

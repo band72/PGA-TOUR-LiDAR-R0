@@ -35,7 +35,6 @@ namespace BBC.CloudManager
                                              DriveService.Scope.DriveReadonly,   // view files and documents on your drive
                                              DriveService.Scope.DriveScripts };  // modify your app scripts
 
-
             try
             {
                 // here is where we Request the user to give us access, or use the Refresh Token that was previously stored in %AppData%
@@ -86,7 +85,7 @@ namespace BBC.CloudManager
                                              DriveService.Scope.DriveFile,   // view and manage files created by this app
                                              DriveService.Scope.DriveMetadataReadonly,   // view metadata for files
                                              DriveService.Scope.DriveReadonly,   // view files and documents on your drive
-                                             DriveService.Scope.DriveScripts };  // modify your app scripts     
+                                             DriveService.Scope.DriveScripts };  // modify your app scripts
 
             var certificate = new X509Certificate2(keyFilePath, "notasecret", X509KeyStorageFlags.Exportable);
             try
@@ -112,8 +111,6 @@ namespace BBC.CloudManager
 
             }
         }
-
-
 
     }
 

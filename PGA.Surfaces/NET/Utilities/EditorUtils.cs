@@ -6,7 +6,7 @@ using Autodesk.AutoCAD.EditorInput;
 
 namespace C3DSurfacesDemo
 {
-    public class EditorUtils 
+    public class EditorUtils
     {
         public static void Regen()
         {
@@ -31,13 +31,12 @@ namespace C3DSurfacesDemo
             return result;
         }
 
-        private static Editor _editor 
+        private static Editor _editor
         {
             get {
                 return Application.DocumentManager.MdiActiveDocument.Editor;
             }
         }
-
 
     }
 }

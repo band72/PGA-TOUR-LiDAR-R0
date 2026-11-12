@@ -27,8 +27,6 @@ namespace PGA.DisjointedSurfaces
     {
         #region Teigha Implementation
 
-
-
         //            (test.x < (points[j].x - points[i].x)*(test.y - points[i].y)/(points[j].y - points[i].y) + points[i].x))
 
         #endregion
@@ -112,7 +110,6 @@ namespace PGA.DisjointedSurfaces
                 if (c) return c; //break if point is inside poly
             }
 
-
             return c;
         }
 
@@ -142,7 +139,6 @@ namespace PGA.DisjointedSurfaces
 
                 if (c) return c; //break if point is inside poly
             }
-
 
             return c;
         }

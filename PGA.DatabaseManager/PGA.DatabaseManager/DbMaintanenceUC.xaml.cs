@@ -52,7 +52,7 @@ namespace PGA.DbMaintanenceUC
         private async void cmdRepair_Click(object sender, RoutedEventArgs e)
         {
             DatabaseCommands commands = new DatabaseCommands();
-           
+
             try
             {
                 using (SqlCeEngine engine = new SqlCeEngine(commands.GetConnectionString()))
@@ -60,7 +60,7 @@ namespace PGA.DbMaintanenceUC
                     ConnectionStringSettings conSetting = new ConnectionStringSettings();
                     conSetting = ConfigHelper.save_new_connection(commands.GetConnectionString());
 
-                     await CallEngineRepairAsync();                   
+                     await CallEngineRepairAsync();
                 }
             }
             catch (SqlCeException ex)

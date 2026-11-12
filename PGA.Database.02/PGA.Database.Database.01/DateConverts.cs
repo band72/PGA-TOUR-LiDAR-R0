@@ -33,7 +33,6 @@ namespace PGA.Database
             return dtresult;
         }
 
-
         /// <summary>
         ///     Cons the date time to string for database.
         /// </summary>

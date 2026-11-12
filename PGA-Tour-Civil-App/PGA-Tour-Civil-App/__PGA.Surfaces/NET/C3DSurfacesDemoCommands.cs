@@ -10,7 +10,6 @@ using PGA.Civil.Logging;
 using Application = Autodesk.AutoCAD.ApplicationServices.Core.Application;
 using Exception = System.Exception;
 
-
 [assembly: CommandClass(typeof (C3DSurfacesDemoCommands))                                ]
 
 namespace C3DSurfacesDemo
@@ -23,7 +22,7 @@ namespace C3DSurfacesDemo
         [CommandMethod("PGA-CreateAllSurfaces")]
         public void CreateAllSurfaces()
         {
-            
+
             try
             {
                 var polylines =
@@ -39,7 +38,7 @@ namespace C3DSurfacesDemo
                 //5 Add Boundary to New Surface
                 //1 Select All Polylines
                 //2 Determine if boundaries are needed to be type inner or outer
-                //3 Filter Polylines based on layer name. May be able to know the type. 
+                //3 Filter Polylines based on layer name. May be able to know the type.
                 #endregion
 
                 try
@@ -56,7 +55,6 @@ namespace C3DSurfacesDemo
 
                 if (CivilTinSurface.FindCivilTinSurface("All"))
                 {
-
 
                     #region get polylines and generate surfaces and boundaries
 
@@ -82,7 +80,6 @@ namespace C3DSurfacesDemo
 
                         m_dict.Add(baseObj, internalPLines);
 
-
                         #endregion
                     }
 
@@ -96,7 +93,6 @@ namespace C3DSurfacesDemo
 
                         ObjectId outerPline = innerbdy.Key;
                         ObjectIdCollection innerIdCollection = innerbdy.Value;
-
 
                         lsurface = PasteSurfaces.FindSurfaceIdForPolylineV2(outerPline);
 
@@ -132,13 +128,12 @@ namespace C3DSurfacesDemo
                         #region Rebuild Surfaces
                         ACADLogging.LogMyExceptions("Start RebuildSurfaceBySurfaceName");
                         if (lsurface != null)
-                            CivilTinSurface.RebuildSurfaceBySurfaceName(lsurface.Name); 
+                            CivilTinSurface.RebuildSurfaceBySurfaceName(lsurface.Name);
                         #endregion
                     }
 
                     #endregion
 
-                                    
                     internalPLines = null;
                     ACADLogging.LogMyExceptions("End Iterate through inner boundaries");
                 }
@@ -183,9 +178,8 @@ namespace C3DSurfacesDemo
                 //5 Add Boundary to New Surface
                 //1 Select All Polylines
                 //2 Determine if boundaries are needed to be type inner or outer
-                //3 Filter Polylines based on layer name. May be able to know the type. 
+                //3 Filter Polylines based on layer name. May be able to know the type.
                 #endregion
-
 
                 if (CivilTinSurface.FindCivilTinSurface("All"))
                 {
@@ -218,7 +212,6 @@ namespace C3DSurfacesDemo
                         internalPLines = surfaceManager.GetAllInternalPolyLinesToSelected(baseObj, polylines, minpolyseparation);
 
                         m_dict.Add(baseObj, internalPLines);
-
 
                         #endregion
                     }
@@ -273,7 +266,6 @@ namespace C3DSurfacesDemo
 
                     #endregion
 
-
                     internalPLines = null;
 
                 }
@@ -309,7 +301,7 @@ namespace C3DSurfacesDemo
                 var polylines =
                     new ObjectIdCollection();
                 Dictionary<ObjectId, ObjectIdCollection> m_dict;
-                 
+
                 var surfaceManager = new PasteSurfaces();
                 m_dict = new Dictionary<ObjectId, ObjectIdCollection>();
 
@@ -319,7 +311,7 @@ namespace C3DSurfacesDemo
                     #region get polylines and generate surfaces and boundaries
 
                     polylines = surfaceManager.GetAllPolyLines();
-         
+
                     #endregion
 
                     ObjectIdCollection internalPLines = null;
@@ -346,7 +338,6 @@ namespace C3DSurfacesDemo
 
                         ObjectId outerPline = innerbdy.Key;
                         ObjectIdCollection innerIdCollection = innerbdy.Value;
-
 
                         lsurface = PasteSurfaces.FindSurfaceIdForPolylineV2(outerPline);
 
@@ -375,15 +366,14 @@ namespace C3DSurfacesDemo
                         #endregion
                         #region Rebuild Surfaces
                         if (lsurface != null)
-                            CivilTinSurface.RebuildSurfaceBySurfaceName(lsurface.Name); 
+                            CivilTinSurface.RebuildSurfaceBySurfaceName(lsurface.Name);
                         #endregion
                         #region Regenerate Graphics
-                        EditorUtils.Regen(); 
+                        EditorUtils.Regen();
                         #endregion
                     }
 
                     #endregion
-
 
                     internalPLines = null;
 
@@ -436,7 +426,6 @@ namespace C3DSurfacesDemo
 
                         surface.GetTriangles(true);
 
-
                         trans.Commit();
                     }
 
@@ -449,18 +438,12 @@ namespace C3DSurfacesDemo
 
         }
 
-
-
-
-
-
-
         public static Autodesk.AutoCAD.DatabaseServices.ObjectIdCollection CloseSelectedPolylines()
         {
-             
+
             Autodesk.AutoCAD.DatabaseServices.ObjectIdCollection oids;
             oids = new Autodesk.AutoCAD.DatabaseServices.ObjectIdCollection();
-            
+
             SelectionSet selection;
             selection = BBC.Common.AutoCAD.SelectionManager.GetSelectionSet("");
 

@@ -70,7 +70,6 @@ namespace BBC.CivilSurf
             var doc = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager;
             var ed = Application.DocumentManager.MdiActiveDocument.Editor;
 
-
             try
             {
                 if (e.GlobalCommandName == "BBC-CreateSurfaceOffsets")
@@ -106,55 +105,14 @@ namespace BBC.CivilSurf
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //                      verticesInsidePline.Contains(tri.Vertex3)))
-
 
         //                ///
         //                /// Todo: Implement the correct coordinate rotation for better performance
         //                ///
 
-
-
-
         //                var resulpoint = BBC.SurfOffet.PlaneGeometry.FindOffset
         //                (mathnetTri.Vertex1, mathnetTri.Vertex2,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         /// <summary>
         /// Tests the create surface offsets.
@@ -248,9 +206,7 @@ namespace BBC.CivilSurf
 
                         var triangles = GetTrianglesFromSurface(surface);
 
-
                         ed.WriteMessage("\nNumber of Triangles Processes: " + verticesInsidePline.Length/3 + "\n");
-
 
                         foreach (var tri in triangles)
                         {
@@ -263,7 +219,7 @@ namespace BBC.CivilSurf
                                 continue;
                             }
 
-                            //Set the UCS to Triangle Plane  
+                            //Set the UCS to Triangle Plane
 
                             ///
                             /// Todo: Implement the correct coordinate rotation for better performance
@@ -282,15 +238,12 @@ namespace BBC.CivilSurf
                             var nativeVec12 = surfaceTri.Vertex1.GetVectorTo(surfaceTri.Vertex2);
                             var nativeVec13 = surfaceTri.Vertex1.GetVectorTo(surfaceTri.Vertex3);
                             var nativeNormal = nativeVec12.CrossProduct(nativeVec13);
- 
 
                             var center = BBC.SurfOffet.PlaneGeometry.FindTriangleCenter(mathnetTri.Vertex1,
                                 mathnetTri.Vertex2,
                                 mathnetTri.Vertex3, cross);
 
-
                             var centerP3D = new Point3d(center[0], center[1], center[2]);
-
 
                             if (createLine)
                             {
@@ -377,7 +330,6 @@ namespace BBC.CivilSurf
                 if (doubleResult.Status != PromptStatus.OK) return;
                 var offset = doubleResult.Value;
 
-
                 //Add an Cutoff Angle
                 PromptDoubleOptions pIntAngleOpts = new PromptDoubleOptions("");
                 pIntAngleOpts.Message = "\nAdd a cutoff angle in degrees (90): ";
@@ -458,13 +410,11 @@ namespace BBC.CivilSurf
 
                         var triangles = GetTrianglesFromSurface(surface);
 
-
                         ed.WriteMessage("\nNumber of Triangles Processes: " + verticesInsidePline.Length / 3 + "\n");
 
                         // Collection of Points for Weeding
 
                         var usedTriangles = new List<Point3d>();
-
 
                         // Iterate the Triangles
 
@@ -479,7 +429,7 @@ namespace BBC.CivilSurf
                                 continue;
                             }
 
-                            //Set the UCS to Triangle Plane  
+                            //Set the UCS to Triangle Plane
 
                             ///
                             /// Todo: Implement the correct coordinate rotation for better performance
@@ -499,17 +449,14 @@ namespace BBC.CivilSurf
                             var nativeVec13 = surfaceTri.Vertex1.GetVectorTo(surfaceTri.Vertex3);
                             var nativeNormal = nativeVec12.CrossProduct(nativeVec13);
 
-
                             var center = BBC.SurfOffet.PlaneGeometry.FindTriangleCenter(mathnetTri.Vertex1,
                                 mathnetTri.Vertex2,
                                 mathnetTri.Vertex3, cross);
-
 
                             var centerP3D = new Point3d(center[0], center[1], center[2]);
 
                             if (ExceedsNormalCutoff(angle,nativeNormal))
                                 continue;
-                            
 
                             if (WithinWeedDistance(weeding, centerP3D, usedTriangles))
                                 continue;
@@ -612,7 +559,6 @@ namespace BBC.CivilSurf
                 if (doubleResult.Status != PromptStatus.OK) return;
                 var offset = doubleResult.Value;
 
-
                 //Add an Cutoff Angle
                 PromptDoubleOptions pIntAngleOpts = new PromptDoubleOptions("");
                 pIntAngleOpts.Message = "\nAdd a cutoff angle in degrees (90): ";
@@ -712,8 +658,6 @@ namespace BBC.CivilSurf
                                 {
 
                                     newsurfacepoints.Add(new Point3d(item.X, item.Y, item.Z));
-                                    
-
 
                                     Debug.WriteLine("After Correction " + item.Z);
                                 }
@@ -722,10 +666,8 @@ namespace BBC.CivilSurf
 
                                     Debug.WriteLine("After Correction (Z outside tol: " + item.Z);
 
-
                                 }
 
-                               
                             }
 
                             if (createLine)
@@ -754,7 +696,6 @@ namespace BBC.CivilSurf
                         newSurface.AddVertices(newsurfacepoints);
                     }
 
-
                     if (erasePline)
                         EraseObject(pline);
                     else
@@ -776,7 +717,6 @@ namespace BBC.CivilSurf
                 ed.WriteMessage("Error " + ex.Message);
             }
         }
-
 
         [CommandMethod("BBC-CreateSurfaceOffsetsTriangles")]
         public static void TestCreateSurfaceOffsetsTriangles()
@@ -808,7 +748,6 @@ namespace BBC.CivilSurf
                 PromptDoubleResult doubleResult = ed.GetDouble(pIntOpts);
                 if (doubleResult.Status != PromptStatus.OK) return;
                 var offset = doubleResult.Value;
-
 
                 //Add an Cutoff Angle
                 PromptDoubleOptions pIntAngleOpts = new PromptDoubleOptions("");
@@ -891,7 +830,6 @@ namespace BBC.CivilSurf
                         plinesBorder.Add(plineId);
                         TinSurfaceVertex[] verticesInsidePline = surface.GetVerticesInsidePolylines(plinesBorder);
 
-
                         // Iterate all the connected Triangles
 
                         var surfaceOid = TinSurface.Create(db, "AutoSurface");
@@ -904,7 +842,7 @@ namespace BBC.CivilSurf
 
                             foreach (var tri in vert.Triangles)
                             {
-                                corrected = BBC.SurfOffset002.OffsetPoints.GetOffsetTriangles(tri,offset);                         
+                                corrected = BBC.SurfOffset002.OffsetPoints.GetOffsetTriangles(tri,offset);
                                 edgescorrected = BBC.SurfOffset002.OffsetPoints.GetOffsetTrianglesEdges(tri, offset);
                                 Create3DPolyline(corrected);
                                 break;
@@ -916,7 +854,6 @@ namespace BBC.CivilSurf
                             }
                             break;
                         }
-
 
                         if (erasePline)
                             EraseObject(pline);
@@ -959,7 +896,7 @@ namespace BBC.CivilSurf
         private static bool WithinWeedDistance(double weeddistange, Point3d centerP3D, List<Point3d> usedTriangles)
         {
 
-            return usedTriangles.Any(p => p.DistanceTo(centerP3D) < weeddistange); 
+            return usedTriangles.Any(p => p.DistanceTo(centerP3D) < weeddistange);
         }
 
         /// <summary>
@@ -1012,7 +949,7 @@ namespace BBC.CivilSurf
                 PromptEntityResult resPline = ed.GetEntity(selPline);
                 if (resPline.Status != PromptStatus.OK) return;
                 ObjectId plineId = resPline.ObjectId;
-                
+
                 //erase the pline?
                 PromptKeywordOptions selYesNopline = new PromptKeywordOptions("\nErase Polyline Boundary?");
                 selYesNopline.Keywords.Add("Yes");
@@ -1035,7 +972,6 @@ namespace BBC.CivilSurf
 
                 }
 
-
                 ed.WriteMessage("\nStarting the Program!\n");
 
                 Database db = Application.DocumentManager.MdiActiveDocument.Database;
@@ -1043,7 +979,7 @@ namespace BBC.CivilSurf
                 var site = new ObjectId(IntPtr.Zero);
 
                 var lines = SkeletonSurf.SkeletonSurf.CreateBoundary(GetExtentsFromSurface(surfaceId), _interval);
-                
+
                 using (Transaction tr = db.TransactionManager.StartTransaction())
                 {
                     foreach (var lineOid in lines)
@@ -1056,7 +992,7 @@ namespace BBC.CivilSurf
                                 var pline = disposableWrapper.ConvertTo(false);
 
                                 pline.Elevation = 0;
-                           
+
                                 var pts = new Point3dCollection();
 
                                 var line = trans.GetObject(lineOid, OpenMode.ForWrite) as Line;
@@ -1066,7 +1002,7 @@ namespace BBC.CivilSurf
                                 if (pts.Count == 0) continue;
 
                                 var ordered = OrderByDistanceFromBase(line, pts);
-                            
+
                                 for (int i=0;i < ordered.Count()-1;i++)
                                 {
                                     var start = ordered.Skip(i).FirstOrDefault();
@@ -1074,7 +1010,7 @@ namespace BBC.CivilSurf
                                     var lline = new Line(start,end);
 
                                     if (IsMidPointInsidePoly(lline,plineId))
-                                    { 
+                                    {
                                         xinfo.Add(new IntersectionInfo(start, end, line));
                                     }
                                 }
@@ -1084,7 +1020,7 @@ namespace BBC.CivilSurf
                     }
                     tr.Commit();
                 }
-                
+
                 site = CleanupZeroElevations(AddFeatureLinesToSurface(xinfo, surfaceId));
                 CleanupReferenceLines(lines);
                 if (addboundary)
@@ -1170,7 +1106,6 @@ namespace BBC.CivilSurf
                     addboundary = resYesNobndy.StringResult.Equals("Yes");
 
                 }
-
 
                 ed.WriteMessage("\nStarting the Program!\n");
 
@@ -1288,12 +1223,11 @@ namespace BBC.CivilSurf
 
             foreach (Point3d p in pts)
             {
-               ordered.Add(p);    
+               ordered.Add(p);
             }
 
             return ordered.Where(q=>q != null).OrderBy(k => k.DistanceTo(origin));
         }
-
 
         /// <summary>
         /// Determines whether [is mid point inside poly] [the specified line].
@@ -1347,7 +1281,6 @@ namespace BBC.CivilSurf
 
         public static bool IsPointInsidePoly(ObjectId pid, Point3d test)
         {
-             
 
             var ptslist = new List<Point3d>();
 
@@ -1394,7 +1327,6 @@ namespace BBC.CivilSurf
                     var boundaryEntities = GetObjectIdCollectionFromEntity(plineId);
 
                     var surfaceBoundaries = surface.BoundariesDefinition;
-
 
                     surfaceBoundaries.AddBoundaries(boundaryEntities, 0.5, SurfaceBoundaryType.Outer, true);
 
@@ -1490,7 +1422,7 @@ namespace BBC.CivilSurf
         private static ObjectIdCollection AddNewSetOfFeatureLinesWithOffset(List<ObjectId> featurelines, double vertoffset, ObjectId getNewSiteId)
         {
             Database db = Application.DocumentManager.MdiActiveDocument.Database;
-            var outfeaturelines = new ObjectIdCollection(); 
+            var outfeaturelines = new ObjectIdCollection();
             foreach (var oid in featurelines)
             {
                 try
@@ -1603,14 +1535,14 @@ namespace BBC.CivilSurf
         }
 
         private static double GetSkew(double offset, Point3d point3D, Point3d point3D1)
-        {          
+        {
             var deltaZ  = point3D1.Z - point3D.Z;
             var deltaXy = point3D.DistanceTo(point3D1);
 
             var angle      = Math.Atan(deltaZ/deltaXy);
             var adjustment = Math.Abs(offset*Math.Cos(angle));
 
-            return Math.Abs((offset - adjustment) + offset); 
+            return Math.Abs((offset - adjustment) + offset);
         }
 
         /// <summary>
@@ -1674,7 +1606,6 @@ namespace BBC.CivilSurf
                 Database acCurDb = acDoc.Database;
                 ObjectId polyline;
 
-
                 // Start a transaction
                 using (Transaction acTrans = acCurDb.TransactionManager.StartTransaction())
                 {
@@ -1690,11 +1621,9 @@ namespace BBC.CivilSurf
                     acBlkTblRec = acTrans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace],
                         OpenMode.ForWrite) as BlockTableRecord;
 
-
                     // Add the new object to the block table record and the transaction
                     polyline = acBlkTblRec.AppendEntity(p3D);
                     acTrans.AddNewlyCreatedDBObject(p3D, true);
-
 
                     // Save the new object to the database
                     acTrans.Commit();
@@ -1822,7 +1751,7 @@ namespace BBC.CivilSurf
                                 if (i == last)
                                    featureline.SetPointElevation(i,points[i-1].Z);
                                 featureline.SetPointElevation(i, points[i + 1].Z);
-                            }    
+                            }
                         }
                     }
 
@@ -1873,17 +1802,13 @@ namespace BBC.CivilSurf
 
                     //============================================================//
 
-
                     //Use lambda extension method
-
-
 
                     #endregion
 
                     ids = (from id in b
                            where id.ObjectClass.DxfName.ToUpper() == "AECC_FEATURE_LINE"
                            select id).ToList();
-
 
                     tran.Commit();
                 }
@@ -2019,7 +1944,7 @@ namespace BBC.CivilSurf
                     }
                 }
             }
-      
+
             catch (System.Exception ex)
             {
                 ed.WriteMessage("Error: " + ex.Message);
@@ -2068,8 +1993,8 @@ namespace BBC.CivilSurf
                     {
                         ed.WriteMessage("Error: " + ex.Message);
                     }
-                }    
-                CleanupReferenceLines(toErase);                
+                }
+                CleanupReferenceLines(toErase);
                 return site;
             }
             catch (System.ArgumentException ex)
@@ -2079,7 +2004,7 @@ namespace BBC.CivilSurf
             catch (Exception ex)
             {
                 ed.WriteMessage("Error: " + ex.Message);
-                
+
             }
             return site;
         }
@@ -2102,7 +2027,6 @@ namespace BBC.CivilSurf
                 Document acDoc = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;
 
                 Database acCurDb = acDoc.Database;
-
 
                 // Start a transaction
                 using (Transaction acTrans = acCurDb.TransactionManager.StartTransaction())
@@ -2325,59 +2249,24 @@ namespace BBC.CivilSurf
 
         }
 
-
-
-
-
         //        var sf =
-
-
-
 
         //                var bt =
 
         //                var btr =
 
-
-
-
-
-
-
         //                                    var subEntityPath =
 
-
-
-
         //                                    var pt =
-
-
-
-
-
-
-
 
         //            var bt =
 
         //            var btr =
 
-
-
-
-
-
-
-
-
-
         //                            var end =
         //                              start +
 
-
-
     }
-
 
     /// <summary>
     /// Class SurfaceTriangle.
@@ -2607,4 +2496,3 @@ namespace EditorExtentions
     }
 
 }
-

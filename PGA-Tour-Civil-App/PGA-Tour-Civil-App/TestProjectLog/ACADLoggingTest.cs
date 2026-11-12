@@ -21,7 +21,6 @@ namespace TestProjectLog
         /// </summary>
         public TestContext TestContext { get; set; }
 
-
         /// <summary>
         ///     A test for LogMyExceptions
         /// </summary>
@@ -69,7 +68,6 @@ namespace TestProjectLog
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
 
-
         /// <summary>
         ///     A test for SystemTracerLogMyExceptions
         /// </summary>
@@ -81,7 +79,6 @@ namespace TestProjectLog
             ACADLogging_Accessor.SystemTracerLogMyExceptions(message);
             Assert.IsTrue(true);
         }
-
 
         /// <summary>
         ///     A test for LogTextTraceWriter
@@ -111,7 +108,7 @@ namespace TestProjectLog
 
         #region Additional test attributes
 
-        // 
+        //
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class

@@ -52,7 +52,7 @@ namespace C3DSurfacesDemo
             {
                 TinSurface surface = trans.GetObject(surfaceId, OpenMode.ForWrite) as TinSurface;
                 Polyline pline = trans.GetObject(plineId, OpenMode.ForWrite) as Polyline;
-                
+
                 //find all vertices inside a pline area
                 ObjectIdCollection plinesBorder = new ObjectIdCollection();
                 plinesBorder.Add(plineId);
@@ -84,6 +84,5 @@ namespace C3DSurfacesDemo
             }
         }
 
-      
     }
 }

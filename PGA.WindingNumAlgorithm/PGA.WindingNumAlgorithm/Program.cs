@@ -15,7 +15,6 @@ namespace PGA.WindingNumAlgorithm
                 COMS.MessengerManager.AddLog("Found Points is Inside");
             COMS.MessengerManager.AddLog("No Points Inside Polyline");
 
-
         }
 
         public static bool WN_Algorithm(Point2dCollection b, Point2dCollection t)
@@ -27,7 +26,7 @@ namespace PGA.WindingNumAlgorithm
                 if (WNumAlgorithm.wn_PnPoly(p, ba, b.Count) != 0)
                 {
                     return true;
-                }    
+                }
             }
             return false;
         }
@@ -41,7 +40,7 @@ namespace PGA.WindingNumAlgorithm
 
                 foreach (Polyline p in ordered)
                 {
-                    
+
                     if (p == null) continue;
 
                     try
@@ -81,7 +80,6 @@ namespace PGA.WindingNumAlgorithm
 
             return false;
         }
-
 
         public static bool TestPolys()
         {
@@ -145,7 +143,6 @@ namespace PGA.WindingNumAlgorithm
                 using (Transaction tr = Active.StartTransaction())
                 {
                     var center = new Point3d(p.X, p.Y, 0);
-
 
                     Circle c = new Circle();
                     c.Center = center;

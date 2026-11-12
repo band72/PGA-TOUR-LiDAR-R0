@@ -154,7 +154,6 @@ namespace BBC.UCSHelper
                                         "\nThe UCS coordinates are: \n" +
                                         pPt3dUCS.ToString());
 
-
             return ucs.CoordinateSystem3d;
         }
 
@@ -212,7 +211,7 @@ namespace BBC.UCSHelper
             return new Matrix3d(new double[] { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, Xt, Yt, Zt, 1 });
         }
         public static Matrix3d CreateTranslationMatrixFlatten()
-        {   
+        {
             return new Matrix3d(new double[] { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1 });
         }
         public static double GetNormal(Editor ed, Point3d basePoint, Point3d positiveZaxisPoint)

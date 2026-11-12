@@ -11,7 +11,6 @@ using Autodesk.Civil.DatabaseServices;
 using MathNet.Numerics.LinearAlgebra.Double;
 using Acad = Autodesk.AutoCAD.Geometry;
 
-
 namespace BBC.SurfOffset002
 {
     public class OffsetPoints
@@ -32,7 +31,6 @@ namespace BBC.SurfOffset002
                 Acad.Vector3d centerv2    = new Acad.Vector3d();
                 Acad.Vector3d centerv3    = new Acad.Vector3d();
 
-
                 var edge1 = tri.Edge1;
                 var edge2 = tri.Edge2;
                 var edge3 = tri.Edge3;
@@ -51,7 +49,6 @@ namespace BBC.SurfOffset002
                 BBC.SkeletonSurf.SkeletonSurf.CreateLine(tv111, tv113);
                 BBC.SkeletonSurf.SkeletonSurf.CreateLine(tv113, tv112);
 
-
                 // vectors
 
                 var v22 = tv111.GetVectorTo(tv113);
@@ -63,12 +60,9 @@ namespace BBC.SurfOffset002
                 var ap  = v22.AngleOnPlane(new Plane(tv121, v23.CrossProduct(v22)));
                 var ap2 = v23.AngleOnPlane(new Plane(tv121, v23.CrossProduct(v22)));
 
-
                 var v1 = tri.Vertex1.Location;
                 var v2 = tri.Vertex2.Location;
                 var v3 = tri.Vertex3.Location;
-                
-                
 
                 var vec1 = v1.GetVectorTo(v2);
                 var vec2 = v1.GetVectorTo(v3);
@@ -92,7 +86,6 @@ namespace BBC.SurfOffset002
                 var p1 = new Acad.Point3d(offsetcenterv1.X, offsetcenterv1.Y, offsetcenterv1.Z);
                 var p2 = new Acad.Point3d(offsetcenterv2.X, offsetcenterv2.Y, offsetcenterv2.Z);
                 var p3 = new Acad.Point3d(offsetcenterv3.X, offsetcenterv3.Y, offsetcenterv3.Z);
-
 
                 points.Add(p1);
                 points.Add(p2);
@@ -149,23 +142,20 @@ namespace BBC.SurfOffset002
                     centerv2 =   (cenpoint + p2) /2.0;
                     centerv3 =   (cenpoint + p3) /2.0;
 
-                    //Convert Formatting 
+                    //Convert Formatting
 
                     var NodeTriangles1 = new List<Triangle>();
-
 
                     foreach (var triVertex in triangles)
                     {
                         NodeTriangles1.Add(new Triangle(triVertex.Vertex1, triVertex.Vertex2, triVertex.Vertex3));
                     }
 
-
                     //Triangle Center Points
 
                     sum = IterateAdjacentTriangles(NodeTriangles1, cenpoint);
 
-                    //Triangle shared at vertex 1, 2, and 3   
-
+                    //Triangle shared at vertex 1, 2, and 3
 
                 }
 
@@ -175,12 +165,11 @@ namespace BBC.SurfOffset002
                 var offsetcenterv1 = (centerv1 + M);
                 var offsetcenterv2 = (centerv2 + M);
                 var offsetcenterv3 = (centerv3 + M);
-     
+
                 points.Add(offsetvecCenter);
                 points.Add(offsetcenterv1);
                 points.Add(offsetcenterv2);
                 points.Add(offsetcenterv3);
-
 
             }
             catch (System.Exception ex)
@@ -214,8 +203,7 @@ namespace BBC.SurfOffset002
                 // all the connecting Triangles
 
                 var triangles = vert.Triangles;
-             
-                
+
                 // all the connecting vertices's
 
                 var connectedvertices  = vert.Vertices;
@@ -226,7 +214,6 @@ namespace BBC.SurfOffset002
                     var v1 = tri.Vertex1.Location;
                     var v2 = tri.Vertex2.Location;
                     var v3 = tri.Vertex3.Location;
-
 
                     var vec1 = v1.GetVectorTo(v2);
                     var vec2 = v1.GetVectorTo(v3);
@@ -239,10 +226,9 @@ namespace BBC.SurfOffset002
 
                     //create 3 more points on the plane
 
-                    centerv1 = new Acad.Vector3d(cenpointp3d.X + v1.X, cenpointp3d.Y + v1.Y, cenpointp3d.Z + v1.Z) / 2.0;                                    
+                    centerv1 = new Acad.Vector3d(cenpointp3d.X + v1.X, cenpointp3d.Y + v1.Y, cenpointp3d.Z + v1.Z) / 2.0;
                     centerv2 = new Acad.Vector3d(cenpointp3d.X + v2.X, cenpointp3d.Y + v2.Y, cenpointp3d.Z + v2.Z) / 2.0;
                     centerv3 = new Acad.Vector3d(cenpointp3d.X + v3.X, cenpointp3d.Y + v3.Y, cenpointp3d.Z + v3.Z) / 2.0;
-
 
                     sum = IterateAdjacentTrianglesAcad(connectedTriangles, cenpointp3d);
 
@@ -261,7 +247,6 @@ namespace BBC.SurfOffset002
                 points.Add(offsetcenterv1);
                 points.Add(offsetcenterv2);
                 points.Add(offsetcenterv3);
-
 
             }
             catch (System.Exception ex)
@@ -286,14 +271,12 @@ namespace BBC.SurfOffset002
                 var v2 = tri.Vertex2.Location;
                 var v3 = tri.Vertex3.Location;
 
-
                 var vec1 = v1.GetVectorTo(v2);
                 var vec2 = v1.GetVectorTo(v3);
 
                 var norm = vec1.CrossProduct(vec2);
                 var e1 = UnitVector3D(vec1);
                 var e2 = UnitVector3D(vec2);
-
 
                 var M = new Acad.Vector3d(norm.X, norm.Y, norm.Z + offset);
 
@@ -310,7 +293,6 @@ namespace BBC.SurfOffset002
                 var p1 = new Acad.Point3d(offsetcenterv1.X, offsetcenterv1.Y, offsetcenterv1.Z);
                 var p2 = new Acad.Point3d(offsetcenterv2.X, offsetcenterv2.Y, offsetcenterv2.Z);
                 var p3 = new Acad.Point3d(offsetcenterv3.X, offsetcenterv3.Y, offsetcenterv3.Z);
-
 
                 points.Add(p1);
                 points.Add(p2);
@@ -365,7 +347,7 @@ namespace BBC.SurfOffset002
                         var nodes2 = tinSurfaceVertices.FirstOrDefault(v => v.Location == v2);
                         var nodes3 = tinSurfaceVertices.FirstOrDefault(v => v.Location == v3);
 
-                        //Convert Formatting 
+                        //Convert Formatting
 
                         var NodeTriangles1 = new List<Triangle>();
                         var NodeTriangles2 = new List<Triangle>();
@@ -384,7 +366,7 @@ namespace BBC.SurfOffset002
                             NodeTriangles3.Add(new Triangle(triVertex.Vertex1, triVertex.Vertex2, triVertex.Vertex3));
                         }
 
-                        //Triangle shared at vertex 1, 2, and 3   
+                        //Triangle shared at vertex 1, 2, and 3
                         var sum1 = IterateAdjacentTriangles(NodeTriangles1, p1);
                         var sum2 = IterateAdjacentTriangles(NodeTriangles2, p2);
                         var sum3 = IterateAdjacentTriangles(NodeTriangles3, p3);
@@ -403,9 +385,7 @@ namespace BBC.SurfOffset002
                         var offsetvecVertex2 = (p2 + Mc);
                         var offsetvecVertex3 = (p3 + Mc);
 
-
                         // final points
-
 
                         points.Add(offsetvecCenter);
                     }
@@ -448,7 +428,7 @@ namespace BBC.SurfOffset002
                     List<Triangle> NodeTriangles2 = GetAllTrianglesConnected(p2, triangles);
                     List<Triangle> NodeTriangles3 = GetAllTrianglesConnected(p3, triangles);
 
-                    //Triangle shared at vertex 1, 2, and 3   
+                    //Triangle shared at vertex 1, 2, and 3
                     var sum1 = IterateAdjacentTriangles(NodeTriangles1, p1);
                     var sum2 = IterateAdjacentTriangles(NodeTriangles2, p2);
                     var sum3 = IterateAdjacentTriangles(NodeTriangles3, p3);
@@ -467,9 +447,7 @@ namespace BBC.SurfOffset002
                     var offsetvecVertex2 = (p2 + Mc);
                     var offsetvecVertex3 = (p3 + Mc);
 
-
                     // final points
-
 
                     points.Add(offsetvecVertex1);
                     points.Add(offsetvecVertex2);
@@ -491,9 +469,6 @@ namespace BBC.SurfOffset002
         }
         public static void GetVerticesFromTriangle(Triangle triangle)
         {
-
-
-
 
         }
         public static Summations IterateAdjacentTriangles(List<Triangle> triangles, Vector<double> centernode)
@@ -559,13 +534,11 @@ namespace BBC.SurfOffset002
 
                 var centerOfPlane = FindTriangleCenter(p1, p2, p3, norm);
 
-
                 var e1  = UnitVector3D(vec12);
                 var e2  = UnitVector3D(vec13);
-                
+
                 var angleradian= Math.Acos(e1.DotProduct(e2));
                 var unitnormal = e1.CrossProduct(e2);
-
 
                 top += unitnormal.MultiplyBy(angleradian);
                 bot += unitnormal.MultiplyBy(angleradian);
@@ -574,7 +547,6 @@ namespace BBC.SurfOffset002
 
             return new SummationsAcad(top, bot);
         }
-
 
         private static double Magnitude(Acad.Vector3d vec)
         {
@@ -714,7 +686,6 @@ namespace BBC.SurfOffset002
                     var firstvectpair = GetProperVector(first,  vertexofinterest);
                     var seconvectpair = GetProperVector(second, vertexofinterest);
 
-
                     var first1  = (firstvectpair.v1);
                     var second1 = (seconvectpair.v1);
                     var first2  = (firstvectpair.v2);
@@ -733,7 +704,7 @@ namespace BBC.SurfOffset002
 
                     var angle  = Math.Acos(Dot(first1, first2));
                     var normal = Cross(first1, first2);
-                    
+
                     if (NormalIsPerpedicular(normal))
                     {
                         if (C == 0.0 || double.IsNaN(C))
@@ -843,7 +814,6 @@ namespace BBC.SurfOffset002
             var fillet = r/off;
             var angle = Math.Acos(Dot(vn, v));
 
-
             if (Math.Abs(angle - (3.1415 / 2)) < 0.01)
                 return 1.0;
             return ((1 - (r / off)) / (Math.Sin((3.1415 / 2 - angle))) + (r / off));
@@ -851,7 +821,7 @@ namespace BBC.SurfOffset002
         }
         public static List<Triangle> GetAllTrianglesConnected(Vector<double> vertex, List<Triangle> triangles)
         {
-             
+
             return triangles.Where(
 
                 p => p.V1.X == vertex[0] && p.V1.Y == vertex[1] && p.V1.Z == vertex[2] ||
@@ -1014,7 +984,6 @@ namespace BBC.SurfOffset002
             public Vector3d V1;
             public Vector3d V2;
             public Vector3d V3;
-  
 
             public Triangle(Vector3d x, Vector3d y, Vector3d z)
             {
@@ -1049,7 +1018,7 @@ namespace BBC.SurfOffset002
 
             public Triangle(TinSurfaceVertex vertex1, TinSurfaceVertex vertex2, TinSurfaceVertex vertex3)
             {
- 
+
                 V1 = new Vector3d(vertex1.Location.X, vertex1.Location.Y, vertex1.Location.Z);
                 V2 = new Vector3d(vertex2.Location.X, vertex2.Location.Y, vertex2.Location.Z);
                 V3 = new Vector3d(vertex3.Location.X, vertex3.Location.Y, vertex3.Location.Z);
@@ -1112,7 +1081,5 @@ namespace BBC.SurfOffset002
             }
         }
 
-
-     
     }
 }

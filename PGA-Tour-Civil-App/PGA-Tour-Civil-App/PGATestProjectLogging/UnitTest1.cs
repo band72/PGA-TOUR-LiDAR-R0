@@ -9,10 +9,10 @@ namespace PGATestProjectLogging
         [TestMethod]
         public void TestMethod1()
         {
-           
+
             PGA.Common.Logging.ACADLogging.LogMyExceptions("Test");
             Assert.Fail("TEst Failed");
-           
+
         }
     }
 }

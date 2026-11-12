@@ -14,6 +14,6 @@ namespace BBC.SkeletonSurf
 {
     public static class Commands
     {
-  
+
     }
 }

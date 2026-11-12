@@ -84,7 +84,6 @@ namespace PGA.Breaklines
         /// </summary>
         private static List<string> usedDrawings;
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Commands" /> class.
         /// </summary>
@@ -234,7 +233,6 @@ namespace PGA.Breaklines
                             if (_polyCollection.IndexOf(poly) == 60)
                                 PGA.MessengerManager.MessengerManager.AddLog("Hit 60");
 
-
                             _siteId = breaklines.GetNewSiteId();
 
                             if (_siteId == ObjectId.Null)
@@ -355,7 +353,6 @@ namespace PGA.Breaklines
                        "SV-TPC-Louisiana-Clipped-For-SV01.DWG";
             OpenDrawingForProcessing(name);
 
-
         }
 
         /// <summary>
@@ -389,12 +386,10 @@ namespace PGA.Breaklines
                         GetIdsByTypeTypeValue("POLYLINE",
                             "LWPOLYLINE", "POLYLINE2D");
 
-
                 var surfaceId = breaklines.FindCivilTinSurface("All");
-                var siteId = breaklines.GetSiteId(surfaceId); //Use New 
+                var siteId = breaklines.GetSiteId(surfaceId); //Use New
 
                 breaklines._originalPolys = _polyCollection;
-
 
                 _siteId = siteId;
                 _surObjectId = surfaceId;
@@ -423,7 +418,6 @@ namespace PGA.Breaklines
                         GetIdsByTypeTypeValue("POLYLINE",
                             "LWPOLYLINE", "POLYLINE2D");
 
-
                 var surfaceId = breaklines.FindCivilTinSurface("All");
 
                 foreach (ObjectId polyid in _polyCollection)
@@ -433,7 +427,7 @@ namespace PGA.Breaklines
                         breaklines.RemoveBoundaryOperations(surfaceId);
                     else
                         SimplifyPolylines.Commands.SimplifyPolylinesInterative(polyid);
-                }              
+                }
             }
             catch (Exception ex)
             {
@@ -467,7 +461,6 @@ namespace PGA.Breaklines
 
                         var featurelineId = breaklines.AddCivil2016BreaklineByTrans
                             (_surObjectId, poly, _siteId, null);
-
 
                         if (featurelineId == ObjectId.Null)
                             continue;
@@ -566,17 +559,13 @@ namespace PGA.Breaklines
 
                     //============================================================//
 
-
                     //Use lambda extension method
-
-
 
                     #endregion
 
                     ids = (from id in b
                         where id.ObjectClass.DxfName.ToUpper() == "AECC_FEATURE_LINE"
                         select id).ToList();
-
 
                     tran.Commit();
                 }
@@ -605,7 +594,6 @@ namespace PGA.Breaklines
 
                 var exfeaturelines = GetSurfaceEntityIDs(CivilApplicationManager.WorkingDatabase);
 
-
                 using (Application.DocumentManager.MdiActiveDocument.LockDocument())
                 {
                     foreach (var featurelineId in exfeaturelines)
@@ -613,7 +601,6 @@ namespace PGA.Breaklines
 
                         breaklines.AddStandardBreakline(surfaceId, featurelineId, "");
                         //var poly3d = breaklines.AddCivil2016ElevationsToFeature
-
 
                     }
                 }
@@ -695,7 +682,6 @@ namespace PGA.Breaklines
                     usedFeatureLines.Add(featurelineId);
 
                     //var poly3d = breaklines.AddCivil2016ElevationsToFeature
-
 
                     break;
                 }
@@ -866,7 +852,7 @@ namespace PGA.Breaklines
 
                 var featureCollection =  new ObjectIdCollection(exfeaturelines.ToArray());
 
-                breaklines.AddFeatureLinesToAllSurface(featureCollection,surfaceId); 
+                breaklines.AddFeatureLinesToAllSurface(featureCollection,surfaceId);
             }
 
             catch (Exception ex)
@@ -884,9 +870,6 @@ namespace PGA.Breaklines
             {
 
                 OpenDrawingForProcessing();
-
-
-
 
                 ////breaklines.GetDrawingName(time, name);
 
@@ -972,5 +955,3 @@ namespace PGA.Breaklines
         }
     }
 }
-
- 

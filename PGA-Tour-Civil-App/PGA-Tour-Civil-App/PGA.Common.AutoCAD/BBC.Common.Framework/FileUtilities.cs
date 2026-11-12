@@ -6,7 +6,6 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Reflection;
 
-
 namespace Pge.Common.Framework
 {
     public static class FileUtilities
@@ -34,7 +33,7 @@ namespace Pge.Common.Framework
                 {
                     fi.Delete();
                 }
-                
+
                 PGA.MessengerManager.MessengerManager.AddLog("CleanFolder finished");
             }
             catch (System.Exception ex)
@@ -53,7 +52,7 @@ namespace Pge.Common.Framework
         {
             return File.Exists(path);
         }
-               
+
         /// <summary>
         /// Determines whether the specified file exists.
         /// </summary>
@@ -62,7 +61,7 @@ namespace Pge.Common.Framework
         public static bool DirectoryExist(string path)
         {
             return Directory.Exists(path);
-        }        
+        }
 
         /// <summary>
         /// Deletes the specified file
@@ -138,8 +137,8 @@ namespace Pge.Common.Framework
         {
             try
             {
-                
-                PGA.MessengerManager.MessengerManager.AddLog("Copyfile called with arguements: " + sourceFileName + destFileName);                 
+
+                PGA.MessengerManager.MessengerManager.AddLog("Copyfile called with arguements: " + sourceFileName + destFileName);
                 File.Copy(sourceFileName, destFileName, true);
                 return true;
             }
@@ -172,7 +171,7 @@ namespace Pge.Common.Framework
             {
                 PGA.MessengerManager.MessengerManager.AddLog("File Not FoundException.", fnfe);
                 return false;
-            }        
+            }
         }
 
         /// <summary>
@@ -262,7 +261,7 @@ namespace Pge.Common.Framework
         /// <param name="classFullname">The class fullname.</param>
         /// <returns></returns>
         public static object LoadXML(string xmlFilename, object classObject)
-        {   
+        {
             XmlDocument xmlDoc = new XmlDocument();
             try
             {
@@ -314,7 +313,6 @@ namespace Pge.Common.Framework
                 Type thisType = classObject.GetType();
                 xmlDoc.Load(xmlFilename);
 
-
                 XmlSerializer serializer = new XmlSerializer(thisType, supportingClassObjects);
                 using (StringReader stringReader = new StringReader(xmlDoc.InnerXml))
                 {
@@ -344,8 +342,6 @@ namespace Pge.Common.Framework
             xmlDoc = null;
             return classObject;
         }
-
-
 
         /// <summary>
         ///     This creates the object representation of the specified XML
@@ -387,7 +383,7 @@ namespace Pge.Common.Framework
                 throw;
             }
         }
-       
+
         /// <summary>
         /// Returns a list of files based on the provided search pattern
         /// </summary>
@@ -437,7 +433,7 @@ namespace Pge.Common.Framework
                         else
                         {
                             fileType = "VECTOR";
-                        }                        
+                        }
                         break;
                     case ".TIF":
                         fileType = "RASTER";
@@ -460,9 +456,9 @@ namespace Pge.Common.Framework
         /// <returns></returns>
         public static string Combine(string path1, string path2)
         {
-            return Path.Combine(path1, path2);            
+            return Path.Combine(path1, path2);
         }
-        
+
         /// <summary>
         /// Creates a directory
         /// </summary>
@@ -486,7 +482,7 @@ namespace Pge.Common.Framework
         /// <param name="fileName">The file to read</param>
         /// <returns></returns>
         public static IList<string> ReadDrawingListFile(string fileName)
-        {           
+        {
             IList<string> lines = new List<string>();
 
             try
@@ -514,7 +510,6 @@ namespace Pge.Common.Framework
             return lines;
         }
 
-
         /// <summary>
         /// Returns the file name with or without the extension
         /// </summary>
@@ -533,7 +528,7 @@ namespace Pge.Common.Framework
 
         /// <summary>
         /// Returns the directory information for the file path
-        /// </summary>        
+        /// </summary>
         public static string GetDirectoryPath(string path)
         {
             return Path.GetDirectoryName(path);

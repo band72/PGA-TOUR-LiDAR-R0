@@ -103,7 +103,6 @@ namespace PGA.Views
             _states.LandScaping = TxtLandscapingCode + ":" + TxtLandscapingLayer;
             _states.IntMedRough = TxtIntMedRoughCode + ":" + TxtIntMedRoughLayer;
 
-
             return _states;
         }
 
@@ -443,7 +442,7 @@ namespace PGA.Views
             set { txtGreenCode.Text = value; }
         }
 
-        // public string 
+        // public string
 
         #endregion
 
@@ -453,7 +452,6 @@ namespace PGA.Views
         {
             throw new NotImplementedException();
         }
-
 
         public void SetController()
         {

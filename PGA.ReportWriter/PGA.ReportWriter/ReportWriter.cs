@@ -61,17 +61,13 @@ namespace PGA.ReportWriter
 
                     //============================================================//
 
-
                     //Use lambda extension method
-
-
 
                     #endregion
 
                     ids = (from id in b
                         where id.ObjectClass.DxfName.ToUpper() == "AECC_TIN_SURFACE"
                         select id).ToList();
-
 
                     tran.Commit();
                 }
@@ -121,17 +117,13 @@ namespace PGA.ReportWriter
 
                     //============================================================//
 
-
                     //Use lambda extension method
-
-
 
                     #endregion
 
                     ids = (from id in b
                            where id.ObjectClass.DxfName.ToUpper() == "LWPOLYLINE"
                            select id).ToList();
-
 
                     tran.Commit();
                 }
@@ -144,7 +136,6 @@ namespace PGA.ReportWriter
 
             return ids;
         }
-
 
         private void FeatureCount()
         {
@@ -265,7 +256,6 @@ namespace PGA.ReportWriter
             public int count;
         }
 
-
         public string GetShortLayerName(string name)
         {
             try
@@ -371,7 +361,6 @@ namespace PGA.ReportWriter
                 writer.WriteEndDocument();
             }
 
-
         }
 
         public void TinSurfacePropertiesWriter()
@@ -382,9 +371,9 @@ namespace PGA.ReportWriter
             var db = doc.Database;
 
             var surfaces = GetSurfaceEntityIDs(db);
-            
+
             //Write PlaceHolder
-             
+
             FeatureCount();
 
             foreach (var surfid in surfaces)
@@ -415,7 +404,6 @@ namespace PGA.ReportWriter
                     else if (surface.Name.Contains("TEEBOX") ||
                              surface.Name.Contains("TEE"))
                         teebox++;
-                   
 
                     _write("\nInformation for TIN Surface: " + surface.Name);
 
@@ -437,7 +425,6 @@ namespace PGA.ReportWriter
             }
 
             AddFooterInfo();
-          
 
         }
 
@@ -472,7 +459,6 @@ namespace PGA.ReportWriter
             try
             {
 
-
                 using (StreamWriter writer = File.AppendText(output))
                 {
                     foreach (var line in lines)
@@ -494,12 +480,11 @@ namespace PGA.ReportWriter
             try
             {
 
-               
                 using (StreamWriter writer = File.AppendText(output))
                 {
-                    
+
                     writer.WriteLine(lines);
-                   
+
                     writer.Close();
                 }
 
@@ -514,7 +499,6 @@ namespace PGA.ReportWriter
         {
             try
             {
-
 
                 using (StreamWriter writer = File.AppendText(output))
                 {

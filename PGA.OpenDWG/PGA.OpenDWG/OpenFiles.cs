@@ -15,7 +15,6 @@ namespace PGA.OpenDWG
     public  class OpenDWG : IExtensionApplication
     {
 
-
         public void Initialize()
         {
 
@@ -31,7 +30,6 @@ namespace PGA.OpenDWG
 
             Document doc =
                 Application.DocumentManager.MdiActiveDocument;
-
 
             if (!System.IO.File.Exists(fileName))
                 throw new FileNotFoundException(fileName);
@@ -59,11 +57,9 @@ namespace PGA.OpenDWG
 
                     Process.CopyPolylinesBetweenDatabases(db, collection);
 
-
                     // Still need to reset the working database
 
                     ACADDB.HostApplicationServices.WorkingDatabase = wdb;
- 
 
                 }
                 catch (System.Exception)
@@ -83,10 +79,8 @@ namespace PGA.OpenDWG
             void OpenDwgFromDatabaseLink(string fileName)
         {
 
-
             Document doc =
                 Application.DocumentManager.MdiActiveDocument;
-
 
             if (!System.IO.File.Exists(fileName))
                 throw new FileNotFoundException(fileName);
@@ -132,7 +126,6 @@ namespace PGA.OpenDWG
                                 ACADDB.OpenMode.ForRead
                                 );
 
-
                         // Iterate through it, dumping objects
                         foreach (ACADDB.ObjectId objId in btr)
                         {
@@ -163,17 +156,15 @@ namespace PGA.OpenDWG
                     return;
                 }
 
-
             }
         }
- 
 
         public string CurrentDrawingToProcess()
         {
            DatabaseCommands dbCommands = new DatabaseCommands();
            return dbCommands.GetCurrentDwgToProcess();
-               
+
         }
-             
+
     }
 }

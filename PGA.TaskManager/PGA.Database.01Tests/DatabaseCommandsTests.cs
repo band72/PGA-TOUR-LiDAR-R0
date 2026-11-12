@@ -13,7 +13,6 @@ namespace PGA.Database.Tests
     {
         DatabaseCommands commands = new DatabaseCommands();
 
-
         [TestMethod()]
         public void LoadDrawingStackTest()
         {

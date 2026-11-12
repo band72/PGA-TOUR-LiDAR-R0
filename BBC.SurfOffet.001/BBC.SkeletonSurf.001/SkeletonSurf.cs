@@ -141,7 +141,7 @@ namespace BBC.SkeletonSurf
         /// Creates the boundary.
         /// </summary>
         /// <param name="extents">The extents.</param>
-        /// 
+        ///
         public static List<ObjectId> CreateBoundary(Extents3d extents, double interval)
         {
             var lines = new List<ObjectId>();
@@ -168,7 +168,7 @@ namespace BBC.SkeletonSurf
                 {
                     var shortdis = start.DistanceTo(new Point3d(extents.MinPoint.X, extents.MaxPoint.Y,0));
 
-                    var atBase = new Point3d(start.X +   linterval, 
+                    var atBase = new Point3d(start.X +   linterval,
                                                  start.Y,
                                                  0);
 
@@ -177,9 +177,9 @@ namespace BBC.SkeletonSurf
                                                  0);
 
                     lines.Add(CreateLine(atBase,atTop));
-                    linterval = interval * ++i;                    
+                    linterval = interval * ++i;
                 }
-                    
+
                 trans.Commit();
             }
             return lines;
@@ -274,7 +274,7 @@ namespace BBC.SkeletonSurf
             {
                 for (int i = 0; i < ptCollection.Count-1;i++)
                 {
-                     CreateLine(ptCollection[i],ptCollection[i+1]);            
+                     CreateLine(ptCollection[i],ptCollection[i+1]);
                 }
                 trans.Commit();
             }
@@ -321,7 +321,6 @@ namespace BBC.SkeletonSurf
             }
             return outLine;
         }
-
 
         /// <summary>
         /// Creates the line.
@@ -390,4 +389,3 @@ namespace BBC.SkeletonSurf
         }
     }
 }
-

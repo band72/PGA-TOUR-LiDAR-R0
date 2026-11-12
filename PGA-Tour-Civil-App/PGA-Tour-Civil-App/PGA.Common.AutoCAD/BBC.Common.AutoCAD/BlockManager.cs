@@ -109,7 +109,6 @@ namespace BBC.Common.AutoCAD
             }
             value = value.Trim();
 
-
             foreach (ObjectId id in blockRef.AttributeCollection)
             {
                 using (var attrRef = trans.GetObject(id, OpenMode.ForWrite) as AttributeReference)

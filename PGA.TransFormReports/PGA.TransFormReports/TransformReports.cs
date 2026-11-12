@@ -12,7 +12,7 @@ namespace PGA.TransFormReports
 {
     public class TransformReports
     {
-        private IEnumerable<Logs> _logs = null; 
+        private IEnumerable<Logs> _logs = null;
         private List<Logs> _alldata  = new List<Logs>();
         List<Logs> _drawings;
         List<Logs> _result;
@@ -30,7 +30,6 @@ namespace PGA.TransFormReports
                 _result = GetStartStopPoint(_drawings);
                 _errors = FiltersByAllErrors(_result);
 
-
                 if (_result.FirstOrDefault() == null)
                     return;
 
@@ -38,7 +37,6 @@ namespace PGA.TransFormReports
             }
 
         }
-
 
         public TransformReports(PGA.DataContext.Logs logs)
         {
@@ -135,7 +133,6 @@ namespace PGA.TransFormReports
             var dwgs = logs.Where(l => (l.Issue.Contains(".DWG") || l.Issue.Contains(".dwg") )&&
                           (l.Issue.Contains("Process Drawing")))
                           .OrderBy(o => o.Id);
-
 
             for (int i = 0; i < dwgs.Count(); i++)
             {

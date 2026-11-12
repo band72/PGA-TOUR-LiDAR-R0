@@ -11,11 +11,8 @@ using ACAD = Autodesk.AutoCAD.ApplicationServices;
 using ACADRT = Autodesk.AutoCAD.Runtime;
 using ACADDB = Autodesk.AutoCAD.DatabaseServices;
 
-
 namespace PGA.CrossingPolygons
 {
-
-
 
     /// <exclude />
     public static class CrossingPolygonsManager
@@ -56,7 +53,7 @@ namespace PGA.CrossingPolygons
                     acBlkTblRec.AppendEntity(acRegion);
                     acTrans.AddNewlyCreatedDBObject(acRegion, true);
 
-                    // Dispose 
+                    // Dispose
                 }
 
                 // Save the new object to the database
@@ -160,7 +157,6 @@ namespace PGA.CrossingPolygons
 
             }
 
-
             if (outterRegion != null)
             {
                 ACADDB.DBObjectCollection objs =
@@ -211,7 +207,6 @@ namespace PGA.CrossingPolygons
 
         }
 
-
         public static void MatchOverlappingRegionsByIntersect(ACADDB.Polyline region1, ACADDB.Polyline region2)
         {
             int startindex1 = 0;
@@ -230,10 +225,9 @@ namespace PGA.CrossingPolygons
             Point2dCollection plinepoints2 = null;
             Point2dCollection intpoints    = null;
 
-
              if (outterRegion.Area > 0 && innerRegion.Area > 0)
 
-             { 
+             {
                 outterRegion.BooleanOperation(ACADDB.BooleanOperationType.BoolIntersect, innerRegion);
                 intRegion = outterRegion; //Assign X-Region
 
@@ -256,7 +250,7 @@ namespace PGA.CrossingPolygons
                              secindex2 = 0;
                              btemp1 = false;
                              isYIncreasing2 = false;
-                             isYIncreasing1 = false;                   
+                             isYIncreasing1 = false;
                              temp1 = null;
                              temp2 = null;
                              plinepoints1 = null;
@@ -274,7 +268,6 @@ namespace PGA.CrossingPolygons
 
                              //Find Direction of Pline
                              var polyDirIncreasing = false;
-
 
                              //X-Section Pline to Points
                              var poly = ent as ACADDB.Polyline;
@@ -300,7 +293,6 @@ namespace PGA.CrossingPolygons
 
                                      first = intpoints[0];
                                      last = intpoints[intpoints.Count - 2];
-
 
                                      //Find matching points with X-Section
 
@@ -354,7 +346,7 @@ namespace PGA.CrossingPolygons
                              Debug.WriteLine("Now Greater Than Search Value");
 
                          } while (isYIncreasing2 != isYIncreasing1);
-                     
+
                              for (int i = 1; i < intpoints.Count-2; i++)
                              {
                             if (plinepoints1.Contains(intpoints[i]))
@@ -364,16 +356,13 @@ namespace PGA.CrossingPolygons
                                 plinepoints2.Remove(intpoints[i]);
                         }
 
-
-
                     }
-        
+
                     PGA.SimplifyPolylines.Commands.CreateSimplifiedPolylines
                         (region1.Layer, 0, plinepoints2);
                 }
             }
         }
-
 
         public static void MatchOverlappingRegionsByTracing(ACADDB.Polyline region1, ACADDB.Polyline region2)
         {
@@ -425,10 +414,8 @@ namespace PGA.CrossingPolygons
 
                             //replace
 
-
                             for (int j = 0; j < polylinepoints.Count - 1; j++)
                             {
-
 
                                 var firstpt = polylinepoints[j];
                                 var secondpt = polylinepoints[j + 1];
@@ -456,7 +443,7 @@ namespace PGA.CrossingPolygons
                                         if (isYIncreasing != polyDirIncreasing)
                                         {
                                             reversed = ReversePolyline(intpoints);
-                                            
+
                                         }
 
                                         if (reversed.Count == 0)
@@ -481,7 +468,6 @@ namespace PGA.CrossingPolygons
                                         Debug.WriteLine("Entered Equal");
                                         ////DistRank = GetListofDistances(tempcol,lower,upper);
 
-
                                     }
 
                                 }
@@ -502,7 +488,6 @@ namespace PGA.CrossingPolygons
                 }
             }
         }
-
 
         private static Point2dCollection ReversePolyline(Point2dCollection poly)
         {
@@ -538,11 +523,10 @@ namespace PGA.CrossingPolygons
             var distH = 0.0;
             ////var rankings = new List<KeyValuePair<int, double>>();
 
-         
             if (isYCoordIncreasing)
             {
                 var sorted = from p in tempcol.ToArray()
-                    orderby p.Y ascending 
+                    orderby p.Y ascending
                     select p;
 
                 foreach (Point2d point in sorted)
@@ -553,7 +537,7 @@ namespace PGA.CrossingPolygons
             else
             {
                 var sorted = from p in tempcol.ToArray()
-                             orderby p.Y descending 
+                             orderby p.Y descending
                              select p;
 
                 foreach (Point2d point in sorted)
@@ -585,11 +569,10 @@ namespace PGA.CrossingPolygons
                 else rankings.Add(new KeyValuePair<int, double>(i, distH));
             }
 
-            //list of ascending distances 
+            //list of ascending distances
             var sorted = from p in rankings
                 orderby p.Value ascending
                 select p;
-
 
             foreach (KeyValuePair<int, double> point in sorted)
             {
@@ -651,7 +634,7 @@ namespace PGA.CrossingPolygons
                         {
                             tempcol = new Point2dCollection();
                             var intpoints = PGA.AcadUtilities.AcadUtilities.GetPointsFromPolyline(poly);
-                            
+
                             var extpoint  = new Point2dCollection();
 
                             for (int i = 0; i < intpoints.Count; i++)
@@ -668,7 +651,6 @@ namespace PGA.CrossingPolygons
                                     extpoint.Add(intpoints[i]);
                                 }
                             }
-
 
                             for (int i = 0; i < extpoint.Count; i++)
                             {
@@ -698,7 +680,6 @@ namespace PGA.CrossingPolygons
                                         sortedarray = sorted.ToArray();
                                     }
 
-                                   
                                     //Also value must be greater/lesser than prev.
                                     if (!polylinepoints.Contains(sortedarray[i]))
                                     polylinepoints.Insert(++index, sortedarray[i]);
@@ -782,14 +763,10 @@ namespace PGA.CrossingPolygons
         private static Point2d? GetNearestNode(Point2dCollection testvals, Point2d testpt, Point2dCollection polylinepoints)
         {
             ////returns a starting point for comparison with master point list
-            
+
             ////returns the index to the location of the point
 
             ////Find the point trend of the near points by index
-
-           
-
-
 
             return null;
         }
@@ -812,7 +789,7 @@ namespace PGA.CrossingPolygons
         private static int FindInsertionPoint(IList<PointIndex> upper3, IList<PointIndex> lower3, Point2d intpnts)
         {
             var master    = new List<PointIndex>();
- 
+
             foreach (PointIndex items in upper3)
                 if(items.Index != -1)  master.Add(items);
             foreach (PointIndex items in lower3)
@@ -822,7 +799,7 @@ namespace PGA.CrossingPolygons
 
             var sort = (from p in master.ToArray()
                         orderby p.Point.Y descending
-                        select p);         
+                        select p);
 
             Point2d? previouspoint = null;
             var sorted = sort.ToArray();
@@ -883,7 +860,6 @@ namespace PGA.CrossingPolygons
                             orderby p.Y ascending
                             select p);
 
-
                         foreach (var item in ascsort)
                         {
                             sorted.Add(item);
@@ -908,7 +884,6 @@ namespace PGA.CrossingPolygons
             {
                 polylinepoints = PGA.AcadUtilities.AcadUtilities.GetPointsFromPolyline(polyline);
             }
-
 
             outterRegion.BooleanOperation(ACADDB.BooleanOperationType.BoolIntersect, innerRegion);
             intersectRegion = outterRegion;
@@ -988,8 +963,6 @@ namespace PGA.CrossingPolygons
             RegionToPolyline(outterRegion);
             RegionToPolyline(innerRegion);
 
-
-
         }
 
         private static Point2d GetNearestNeighbor(Point2dCollection tempcol)
@@ -1068,7 +1041,6 @@ namespace PGA.CrossingPolygons
             PromptEntityResult per =
               ed.GetEntity(peo);
 
-
             PromptEntityOptions peo1 =
            new PromptEntityOptions("\nSelect a region:");
             peo1.SetRejectMessage("\nMust be a region.");
@@ -1118,8 +1090,6 @@ namespace PGA.CrossingPolygons
             ACADDB.Database db = doc.Database;
             Editor ed = doc.Editor;
 
-          
-
             ACADDB.Transaction tr =
               doc.TransactionManager.StartTransaction();
             using (tr)
@@ -1132,8 +1102,6 @@ namespace PGA.CrossingPolygons
                   (ACADDB.BlockTableRecord)tr.GetObject(
                     bt[ACADDB.BlockTableRecord.ModelSpace],
                     ACADDB.OpenMode.ForRead);
-
-
 
                 if (reg != null)
                 {
@@ -1193,7 +1161,6 @@ namespace PGA.CrossingPolygons
                       tr.GetObject(
                         per.ObjectId,
                         ACADDB.OpenMode.ForRead) as ACADDB.Region;
-
 
                     if (reg != null)
                     {
@@ -1469,7 +1436,6 @@ namespace PGA.CrossingPolygons
                 return bulge;
             }
 
-
         public static void ReversePolylineDirection(ACADDB.Polyline poly)
         {
             try
@@ -1492,7 +1458,6 @@ namespace PGA.CrossingPolygons
                 PGA.MessengerManager.MessengerManager.LogException(ex);
             }
         }
-
 
         public static double? plIntersect(ACADDB.ObjectId oid0, ACADDB.ObjectId oid1)
         {

@@ -79,7 +79,7 @@ namespace PGA.DeleteDupSurfaces
                                     continue;
 
                                 //Precision is set to < 0.5 Sq-ft Missed Features
-                                //Precision is set to = 1.0 Sq-ft Works(Not Perfect) 
+                                //Precision is set to = 1.0 Sq-ft Works(Not Perfect)
 
                                 if (IsEqual(masterArea, comparerArea, 1.0))
                                 {
@@ -129,7 +129,7 @@ namespace PGA.DeleteDupSurfaces
                 Handle h = new Handle(Int64.Parse
                     (handle, NumberStyles.AllowHexSpecifier));
                 db.TryGetObjectId(h, out id);
-                tr.Commit(); 
+                tr.Commit();
             }
             return id;
         }
@@ -161,7 +161,6 @@ namespace PGA.DeleteDupSurfaces
                 DatabaseCommands commands = new DatabaseCommands();
                 ObjectIdCollection polylines = null;
                 var excludedpolys = new List<Handle>();
-
 
                 Document doc = Application.DocumentManager.MdiActiveDocument;
                 global::Autodesk.AutoCAD.DatabaseServices.Database db = doc.Database;
@@ -289,7 +288,7 @@ namespace PGA.DeleteDupSurfaces
                 var masterArea = SelectPolylines.GetPolyLineArea(master, db);
 
                 if (masterArea == null || masterArea == 0) continue;
-                 
+
                 if (masterLayer == "ORO")
                 {
                     if (masterArea > MaxArea)

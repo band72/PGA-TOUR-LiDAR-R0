@@ -15,7 +15,6 @@ namespace PGA.DatabaseManager
     public partial class App : Application
     {
 
-    
     protected override void OnStartup(StartupEventArgs e)
         {
             //on start stuff here
@@ -29,6 +28,6 @@ namespace PGA.DatabaseManager
         }
 
         //public Settings MySettings
-     
+
     }
 }

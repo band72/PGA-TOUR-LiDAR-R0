@@ -8,13 +8,12 @@ using global::Autodesk.AutoCAD.Geometry;
 using global::Autodesk.AutoCAD.EditorInput;
 using AcadApplication = global::Autodesk.AutoCAD.ApplicationServices.Application;
 
-
 namespace PGA.AcadUtilities
 {
     public class AcadUtilities
     {
         //private static readonly ILog //_logger = LogManager.GetLogger(typeof(AcadUtilities));
-       
+
         #region PointInPolygon
 
         /// <summary>
@@ -25,8 +24,6 @@ namespace PGA.AcadUtilities
         /// <param name="outsidePoint"></param>
         /// <param name="includeTouching"></param>
         /// <returns></returns>
-
-
 
         /// <summary>
         /// Gets a point outside of a polygon
@@ -43,8 +40,6 @@ namespace PGA.AcadUtilities
         /// <param name="startPoint2"></param>
         /// <param name="endPoint2"></param>
         /// <returns></returns>
-
-
 
         /// <summary>
         /// Calculates the distance between a point and a segment.
@@ -63,7 +58,7 @@ namespace PGA.AcadUtilities
         /// </summary>
         /// <param name="acadCmd"></param>
         public static void SendStringToExecute(string acadCmd)
-        { 
+        {
             try
             {
                 Document currentDoc = Application.DocumentManager.MdiActiveDocument;
@@ -86,14 +81,14 @@ namespace PGA.AcadUtilities
 
             try
             {
-                // Access the COM Preferences object  
+                // Access the COM Preferences object
                 Autodesk.AutoCAD.Interop.AcadApplication acadApp = (Autodesk.AutoCAD.Interop.AcadApplication)Autodesk.AutoCAD.ApplicationServices.Application.AcadApplication;
                 // your code to draw geometries, or something else
                 acadApp.ZoomAll();
                 retval = true;
             }
             catch (System.Exception ex)
-            {   
+            {
                PGA.MessengerManager.MessengerManager.AddLog("Failed to zoom active window ", ex);
                 throw;
             }
@@ -111,7 +106,7 @@ namespace PGA.AcadUtilities
 
             try
             {
-                // Access the COM Preferences object  
+                // Access the COM Preferences object
                 Autodesk.AutoCAD.Interop.AcadApplication acadApp = (Autodesk.AutoCAD.Interop.AcadApplication)Autodesk.AutoCAD.ApplicationServices.Application.AcadApplication;
                 // your code to draw geometries, or something else
                 acadApp.ZoomExtents();
@@ -131,7 +126,7 @@ namespace PGA.AcadUtilities
         /// </summary>
         /// <returns></returns>
         public static string GetActiveProfileName()
-        {   
+        {
             string retval = String.Empty;
 
             try
@@ -141,7 +136,7 @@ namespace PGA.AcadUtilities
                 retval = sActiveProfile;
             }
             catch (System.Exception ex)
-            {   
+            {
                PGA.MessengerManager.MessengerManager.AddLog("Failed to get AutoCAD Active Profile ", ex);
                 throw;
             }
@@ -504,7 +499,7 @@ namespace PGA.AcadUtilities
 
             }
             catch (System.Exception ex)
-            {   
+            {
                PGA.MessengerManager.MessengerManager.AddLog("Failed to merge symbol tables", ex);
                 throw;
             }
@@ -735,7 +730,7 @@ namespace PGA.AcadUtilities
 
         /// <summary>
         /// Writes a message to the command line
-        /// </summary>        
+        /// </summary>
         public static Autodesk.AutoCAD.Windows.Window AcadWindow
         {
             get
@@ -746,7 +741,7 @@ namespace PGA.AcadUtilities
 
         /// <summary>
         /// Writes a message to the command line
-        /// </summary>        
+        /// </summary>
         public static void WriteMessage(string message)
         {
             Editor editor = AcadApplication.DocumentManager.MdiActiveDocument.Editor;
@@ -956,7 +951,7 @@ namespace PGA.AcadUtilities
                 {
                     DBObject obj = trans.GetObject(id, OpenMode.ForWrite);
                     obj.Erase();
-                   
+
                 }
             }
         }
@@ -1158,7 +1153,7 @@ namespace PGA.AcadUtilities
         {
             Document doc = Application.DocumentManager.MdiActiveDocument;
            Autodesk.AutoCAD.DatabaseServices.Database db = doc.Database;
-           
+
             using (Transaction tr = db.TransactionManager.StartTransaction())
             {
                 DBObject obj =
@@ -1278,7 +1273,7 @@ namespace PGA.AcadUtilities
                 trans.Commit();
             }
         }
-        
+
         /// <summary>
         /// Sets the database limits
         /// </summary>
@@ -1312,7 +1307,7 @@ namespace PGA.AcadUtilities
                 trans.Commit();
             }
         }
-        
+
         /// <summary>
         /// Sets the grid spacing in the editor's active viewport
         /// </summary>
@@ -1325,7 +1320,7 @@ namespace PGA.AcadUtilities
         {
             using (ViewportTableRecord viewportTableRecord = trans.GetObject(viewportId, OpenMode.ForWrite) as ViewportTableRecord)
             {
-                // Adjust the spacing of the grid to gridSpacingX, gridSpacingY      
+                // Adjust the spacing of the grid to gridSpacingX, gridSpacingY
                 viewportTableRecord.GridIncrements = new Point2d(gridSpacingX, gridSpacingY);
             }
         }
@@ -1358,7 +1353,7 @@ namespace PGA.AcadUtilities
         {
             using (ViewportTableRecord viewportTableRecord = trans.GetObject(viewportId, OpenMode.ForWrite) as ViewportTableRecord)
             {
-                // Adjust the spacing of the snap to snapSpacingX, snapSpacingY     
+                // Adjust the spacing of the snap to snapSpacingX, snapSpacingY
                 viewportTableRecord.SnapIncrements = new Point2d(snapSpacingX, snapSpacingY);
             }
         }
@@ -1482,7 +1477,7 @@ namespace PGA.AcadUtilities
             }
             return retVal;
         }
-        
+
         /// <summary>
         /// Iterates model space returning all object ids
         /// </summary>
@@ -1544,7 +1539,6 @@ namespace PGA.AcadUtilities
         public static bool FuzzyEqualTo(double value1, double value2)
         {
             double tolerance = 0.0001;
-            
 
             double absoluteDifference = 0;
             absoluteDifference = Math.Abs(value1 - value2);

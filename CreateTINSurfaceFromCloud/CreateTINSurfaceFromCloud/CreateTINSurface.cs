@@ -35,22 +35,8 @@ namespace CreateTINSurfaceFromCloud
     public class CreateTINSurface
     {
 
-
         //        Transaction ts =
         //            Application.DocumentManager.MdiActiveDocument.Database.TransactionManager.StartTransaction())
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         /// <summary>
         /// Creates the tin surface by point collection.
@@ -58,16 +44,6 @@ namespace CreateTINSurfaceFromCloud
         /// <param name="points">The points.</param>
         /// <param name="polylinelayer">The polylinelayer.</param>
         /// <returns>TinSurface.</returns>
-
-
-
-
-
-
-
-
-
-
 
         /// <summary>
         /// Creates the tin surface by point collection.
@@ -83,7 +59,7 @@ namespace CreateTINSurfaceFromCloud
 
                 string surfaceName = "All";
 
-                // Select a style to use 
+                // Select a style to use
                 ObjectId surfaceStyleId = ObjectId.Null;
                 //NO-DISPLAY
 
@@ -100,9 +76,9 @@ namespace CreateTINSurfaceFromCloud
                 TinSurface surface = surfaceId.GetObject(OpenMode.ForWrite) as TinSurface;
 
                 surface.DowngradeOpen();
-                SetDefaultBuildOptions(surface); ///Todo: 2.20.2017 
+                SetDefaultBuildOptions(surface); ///Todo: 2.20.2017
                 surface.UpgradeOpen();
-                
+
                 //// Add some LiDAR points
                 Point3dCollection points = new Point3dCollection();
                 points = ReadPointCloudFile.ReadFile(path, filename);
@@ -114,7 +90,6 @@ namespace CreateTINSurfaceFromCloud
                 // commit the create action
                 ts.Commit();
             }
-
 
         }
 
@@ -234,10 +209,8 @@ namespace CreateTINSurfaceFromCloud
                 PGA.MessengerManager.MessengerManager.AddLog(String.Format("Smoothing Region Failed {0}", ex));
             }
 
-
             return null;
         }
-
 
         /// <summary>
         /// Sets the smoothing to 0.5 ft for select surfaces
@@ -252,7 +225,6 @@ namespace CreateTINSurfaceFromCloud
 
                 PGA.MessengerManager.MessengerManager.AddLog("Start Smoothing for " + surface.Name);
 
-
                 //Smooth Critical Surfaces//
 
                 if (surface.Name.Contains("GREEN") ||
@@ -263,7 +235,6 @@ namespace CreateTINSurfaceFromCloud
 
                     using (Transaction ts = CivilApplicationManager.StartTransaction())
                     {
-
 
                         SurfacePointOutputOptions pointOutputOptions =
                             new SurfacePointOutputOptions();
@@ -283,7 +254,6 @@ namespace CreateTINSurfaceFromCloud
 
                 }
                 return surface;
-
 
             }
             catch (System.Exception ex)
@@ -362,7 +332,6 @@ namespace CreateTINSurfaceFromCloud
 
                 // do the same for all model display settings as well
 
-
                 // commit the transaction
                 ts.Commit();
             }
@@ -408,7 +377,6 @@ namespace CreateTINSurfaceFromCloud
 
                 // do the same for all model display settings as well
 
-
                 // assign the style to the first surface in the document:
                 TinSurface surf = doc.GetSurfaceIds()[0].GetObject(OpenMode.ForWrite) as TinSurface;
                 surf.StyleId = styleId;
@@ -431,8 +399,7 @@ namespace CreateTINSurfaceFromCloud
 
                     var doc = CivilApplicationManager.ActiveCivilDocument;
 
-
-                    // Select a style to use 
+                    // Select a style to use
                     ObjectId surfaceStyleId = ObjectId.Null;
                     //NO-DISPLAY
                     if (GetSurfaceStyle("NO-DISPLAY") != null)
@@ -472,8 +439,7 @@ namespace CreateTINSurfaceFromCloud
 
                     var doc = CivilApplicationManager.ActiveCivilDocument;
 
-
-                    // Select a style to use 
+                    // Select a style to use
                     ObjectId surfaceStyleId = ObjectId.Null;
 
                     if (GetSurfaceStyle("Standard") != null)
@@ -483,7 +449,6 @@ namespace CreateTINSurfaceFromCloud
 
                         surfaceStyleId = GetSurfaceStyle("Standard").ObjectId;
                     }
-
 
                     TinSurface surface = surfaceId.GetObject(OpenMode.ForWrite) as TinSurface;
 
@@ -544,13 +509,13 @@ namespace CreateTINSurfaceFromCloud
                     using (var tr = CivilApplicationManager.StartTransaction())
                     {
                         MessengerManager.AddLog("Start Setting Build Options");
- 
+
                         if (surface == null)
                             return;
 
                         surface.UpgradeOpen();
                         ///Todo:Handle Breaklines for Water and Bulkhead-Added 3.7.17
-                        /// 
+                        ///
                         if (surface.Name.Contains("WATER"))
                             surface.BuildOptions.MaximumTriangleLength = 100;
                         else if (surface.Name.Contains("All"))
@@ -581,5 +546,3 @@ namespace CreateTINSurfaceFromCloud
 
     }
 }
-
-

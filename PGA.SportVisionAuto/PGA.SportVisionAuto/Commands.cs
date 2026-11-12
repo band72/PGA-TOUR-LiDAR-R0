@@ -51,7 +51,6 @@ namespace PGA.SportVisionAuto
         private static int MaxDXFs = 0;
         private static int TotalDWGs = 0;
 
-
         public void UnlockCommands(Document doc)
         {
 
@@ -125,9 +124,7 @@ namespace PGA.SportVisionAuto
             try
             {
 
-
                 PGA.DrawingManager.Commands.ForceCloseAllButActiveDocuments();
-
 
                 using (DatabaseCommands commands = new DatabaseCommands())
                 {
@@ -271,7 +268,7 @@ namespace PGA.SportVisionAuto
 
                 myTimer.Tick += new EventHandler(TimerEventProcessor);
                 myTimer.Enabled = true;
-                myTimer.Interval = 1000 * 5; 
+                myTimer.Interval = 1000 * 5;
                 myTimer.Start();
             }
             catch (Exception ex)

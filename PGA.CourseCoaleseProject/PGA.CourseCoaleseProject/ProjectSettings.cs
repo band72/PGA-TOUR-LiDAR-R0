@@ -87,7 +87,7 @@ namespace PGA.CourseCoaleseProject
 
         public bool UseSimplify { get; set; }
         public bool UseSportVision { get;  private set; }
-         
+
         public bool GetValueFromCheckBox(object sender)
         {
             try

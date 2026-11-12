@@ -96,7 +96,6 @@ namespace PGA.Sv.PostAudit
             }
         }
 
-
         public string GetSportVisionDir(string curdir)
         {
             var dirout = "";
@@ -127,7 +126,7 @@ namespace PGA.Sv.PostAudit
             {
                 if (!CreateDirectories())
                     throw new FileNotFoundException("CreateDirectories!");
-             
+
                 foreach (string d in Directory.GetDirectories(_directory))
                 {
                     if (Path.GetFileName(d).EndsWith("SURFACE")   ||
@@ -170,7 +169,6 @@ namespace PGA.Sv.PostAudit
         private void ProcessFilesInDirFiles(string target, string directory)
         {
 
-          
             try
             {
                 var files = Directory.GetFiles(directory);
@@ -187,7 +185,6 @@ namespace PGA.Sv.PostAudit
                             fileName = Rfile;
 
                         fileName = String.Format("P-{0}.DWG", fileName);
-
 
                         var destFile = System.IO.Path.Combine(target, fileName);
                         System.IO.File.Copy(source, destFile, true);
@@ -210,8 +207,6 @@ namespace PGA.Sv.PostAudit
         private void ProcessCombinedFiles(string target, string directory)
         {
 
-      
-
             try
             {
                 var files = Directory.GetFiles(directory);
@@ -228,7 +223,6 @@ namespace PGA.Sv.PostAudit
                             fileName = Rfile;
 
                         fileName = String.Format("C-{0}.DWG", fileName);
-
 
                         var destFile = System.IO.Path.Combine(target, fileName);
                         System.IO.File.Copy(source, destFile, true);
@@ -248,9 +242,6 @@ namespace PGA.Sv.PostAudit
                 _logger.LogException(ex);
             }
         }
-
-
-
 
         public string GetRFile(string[] files)
         {
@@ -297,11 +288,11 @@ namespace PGA.Sv.PostAudit
                 _logger.AddLog("Start Create Directories!");
                 _logger.AddLog("Directory = " + _directory);
                 var dirs = new List<string>();
-                        
+
                _sdir  = Path.Combine(_directory, "SURFACE" );
                _cdir  = Path.Combine(_directory, "COMBINED");
                _pdir  = Path.Combine(_directory, "POLYLINE");
- 
+
                 dirs.Add(_sdir);
                 dirs.Add(_cdir);
                 dirs.Add(_pdir);
@@ -328,7 +319,6 @@ namespace PGA.Sv.PostAudit
             return false;
         }
 
-
         private void DeletePoly2D3DObjects(string source, string dest, string drawingName)
         {
 
@@ -339,7 +329,6 @@ namespace PGA.Sv.PostAudit
                 if (drawingName == null) throw new ArgumentNullException(nameof(drawingName));
 
                 _logger.AddLog(String.Format("Drawing to Open: {0}", source));
-
 
                 Autodesk.AutoCAD.DatabaseServices.Database oldDb = HostApplicationServices.WorkingDatabase;
 
@@ -376,7 +365,7 @@ namespace PGA.Sv.PostAudit
                             if (ent.GetType() == typeof(Polyline3d) ||
                                 ent.GetType() == typeof(Polyline2d) ||
                                 ent.GetType() == typeof(Acad.Polyline) ||
-                                ent.GetType() == typeof(Line)) 
+                                ent.GetType() == typeof(Line))
                             {
                                 if (eraseOrig)
                                 {
@@ -387,7 +376,7 @@ namespace PGA.Sv.PostAudit
                         }
                         tr.Commit();
                     }
-                  
+
                     var output = Path.Combine(_sdir, "S-" + drawingName + ".DWG");
                     var dxfout = output.Replace(".DWG", ".DXF");
                     db.SaveAs(output, DwgVersion.Current);

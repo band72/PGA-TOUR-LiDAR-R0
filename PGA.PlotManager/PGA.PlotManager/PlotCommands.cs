@@ -96,7 +96,6 @@ namespace PGA.PlotManager
             }
         }
 
-
         public static void SnapShotFromPrintScreen(string path)
         {
             try
@@ -142,7 +141,7 @@ namespace PGA.PlotManager
                     // Set the render type and the background color
                     dev.DeviceRenderType = RendererType.Default;
                     dev.BackgroundColor = Color.White;
-                    
+
                     // Add the view to the device and update it
                     dev.Add(view);
                     dev.Update();
@@ -184,13 +183,12 @@ namespace PGA.PlotManager
                             System.Threading.Thread.Sleep(1000);
 
                             bitmap.Save(filename);
-                            
+
                             // Clean up
                             view.EraseAll();
                             dev.Erase(view);
                         }
 
-    
                     }
                 }
             }

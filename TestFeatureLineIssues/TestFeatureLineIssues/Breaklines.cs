@@ -179,10 +179,8 @@ namespace TestFeatureLineIssues
             var filename = Path.GetFileName(name);
             name = Path.Combine(directory, "BL_" + filename);
 
-
             return name;
         }
-
 
         /// <exclude />
         public bool AddStandardBoundary(ObjectId polyId, string name, ObjectId surfaceId)
@@ -221,7 +219,6 @@ namespace TestFeatureLineIssues
                 feature.AssignElevationsFromSurface(SurfaceId, true);
                 var p3Dcollection = feature.GetPoints(FeatureLinePointType.AllPoints);
 
-
                 C3DLandDb.TinSurface surface = SurfaceId.GetObject(OpenMode.ForWrite) as C3DLandDb.TinSurface;
 
                 surface.BreaklinesDefinition.AddStandardBreaklines(p3Dcollection, 1.0, 2.0, 1.0, 0.0);
@@ -259,8 +256,6 @@ namespace TestFeatureLineIssues
         {
             CrossingBreaklinesElevationType crossing = CrossingBreaklinesElevationType.UseNone;
         }
-
-   
 
         private string GetFeatureLineName()
         {
@@ -429,7 +424,6 @@ namespace TestFeatureLineIssues
             }
         }
 
-
         public object OpenFeatureLineForSave(ObjectId featureId)
         {
             Debug.WriteLine("Starting OpenFeatureLineForSave");
@@ -443,7 +437,6 @@ namespace TestFeatureLineIssues
                 poly3d.Layer = feature.Layer;
                 poly3d.Color = feature.Color;
                 _polylines.Add(poly3d);
-
 
                 tr.Commit();
                 Debug.WriteLine("Ending OpenFeatureLineForSave");

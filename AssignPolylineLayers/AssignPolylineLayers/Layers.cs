@@ -12,7 +12,7 @@
 
     public class Layers
     {
-  
+
         private static bool IsLayerDefined(Database db, string layername)
         {
             try
@@ -30,31 +30,9 @@
             return false;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //                    Vertex2d v2d =
 
-
-
-
-
         //                        PolylineVertex3d v3d =
-
-
-
 
         private static string AssignPolyLinesToLayers(Polyline2d p2d)
         {
@@ -163,7 +141,6 @@
                 DBObject obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
 
-
                 // If a "lightweight" (or optimized) polyline
 
                 Polyline lwp = obj as Polyline;
@@ -210,7 +187,6 @@
                                 p2d.Layer = layername ?? p2d.Layer;
                             p2d.DowngradeOpen();
                         }
-
 
                         //    Vertex2d v2d =
 
@@ -335,9 +311,6 @@
             return null;
         }
 
-
-
-
         public static void ProcessLayers(ObjectIdCollection objs)
         {
             foreach (ObjectId obj in objs)
@@ -378,7 +351,6 @@
             return new ObjectIdCollection(promptSelectionResult.Value.GetObjectIds());
 
         }
-
 
     }
 
@@ -683,7 +655,7 @@
             /// </summary>
             /// <param name="db">The db.</param>
             /// <param name="layername">The layername.</param>
-            /// <returns>The object id the layer if it exists, otherwise ObjectId.Null</returns>        
+            /// <returns>The object id the layer if it exists, otherwise ObjectId.Null</returns>
             public static ObjectId GetLayerId(Database db, string layername)
             {
                 ObjectId layerId = ObjectId.Null;
@@ -1217,4 +1189,3 @@
 
         }
     }
-

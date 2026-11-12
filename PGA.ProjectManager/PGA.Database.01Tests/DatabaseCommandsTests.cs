@@ -15,7 +15,6 @@ namespace PGA.Database.Tests
     [TestClass()]
     public class DatabaseCommandsTests
     {
-        
 
         DatabaseCommands commands = new DatabaseCommands();
 

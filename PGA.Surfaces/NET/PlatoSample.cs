@@ -85,6 +85,5 @@ namespace C3DSurfacesDemo
             }
         }
 
-      
     }
 }

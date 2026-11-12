@@ -91,10 +91,7 @@ namespace PGA.SportVision
             SetVars();
         }
 
-
-
         //    CryptoLicense license =
-
 
         /// <summary>
         ///     Terminates this instance.
@@ -247,7 +244,6 @@ namespace PGA.SportVision
             try
             {
                 var ed = Application.DocumentManager.MdiActiveDocument.Editor;
-
 
                 AcadUtilities.SendStringToExecute(".ZoomExtents\n");
 
@@ -662,7 +658,6 @@ namespace PGA.SportVision
                             SetXData(reg1.ObjectId, rb1);
                             SetXData(reg2.ObjectId, rb2);
 
-
                             if (r1.Area > r2.Area)
                             {
                                 reg1.BooleanOperation(Acaddb.BooleanOperationType.BoolIntersect, r2);
@@ -779,7 +774,6 @@ namespace PGA.SportVision
                 var obj =
                     tr.GetObject(polyoid, Acaddb.OpenMode.ForRead);
 
-
                 // If a "lightweight" (or optimized) polyline
 
                 var lwp = obj as Acaddb.Polyline;
@@ -857,7 +851,6 @@ namespace PGA.SportVision
             }
         }
 
-
         //todo complete //
 
         /// <summary>
@@ -879,10 +872,9 @@ namespace PGA.SportVision
 
                 var ordered = filtered.OrderByDescending(p => p.Area);
 
-
                 if (ordered.ElementAtOrDefault(0) != ordered.ElementAtOrDefault(1))
                 {
-                    //Is Larger Within Inner OR On Boundary 
+                    //Is Larger Within Inner OR On Boundary
                     var o = ordered.ElementAtOrDefault(0);
                     var i = ordered.ElementAtOrDefault(1);
                     var outer = AcadUtilities.GetPointsFromPolyline(o);
@@ -906,14 +898,13 @@ namespace PGA.SportVision
                         }
                     }
                 }
-               
+
             }
             catch (Exception ex)
             {
                 COMS.MessengerManager.LogException(ex);
             }
         }
-
 
         /// <summary>
         ///     Polylineses the intersect.
@@ -1086,17 +1077,13 @@ namespace PGA.SportVision
 
                     //============================================================//
 
-
                     //Use lambda extension method
-
-
 
                     #endregion
 
                     ids = (from id in b
                         where id.ObjectClass.DxfName.ToUpper() == "AECC_FEATURE_LINE"
                         select id).ToList();
-
 
                     tran.Commit();
                 }
@@ -1271,7 +1258,6 @@ namespace PGA.SportVision
                 }
             }
         }
-
 
         /// <summary>
         ///     Clears the polyline inners.
@@ -1530,7 +1516,6 @@ namespace PGA.SportVision
                                     if (r1.Area == r2.Area)
                                         continue;
 
-
                                     var layer = r1.Layer;
 
                                     if (layer == "0")
@@ -1555,7 +1540,6 @@ namespace PGA.SportVision
 
                                     treg1.CopyFrom(reg1);
                                     treg2.CopyFrom(reg2);
-
 
                                     if (reg1.Area > 0 && reg2.Area > 0)
                                     {
@@ -2072,7 +2056,6 @@ namespace PGA.SportVision
             Application.SetSystemVariable("FILEDIA", 0);
             Application.SetSystemVariable("NOMUTT", 1);
             Application.SetSystemVariable("CMDECHO", 1);
-
 
             foreach (var filename in drawings)
             {

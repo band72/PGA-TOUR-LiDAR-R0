@@ -4,7 +4,7 @@ using Autodesk.AutoCAD.Geometry;
 
 namespace C3DSurfacesDemo
 {
-    public class SurfaceDataProvider 
+    public class SurfaceDataProvider
     {
         static SurfaceDataProvider()
         {

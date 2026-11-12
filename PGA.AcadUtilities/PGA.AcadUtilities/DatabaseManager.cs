@@ -128,7 +128,6 @@ namespace PGA.AcadUtilities
             return id;
         }
 
-
         /// <summary>
         /// Adds the polyline3d.
         /// </summary>
@@ -170,7 +169,6 @@ namespace PGA.AcadUtilities
             }
             return id;
         }
-
 
         /// <summary>
         /// Adds the predefined hatch.
@@ -407,7 +405,6 @@ namespace PGA.AcadUtilities
             }
         }
 
-
         /// <summary>
         /// Adds an entity to the database and returns the id
         /// </summary>
@@ -512,7 +509,7 @@ namespace PGA.AcadUtilities
         }
 
         /// <summary>
-        /// Returns EED for an Entity with a specific applicationname 
+        /// Returns EED for an Entity with a specific applicationname
         /// </summary>
         /// <param name="entityId"></param>
         /// <param name="applicationName"></param>
@@ -569,13 +566,12 @@ namespace PGA.AcadUtilities
 
         /// <summary>
         /// Writes a message to the command line
-        /// </summary>        
+        /// </summary>
         public static void WriteMessage(string message)
         {
             Editor editor = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
             editor.WriteMessage(message);
         }
-
 
         /// <summary>
         /// Sets the display order.
@@ -596,7 +592,7 @@ namespace PGA.AcadUtilities
 
             // get the database from the the first objectId
             //
-           Autodesk.AutoCAD.DatabaseServices.Database db = oids[0].Database;           
+           Autodesk.AutoCAD.DatabaseServices.Database db = oids[0].Database;
 
             // create a transaction if needed
             //
@@ -609,7 +605,7 @@ namespace PGA.AcadUtilities
             {
                 trans = transaction;
             }
-            
+
             // now get the draworder table and set accordingly
             //
             using (BlockTable blockTable = (BlockTable)trans.GetObject(db.BlockTableId, OpenMode.ForRead))

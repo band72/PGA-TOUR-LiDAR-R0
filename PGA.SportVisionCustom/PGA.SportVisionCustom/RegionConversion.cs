@@ -9,7 +9,7 @@ namespace PGA.SportVision
 {
     public static class RegionConversion
     {
-    
+
         public class Commands
         {
             [CommandMethod("RTP")]
@@ -23,7 +23,6 @@ namespace PGA.SportVision
                 //PromptEntityOptions peo =
 
                 //PromptEntityResult per =
-
 
                 Transaction tr =
                   doc.TransactionManager.StartTransaction();
@@ -42,7 +41,6 @@ namespace PGA.SportVision
                       tr.GetObject(
                         regId,
                         OpenMode.ForRead) as Region;
-
 
                     if (reg != null)
                     {

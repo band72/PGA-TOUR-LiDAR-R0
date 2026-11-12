@@ -21,24 +21,22 @@ namespace TestFeatureLineIssues
         /// <summary>
         /// Adds the break lines synch.
         /// </summary>
-        /// 
+        ///
         [CommandMethod("PGA-AddBreaklines", CommandFlags.Session)]
         public void AddBreakLinesSynch()
         {
             try
             {
-             
+
                 if (_polyCollection.Count == 0)
                     _polyCollection = selectPolylines.
                         GetIdsByTypeTypeValue("POLYLINE",
                             "LWPOLYLINE", "POLYLINE2D");
 
-
                 var surfaceId = breaklines.FindCivilTinSurface("All");
-                var siteId    = breaklines.GetSiteId(surfaceId); //Use New 
+                var siteId    = breaklines.GetSiteId(surfaceId); //Use New
 
                 breaklines._originalPolys = _polyCollection;
-
 
                 var _siteId      = siteId;
                 var _surObjectId = surfaceId;
@@ -49,7 +47,6 @@ namespace TestFeatureLineIssues
             {
             }
         }
-
 
         public void AddBreaklinesByCommandLine()
         {
@@ -64,7 +61,7 @@ namespace TestFeatureLineIssues
                     var _surObjectId = surfaceId;
 
                     foreach (ObjectId poly in _polyCollection)
-                    {           
+                    {
 
                         var _siteId = breaklines.GetNewSiteId();
 
@@ -112,7 +109,6 @@ namespace TestFeatureLineIssues
             {
             }
         }
-
 
     }
 }

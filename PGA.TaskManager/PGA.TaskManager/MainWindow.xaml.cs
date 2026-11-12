@@ -52,8 +52,6 @@ namespace PGA.TaskManager
 
         }
 
-       
-
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -63,8 +61,6 @@ namespace PGA.TaskManager
         {
             LoadSettingsData();
         }
-
-
 
         private void cmdRunTask_Click(object sender, RoutedEventArgs e)
         {
@@ -88,7 +84,7 @@ namespace PGA.TaskManager
 
                 "{0},{1},{2},{3},{4}", order, pointFile, polyfile.FirstOrDefault(), destination, timestamp);*/
 
-                //Get 
+                //Get
 
                 var stack =
                     from p in context.DrawingStack
@@ -102,12 +98,9 @@ namespace PGA.TaskManager
                     FileFunctions.CopyFiles(fi.PolyFile, fi.DestFile, System.IO.Path.GetFileName(fi.PolyFile));
                 }
 
-
                 //var lsetting =
                 //    from p in context.CommandStack
                 //    select new { p.CourseName, p.DateStamp, p.ProjectCreator, p.ProjectName };
-
-
 
             }
         }
@@ -124,7 +117,7 @@ namespace PGA.TaskManager
             file.PolyFile = lfile[2];
             file.DestFile = System.IO.Path.Combine(lfile[2],lfile[3]);
             file.time = Convert.ToDateTime(lfile[4]);
-            return file;   
+            return file;
         }
 
         private void MergeStacks(IList<Files> pointClouds, IList<Files> polylines)
@@ -149,11 +142,9 @@ namespace PGA.TaskManager
                         where ((po.Order).Equals(t))
                         select po;
 
-
                     var pline = from pl in polylines
                         where ((pl.Order).Equals(t))
                         select pl;
-
 
                     foreach (var po in point)
                     {
@@ -175,13 +166,11 @@ namespace PGA.TaskManager
                         command = String.Format(
                             "{0},{1},{2},{3},{4}", order, pointFile, polyfile.FirstOrDefault(), destination, timestamp);
 
-
                     }
                     context.SubmitChanges();
                 }
             }
         }
-
 
         //        var polylines =
         //            (from p in context.PolylineDWGS
@@ -191,16 +180,12 @@ namespace PGA.TaskManager
         //            (from p in context.PointCloud
         //                where (p.DateStamp == Convert.ToDateTime(DateSelected))
 
-
         //        var drawingstack =
         //            (from pl in context.PolylineDWGS
         //                from p in context.PointCloud
         //                where (p.DateStamp == pl.DateStamp)
         //                select
         //                    new
-
-
-
 
         private void cmdCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -252,7 +237,6 @@ namespace PGA.TaskManager
                     where (p.DateStamp == Convert.ToDateTime(DateSelected))
                     select p;
 
-
                 string command;
                 int i = 1;
                 foreach (var val in points)
@@ -271,7 +255,6 @@ namespace PGA.TaskManager
             }
         }
 
-
         public void PreparePolylineFiles(DateTime time)
         {
             Polylines.Clear();
@@ -282,7 +265,6 @@ namespace PGA.TaskManager
                     from p in context.PolylineDWGS
                     where (p.DateStamp == Convert.ToDateTime(DateSelected))
                     select p;
-
 
                 string command;
                 int i = 1;
@@ -310,7 +292,6 @@ namespace PGA.TaskManager
                     from p in context.PointCloud
                     where (p.DateStamp == Convert.ToDateTime(DateSelected))
                     select p;
-
 
                 string command;
                 int i = 1;
@@ -390,7 +371,6 @@ namespace PGA.TaskManager
             return "";
         }
 
-
         //As I want the value of 3 column
 
         public DataGridCell GetCell(int row, int column, DataGrid customDataGrid)
@@ -447,9 +427,7 @@ namespace PGA.TaskManager
             return child;
         }
 
-
     }
-
 
     public class Files
     {
@@ -471,12 +449,12 @@ namespace PGA.TaskManager
 
     public static class FileFunctions
     {
- 
+
         public static void CopyFiles(string source, string destination, string fileName)
         {
             destination = System.IO.Path.Combine(destination, fileName);
             var test = System.IO.Path.GetDirectoryName(destination);
-           
+
             if (!Directory.Exists(System.IO.Path.GetDirectoryName(destination)))
                 Directory.CreateDirectory(System.IO.Path.GetDirectoryName(destination));
             else

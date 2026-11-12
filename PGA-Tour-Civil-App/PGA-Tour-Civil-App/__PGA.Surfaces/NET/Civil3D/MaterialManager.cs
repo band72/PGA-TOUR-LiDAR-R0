@@ -13,7 +13,6 @@ namespace C3DSurfacesDemo
 
         /*Maps basic materials from Civil3D to Max libraries*/
 
-
         public static class LayerMaterialMappings
         {
             private static string _bridge = "S-BRIDGES:Birch - Solid Stained Dark No Gloss";
@@ -262,7 +261,7 @@ namespace C3DSurfacesDemo
                         return GetLayer(val.ToString());
                     }
                 }
-                    
+
             }
             catch (Exception ex)
             {
@@ -272,7 +271,7 @@ namespace C3DSurfacesDemo
 
             return null;
         }
-        
+
         private static string CleanSurfaceName(string surfaceName)
         {
           return  surfaceName.Substring(2);

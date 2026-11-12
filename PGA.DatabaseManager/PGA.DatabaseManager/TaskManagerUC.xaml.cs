@@ -47,7 +47,7 @@ namespace PGA.TaskManagerUC
         public static object _settings = null;
 
         public static TextBox _TextEventPlaceHolder = null;
-        
+
         public void LoadSettingsData()
         {
             try
@@ -151,7 +151,7 @@ namespace PGA.TaskManagerUC
 
             try
             {
-              
+
                 foreach (var item in settings)
                 {
                     if (!String.IsNullOrEmpty(item.CourseName))
@@ -192,7 +192,6 @@ namespace PGA.TaskManagerUC
            GetTasks();
         }
 
-
         private void cmdRunTask_Click(object sender, RoutedEventArgs e)
         {
 
@@ -203,7 +202,7 @@ namespace PGA.TaskManagerUC
 
                 using (DatabaseCommands commands = new DatabaseCommands())
                 {
-                   
+
                     commands.LoadDrawingStack(DateSelected);
 
                     if (commands.GetAllDrawingStackDwg().Count != 0)
@@ -217,7 +216,7 @@ namespace PGA.TaskManagerUC
                         commands.SetTasksNOTPaused(DateSelected);
                         GetTasks();
                     }
-                    else 
+                    else
                         PGA.MessengerManager.MessengerManager.ShowMessageAndLog("Files NOT Loaded in Drawing Stack!");
                 }
             }
@@ -276,27 +275,16 @@ namespace PGA.TaskManagerUC
             return null;
         }
 
-
-
-
-
         //                var point = from po in pointClouds
         //                            where ((po.Order).Equals(t))
         //                            select po;
-
 
         //                var pline = from pl in polylines
         //                            where ((pl.Order).Equals(t))
         //                            select pl;
 
-
-
-
         //                    var polyfile = from p in pline
         //                                   where order.Equals(p.Order)
-
-
- 
 
         private void cmdCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -365,7 +353,7 @@ namespace PGA.TaskManagerUC
                     _settings = settings;
                     MainWindow._TextEventPlaceHolder.Text = DateTime.Now.ToString();
                 }
-                   
+
             }
             catch (System.InvalidCastException ex)
             {
@@ -406,7 +394,6 @@ namespace PGA.TaskManagerUC
                         where (p.DateStamp == Convert.ToDateTime(DateSelected))
                         select p;
 
-
                     foreach (var val in points)
                     {
                         Files stack = new Files();
@@ -427,7 +414,6 @@ namespace PGA.TaskManagerUC
             }
         }
 
-
         public void PreparePolylineFiles(DateTime time)
         {
             if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
@@ -445,7 +431,6 @@ namespace PGA.TaskManagerUC
                         from p in context.PolylineDWGS
                         where (p.DateStamp == Convert.ToDateTime(DateSelected))
                         select p;
-
 
                     foreach (var val in points)
                     {
@@ -483,7 +468,6 @@ namespace PGA.TaskManagerUC
                         from p in context.PointCloud
                         where (p.DateStamp == Convert.ToDateTime(DateSelected))
                         select p;
-
 
                     string command;
                     foreach (var val in points)
@@ -563,7 +547,6 @@ namespace PGA.TaskManagerUC
             }
             return "";
         }
-
 
         public DataGridCell GetCell(int row, int column, DataGrid customDataGrid)
         {
@@ -666,6 +649,4 @@ namespace PGA.TaskManagerUC
 
     }
 
-
 }
-

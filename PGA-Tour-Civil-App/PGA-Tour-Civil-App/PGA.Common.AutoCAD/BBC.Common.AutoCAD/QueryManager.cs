@@ -10,14 +10,11 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 
-
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Runtime;
-
-
 
 namespace Pge.Common.AutoCAD
 {
@@ -66,7 +63,7 @@ namespace Pge.Common.AutoCAD
         public QueryManager(Database db)
         {
             _mapApp = Autodesk.Gis.Map.HostMapApplicationServices.Application;
-            _projectModel = _mapApp.GetProjectForDB(db);            
+            _projectModel = _mapApp.GetProjectForDB(db);
         }
 
         #endregion
@@ -926,7 +923,6 @@ namespace Pge.Common.AutoCAD
         public void DetachDrawings(IList<string> drawingNames)
         {
 
-
             foreach (string dwg in drawingNames)
             {
                 try
@@ -1052,4 +1048,3 @@ namespace Pge.Common.AutoCAD
         #endregion
     }
 }
-

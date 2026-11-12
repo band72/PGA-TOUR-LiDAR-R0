@@ -62,7 +62,6 @@ namespace PGA.Model.BLL
 
                 //if (!String.IsNullOrEmpty(value)) { states.WaterDrop = value; }
 
-
                 return states; //only loop once
             }
             catch (Exception ex)

@@ -14,29 +14,10 @@ namespace C3DSurfacesDemo
    public class PolylineUtils
 
     {
-       
-
-
-
-
-
-
-
-
 
         //            SelectionFilter sf = new SelectionFilter
 
-
-
-
-
-
-
-
-
         //            sfd.Dispose();// non resident object, so kill 'em
-
-
 
         public static void GetIntersections()
         {
@@ -45,7 +26,7 @@ namespace C3DSurfacesDemo
             Document doc = Application.DocumentManager.MdiActiveDocument;
 
             Editor ed = doc.Editor;
-     
+
             using (DocumentLock docLock = doc.LockDocument())
             {
                 using ( Transaction tr = db.TransactionManager.StartTransaction())
@@ -77,8 +58,8 @@ namespace C3DSurfacesDemo
                         DBObjectCollection pcurves = new DBObjectCollection();
 
                         curv.Explode(pcurves);
-                        TypedValue[] values = new TypedValue[] 
-                     { 
+                        TypedValue[] values = new TypedValue[]
+                     {
                         new TypedValue(0, "lwpolyline")
                         //might be added layer name to select curve:
                         //, new TypedValue(8, "mylayer")
@@ -126,8 +107,6 @@ namespace C3DSurfacesDemo
 
                         }
                         ed.WriteMessage("\n{0}", qcurves.Count);
-
-
 
                         int j = 0;
                         Point3dCollection polypts = new Point3dCollection();
@@ -211,7 +190,7 @@ namespace C3DSurfacesDemo
 
                     ObjectId id = res.ObjectId;
 
-                    // Convert to WCS incase selection was made 
+                    // Convert to WCS incase selection was made
 
                     // while in a UCS.
 
@@ -263,7 +242,7 @@ namespace C3DSurfacesDemo
 
                         double segParam = new double();
 
-                        // This is the test filter here...it uses the 
+                        // This is the test filter here...it uses the
 
                         // nifty API OnSegmentAt
 
@@ -290,17 +269,7 @@ namespace C3DSurfacesDemo
 
         }
 
-
-
-
-
-
-
         //                bt[BlockTableRecord.ModelSpace],
-
-
-
-
 
         public static void GetComplexity()
         {
@@ -341,8 +310,8 @@ namespace C3DSurfacesDemo
                         DBObjectCollection pcurves = new DBObjectCollection();
 
                         curv.Explode(pcurves);
-                        TypedValue[] values = new TypedValue[] 
-                     { 
+                        TypedValue[] values = new TypedValue[]
+                     {
                         new TypedValue(0, "lwpolyline")
                         //might be added layer name to select curve:
                         //, new TypedValue(8, "mylayer")
@@ -358,7 +327,7 @@ namespace C3DSurfacesDemo
                         Application.SetSystemVariable("osmode", 0);// optional
                         // for debug only
                         Application.ShowAlertDialog(string.Format("\nNumber of Steps: {0}", step));
-       
+
                         tr.Commit();
                     }
                     catch (System.Exception ex)
@@ -381,7 +350,6 @@ namespace C3DSurfacesDemo
 
             Editor ed = doc.Editor;
 
-         
             using (Transaction tr = db.TransactionManager.StartTransaction())
             {
                 try
@@ -392,12 +360,12 @@ namespace C3DSurfacesDemo
                     if (ent == null) return false;
 
                     Curve curv = ent as Curve;
-                        
+
                     DBObjectCollection pcurves = new DBObjectCollection();
-                        
+
                     curv.Explode(pcurves);
-                    TypedValue[] values = new TypedValue[] 
-                    { 
+                    TypedValue[] values = new TypedValue[]
+                    {
                     new TypedValue(0, "lwpolyline")
                     };
                     SelectionFilter filter = new SelectionFilter(values);
@@ -430,7 +398,7 @@ namespace C3DSurfacesDemo
 
                 return result;
             }
-    
+
         }
 
     }

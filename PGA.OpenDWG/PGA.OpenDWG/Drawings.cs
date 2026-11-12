@@ -36,7 +36,7 @@ namespace PGA.OpenDWG
 
         public bool GetDrawingPath()
         {
-            
+
             Document doc = Core.Application.DocumentManager.MdiActiveDocument;
 
             HostApplicationServices hs =
@@ -70,5 +70,3 @@ namespace PGA.OpenDWG
         }
     }
 }
-
-

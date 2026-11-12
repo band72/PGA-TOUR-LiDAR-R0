@@ -34,7 +34,6 @@ namespace PGA.Database.Tests
             string res =
             GetDataBasePath.CreateIfNotExists(value);
 
-
         }
         [TestMethod()]
         public void CreateIfNotExistsTes3()

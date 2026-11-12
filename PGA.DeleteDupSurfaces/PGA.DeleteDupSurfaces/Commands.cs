@@ -25,7 +25,6 @@ namespace PGA.DeleteDupSurfaces
             }
         }
 
- 
         [CommandMethod("PGA-DeleteDupSurfacesV2",CommandFlags.Session)]
         public void CommandDeleteSurfacesV2()
         {

@@ -88,7 +88,6 @@ namespace PGA.CourseName
                     {
                         var details = commands.GetCourseDetails().ToArray();
 
-
                         StreamWriter writer = new StreamWriter(filepath, false);
                         foreach (var line in details)
                         {
@@ -113,13 +112,12 @@ namespace PGA.CourseName
                return  field.Trim();
             }
             catch { }
-            
+
             return String.Empty;
         }
 
         private void cmdImport_Click(object sender, RoutedEventArgs e)
         {
-
 
             try
             {
@@ -140,7 +138,7 @@ namespace PGA.CourseName
                         foreach (var line in lines)
                         {
                             string[] contents = line.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-                            
+
                             commands.InsertCourseDetail
                             (CleanField(contents[0]), CleanField(contents[1]), CleanField(contents[2]),
                                CleanField(contents[3]), CleanField(contents[4]));
@@ -161,7 +159,6 @@ namespace PGA.CourseName
 
         private void cboCourseName_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-        
 
             using (DatabaseCommands commands = new DatabaseCommands())
             {
@@ -172,7 +169,6 @@ namespace PGA.CourseName
                     if (e.AddedItems.Count == 0)
                         return;
                     txtCourseName.Text = e.AddedItems[0].ToString();
-
 
                     var selected = commands.GetCourseDetails();
 
@@ -192,7 +188,7 @@ namespace PGA.CourseName
                 }
                 catch (System.NullReferenceException)
                 {
-                    
+
                 }
 
                 catch (Exception ex)
@@ -200,7 +196,6 @@ namespace PGA.CourseName
                     PGA.MessengerManager.MessengerManager.ShowMessageAndLog("Error in Delete" + ex.Message);
                 }
             }
-
 
         }
 
@@ -264,13 +259,12 @@ namespace PGA.CourseName
                     detail.CourseNum = num;
                     detail.TOURCode = cod;
 
-                     
                     if ((commands.GetCourseDetails().Select(p => p.Name == n).FirstOrDefault()))
                     {
                         PGA.MessengerManager.MessengerManager.ShowMessageAndLog("Course Name Already in Database");
                         return;
                     }
-                
+
                     commands.InsertCourseDetail(n,c,s,num,cod);
 
                     LoadCourses();
@@ -284,7 +278,6 @@ namespace PGA.CourseName
             }
 
         }
-    
 
         private void txtUpdateCourse_Click(object sender, RoutedEventArgs e)
         {

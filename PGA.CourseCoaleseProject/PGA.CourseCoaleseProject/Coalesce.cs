@@ -105,7 +105,7 @@ namespace PGA.CourseCoalesceProject
                         commands.CheckForTimerRecs();
                         commands.ClearTimerInfo();
                     }
-                    catch { } 
+                    catch { }
                     #endregion
 
                     #region Template Path and Settings
@@ -144,7 +144,7 @@ namespace PGA.CourseCoalesceProject
                         #region Check DateStamp
 
                        DateStamp = (DateTime) CheckDateStamp(dwg.DateStamp);
-                      
+
                        COMS.MessengerManager.AddLog("End Checking DateStamp!");
 
                         #endregion
@@ -242,7 +242,6 @@ namespace PGA.CourseCoalesceProject
 
                                    if (path == null) throw new ArgumentNullException(nameof(path));
 
-
                                    if (!File.Exists(path))
                                    {
                                        COMS.MessengerManager.ShowMessageAlert
@@ -293,7 +292,6 @@ namespace PGA.CourseCoalesceProject
                                                "POLYLINE", "LWPOLYLINE", "POLYLINE2D", "POLYLINE3d");
                                            NumberofPolylines = collection.Count;
                                            Process.CopyPolylinesBetweenDatabases(db, collection);
-
 
                                            // Still need to reset the working database
 
@@ -363,14 +361,12 @@ namespace PGA.CourseCoalesceProject
                                            Drawingpath = outdwg;
                                             COMS.MessengerManager.AddLog("Ending Output Folders!");
 
-
                                             #endregion
 
                                             #region Zoom Extents
                                             ZoomExtents();
 
                                             #endregion
-
 
                                             #region Simplify Polylines
 
@@ -416,14 +412,12 @@ namespace PGA.CourseCoalesceProject
 
                                             //Create Point Cloud Surface "All"
                                             CreateAllSurface.CreateTINSurface pTinSurface =
-                                               new CreateAllSurface.CreateTINSurface();                                         
+                                               new CreateAllSurface.CreateTINSurface();
 
                                            pTinSurface.CreateTINSurfaceByPointCollection(GCloudPath,
                                                dwg.PointCloudDwgName);
-                                           
-                                          
-                                           SavezCADFile(outdwg, acDbNewDoc, dwg);
 
+                                           SavezCADFile(outdwg, acDbNewDoc, dwg);
 
                                            #endregion
 
@@ -446,12 +440,10 @@ namespace PGA.CourseCoalesceProject
                                            if (s.UseBreaklines)
                                            {
 
-                                             
                                                 //Add Breaklines to "All"
                                                 _commands.AddBreakLinesSynch
                                                    (dwg.DateStamp.Value, outdwg);
 
-                                                
                                             }
 
                                            #endregion
@@ -592,14 +584,12 @@ namespace PGA.CourseCoalesceProject
                            }
                        }
 
-
                         #region Messaging
 
                         COMS.MessengerManager.AddLog
                            ("End Process Drawing: " + dwg.PolylineDwgName);
 
                         #endregion
-
 
                     }
 
@@ -617,7 +607,7 @@ namespace PGA.CourseCoalesceProject
                     if (_flagAutoErrorReports)
                         StartProcess(DateStamp.Ticks.ToString());
 
-                    COMS.MessengerManager.AddLog("Ended Sending Automatic Reports!"); 
+                    COMS.MessengerManager.AddLog("Ended Sending Automatic Reports!");
                     #endregion
 
                 }
@@ -625,8 +615,6 @@ namespace PGA.CourseCoalesceProject
                {
                    COMS.MessengerManager.AddLog("Failed Sending Automatic Reports!");
                }
-
-
 
                #region SendStringToExecute Commands for Watcher
 
@@ -667,10 +655,10 @@ namespace PGA.CourseCoalesceProject
                 using (DatabaseCommands commands = new DatabaseCommands())
                 {
                     AcadPreferences acPrefComObj = (AcadPreferences)global::Autodesk.AutoCAD.ApplicationServices.Application.Preferences;
-    
+
                     if (commands.GetTemplatePath() != acPrefComObj.Files.QNewTemplateFile)
                         acPrefComObj.Files.QNewTemplateFile = commands.GetTemplatePath();
-                    
+
                 }
             }
             catch (Exception ex)
@@ -743,7 +731,6 @@ namespace PGA.CourseCoalesceProject
                 COMS.MessengerManager.LogException(ex);
             }
         }
-
 
         /// <summary>
         /// Closes the polylines.
@@ -830,7 +817,6 @@ namespace PGA.CourseCoalesceProject
             }
         }
 
-
         public static string GetFileVersion(string path)
         {
             return FileVersionInfo.GetVersionInfo(path).FileVersion;
@@ -848,7 +834,7 @@ namespace PGA.CourseCoalesceProject
         /// Gets the os version.
         /// </summary>
         /// <returns>System.String.</returns>
-        /// 
+        ///
         public static string GetOsVersion()
         {
             try
@@ -858,7 +844,7 @@ namespace PGA.CourseCoalesceProject
                 return name != null ? name.ToString() : "Unknown OS Version";
             }
             catch (ACADRT.Exception ex)
-            {           
+            {
                 COMS.MessengerManager.LogException(ex);
             }
             return "Unknown OS Version";
@@ -880,7 +866,6 @@ namespace PGA.CourseCoalesceProject
                     var hole = GetAndCheckHole(dwg);
                     var filepath = Path.GetDirectoryName(outdwg);
                     var savepath = GetAndCheckPath(hole, filepath);
-
 
                     var drawingname = String.Format("s-{0}", dwg.PolylineDwgName);
                     var completepath = Path.Combine(savepath, drawingname);
@@ -1026,7 +1011,7 @@ namespace PGA.CourseCoalesceProject
 
                 commands.AddExportToCADRecord
                         (dwg, completepath, Convert.ToInt64(hole));
-             
+
                 acDbNewDoc.SaveAs(completepath, ACADDB.DwgVersion.Current);
 
             }
@@ -1089,7 +1074,7 @@ namespace PGA.CourseCoalesceProject
                 }
             }
             catch (ACADRT.Exception ex)
-            {               
+            {
                 COMS.MessengerManager.LogException(ex);
             }
         }
@@ -1193,7 +1178,7 @@ namespace PGA.CourseCoalesceProject
                 }
             }
             catch (ACADRT.Exception ex)
-            {               
+            {
                 COMS.MessengerManager.LogException(ex);
             }
             return null;
@@ -1294,8 +1279,6 @@ namespace PGA.CourseCoalesceProject
 
                     #endregion
 
-                   
-
                     var TotalDrawings = 0;
                     foreach (DrawingStack dwg in DwDrawingStacks)
                     {
@@ -1306,7 +1289,6 @@ namespace PGA.CourseCoalesceProject
                         if (++TotalDrawings > 18)
                             throw new System.Exception
                                 ("Clear Database! Drawing Stack Not Synchronized!");
-
 
                         var acDocMgr = ACAD.Application.DocumentManager;
                         Document acNewDoc = null;
@@ -1346,7 +1328,6 @@ namespace PGA.CourseCoalesceProject
                                     string path = Path.Combine(gpath, dwg.PolylineDwgName);
 
                                     if (path == null) throw new ArgumentNullException(nameof(path));
-
 
                                     if (!File.Exists(path))
                                     {
@@ -1463,7 +1444,7 @@ namespace PGA.CourseCoalesceProject
                     ("Coalesce Drawing: {0}", ex1.Message));
                 COMS.MessengerManager.LogException(ex1);
             }
-            //Reset DWG State Here 
+            //Reset DWG State Here
             ACAD.Application.SetSystemVariable("FILEDIA", 1);
         }
 

@@ -138,8 +138,8 @@ namespace PGA.AcadUtilities
         /// <param name="color">The color.</param>
         /// <returns></returns>
         public static ObjectId CreateLayer(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string layername, Color color) //, ObjectId linetypeId, Color color, ObjectId plotStyleNameId, bool plots, bool frewezeInViewPorts)
-        {   
-            return CreateLayer(db, trans, layername, color, ObjectId.Null);            
+        {
+            return CreateLayer(db, trans, layername, color, ObjectId.Null);
         }
 
         /// <summary>
@@ -315,7 +315,7 @@ namespace PGA.AcadUtilities
         /// </summary>
         /// <param name="db">The db.</param>
         /// <param name="layername">The layername.</param>
-        /// <returns>The object id the layer if it exists, otherwise ObjectId.Null</returns>        
+        /// <returns>The object id the layer if it exists, otherwise ObjectId.Null</returns>
         public static ObjectId GetLayerId(Autodesk.AutoCAD.DatabaseServices.Database db, string layername)
         {
             ObjectId layerId = ObjectId.Null;
@@ -544,7 +544,7 @@ namespace PGA.AcadUtilities
         /// <returns>A list of layer names</returns>
         public static bool IsLocked(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, ObjectId layerId)
         {
-            bool locked = false;             
+            bool locked = false;
             using (LayerTableRecord layerTableRecord = trans.GetObject(layerId, OpenMode.ForRead, false) as LayerTableRecord)
             {
                 locked = layerTableRecord.IsLocked;
@@ -878,4 +878,3 @@ namespace PGA.AcadUtilities
 
     }
 }
-

@@ -17,23 +17,23 @@ namespace C3DSurfacesDemo
             {
                 throw new ArgumentNullException(layername);
             }
-           
+
             try
             {
-              
+
                 Autodesk.Gis.Map.Topology.Variable cadAction
 
                 = new Autodesk.Gis.Map.Topology.Variable();
-          
+
                 string appfolder = PGA.Autodesk.Settings.AcadSettings.AppFolderScriptPath;
-                 
+
                 string filepath = System.IO.Path.Combine(appfolder,"MapClean",layername + ".dpf");
 
                 if (!System.IO.File.Exists(filepath))
                     throw new FileNotFoundException(filepath);
-                
+
                 cadAction.LoadProfile(filepath);
-             
+
                 using (Autodesk.Gis.Map.Topology.TopologyClean cadCleanobj
                     = new Autodesk.Gis.Map.Topology.TopologyClean())
                 {
@@ -42,27 +42,27 @@ namespace C3DSurfacesDemo
                     cadCleanobj.GroupNext();
 
                     while (!cadCleanobj.Completed)
-                    {   
+                    {
                             if (cadCleanobj.GroupErrorCount > 0)
                             {
                                 try
                                 {
                                     cadCleanobj.GroupFix();
                                 }
-                                catch 
+                                catch
                                 {
                                     //No Need to Log//
-                                } 
-                                   
+                                }
+
                             }
-                            cadCleanobj.GroupNext();                      
+                            cadCleanobj.GroupNext();
 
                     }
 
                     cadCleanobj.End();
 
                 }
-            
+
             }
             catch (System.Exception ex)
             {
@@ -84,7 +84,6 @@ namespace C3DSurfacesDemo
                 polys = GetSelection();
 
                 if (layernames.Count == 0) return false;
-
 
                 foreach (string layer in layernames)
                 {

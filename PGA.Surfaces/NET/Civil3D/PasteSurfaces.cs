@@ -68,7 +68,7 @@ namespace C3DSurfacesDemo
         public void ExtractBorder(Transaction trans, ObjectId surfaceId)
         {
             TinSurface surface = trans.GetObject(surfaceId, OpenMode.ForRead) as TinSurface;
-            
+
             // Extract Border from the TinSurface
             // The extracted entities can be Polyline, Polyline3d, or Face.
 
@@ -85,7 +85,6 @@ namespace C3DSurfacesDemo
             }
         }
 
-
         public class SurfaceMatrix
         {
             private string surfaceType = "";
@@ -93,7 +92,6 @@ namespace C3DSurfacesDemo
             private string surfaceStyle = "";
             private string destTINStyle = "";
             private string polyLayer = "";
-
 
             public string SurfaceType
             {
@@ -349,9 +347,7 @@ namespace C3DSurfacesDemo
             string surfaceName = EditorUtils.PromptForString("\nEnter surface name: ");
             if (String.IsNullOrEmpty(surfaceName)) surfaceName = "OVERALLSURFACE";
 
-
             string surfaceStyleName = EditorUtils.PromptForString("\nEnter surface style name: ");
-
 
             if (!SurfaceStyleManager.Exists(surfaceStyleName))
             {
@@ -368,7 +364,6 @@ namespace C3DSurfacesDemo
             GetAllInternalPolyLinesToSelected(Autodesk.AutoCAD.DatabaseServices.ObjectId oid,
                 Autodesk.AutoCAD.DatabaseServices.ObjectIdCollection oids)
         {
-           
 
             try
             {
@@ -376,7 +371,6 @@ namespace C3DSurfacesDemo
                 using (Database db = CivilApplicationManager.WorkingDatabase)
                 {
                     var intid = new ObjectIdCollection();
-
 
                     foreach (Autodesk.AutoCAD.DatabaseServices.ObjectId objectId in oids)
                     {
@@ -400,7 +394,7 @@ namespace C3DSurfacesDemo
 
                             PGA.MessengerManager.MessengerManager.AddLog
                             (string.Format("GETALLINTERNALPOLYLINESTOSELECTED{0}", ex.Message));
-                            continue;  
+                            continue;
                         }
 
                         if (basePolyline != null || tempPolyline != null)
@@ -435,8 +429,8 @@ namespace C3DSurfacesDemo
                                 if (objectId.IsValid)
                                     intid.Add(objectId);
                             }
-                        }           
-               
+                        }
+
                     }
 
                     if (intid.Count != 0)
@@ -537,7 +531,6 @@ namespace C3DSurfacesDemo
             return null;
         }
 
-
         private static List<ObjectId> GetSurfaceEntityIDs(Database db)
 
         {
@@ -575,17 +568,13 @@ namespace C3DSurfacesDemo
 
                     //============================================================//
 
-
                     //Use lambda extension method
-
-
 
                     #endregion
 
                     ids = (from id in b
                            where id.ObjectClass.DxfName.ToUpper() == "AECC_TIN_SURFACE"
                            select id).ToList();
-
 
                     tran.Commit();
                 }
@@ -598,7 +587,6 @@ namespace C3DSurfacesDemo
 
             return ids;
         }
-
 
         public static Autodesk.AutoCAD.DatabaseServices.ObjectId GetSurfaceByName(String surfaceName)
         {
@@ -691,13 +679,10 @@ namespace C3DSurfacesDemo
                     collection.Add(id);
                 }
 
-
                 trans.Commit();
                 return collection;
             }
         }
-
-
 
         public Autodesk.AutoCAD.DatabaseServices.ObjectIdCollection GetAllPolyLines()
         {
@@ -732,9 +717,9 @@ namespace C3DSurfacesDemo
             {
                 using (Transaction tr = CivilApplicationManager.StartTransaction())
                 {
-                     
+
                     //Store boundary
-               
+
                     poly = polyId.GetObject(OpenMode.ForRead) as ACAD.Polyline;
                     var points = AcadUtilities.GetPointsFromPolyline(poly);
 
@@ -768,7 +753,7 @@ namespace C3DSurfacesDemo
                 ///Todo: Added Support for Boundary Failure 3.10.2017 ///
                 ProcessFailedHideBoundarys(polyId, surfacename, surface);
             }
-            finally 
+            finally
             {
                 poly.Dispose();
             }
@@ -928,7 +913,7 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
             {
                 using (Transaction tr = CivilApplicationManager.StartTransaction())
                 {
-                    //1. Create new surface if no existing surface passed in 
+                    //1. Create new surface if no existing surface passed in
                     //2. Store boundary
                     ObjectIdCollection boundaryEntities = new ObjectIdCollection();
                     boundaryEntities = GetObjectIdCollectionFromEntity(polyId);
@@ -948,15 +933,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                 DatabaseLogs.FormatLogs("AddStandardBoundary: " + (ex.Message));
             }
         }
-
-
-
-
-
-
-
-
-
 
         public bool AddSelectedLineAsOuterBoundary(Autodesk.AutoCAD.DatabaseServices.ObjectId id)
         {
@@ -992,7 +968,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
             return surface;
         }
 
-
         public Vector3d GetPLineMaxGeoExtents(ACAD.Polyline polyline)
         {
             return polyline.GeometricExtents.MaxPoint.GetAsVector();
@@ -1020,7 +995,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                                 continue;
 
                             //Test for Complexity
-
 
                             basePolyline = GetPolyFromObjId(oid, db);
                             tempPolyline = GetPolyFromObjId(objectId, db);
@@ -1128,7 +1102,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
             {
                 DBObject obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
-
 
                 // If a "lightweight" (or optimized) polyline
 
@@ -1239,7 +1212,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                 DBObject obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
 
-
                 // If a "lightweight" (or optimized) polyline
 
                 ACAD.Polyline lwp = obj as ACAD.Polyline;
@@ -1254,7 +1226,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
 
                     return lwp.Layer;
 
-
                 }
 
                 else
@@ -1262,8 +1233,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                     // If an old-style, 2D polyline
 
                     Polyline2d p2d = obj as Polyline2d;
-
-                 
 
                     if (p2d != null)
                     {
@@ -1273,7 +1242,7 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                         }
 
                         return p2d.Layer;
-                         
+
                     }
 
                     else
@@ -1289,7 +1258,7 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                                 PGA.MessengerManager.MessengerManager.AddLog("Polyline is not Closed!");
                             }
                             return p3d.Layer;
-                            
+
                         }
                     }
                 }
@@ -1300,7 +1269,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
 
             return String.Empty;
         }
-
 
         public ACAD.Polyline GetPolyFromObjId(Autodesk.AutoCAD.DatabaseServices.ObjectId oid, Database db)
         {
@@ -1388,7 +1356,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
             return null;
         }
 
-
         public ObjectIdCollection GetObjectIdCollectionFromEntity(ObjectId polyId)
         {
             ObjectIdCollection entities = new ObjectIdCollection();
@@ -1424,7 +1391,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                 DBObject obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
 
-
                 // If a "lightweight" (or optimized) polyline
 
                 ACAD.Polyline lwp = obj as ACAD.Polyline;
@@ -1450,12 +1416,10 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
         internal static void ListInternalPolylines(Dictionary<ObjectId, ObjectIdCollection> m_dict)
         {
 
-
             foreach (var obj in m_dict.Keys)
             {
                 PGA.MessengerManager.MessengerManager.AddLog
                 (obj + "******Key ********" + obj);
-
 
                 foreach (ObjectIdCollection collection in m_dict.Values)
                 {
@@ -1511,7 +1475,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
         {
             try
             {
-               
 
                 foreach (ObjectId polyline in polylines)
                 {
@@ -1557,7 +1520,7 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                             ObjectId lObjectId = new ObjectId();
 
                             lObjectId = CivilTinSurface.FindCivilTinSurfaceByName(pair.Value);
-                            //1. Create new surface if no existing surface passed in 
+                            //1. Create new surface if no existing surface passed in
                             surface = lObjectId.GetObject(OpenMode.ForRead) as TinSurface;
                             name = surface.Name;
                             //2. Store boundary
@@ -1573,7 +1536,7 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                             sbo.Name = "Boundary-" +  name + "-" + DateTime.Now.Millisecond;
 
                             tr.Commit();
- 
+
                         }
 
                         #endregion
@@ -1696,7 +1659,7 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                         return;
                     name = surface.Name;
                     ////2. Store boundary
-                    
+
                     //3. Access the BoundariesDefinition object from the surface object
                     SurfaceDefinitionBoundaries surfaceBoundaries =
                         surface.BoundariesDefinition;
@@ -1724,7 +1687,7 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                     ProcessOverlapOuterBoundary(name, surface);  //Disable Existing Outer Polyline
                 }
             }
-            
+
         }
 
         private void ProcessOverlapOuterBoundary( string name, TinSurface surface)
@@ -1744,7 +1707,7 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                     var points = AcadUtilities.GetPointsFromPolyline(poly);
 
                     ProcessFailedOuterBoundary(points, name, surface);  //Inserts Outer Polyline
-             
+
                     tr.Commit();
                 }
 
@@ -1840,7 +1803,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                 var obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
 
-
                 //"lightweight" (or optimized) polyline
 
                 var lwp = obj as ACAD.Polyline;
@@ -1853,7 +1815,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                 // If an old-style, 2D polyline
 
                 var p2d = obj as Polyline2d;
-
 
                 if (p2d != null)
                 {
@@ -1868,7 +1829,6 @@ Autodesk.Civil.DatabaseServices.TinSurface surface)
                 {
                     return p3d.Layer;
                 }
-
 
                 // Committing is cheaper than aborting
 

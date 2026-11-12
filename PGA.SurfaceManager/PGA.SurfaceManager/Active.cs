@@ -87,7 +87,6 @@ namespace PGA.SurfaceManager
             get { return Application.DocumentManager.MdiActiveDocument; }
         }
 
-
     }
 
 }

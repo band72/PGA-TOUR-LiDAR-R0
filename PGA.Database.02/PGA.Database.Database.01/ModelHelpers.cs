@@ -34,7 +34,6 @@ namespace PGA.Database
             }
         }
 
-
         public object this[int isuffix]
         {
             get { return GetHole(isuffix); }
@@ -49,7 +48,6 @@ namespace PGA.Database
             return holes[hole];
         }
     }
-
 
     public class TaskWithProjectInfo : IEnumerable<TaskWithProjectInfo>
     {
@@ -70,7 +68,6 @@ namespace PGA.Database
             set { mylist.Insert(index, value); }
         }
 
-
         public IEnumerator<TaskWithProjectInfo> GetEnumerator()
         {
             return mylist.GetEnumerator();
@@ -86,7 +83,6 @@ namespace PGA.Database
             return mylist.ToList();
         }
     }
-
 
     public class MyTaskCollection<TaskWithProjectInfo> : IList<TaskWithProjectInfo>
     {

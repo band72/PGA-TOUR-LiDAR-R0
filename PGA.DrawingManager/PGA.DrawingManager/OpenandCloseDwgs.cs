@@ -119,7 +119,6 @@ namespace PGA.DrawingManager
                 }
             }
 
-
             catch (System.Exception ex)
             {
                 PGA.Database.DatabaseLogs.FormatLogs("ForceCloseDrawings: " + ex.Message);
@@ -127,7 +126,6 @@ namespace PGA.DrawingManager
 
         }
     }
-
 
     public static class Commands
     {
@@ -189,8 +187,7 @@ namespace PGA.DrawingManager
                 DocumentCollection docs = ACAD.Application.DocumentManager;
                 foreach (Document doc in docs)
                 {
-                  
-            
+
                     if (docs.Count == 1)
                     {
                         return;
@@ -243,7 +240,6 @@ namespace PGA.DrawingManager
             }
         }
 
-
         public static void CloseAllButActiveDocuments()
         {
             DocumentCollection docs = ACAD.Application.DocumentManager;
@@ -282,5 +278,3 @@ namespace PGA.DrawingManager
     }
 
 }
-
-

@@ -30,8 +30,6 @@ namespace PGA.SportVision
 
                    //ACADDB.Polyline plBox =
 
-
-
                     ObjectIdCollection ObjIds = new ObjectIdCollection();
                     ObjIds.Add(poly.Id);
 
@@ -43,10 +41,10 @@ namespace PGA.SportVision
                     oHatch.SetHatchPattern(HatchPatternType.PreDefined, "ZIGZAG");
                     oHatch.ColorIndex = poly.Color.ColorIndex;
                     oHatch.Layer = poly.Layer;
-                    
+
                     btr.AppendEntity(oHatch);
                     Tx.AddNewlyCreatedDBObject(oHatch, true);
-                    //this works ok  
+                    //this works ok
                     oHatch.Associative = true;
                     oHatch.AppendLoop((int)HatchLoopTypes.Default, ObjIds);
                     oHatch.EvaluateHatch(true);

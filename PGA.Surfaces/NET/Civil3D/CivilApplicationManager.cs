@@ -8,7 +8,7 @@ namespace C3DSurfacesDemo
 {
     public class CivilApplicationManager
     {
-        public static CivilDocument ActiveCivilDocument 
+        public static CivilDocument ActiveCivilDocument
         {
             get { return CivilApplication.ActiveDocument; }
         }

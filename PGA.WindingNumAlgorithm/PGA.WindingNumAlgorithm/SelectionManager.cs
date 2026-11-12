@@ -16,7 +16,6 @@ namespace PGA.WindingNumAlgorithm
                 "POLYLINE2D");
         }
 
-
         public static IOrderedEnumerable<Acaddb.Polyline> OrderPolylines(Acaddb.ObjectIdCollection polyoId)
         {
             var ordered = new List<Acaddb.Polyline>();
@@ -30,7 +29,6 @@ namespace PGA.WindingNumAlgorithm
 
             return ordered.OrderBy(p => p.Area);
         }
-
 
     }
 }

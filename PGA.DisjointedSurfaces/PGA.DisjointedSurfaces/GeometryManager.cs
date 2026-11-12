@@ -30,7 +30,6 @@ namespace PGA.DisjointedSurfaces
             MgByteReader byteReader;
             string geometryAgfText;
 
-
             agfReaderWriter = new MgAgfReaderWriter();
             wktReaderWriter = new MgWktReaderWriter();
             // In the string to geometry direction:
@@ -43,8 +42,8 @@ namespace PGA.DisjointedSurfaces
         }
 
         public static SqlBytes SerializeSqlGeographyMultiPoint(Point3dCollection points3d)
-        {    
-           
+        {
+
             var result = "";
             foreach (Point3d point in points3d)
             {
@@ -56,12 +55,12 @@ namespace PGA.DisjointedSurfaces
             if (String.IsNullOrEmpty(result)) return null;
             result += ")";  //, null)";
             SqlGeometry multipoint = SqlGeometry.STMPointFromText(new SqlChars(result), 0);
-         
+
             return multipoint.Serialize();
         }
 
         public static SqlBytes SerializeSqlGeographyMultiPoint(Point2dCollection points2d)
-        {   
+        {
 
             var result = "";
             foreach (Point2d point in points2d)
@@ -73,7 +72,7 @@ namespace PGA.DisjointedSurfaces
             }
             result += ")";  //, null)";
             SqlGeometry multipoint = SqlGeometry.STMPointFromText(new SqlChars(result), 0);
-    
+
             return multipoint.Serialize();
         }
 
@@ -91,7 +90,6 @@ namespace PGA.DisjointedSurfaces
             return point3D;
         }
 
-
         public static byte[] ToBytes(string hex)
         {
             var shb = SoapHexBinary.Parse(hex);
@@ -99,8 +97,7 @@ namespace PGA.DisjointedSurfaces
         }
 
         internal static byte[] ToBytes(SqlBytes b)
-        { 
-
+        {
 
             byte[] binaryString = b.Buffer;
 

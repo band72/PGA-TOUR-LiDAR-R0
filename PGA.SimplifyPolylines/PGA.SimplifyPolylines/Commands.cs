@@ -59,8 +59,8 @@ namespace PGA.SimplifyPolylines
                     foreach (ObjectId obj in collection)
                     {
                         string layername = GetPolylineName(obj);
-                        layerlist.Add(layername); 
-                            
+                        layerlist.Add(layername);
+
                         point2DCollections.Add(GetPoint2dFromPolylines(obj));
 
                         //Log Original Information
@@ -79,7 +79,6 @@ namespace PGA.SimplifyPolylines
                         reducedPoints = DouglasPeuckerImplementation.DouglasPeuckerReduction(list, tolerance);
                         reducedCollection.Add(ConvertCollections(reducedPoints));
 
-
                         sortedCollection = SortModified(list, ConvertCollections(reducedPoints));
                         // Add Reduced Polylines to Database
                         ModifyPolylineVertices(sortedCollection, collection[index]);
@@ -92,7 +91,6 @@ namespace PGA.SimplifyPolylines
 
                     IList<Point2dCollection> OriginalPointCollection = point2DCollections.ToList();
 
-                     
                     //Get Point Collection of Polylines
 
                 }
@@ -109,7 +107,7 @@ namespace PGA.SimplifyPolylines
         /// <param name="collection">The collection.</param>
         private static void DeleteOldPolylines(ObjectIdCollection collection)
         {
-            // Get the current document and database 
+            // Get the current document and database
             var acDoc = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;
             var acCurDb = acDoc.Database;
             var ed = acDoc.Editor;
@@ -130,8 +128,6 @@ namespace PGA.SimplifyPolylines
 
                     PGA.AcadUtilities.AcadUtilities.DeleteObjects(collection);
 
-
-
                     acTrans.Commit();
                 }
             }
@@ -147,11 +143,11 @@ namespace PGA.SimplifyPolylines
         {
             Point3dCollection points3D = PGA.AcadUtilities.AcadUtilities.ConvertTo3dCollection(points);
 
-            // Get the current document and database 
+            // Get the current document and database
             Document acDoc = Application.DocumentManager.MdiActiveDocument;
             Autodesk.AutoCAD.DatabaseServices.Database acCurDb = acDoc.Database;
             Editor ed = acDoc.Editor;
-            // Lock the current document 
+            // Lock the current document
             PlanarEntity plane;
 
             CoordinateSystem3d ucs =
@@ -174,9 +170,6 @@ namespace PGA.SimplifyPolylines
                     acBlkTblRec = acTrans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace],
                         OpenMode.ForWrite) as BlockTableRecord;
 
-
-
-
                     Polyline polyline = new Polyline();
 
                     for (int i = 0; i < points.Count; i++)
@@ -189,9 +182,7 @@ namespace PGA.SimplifyPolylines
                     acBlkTblRec.AppendEntity(polyline);
                     acTrans.AddNewlyCreatedDBObject(polyline, true);
 
-
-
-                    #endregion         
+                    #endregion
 
                     acTrans.Commit();
                 }
@@ -220,7 +211,6 @@ namespace PGA.SimplifyPolylines
                 using (DocumentLock doclock = doc.LockDocument())
                 {
 
-
                     //Get Point Collection of Polylines
                     foreach (ObjectId obj in collection)
                     {
@@ -239,7 +229,6 @@ namespace PGA.SimplifyPolylines
                         //Reduce Polylines
                         reducedPoints = DouglasPeuckerImplementation.DouglasPeuckerReduction(list, tolerance);
                         reducedCollection.Add(ConvertCollections(reducedPoints));
-
 
                         sortedCollection = SortModified(list, ConvertCollections(reducedPoints));
                         // Add Reduced Polylines to Database
@@ -280,7 +269,6 @@ namespace PGA.SimplifyPolylines
                 using (DocumentLock doclock = doc.LockDocument())
                 {
 
-
                     //Get Point Collection of Polylines
                     foreach (ObjectId obj in collection)
                     {
@@ -299,7 +287,6 @@ namespace PGA.SimplifyPolylines
                         //Reduce Polylines
                         reducedPoints = DouglasPeuckerImplementation.DouglasPeuckerReduction(list, tolerance);
                         reducedCollection.Add(ConvertCollections(reducedPoints));
-
 
                         sortedCollection = SortModified(list, ConvertCollections(reducedPoints));
                         // Add Reduced Polylines to Database
@@ -338,7 +325,6 @@ namespace PGA.SimplifyPolylines
 
                 using (DocumentLock doclock = doc.LockDocument())
                 {
-
 
                     //Get Point Collection of Polylines
                     foreach (ObjectId obj in collection)
@@ -385,13 +371,12 @@ namespace PGA.SimplifyPolylines
         {
             var doc = Application.DocumentManager.MdiActiveDocument;
 
-
             using (Transaction tr = doc.TransactionManager.StartTransaction())
             {
                 var obj = tr.GetObject(polylineoId, OpenMode.ForRead);
                 var pl = obj as Polyline;
                 if (pl != null)
-                {                    
+                {
                     pl.UpgradeOpen();
                     pl.Reset(true,sortedpoints.Count);
                     for (int i = 0; i < sortedpoints.Count; i++)
@@ -413,7 +398,6 @@ namespace PGA.SimplifyPolylines
         {
             var doc = Application.DocumentManager.MdiActiveDocument;
 
-          
                 using (Transaction tr = doc.TransactionManager.StartTransaction())
                 {
                     var obj = tr.GetObject(polylineoId, OpenMode.ForRead);
@@ -440,9 +424,8 @@ namespace PGA.SimplifyPolylines
                     }
                     tr.Commit();
                 }
-       
-        }
 
+        }
 
         /// <summary>
         /// Creates the new polyliness.
@@ -451,12 +434,12 @@ namespace PGA.SimplifyPolylines
         /// <param name="_collection">The _collection.</param>
         public static void CreateNewPolyliness(Autodesk.AutoCAD.DatabaseServices.Database _sourcedb, Point2dCollection _collection)
         {
-       
-            // Get the current document and database 
+
+            // Get the current document and database
             Document acDoc = Application.DocumentManager.MdiActiveDocument;
             Autodesk.AutoCAD.DatabaseServices.Database acCurDb =  acDoc.Database;
             Editor ed = acDoc.Editor;
-            // Lock the current document 
+            // Lock the current document
             PlanarEntity plane;
 
             CoordinateSystem3d ucs =
@@ -466,7 +449,7 @@ namespace PGA.SimplifyPolylines
 
             using (DocumentLock acLckDocCur = acDoc.LockDocument())
             {
-                // Start a transaction 
+                // Start a transaction
                 using (Transaction acTrans = acCurDb.TransactionManager.StartTransaction())
                 {
                     #region MyRegion
@@ -480,7 +463,6 @@ namespace PGA.SimplifyPolylines
                     acBlkTblRec = acTrans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace],
                         OpenMode.ForWrite) as BlockTableRecord;
 
-
                     DoubleCollection bulges = new DoubleCollection();
                     double[] bulgelist = new double[] {};
                     Point3dCollection p3DCollection = new Point3dCollection();
@@ -491,12 +473,12 @@ namespace PGA.SimplifyPolylines
 
                         bulges.Add(0);
                     }
-                
+
                     Polyline2d polyline2D = new Polyline2d(Poly2dType.SimplePoly, p3DCollection,0,true,0,0,bulges);
                     polyline2D.Color = Color.FromColorIndex(ColorMethod.ByAci, 1);
-                  
+
                     acBlkTblRec.AppendEntity(polyline2D);
-                    acTrans.AddNewlyCreatedDBObject(polyline2D, true); 
+                    acTrans.AddNewlyCreatedDBObject(polyline2D, true);
 
                     #endregion
 
@@ -558,14 +540,13 @@ namespace PGA.SimplifyPolylines
 
                 CoordinateSystem3d ucs =
                     ed.CurrentUserCoordinateSystem.CoordinateSystem3d;
-            
+
             plane = new Plane(ucs.Origin,ucs.Xaxis);
 
             using (var tr = db.TransactionManager.StartTransaction())
             {
                 var obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
-
 
                 //"lightweight" (or optimized) polyline
 
@@ -590,7 +571,7 @@ namespace PGA.SimplifyPolylines
 
                     if (p2d != null)
                     {
-                      
+
                         foreach (ObjectId vId in p2d)
                         {
                             var v2d =
@@ -693,7 +674,6 @@ namespace PGA.SimplifyPolylines
                 var obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
 
-
                 //"lightweight" (or optimized) polyline
 
                 var lwp = obj as Polyline;
@@ -702,7 +682,7 @@ namespace PGA.SimplifyPolylines
                 {
                     var vn = lwp.NumberOfVertices;
 
-                    DatabaseLogs.FormatLogs( String.Format("Polyline Name= {2}-{0} - Vertices= {1}", 
+                    DatabaseLogs.FormatLogs( String.Format("Polyline Name= {2}-{0} - Vertices= {1}",
                         lwp.Layer, lwp.NumberOfVertices,index));
                 }
 
@@ -711,10 +691,9 @@ namespace PGA.SimplifyPolylines
                     // If an old-style, 2D polyline
 
                     var p2d = obj as Polyline2d;
-                   
 
                     if (p2d != null)
-                    {           
+                    {
 
                         foreach (ObjectId vId in p2d)
                         {
@@ -789,7 +768,6 @@ namespace PGA.SimplifyPolylines
                 var obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
 
-
                 //"lightweight" (or optimized) polyline
 
                 var lwp = obj as Polyline;
@@ -802,7 +780,6 @@ namespace PGA.SimplifyPolylines
                 // If an old-style, 2D polyline
 
                 var p2d = obj as Polyline2d;
-
 
                 if (p2d != null)
                 {
@@ -818,14 +795,12 @@ namespace PGA.SimplifyPolylines
                     return p3d.Layer;
                 }
 
-
                 // Committing is cheaper than aborting
 
                 tr.Commit();
             }
             return null;
         }
-
 
         /// <summary>
         /// Sorts the modified.
@@ -844,7 +819,7 @@ namespace PGA.SimplifyPolylines
                 if (!reduced.Contains(item))
                     original.Remove(item);
             }
-        
+
             return ConvertCollections(original);
         }
 
@@ -873,7 +848,6 @@ namespace PGA.SimplifyPolylines
         public static Point2dCollection Sort(Point2dCollection collection)
         {
 
-
             IList<Point2d> usedList = new List<Point2d>();
             Point2dCollection pointsout = new Point2dCollection();
             Point2dCollection sorted    = new Point2dCollection();
@@ -886,7 +860,7 @@ namespace PGA.SimplifyPolylines
                 first = collection[0];
                 last  = collection[1];
             }
-            
+
             //last item resorted
             foreach (var item in collection)
             {
@@ -895,7 +869,7 @@ namespace PGA.SimplifyPolylines
             }
             pointsout.Add(last);
             //final sort nearestneighbor
-            
+
             int count = 0;
             foreach (var item in pointsout)
             {
@@ -915,7 +889,6 @@ namespace PGA.SimplifyPolylines
             sorted.Add(last);
             return sorted;
         }
-
 
         /// <summary>
         /// Closests the point.

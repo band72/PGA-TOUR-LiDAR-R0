@@ -81,7 +81,6 @@ namespace C3DSurfacesDemo
 
         //        Public Sub DemoPasteSurfaceAPI2009()
 
-
         //    On Error GoTo ErrLabel
         //    If getCivilObjects = True Then
 
@@ -106,10 +105,8 @@ namespace C3DSurfacesDemo
         //    End If
         //    Exit Sub
 
-
         //ErrLabel:
         //    MsgBox Err.Description & " " & Err.Number
-
 
         //End Sub
 
@@ -120,7 +117,6 @@ namespace C3DSurfacesDemo
             private string surfaceStyle = "";
             private string destTINStyle = "";
             private string polyLayer = "";
-
 
             public string SurfaceType
             {
@@ -376,9 +372,7 @@ namespace C3DSurfacesDemo
             string surfaceName = EditorUtils.PromptForString("\nEnter surface name: ");
             if (String.IsNullOrEmpty(surfaceName)) surfaceName = "OVERALLSURFACE";
 
-
             string surfaceStyleName = EditorUtils.PromptForString("\nEnter surface style name: ");
-
 
             if (!SurfaceStyleManager.Exists(surfaceStyleName))
             {
@@ -455,9 +449,9 @@ namespace C3DSurfacesDemo
                                     intid.Add(objectId);
                             }
                         }
-                       
+
                     }
-                      
+
                     if (intid.Count != 0)
                         return intid;
                 }
@@ -528,7 +522,7 @@ namespace C3DSurfacesDemo
         {
             using (Transaction tr = CivilApplicationManager.StartTransaction())
             {
-                //1. Create new surface if no existing surface passed in 
+                //1. Create new surface if no existing surface passed in
                 //2. Store boundary
                 ObjectIdCollection boundaryEntities = new ObjectIdCollection();
                 boundaryEntities = GetObjectIdCollectionFromEntity(polyId);
@@ -540,23 +534,11 @@ namespace C3DSurfacesDemo
                 //4. now add the boundary to the surface
                 surfaceBoundaries.AddBoundaries(boundaryEntities, 1.0, SurfaceBoundaryType.Hide, true);
 
-
                 tr.Commit();
-
-
 
                 //// Add the selected polyline's ObjectId to a collection
             }
         }
-
-
-
-
-
-
-
-
-
 
         public bool AddSelectedLineAsOuterBoundary(Autodesk.AutoCAD.DatabaseServices.ObjectId id)
         {
@@ -648,7 +630,6 @@ namespace C3DSurfacesDemo
             {
                 DBObject obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
-
 
                 // If a "lightweight" (or optimized) polyline
 
@@ -759,7 +740,6 @@ namespace C3DSurfacesDemo
                 DBObject obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
 
-
                 // If a "lightweight" (or optimized) polyline
 
                 Polyline lwp = obj as Polyline;
@@ -841,13 +821,6 @@ namespace C3DSurfacesDemo
             }
             return String.Empty;
         }
-
-
-
-
-
-
-
 
         public Polyline GetPolyFromObjId(Autodesk.AutoCAD.DatabaseServices.ObjectId oid, Database db)
         {
@@ -932,10 +905,9 @@ namespace C3DSurfacesDemo
                     PGA.Civil.Logging.ACADLogging.LogMyExceptions("GETPOLYFROMOBJID:" + e.Message);
                 }
             }
-             
+
             return null;
         }
-
 
         public ObjectIdCollection GetObjectIdCollectionFromEntity(ObjectId polyId)
         {
@@ -971,7 +943,6 @@ namespace C3DSurfacesDemo
                 DBObject obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
 
-
                 // If a "lightweight" (or optimized) polyline
 
                 Polyline lwp = obj as Polyline;
@@ -991,43 +962,13 @@ namespace C3DSurfacesDemo
 
                 #region Comments
 
-
-
-
-
-
-
                 //            Vertex2d v2d =
-
-
-
-
-
 
                 //                "\n" + v2d.Position.ToString()
 
-
-
-
-
-
-
-
-
-
                 //                PolylineVertex3d v3d =
 
-
-
-
-
-
                 //                    "\n" + v3d.Position.ToString()
-
-
-
-
-
 
                 #endregion
 
@@ -1044,7 +985,6 @@ namespace C3DSurfacesDemo
             foreach (var obj in m_dict.Keys)
             {
                 ACADLogging.LogMyExceptions(obj + "******Key ********" + obj);
-                 
 
                 foreach (ObjectIdCollection collection in m_dict.Values)
                 {
@@ -1053,10 +993,10 @@ namespace C3DSurfacesDemo
                     {
                         ACADLogging.LogMyExceptions(polylines.Handle.ToString());
                     }
-                    
+
                 }
             }
-         
+
         }
 
         public bool CreateSurfaceForPolylines(ObjectIdCollection polylines)
@@ -1109,7 +1049,7 @@ namespace C3DSurfacesDemo
                             ObjectId lObjectId = new ObjectId();
 
                             lObjectId = CivilTinSurface.FindCivilTinSurfaceByName(pair.Value);
-                            //1. Create new surface if no existing surface passed in 
+                            //1. Create new surface if no existing surface passed in
                             TinSurface surface =
                                 lObjectId.GetObject(OpenMode.ForRead) as TinSurface;
                             //2. Store boundary
@@ -1132,8 +1072,6 @@ namespace C3DSurfacesDemo
 
                             }
                             PGA.Civil.Logging.ACADLogging.LogMyExceptions("End AddBoundariesForSurfaces");
-
-
 
                             tr.Commit();
 
@@ -1182,7 +1120,7 @@ namespace C3DSurfacesDemo
         {
             try
             {
-               
+
                 foreach (KeyValuePair<ObjectId,string> id in m_polylinesonly)
                 {
                     if (id.Key == null) continue;
@@ -1194,7 +1132,7 @@ namespace C3DSurfacesDemo
                     }
                     Debug.WriteLine("NO match iod" + oid + "and" + id.Key);
                 }
-              
+
             }
             catch (System.Exception e)
             {
@@ -1210,7 +1148,7 @@ namespace C3DSurfacesDemo
 
         public bool PasteAllSurfaces(Autodesk.Civil.DatabaseServices.Surface sHole)
         {
-          
+
             ObjectId objectId = ObjectId.Null;
             try
             {
@@ -1218,13 +1156,13 @@ namespace C3DSurfacesDemo
                 {
                     objectId = id.Key;
                     try
-                    {                    
+                    {
                         TestPasteSurface(sHole, CivilTinSurface.FindSurfaceBySurfaceId(objectId));
                     }
                     catch (System.Exception e)
                     {
                         Console.WriteLine(e);
-                    }             
+                    }
                 }
                 return true;
             }

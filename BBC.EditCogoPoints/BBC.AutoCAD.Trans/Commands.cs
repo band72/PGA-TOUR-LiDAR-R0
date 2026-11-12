@@ -6,7 +6,7 @@ using Autodesk.AutoCAD.Runtime;
 namespace BBC.AutoCAD.Trans
 {
     public class Commands
-    {      
+    {
         [CommandMethod("BBC-TRANSLATE",CommandFlags.UsePickSet)]
         public static void Translate()
         {
@@ -76,13 +76,13 @@ namespace BBC.AutoCAD.Trans
             var desStart    = GetPoint("\nPick fixed destination (Record) point. ");
 
             if (desStart == null) return;
-        
+
             var desEnd      = GetPoint("\nPick destination (Record) point. ");
 
             if (desEnd == null) return;
 
             var translationVector = sourceStart.Value.GetVectorTo(sourceEnd.Value);
-            
+
             var picksetbefore = new PointObject(sourceStart.Value,sourceEnd.Value,desStart.Value,desEnd.Value);
             var picksetafter  = new PointObject(picksetbefore, translationVector);
 
@@ -98,13 +98,6 @@ namespace BBC.AutoCAD.Trans
             Program.CreatePoint(picksetafter.DesEnd.TransformBy(mat));
             // move first point to second point
 
-
-
-
-
-
-
-
             //// Program.CreatePoint(start2.TransformBy(mat));
             ////Program.CreatePoint(  end2.TransformBy(mat));
 
@@ -118,11 +111,11 @@ namespace BBC.AutoCAD.Trans
 
         private static Point3d? GetPoint(string message)
         {
-            
+
             PromptPointOptions po = new PromptPointOptions(message);
             po.AllowNone = false;
             po.AllowArbitraryInput = false;
-            
+
             PromptPointResult pr = Active.Editor.GetPoint(po);
 
             if (pr.Status == PromptStatus.OK)

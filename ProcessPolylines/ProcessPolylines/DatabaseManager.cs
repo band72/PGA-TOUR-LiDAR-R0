@@ -333,7 +333,6 @@ namespace PGA.Common.AutoCAD
             }
         }
 
-
         /// <summary>
         /// Adds an entity to the database and returns the id
         /// </summary>
@@ -444,7 +443,7 @@ namespace PGA.Common.AutoCAD
         }
 
         /// <summary>
-        /// Returns EED for an Entity with a specific applicationname 
+        /// Returns EED for an Entity with a specific applicationname
         /// </summary>
         /// <param name="entityId"></param>
         /// <param name="applicationName"></param>
@@ -505,13 +504,12 @@ namespace PGA.Common.AutoCAD
 
         /// <summary>
         /// Writes a message to the command line
-        /// </summary>        
+        /// </summary>
         public static void WriteMessage(string message)
         {
             Editor editor = Active.Editor;
             editor.WriteMessage(message);
         }
-
 
         /// <summary>
         /// Sets the display order.
@@ -533,7 +531,7 @@ namespace PGA.Common.AutoCAD
 
             // get the database from the the first objectId
             //
-            global::Autodesk.AutoCAD.DatabaseServices.Database db = oids[0].Database;           
+            global::Autodesk.AutoCAD.DatabaseServices.Database db = oids[0].Database;
 
             // create a transaction if needed
             //
@@ -546,7 +544,7 @@ namespace PGA.Common.AutoCAD
             {
                 trans = transaction;
             }
-            
+
             // now get the draworder table and set accordingly
             //
             using (BlockTable blockTable = (BlockTable)trans.GetObject(db.BlockTableId, OpenMode.ForRead))

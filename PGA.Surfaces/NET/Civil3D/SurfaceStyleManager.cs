@@ -1,6 +1,4 @@
 ﻿
-
-
 using System;
 using Autodesk.AutoCAD.Colors;
 using global::Autodesk.AutoCAD.DatabaseServices;
@@ -9,12 +7,12 @@ using Autodesk.Civil.DatabaseServices.Styles;
 
 namespace C3DSurfacesDemo
 {
-    public class SurfaceStyleManager 
+    public class SurfaceStyleManager
     {
         public static bool Exists(string styleName)
         {
             return (GetStyleId(styleName) != ObjectId.Null);
-            
+
         }
 
         public static ObjectId GetStyleId(string styleName)
@@ -42,7 +40,6 @@ namespace C3DSurfacesDemo
         {
             try
             {
-
 
                 using (Transaction tr = CivilApplicationManager.StartTransaction())
                 {

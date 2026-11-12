@@ -43,8 +43,6 @@ namespace PGA.DatabaseManager
 
         private CustomTimeSpan time = new CustomTimeSpan();
 
-
-
         public string CourseCode
         {
             get;
@@ -148,7 +146,6 @@ namespace PGA.DatabaseManager
                 return Assembly.GetCallingAssembly().GetName().Version;
             }
         }
-        
 
         static MainWindow()
         {
@@ -181,7 +178,6 @@ namespace PGA.DatabaseManager
                     MainWindow._TextEventPlaceHolder.TextChanged += new TextChangedEventHandler(this._Text_TextChanged);
                     this.txtStartTime.TextChanged += new TextChangedEventHandler(this.TxtStartTime_TextChanged);
                     this.txtEndTime.TextChanged += new TextChangedEventHandler(this.TxtStartTime_TextChanged);
-                  
 
                     this.InitializeTaskManager();
                     MainWindow.InitializeTimer();
@@ -193,7 +189,7 @@ namespace PGA.DatabaseManager
                     this.chkPDFReport.IsChecked = new bool?(false);
                     this.chkSimplifyPolylines.IsChecked = new bool?(false);
                     this.chkStrictNames.IsChecked = new bool?(false);
- 
+
                     //Event handler to refresh log and task datagrids.
                     Action loghandler = () => PGA.LogManagerUC.LogManagerUC.DoRefresh(DbMaintanenceUC.DbMaintanenceUC.RefreshFlag);
                     DbMaintanenceUC.DbMaintanenceUC.RefreshChanged += loghandler;
@@ -201,7 +197,6 @@ namespace PGA.DatabaseManager
                     DbMaintanenceUC.DbMaintanenceUC.RefreshChanged += taskhandler;
 
                 }
-
 
             }
             catch (Exception exception)
@@ -214,7 +209,6 @@ namespace PGA.DatabaseManager
         {
             this.GSettings_PropertyChanged(sender, null);
         }
-
 
         private void ClearProgressBar()
         {
@@ -393,8 +387,6 @@ namespace PGA.DatabaseManager
                 txtManager.Text  = "Manager";
                 txtUserName.Text = "Admin User";
 
-               
-
             }
             catch (Exception exception)
             {
@@ -442,9 +434,9 @@ namespace PGA.DatabaseManager
 
             if (directchoosedlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-               
+
                 string folderPath = directchoosedlg.SelectedPath;
-                this.txtPointPath.Text = folderPath;      
+                this.txtPointPath.Text = folderPath;
             }
         }
 
@@ -601,8 +593,6 @@ namespace PGA.DatabaseManager
             return Path.Combine(path, filename);
         }
 
-
-
         private int GetCourseCode(string changes)
         {
             int num;
@@ -730,8 +720,6 @@ namespace PGA.DatabaseManager
                 PGA.MessengerManager.MessengerManager.LogException(exception);
             }
         }
-
-
 
         private void GSettings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -873,7 +861,6 @@ namespace PGA.DatabaseManager
             }
         }
 
-
         private bool StepCreateTask()
         {
             try
@@ -893,7 +880,7 @@ namespace PGA.DatabaseManager
 
                 using (DatabaseCommands commands = new DatabaseCommands())
                 {
-              
+
                     Settings settings = new Settings();
 
                     if (txtDateCreated.Text != null)
@@ -1027,8 +1014,6 @@ namespace PGA.DatabaseManager
             flag = true;
             return flag;
         }
-
-
 
         private bool TestAccess(string path)
         {
@@ -1174,7 +1159,6 @@ namespace PGA.DatabaseManager
             }
         }
 
-
         private SolidColorBrush colorBegin = new SolidColorBrush(Colors.Coral);
 
         private SolidColorBrush colorEnd   = new SolidColorBrush(Colors.Transparent);
@@ -1192,7 +1176,6 @@ namespace PGA.DatabaseManager
             }
         }
 
-
         public SolidColorBrush ColorEnd
         {
             get { return colorEnd; }
@@ -1206,7 +1189,6 @@ namespace PGA.DatabaseManager
             }
         }
 
-          
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -1214,7 +1196,7 @@ namespace PGA.DatabaseManager
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        
+
         private void togSportvisionRun_Checked(object sender, RoutedEventArgs e)
         {
             try
@@ -1237,10 +1219,7 @@ namespace PGA.DatabaseManager
             }
         }
 
-       
     }
-
-
 
     public static class FileLoader
     {
@@ -1252,7 +1231,6 @@ namespace PGA.DatabaseManager
             return files;
         }
     }
-
 
     public static class ReadWriteTest
     {
@@ -1388,4 +1366,3 @@ namespace PGA.DatabaseManager
     }
 
 }
-

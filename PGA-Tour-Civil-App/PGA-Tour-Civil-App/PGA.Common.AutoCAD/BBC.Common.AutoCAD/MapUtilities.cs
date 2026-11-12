@@ -18,7 +18,7 @@ namespace Pge.Common.AutoCAD
         //private static readonly ILog //_logger = LogManager.GetLogger(typeof(MapUtilities));
 
         #endregion
-        
+
         #region MapBreak
 
         /// <summary>
@@ -400,7 +400,3 @@ namespace Pge.Common.AutoCAD
 
     }
 }
-
-
-
-

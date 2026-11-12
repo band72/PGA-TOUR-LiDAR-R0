@@ -25,12 +25,11 @@ namespace PGA.ApplicationProgress
         static int alarmCounter = 1;
         static bool exitFlag = false;
 
-        //public static System.Windows.Forms.Timer myTimer = 
+        //public static System.Windows.Forms.Timer myTimer =
 
-        public static ApplicationProgress.BackgroundWorker worker = 
+        public static ApplicationProgress.BackgroundWorker worker =
             new PGA.ApplicationProgress.BackgroundWorker();
-          
-        
+
         public ProgressBar()
         {
             InitializeComponent();
@@ -71,7 +70,6 @@ namespace PGA.ApplicationProgress
             return 0;
         }
 
-
         private  void TimerEventProcessor(Object myObject,
                                                EventArgs myEventArgs)
         {
@@ -93,7 +91,6 @@ namespace PGA.ApplicationProgress
             }
         }
 
-         
         public  void SetProgressBarValues()
         {
             try

@@ -13,7 +13,6 @@ namespace PGA.Sv.PostAudit
 
         }
 
-
         public object GetSettings(DateTime dt)
         {
             throw new NotImplementedException();

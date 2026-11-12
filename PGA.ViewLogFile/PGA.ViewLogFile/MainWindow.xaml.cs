@@ -82,8 +82,6 @@ namespace PGA.ViewLogFile
                 {
                     var logs = commands.GetLastAllLogs().ToArray();
 
-
-
                     StreamWriter writer = new StreamWriter(commands.GetLogFilePath(), false);
                     foreach (var line in logs)
                     {
@@ -107,8 +105,6 @@ namespace PGA.ViewLogFile
                 using (DatabaseCommands commands = new DatabaseCommands())
                 {
                     var logs = commands.GetLastAllLogs().ToArray();
-
-
 
                     StreamWriter writer = new StreamWriter(commands.GetLogFilePath(), false);
                     foreach (var line in logs)

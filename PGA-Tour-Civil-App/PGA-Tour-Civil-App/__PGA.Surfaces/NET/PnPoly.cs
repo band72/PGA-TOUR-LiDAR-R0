@@ -1,4 +1,4 @@
-﻿ 
+﻿
 using System.Collections.Generic;
 using System.Diagnostics;
 using Autodesk.AutoCAD.Geometry;
@@ -8,8 +8,6 @@ namespace C3DSurfacesDemo
     public class PnPoly
     {
         #region Teigha Implementation
-
-
 
         //            (test.x < (points[j].x - points[i].x)*(test.y - points[i].y)/(points[j].y - points[i].y) + points[i].x))
 
@@ -77,7 +75,6 @@ namespace C3DSurfacesDemo
                 if (Inside) return Inside;
             }
 
-
             return Inside;
         }
 
@@ -106,7 +103,6 @@ namespace C3DSurfacesDemo
 
                 if (c) return c;
             }
-
 
             return c;
         }

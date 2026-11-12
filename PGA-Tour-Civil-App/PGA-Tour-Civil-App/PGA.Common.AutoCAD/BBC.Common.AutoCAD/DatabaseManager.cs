@@ -9,7 +9,6 @@ using global::Autodesk.AutoCAD.Runtime;
 
 #endregion
 
-
 namespace BBC.Common.AutoCAD
 {
     public class AcadDatabaseManager
@@ -347,7 +346,6 @@ namespace BBC.Common.AutoCAD
             }
         }
 
-
         /// <summary>
         ///     Adds an entity to the database and returns the id
         /// </summary>
@@ -528,7 +526,6 @@ namespace BBC.Common.AutoCAD
             var editor = Application.DocumentManager.MdiActiveDocument.Editor;
             editor.WriteMessage(message);
         }
-
 
         /// <summary>
         ///     Sets the display order.

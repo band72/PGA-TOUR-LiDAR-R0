@@ -64,6 +64,5 @@ namespace PGA.Controller
         //string gtxtGreenLayer { get; set; }
         //string gtxtGreenCode { get; set; }
 
-
     }
 }

@@ -89,7 +89,6 @@ namespace PGA.Autodesk.Utils
             }
         }
 
-
         public static void GetIntersections()
         {
             var db = HostApplicationServices.WorkingDatabase;
@@ -179,7 +178,6 @@ namespace PGA.Autodesk.Utils
                         }
                         ed.WriteMessage("\n{0}", qcurves.Count);
 
-
                         var j = 0;
                         var polypts = new Point3dCollection();
 
@@ -260,7 +258,7 @@ namespace PGA.Autodesk.Utils
 
                     var id = res.ObjectId;
 
-                    // Convert to WCS incase selection was made 
+                    // Convert to WCS incase selection was made
 
                     // while in a UCS.
 
@@ -299,7 +297,7 @@ namespace PGA.Autodesk.Utils
                     {
                         var segParam = new double();
 
-                        // This is the test filter here...it uses the 
+                        // This is the test filter here...it uses the
 
                         // nifty API OnSegmentAt
 
@@ -319,17 +317,7 @@ namespace PGA.Autodesk.Utils
             }
         }
 
-
-
-
-
-
-
         //                bt[BlockTableRecord.ModelSpace],
-
-
-
-
 
         public static void GetComplexity()
         {

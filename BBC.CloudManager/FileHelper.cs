@@ -37,7 +37,6 @@ namespace BBC.CloudManager
                 //Q-Build-16148.9.16.317 (2016)
                 //Q-Build-18148.9.18.317 (2018)
 
-
                 return GetBuild("18", GetFiles(files));
 
             }
@@ -93,8 +92,7 @@ namespace BBC.CloudManager
                     minbuild = split[2].Split(new char[] {'.'}, 4)[3]
                 };
 
-
-            // largest build with provided civil year 
+            // largest build with provided civil year
             var result = BuildVersion.Where(p => p.civil == civilyear).OrderByDescending
                 (p => p.majbuild + p.minbuild).FirstOrDefault();
 
@@ -166,15 +164,14 @@ namespace BBC.CloudManager
                         minbuild = split[2].Split(new char[] { '.' }, 4)[3]
                     };
 
-
-            // largest build with provided civil year 
+            // largest build with provided civil year
             var result = BuildVersion.Where(p => p.civil == civilyear).OrderByDescending
                          (p => p.majbuild + p.minbuild).FirstOrDefault();
 
             return (result == null) ? "" : result.build;
-        
+
         }
-        #region Methods for parsing format Q-Build-16149.9.16.318 
+        #region Methods for parsing format Q-Build-16149.9.16.318
         /// <summary>
         /// Gets the civil year.
         /// </summary>

@@ -64,10 +64,10 @@ namespace PGA.TaskManager
 
         private void cmdRunTask_Click(object sender, RoutedEventArgs e)
         {
- 
+
             using (var context = GetDataBasePath.GetSql4Connection())
             {
-                commands.LoadDrawingStack(DateSelected);           
+                commands.LoadDrawingStack(DateSelected);
             }
         }
 
@@ -75,7 +75,7 @@ namespace PGA.TaskManager
         {
             using (var context = GetDataBasePath.GetSql4Connection())
             {
-   
+
                 var stack =
                     from p in context.DrawingStack
                     select p;
@@ -91,7 +91,7 @@ namespace PGA.TaskManager
         }
 
         private CommandsForCopy ParseCommand(string commands)
-        { 
+        {
 
             string[] lfile = commands.Split(',');
             CommandsForCopy file = new CommandsForCopy();
@@ -125,11 +125,9 @@ namespace PGA.TaskManager
                         where ((po.Order).Equals(t))
                         select po;
 
-
                     var pline = from pl in polylines
                         where ((pl.Order).Equals(t))
                         select pl;
-
 
                     foreach (var po in point)
                     {
@@ -188,7 +186,6 @@ namespace PGA.TaskManager
                     where (p.DateStamp == Convert.ToDateTime(DateSelected))
                     select p;
 
-
                 string command;
                 var i = 1;
                 foreach (var val in points)
@@ -218,7 +215,6 @@ namespace PGA.TaskManager
                     where (p.DateStamp == Convert.ToDateTime(DateSelected))
                     select p;
 
-
                 string command;
                 var i = 1;
                 foreach (var val in points)
@@ -245,7 +241,6 @@ namespace PGA.TaskManager
                     from p in context.PointCloud
                     where (p.DateStamp == Convert.ToDateTime(DateSelected))
                     select p;
-
 
                 string command;
                 var i = 1;
@@ -377,4 +372,3 @@ namespace PGA.TaskManager
         }
     }
 }
- 

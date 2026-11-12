@@ -28,7 +28,6 @@ namespace BBC.Common.AutoCAD
 
         //private static readonly ILog //_logger = LogManager.GetLogger(typeof(AcadUtilities));
 
-
         /// <summary>
         ///     Determines if a point is inside a polygon
         /// </summary>
@@ -88,7 +87,7 @@ namespace BBC.Common.AutoCAD
 
             try
             {
-                // Access the COM Preferences object  
+                // Access the COM Preferences object
                 var acadApp = (Autodesk.AutoCAD.Interop.AcadApplication) AcadApplication.AcadApplication;
                 // your code to draw geometries, or something else
                 acadApp.ZoomAll();
@@ -113,7 +112,7 @@ namespace BBC.Common.AutoCAD
 
             try
             {
-                // Access the COM Preferences object  
+                // Access the COM Preferences object
                 var acadApp = (Autodesk.AutoCAD.Interop.AcadApplication) AcadApplication.AcadApplication;
                 // your code to draw geometries, or something else
                 acadApp.ZoomExtents();
@@ -1219,7 +1218,7 @@ namespace BBC.Common.AutoCAD
         {
             using (var viewportTableRecord = trans.GetObject(viewportId, OpenMode.ForWrite) as ViewportTableRecord)
             {
-                // Adjust the spacing of the grid to gridSpacingX, gridSpacingY      
+                // Adjust the spacing of the grid to gridSpacingX, gridSpacingY
                 viewportTableRecord.GridIncrements = new Point2d(gridSpacingX, gridSpacingY);
             }
         }
@@ -1253,7 +1252,7 @@ namespace BBC.Common.AutoCAD
         {
             using (var viewportTableRecord = trans.GetObject(viewportId, OpenMode.ForWrite) as ViewportTableRecord)
             {
-                // Adjust the spacing of the snap to snapSpacingX, snapSpacingY     
+                // Adjust the spacing of the snap to snapSpacingX, snapSpacingY
                 viewportTableRecord.SnapIncrements = new Point2d(snapSpacingX, snapSpacingY);
             }
         }
@@ -1446,7 +1445,6 @@ namespace BBC.Common.AutoCAD
         public static bool FuzzyEqualTo(double value1, double value2)
         {
             var tolerance = 0.0001;
-
 
             double absoluteDifference = 0;
             absoluteDifference = Math.Abs(value1 - value2);

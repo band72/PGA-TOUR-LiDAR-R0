@@ -15,13 +15,12 @@ namespace PGA.Database.Tests
         [TestMethod()]
         public void HolesTest()
         {
-          
+
             Holes h = new Holes();
             for (int i = 1; i < 19; i++)
                 Debug.WriteLine(h.GetHole(i));
             Assert.AreEqual(1, 1);
         }
     }
-
 
 }

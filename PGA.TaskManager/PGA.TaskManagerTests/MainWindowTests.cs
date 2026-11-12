@@ -14,7 +14,7 @@ namespace PGA.TaskManager.Tests
         [TestMethod()]
         public void LoadDrawingStackTest()
         {
-           
+
             Assert.Fail();
         }
     }

@@ -61,7 +61,7 @@ namespace PGA.TransFormReports
         {
             try
             {
-                SetWorkDirs();  
+                SetWorkDirs();
                 CleanDirs();
                 CreateWorkDirs();
                 HeaderComments();
@@ -151,7 +151,7 @@ namespace PGA.TransFormReports
                                 }
                                 catch
                                 {
-                                }                              
+                                }
                             }
                         }
                         catch (Exception ex)
@@ -301,7 +301,6 @@ namespace PGA.TransFormReports
                 MessengerManager.MessengerManager.LogException(exception);
             }
         }
-
 
         private void SetAdminPrivledges()
         {

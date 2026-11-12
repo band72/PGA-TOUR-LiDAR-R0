@@ -14,10 +14,9 @@ namespace PGA.Breaklines
     public partial class Commands
     {
         private static int TotalDWGs= 0;
-        private static bool _bLinesComplete = false; 
+        private static bool _bLinesComplete = false;
         private static bool _flocked     = false;
         private static bool _Initialized = false;
-
 
         public Commands(DateTime value, string outdwg)
         {
@@ -69,7 +68,6 @@ namespace PGA.Breaklines
             if (IsBreaklineComplete())
                 AddFeatureLineElevFromSurface();
         }
-
 
         public void EnableLock()
         {

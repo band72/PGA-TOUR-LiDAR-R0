@@ -37,9 +37,7 @@ namespace PGA.Common.Registry
 
             var rs = new RegistrySecurity();
 
-
             var user = System.IO.Path.Combine(Environment.UserDomainName, Environment.UserName);
-
 
             // Allow the current user to read and delete the key                                          .
             //
@@ -104,9 +102,7 @@ namespace PGA.Common.Registry
             {
                 var rs = new RegistrySecurity();
 
-
                 var user = System.IO.Path.Combine(Environment.UserDomainName, Environment.UserName);
-
 
                 // Allow the current user to read and delete the key                                          .
                 //
@@ -196,9 +192,7 @@ namespace PGA.Common.Registry
 
             var rs = new RegistrySecurity();
 
-
             var user = Environment.UserDomainName + "\\" + Environment.UserName;
-
 
             // Allow the current user to read and delete the key                                          .
             //

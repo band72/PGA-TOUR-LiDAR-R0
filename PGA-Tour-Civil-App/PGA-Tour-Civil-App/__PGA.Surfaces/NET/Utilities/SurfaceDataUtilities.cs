@@ -4,7 +4,7 @@ using Autodesk.AutoCAD.Geometry;
 
 namespace C3DSurfacesDemo
 {
-    internal class SurfaceDataUtilities 
+    internal class SurfaceDataUtilities
     {
         public static SurfaceTriangle GetTriangleAtIndex(double[] data, int index)
         {

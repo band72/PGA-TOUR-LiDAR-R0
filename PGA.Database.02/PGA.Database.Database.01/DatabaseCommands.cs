@@ -75,10 +75,7 @@ namespace PGA.Database
             return null;
         }
 
-
         //            var logs = (from p in context.Logs
-
-
 
         public List<Logs> FilterLogsForErrors()
         {
@@ -168,7 +165,6 @@ namespace PGA.Database
                     .FormatLogs(ex.Message);
             }
         }
-
 
         /// <summary>
         ///     Updates the total DWGS timer information.
@@ -461,7 +457,6 @@ namespace PGA.Database
             }
         }
 
-
         /// <summary>
         ///     Gets the feature index by code.
         /// </summary>
@@ -665,7 +660,6 @@ namespace PGA.Database
             }
             return 0;
         }
-
 
         /// <summary>
         ///     Inserts the notifications.
@@ -885,7 +879,6 @@ namespace PGA.Database
             }
         }
 
-
         /// <summary>
         ///     Gets the point path by date. Version 1.0
         /// </summary>
@@ -995,7 +988,6 @@ namespace PGA.Database
                 return path;
             }
         }
-
 
         /// <summary>
         ///     Loads the drawing stack.
@@ -1464,7 +1456,6 @@ namespace PGA.Database
             }
         }
 
-
         /// <summary>
         ///     Loadands the process polys.
         /// </summary>
@@ -1514,7 +1505,6 @@ namespace PGA.Database
 
                         tasks.Paused = true;
 
-
                         #endregion
                         else
                         {
@@ -1525,7 +1515,6 @@ namespace PGA.Database
                         #region Single Task is Deprecated
 
                         //var tasks = (from p in context.TaskManager
-
 
                         #endregion
                     }
@@ -1568,7 +1557,6 @@ namespace PGA.Database
                     SourcePolylineDwgID = Convert.ToInt16(dwgid)
                 };
 
-
                 context.DrawingStack.InsertOnSubmit(logs);
                 context.SubmitChanges();
             }
@@ -1603,7 +1591,6 @@ namespace PGA.Database
                     TimeCompleted = completedTime,
                     SourcePolylineDwgID = Convert.ToInt16(dwgid)
                 };
-
 
                 context.DrawingStack.InsertOnSubmit(logs);
                 context.SubmitChanges();
@@ -1642,7 +1629,6 @@ namespace PGA.Database
                     TimeCompleted = completedTime,
                     SourcePolylineDwgID = Convert.ToInt16(dwgid)
                 };
-
 
                 context.DrawingStack.InsertOnSubmit(logs);
                 context.SubmitChanges();
@@ -1730,7 +1716,6 @@ namespace PGA.Database
                     var result = from p in context.CourseDetails
                         select p;
 
-
                     if (result.FirstOrDefault() != null)
                         return result.ToList().OrderBy(p => p.Name).ToList();
                     return null;
@@ -1758,7 +1743,6 @@ namespace PGA.Database
                     SourcePolylineDwgID = Convert.ToInt16(dwgid)
                 };
 
-
                 context.DrawingStack.InsertOnSubmit(dwg);
                 context.SubmitChanges();
             }
@@ -1779,7 +1763,6 @@ namespace PGA.Database
                         PolylineDwgName = dwg.DrawingName,
                         SourcePolylineDwgID = Convert.ToInt16(dwg.Id)
                     };
-
 
                     context.DrawingStack.InsertOnSubmit(drawingStackdwg);
                 }
@@ -1870,7 +1853,6 @@ namespace PGA.Database
                 return dwg.ToList();
             }
         }
-
 
         /// <summary>
         ///     Determines whether [is drawing stack started flag set] [the specified DWG stack].
@@ -2062,7 +2044,6 @@ namespace PGA.Database
                     }
                 }
 
-
                 return drawingStacks.ToList();
             }
         }
@@ -2119,11 +2100,9 @@ namespace PGA.Database
                 }
                 context.SubmitChanges();
 
-
                 return drawingStacks.ToList();
             }
         }
-
 
         /// <summary>
         ///     Gets the current DWG to process.
@@ -2161,7 +2140,6 @@ namespace PGA.Database
             }
         }
 
-
         /// <summary>
         ///     Checks the time stamp.
         /// </summary>
@@ -2186,7 +2164,6 @@ namespace PGA.Database
             return false;
         }
 
-
         /// <summary>
         ///     Inserts the settings.
         /// </summary>
@@ -2209,7 +2186,6 @@ namespace PGA.Database
                     from p in context.Tasks
                     select p;
 
-
                 return tasks.ToList();
             }
         }
@@ -2227,7 +2203,6 @@ namespace PGA.Database
                     from p in context.Tasks
                     where p.DateStamp == date
                     select p;
-
 
                 return tasks.FirstOrDefault();
             }
@@ -2315,7 +2290,6 @@ namespace PGA.Database
                     where p.DateStamp == date
                     select p).FirstOrDefault();
 
-
                 tasks.TimeEnded = DateTime.Now;
                 context.SubmitChanges();
                 return tasks;
@@ -2335,7 +2309,6 @@ namespace PGA.Database
                 (from p in context.TaskManager
                     where p.DateStamp == date
                     select p).FirstOrDefault();
-
 
                 tasks.DateCompleted = DateTime.Now;
                 tasks.Completed = true;
@@ -2418,7 +2391,6 @@ namespace PGA.Database
             {
                 //Todo Add Task this when we condense
 
-
                 foreach (var file in PolyLinefiles)
                 {
                     var lines = new PolylineDWGS();
@@ -2442,15 +2414,12 @@ namespace PGA.Database
                     context.PointCloud.InsertOnSubmit(points);
                 }
 
-
-
                 // submit changes
                 context.SubmitChanges();
             }
 
             return true;
         }
-
 
         /// <summary>
         ///     News the task.
@@ -3291,7 +3260,6 @@ namespace PGA.Database
                         context.SubmitChanges();
                     }
 
-
                     var Polydwg = from log in context.PolylineDWGS
                         orderby log.Id descending
                         select log;
@@ -3301,7 +3269,6 @@ namespace PGA.Database
                         context.PolylineDWGS.DeleteAllOnSubmit(Polydwg);
                         context.SubmitChanges();
                     }
-
 
                     var setting = from log in context.Settings
                         orderby log.Id descending
@@ -3322,7 +3289,6 @@ namespace PGA.Database
                         context.SourceDrawingInfo.DeleteAllOnSubmit(sdwg);
                         context.SubmitChanges();
                     }
-
 
                     var tm = from log in context.TaskManager
                         orderby log.Id descending
@@ -3353,7 +3319,6 @@ namespace PGA.Database
                         context.ExportToCADStack.DeleteAllOnSubmit(exportstk);
                         context.SubmitChanges();
                     }
-
 
                     var notes = from log in context.Notifications
                         orderby log.Id descending
@@ -3394,7 +3359,6 @@ namespace PGA.Database
                         context.GeneralCADStack.DeleteAllOnSubmit(guse);
                         context.SubmitChanges();
                     }
-
 
                     var pb = from p in context.Timer
                         orderby p.Id descending
@@ -3443,7 +3407,6 @@ namespace PGA.Database
 
             return true;
         }
-
 
         /// <summary>
         ///     Deletes all from gu stack.
@@ -4134,7 +4097,6 @@ namespace PGA.Database
                     var items = (from p in context.Updates
                         select p).FirstOrDefault();
 
-
                     if (items == null)
                         return null;
 
@@ -4464,7 +4426,6 @@ namespace PGA.Database
             }
         }
 
-
         /// <summary>
         ///     Converts the int32.
         /// </summary>
@@ -4502,7 +4463,6 @@ namespace PGA.Database
             }
             return result;
         }
-
 
         /// <summary>
         ///     Inserts the polyline.

@@ -28,7 +28,6 @@ namespace PGA.Updater
                                                             CancellationToken.None,
                                                             new FileDataStore("Daimto.GoogleDrive.Auth.Store")).Result;
 
-
         }
 
     }

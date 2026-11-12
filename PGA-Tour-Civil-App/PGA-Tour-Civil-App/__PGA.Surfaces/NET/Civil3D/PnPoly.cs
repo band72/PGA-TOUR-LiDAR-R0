@@ -1,4 +1,4 @@
-﻿ 
+﻿
 using System.Collections.Generic;
 using Autodesk.AutoCAD.Geometry;
 using Autodesk.Civil;
@@ -6,8 +6,6 @@ using Autodesk.Civil;
 public class PnPoly
 {
     #region Teigha Implementation
-
-
 
     //            (test.x < (points[j].x - points[i].x)*(test.y - points[i].y)/(points[j].y - points[i].y) + points[i].x))
 
@@ -68,14 +66,13 @@ public class PnPoly
                     (System.Math.Abs(points[i].X - test.X) >= minpolyseparation) && (System.Math.Abs(points[j].X - test.X) >= minpolyseparation)))
                     return false; // line too close
 
-                if (((points[i].Y > test.Y) != (points[j].Y > test.Y)) && 
+                if (((points[i].Y > test.Y) != (points[j].Y > test.Y)) &&
                     (test.X < (points[j].X - points[i].X) * (test.Y - points[i].Y) / (points[j].Y - points[i].Y) + points[i].X))
                     c = !c;
             }
 
-           if (c) return c;  
+           if (c) return c;
         }
-      
 
         return c;
     }

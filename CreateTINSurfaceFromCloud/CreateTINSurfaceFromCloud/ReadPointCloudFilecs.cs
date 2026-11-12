@@ -20,7 +20,6 @@ using System.Linq;
 using Autodesk.AutoCAD.Geometry;
 using COMS = PGA.MessengerManager.MessengerManager;
 
-
 namespace CreateTINSurfaceFromCloud
 {
     /// <summary>
@@ -47,7 +46,6 @@ namespace CreateTINSurfaceFromCloud
             return points;
         }
 
-
         /// <summary>
         /// Gets the coordinates.
         /// </summary>
@@ -70,13 +68,13 @@ namespace CreateTINSurfaceFromCloud
             {
                 throw new FileFormatException(String.Format("LiDAR file contents are invalid! (PN,Y,X,Z,DESC) at line {0}",cell[0]));
             }
-          
+
             double y = Double.Parse(cell[1]);
             double x = Double.Parse(cell[2]);
             double z = Double.Parse(cell[3]);
 
             return new Point3d(x, y, z);
-           
+
         }
 
         /// <summary>
@@ -111,8 +109,7 @@ namespace CreateTINSurfaceFromCloud
                 return true;
             return false;
         }
-        
+
     }
 
 }
-

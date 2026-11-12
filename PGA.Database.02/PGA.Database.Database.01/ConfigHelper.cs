@@ -21,7 +21,6 @@ namespace PGA.Database
             ConfigurationManager.RefreshSection(config.AppSettings.SectionInformation.Name);
         }
 
-
         public static ConnectionStringSettings save_new_connection(string filename)
         {
             var ConStrng = ConfigurationManager.ConnectionStrings.ToString();

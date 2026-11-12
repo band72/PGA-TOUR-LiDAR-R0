@@ -10,7 +10,6 @@ namespace PGA.DisjointedSurfaces
     {
     }
 
-
 namespace WellKnowBinary
     {
         public class Point
@@ -26,7 +25,6 @@ namespace WellKnowBinary
             public LinearRing(Point[] points) { Points = points; }
             public Point[] Points { get; private set; }
         }
-
 
         public enum WkbGeometryType : uint
         {
@@ -100,7 +98,6 @@ namespace WellKnowBinary
             public WkbShape[] Shapes { get; private set; }
 
         }
-
 
         public static class WkbDecoder
         {
@@ -233,7 +230,6 @@ namespace WellKnowBinary
 
                 return new WkbGeometryCollection(shapes);
             }
-
 
             static public WkbShape ParseShape(byte[] wkb, ref int pos)
             {

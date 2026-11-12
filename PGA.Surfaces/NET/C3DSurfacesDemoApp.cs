@@ -19,4 +19,3 @@ namespace C3DSurfacesDemo
         }
     }
 }
-

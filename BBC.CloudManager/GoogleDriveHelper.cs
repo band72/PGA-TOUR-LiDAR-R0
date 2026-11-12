@@ -47,7 +47,6 @@ namespace BBC.CloudManager
             }
         }
 
-
         private static string GetMimeType(string fileName)
         {
             string mimeType = "application/unknown";
@@ -64,9 +63,9 @@ namespace BBC.CloudManager
         /// </summary>
         /// <param name="_service">a Valid authenticated DriveService</param>
         /// <param name="_uploadFile">path to the file to upload</param>
-        /// <param name="_parent">Collection of parent folders which contain this file. 
+        /// <param name="_parent">Collection of parent folders which contain this file.
         ///                       Setting this field will put the file in all of the provided folders. root folder.</param>
-        /// <returns>If upload succeeded returns the File resource of the uploaded file 
+        /// <returns>If upload succeeded returns the File resource of the uploaded file
         ///          If the upload fails returns null</returns>
         public static File uploadFile(DriveService _service, string _uploadFile, string _parent)
         {
@@ -78,7 +77,7 @@ namespace BBC.CloudManager
                 body.Description = "File uploaded by BBC Drive";
                 body.MimeType = GetMimeType(_uploadFile);
                 body.Parents = new List<ParentReference>() { new ParentReference() { Id = _parent } };
-                
+
                 // File's content.
                 byte[] byteArray = System.IO.File.ReadAllBytes(_uploadFile);
                 System.IO.MemoryStream stream = new System.IO.MemoryStream(byteArray);
@@ -109,10 +108,10 @@ namespace BBC.CloudManager
         /// </summary>
         /// <param name="_service">a Valid authenticated DriveService</param>
         /// <param name="_uploadFile">path to the file to upload</param>
-        /// <param name="_parent">Collection of parent folders which contain this file. 
+        /// <param name="_parent">Collection of parent folders which contain this file.
         ///                       Setting this field will put the file in all of the provided folders. root folder.</param>
-        /// <param name="_fileId">the resource id for the file we would like to update</param>                      
-        /// <returns>If upload succeeded returns the File resource of the uploaded file 
+        /// <param name="_fileId">the resource id for the file we would like to update</param>
+        /// <returns>If upload succeeded returns the File resource of the uploaded file
         ///          If the upload fails returns null</returns>
         public static File updateFile(DriveService _service, string _uploadFile, string _parent, string _fileId)
         {
@@ -148,7 +147,6 @@ namespace BBC.CloudManager
 
         }
 
-
         /// <summary>
         /// Create a new Directory.
         /// Documentation: https://developers.google.com/drive/v2/reference/files/insert
@@ -156,7 +154,7 @@ namespace BBC.CloudManager
         /// <param name="_service">a Valid authenticated DriveService</param>
         /// <param name="_title">The title of the file. Used to identify file or folder name.</param>
         /// <param name="_description">A short description of the file.</param>
-        /// <param name="_parent">Collection of parent folders which contain this file. 
+        /// <param name="_parent">Collection of parent folders which contain this file.
         ///                       Setting this field will put the file in all of the provided folders. root folder.</param>
         /// <returns></returns>
         public static File createDirectory(DriveService _service, string _title, string _description, string _parent)
@@ -183,15 +181,14 @@ namespace BBC.CloudManager
             return NewDirectory;
         }
 
-
         /// <summary>
-        /// List all of the files and directories for the current user.  
-        /// 
+        /// List all of the files and directories for the current user.
+        ///
         /// Documentation: https://developers.google.com/drive/v2/reference/files/list
         /// Documentation Search: https://developers.google.com/drive/web/search-parameters
         /// </summary>
-        /// <param name="service">a Valid authenticated DriveService</param>        
-        /// <param name="search">if Search is null will return all files</param>        
+        /// <param name="service">a Valid authenticated DriveService</param>
+        /// <param name="search">if Search is null will return all files</param>
         /// <returns></returns>
         public static IList<File> GetFiles(DriveService service, string search)
         {
@@ -200,7 +197,7 @@ namespace BBC.CloudManager
 
             try
             {
-                //List all of the files and directories for the current user.  
+                //List all of the files and directories for the current user.
                 // Documentation: https://developers.google.com/drive/v2/reference/files/list
                 FilesResource.ListRequest list = service.Files.List();
                 list.MaxResults = 1000;
@@ -213,7 +210,7 @@ namespace BBC.CloudManager
                 //// Loop through until we arrive at an empty page
                 while (filesFeed.Items != null)
                 {
- 
+
                     // Adding each item  to the list.
                     foreach (File item in filesFeed.Items)
                     {
@@ -272,13 +269,10 @@ namespace BBC.CloudManager
             return null;
         }
 
-
         internal static void InsertPermission(DriveService service, object p1, string p2, string p3, string p4)
         {
             throw new NotImplementedException();
         }
-
-
 
     }
 

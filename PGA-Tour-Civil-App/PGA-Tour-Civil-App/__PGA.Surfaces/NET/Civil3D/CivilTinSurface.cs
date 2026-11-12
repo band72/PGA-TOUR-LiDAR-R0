@@ -31,7 +31,7 @@ namespace C3DSurfacesDemo
         }
 
         public static void SetBaseLayerCivilTinSurface(string surfaceStyleName)
-        { 
+        {
             Database db = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Database;
             Document doc = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.GetDocument(db);
 
@@ -92,17 +92,17 @@ namespace C3DSurfacesDemo
             return true;
         }
 
-        public string Name 
+        public string Name
         {
-            get 
-            { 
+            get
+            {
                 using (Transaction tr = CivilApplicationManager.StartTransaction())
                 {
                     C3DLandDb.TinSurface surface = m_TheSurfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
-                    return surface.Name; 
+                    return surface.Name;
                 }
             }
-            set 
+            set
             {
                 using (Transaction tr = CivilApplicationManager.StartTransaction())
                 {
@@ -113,7 +113,7 @@ namespace C3DSurfacesDemo
             }
         }
 
-        public IEnumerable<Point3d> Points 
+        public IEnumerable<Point3d> Points
         {
             get
             {
@@ -170,8 +170,8 @@ namespace C3DSurfacesDemo
             try
             {
                 using (Transaction tr = CivilApplicationManager.StartTransaction())
-                { 
-                    surface = surIdId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;                  
+                {
+                    surface = surIdId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
                     tr.Commit();
                 }
                 return surface;
@@ -233,7 +233,7 @@ namespace C3DSurfacesDemo
             {
                 using (Transaction tr = CivilApplicationManager.StartTransaction())
                 {
-                    //1. Create new surface if no existing surface passed in 
+                    //1. Create new surface if no existing surface passed in
                     C3DLandDb.TinSurface surface = m_TheSurfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
                     if (surface == null)
                         surface = m_TheSurfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
@@ -253,9 +253,9 @@ namespace C3DSurfacesDemo
                     catch (Exception e)
                     {
                         PGA.Civil.Logging.ACADLogging.LogMyExceptions("Error AddStandardBoundary" + e.Message);
-                    }                   
+                    }
                     tr.Commit();
-                   
+
                 }
             }
             catch (System.Exception e)
@@ -272,7 +272,7 @@ namespace C3DSurfacesDemo
                 {
                     try
                     {
-                        //1. Create new surface if no existing surface passed in 
+                        //1. Create new surface if no existing surface passed in
                         C3DLandDb.TinSurface surface = m_TheSurfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
                         if (surface == null)
                             surface = m_TheSurfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
@@ -299,7 +299,7 @@ namespace C3DSurfacesDemo
                     {
                         PGA.Civil.Logging.ACADLogging.LogMyExceptions(string.Format("AddStandardInnerBoundary: {0}:{1}", surfacename, ex.Message));
                     }
-                  
+
                     tr.Commit();
                 }
             }
@@ -328,16 +328,16 @@ namespace C3DSurfacesDemo
                     }
                 }
             }
-            
+
             return ObjectId.Null;
         }
 
         private ObjectId createPolylineFromPoints(Point3dCollection points)
         {
-            ObjectId polyId = ObjectId.Null;    
+            ObjectId polyId = ObjectId.Null;
             Polyline3d polyline = new Polyline3d(Poly3dType.SimplePoly, points, false);
             polyId = addEntityToCurrentDatabase(polyline);
-            return polyId;           
+            return polyId;
         }
 
         private ObjectId addEntityToCurrentDatabase(Entity entity)

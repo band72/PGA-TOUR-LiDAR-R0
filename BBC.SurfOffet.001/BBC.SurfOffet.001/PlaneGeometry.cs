@@ -45,10 +45,9 @@ namespace BBC.SurfOffet
         /// <returns>Matrix&lt;System.Double&gt;.</returns>
         public Matrix<double> CreateMatrix()
         {
-    
+
             return Matrix<double>.Build.Random(3, 3);
         }
-
 
         #region MathNet Methods
 
@@ -81,7 +80,6 @@ namespace BBC.SurfOffet
             );
             return v;
         }
-
 
         /// <summary>
         /// Crosses the specified left.

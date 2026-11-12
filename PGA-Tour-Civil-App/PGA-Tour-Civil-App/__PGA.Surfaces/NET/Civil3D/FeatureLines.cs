@@ -25,8 +25,6 @@ namespace PGA.Surfaces.Civil3D
 
         //  End Try
 
-
-
         //  Try
 
         //    oAeccApp = oAcadApp.GetInterfaceObject("AeccXUiLand.AeccApplication.10.0")
@@ -35,11 +33,7 @@ namespace PGA.Surfaces.Civil3D
 
         //    oAeccDB = oAeccApp.ActiveDocument.Database
 
-
-
         ////    ' Select the 3D Polyline which you want to convert to Feature Line
-
-
 
         ////    Dim promptEntOp As New PromptEntityOptions(vbCrLf + "Select a 3D Polyline : ")
 
@@ -59,21 +53,13 @@ namespace PGA.Surfaces.Civil3D
 
         ////    idEnt = promptEntRs.ObjectId
 
-
-
         ////    Dim oFtrLn As AeccLandFeatureLine = Nothing
 
         ////    Dim oFtrLns As AeccLandFeatureLines = oAeccDoc.Sites.Item(0).FeatureLines
 
-
-
         ////    Dim plineObjId As Long = idEnt.OldIdPtr
 
-
-
         ////    oFtrLn = oFtrLns.AddFromPolyline(plineObjId, oAeccDB.FeatureLineStyles.Item(0))
-
-
 
         ////    trans.Commit()
 
@@ -84,9 +70,6 @@ namespace PGA.Surfaces.Civil3D
         ////  End Try
 
         ////End Using
-
-
-
 
     }
 }

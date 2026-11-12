@@ -38,14 +38,13 @@ using Active = PGA.PolylineManager.Active;
 using Application = Autodesk.AutoCAD.ApplicationServices.Core.Application;
 using Exception = System.Exception;
 
-
 namespace PGA.SV30MOffset
 {
-   
+
     public class Program : IExtensionApplication
     {
         public static int MaxCount = 1000;
-         
+
         /// <summary>
         ///     The offset object
         /// </summary>
@@ -86,13 +85,12 @@ namespace PGA.SV30MOffset
         /// </summary>
         public void Initialize()
         {
-            CheckLicense();        
-           
+            CheckLicense();
+
         }
 
         public void CheckLicense()
         {
-
 
             //CryptoLicense license =
 
@@ -280,7 +278,6 @@ namespace PGA.SV30MOffset
             {
                 var ed = Application.DocumentManager.MdiActiveDocument.Editor;
 
-
                 AcadUtilities.SendStringToExecute(".ZoomExtents\n");
 
                 ed.Command(".PGA-ClosePolylines", 1, 1, 0);
@@ -314,7 +311,7 @@ namespace PGA.SV30MOffset
         /// </summary>
         [CommandMethod("ZoomExtents")]
         public static void ZoomExtents()
-        { 
+        {
              var acad =  global::Autodesk.AutoCAD.ApplicationServices.Application.AcadApplication;
             acad.GetType().InvokeMember("ZoomExtents", BindingFlags.Public |
                                                        BindingFlags.InvokeMethod, null, acad, null);
@@ -439,7 +436,7 @@ namespace PGA.SV30MOffset
                     {
                         // ignored
                     }
-         
+
                 }
             }
             catch (Exception ex)
@@ -687,7 +684,6 @@ namespace PGA.SV30MOffset
                             SetXData(reg1.ObjectId, rb1);
                             SetXData(reg2.ObjectId, rb2);
 
-
                             if (r1.Area > r2.Area)
                             {
                                 reg1.BooleanOperation(Acaddb.BooleanOperationType.BoolIntersect, r2);
@@ -804,7 +800,6 @@ namespace PGA.SV30MOffset
                 var obj =
                     tr.GetObject(polyoid, Acaddb.OpenMode.ForRead);
 
-
                 // If a "lightweight" (or optimized) polyline
 
                 var lwp = obj as Acaddb.Polyline;
@@ -882,7 +877,6 @@ namespace PGA.SV30MOffset
             }
         }
 
-
         /// <summary>
         ///     Refines the polylines.
         /// </summary>
@@ -902,10 +896,9 @@ namespace PGA.SV30MOffset
 
                 var ordered = filtered.OrderByDescending(p => p.Area);
 
-
                 if (ordered.ElementAtOrDefault(0) != ordered.ElementAtOrDefault(1))
                 {
-                    //Is Larger Within Inner OR On Boundary 
+                    //Is Larger Within Inner OR On Boundary
                     var o = ordered.ElementAtOrDefault(0);
                     var i = ordered.ElementAtOrDefault(1);
                     var outer = AcadUtilities.GetPointsFromPolyline(o);
@@ -936,7 +929,6 @@ namespace PGA.SV30MOffset
                 COMS.MessengerManager.LogException(ex);
             }
         }
-
 
         /// <summary>
         ///     Polylineses the intersect.
@@ -1109,17 +1101,13 @@ namespace PGA.SV30MOffset
 
                     //============================================================//
 
-
                     //Use lambda extension method
-
-
 
                     #endregion
 
                     ids = (from id in b
                            where id.ObjectClass.DxfName.ToUpper() == "AECC_FEATURE_LINE"
                            select id).ToList();
-
 
                     tran.Commit();
                 }
@@ -1224,7 +1212,6 @@ namespace PGA.SV30MOffset
 
             ProgressMeter pm = new ProgressMeter();
 
-
             try
             {
                 using (var db = Active.WorkingDatabase)
@@ -1234,7 +1221,7 @@ namespace PGA.SV30MOffset
                     foreach (Acaddb.ObjectId objectId in oids)
                     {
                         try
-                        {       
+                        {
                             using (var tr = Active.StartTransaction())
                             {
                                 var p = tr.GetObject(objectId, Acaddb.OpenMode.ForRead) as Acaddb.Polyline;
@@ -1255,7 +1242,7 @@ namespace PGA.SV30MOffset
                             COMS.MessengerManager.LogException(ex);
                         }
                     }
-                 
+
                 }
             }
             catch (Exception ex)
@@ -1306,7 +1293,6 @@ namespace PGA.SV30MOffset
                 }
             }
         }
-
 
         /// <summary>
         ///     Clears the polyline inners.
@@ -1563,7 +1549,6 @@ namespace PGA.SV30MOffset
                                     if (r1.Area == r2.Area)
                                         continue;
 
-
                                     var layer = r1.Layer;
 
                                     if (layer == "0")
@@ -1588,7 +1573,6 @@ namespace PGA.SV30MOffset
 
                                     treg1.CopyFrom(reg1);
                                     treg2.CopyFrom(reg2);
-
 
                                     if (reg1.Area > 0 && reg2.Area > 0)
                                     {
@@ -2130,8 +2114,6 @@ namespace PGA.SV30MOffset
 
         }
 
-       
-
         public static class DrawingProgressMeter
         {
             public static void MeterEvent(string description, int size, Action<ProgressMeter> action)
@@ -2185,7 +2167,7 @@ namespace PGA.SV30MOffset
                 DrawingProgressMeter.MeterEvent
                     (
                     Path.GetFileName(selectedfile),
-                    MaxCount, 
+                    MaxCount,
                     new Action<ProgressMeter>
                     (p => p.MeterProgress())
                     );
@@ -2207,7 +2189,6 @@ namespace PGA.SV30MOffset
             Application.SetSystemVariable("NOMUTT", 1);
             Application.SetSystemVariable("CMDECHO", 1);
 
-
             foreach (var filename in drawings)
             {
                 var doc = Application.DocumentManager.Open(filename, true);
@@ -2220,8 +2201,6 @@ namespace PGA.SV30MOffset
                 }
             }
         }
-
-
 
         /// <summary>
         ///     Executes the automatic cad file.
@@ -2237,7 +2216,7 @@ namespace PGA.SV30MOffset
                 var selectedfile = Drawings.Skip(Counter).Take(1).FirstOrDefault();
 
                 InvokeProgressBar(selectedfile);
-       
+
                 var doc = Application.DocumentManager.Open(selectedfile, true);
                 Application.DocumentManager.MdiActiveDocument = doc;
                 var db = doc.Database;

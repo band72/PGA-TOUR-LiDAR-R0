@@ -47,7 +47,7 @@ namespace PGA.DeleteDupSurfaces
         public static IList<ObjectId> GetAllPolylines()
         {
             IList<ObjectId> ids = GetPolylineEntityIDs();
-        
+
             return ids;
         }
 
@@ -64,7 +64,6 @@ namespace PGA.DeleteDupSurfaces
                 DBObject obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
 
-
                 // If a "lightweight" (or optimized) polyline
 
                 Polyline lwp = obj as Polyline;
@@ -75,7 +74,7 @@ namespace PGA.DeleteDupSurfaces
                     {
                         return lwp.Area;
                     }
-                   
+
                 }
 
                 else
@@ -182,13 +181,11 @@ namespace PGA.DeleteDupSurfaces
                         (BlockTableRecord)tran.GetObject(tbl[BlockTableRecord.ModelSpace], OpenMode.ForRead);
 
                     var b = br.Cast<ObjectId>();
- 
 
                     ids = (from id in b
                            where id.ObjectClass.Name == "AcDb2dPolyline" // DXF "POLYLINE" covers 2D and 3D; class name distinguishes them
 
                            select id).ToList();
-
 
                     tran.Commit();
                 }

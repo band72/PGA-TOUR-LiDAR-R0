@@ -14,7 +14,7 @@ namespace PGA.SV30MOffset
 {
     public static class RegionConversion
     {
-    
+
         public class Commands
         {
             [CommandMethod("RTP")]
@@ -41,7 +41,6 @@ namespace PGA.SV30MOffset
                       tr.GetObject(
                         regId,
                         OpenMode.ForRead) as Region;
-
 
                     if (reg != null)
                     {

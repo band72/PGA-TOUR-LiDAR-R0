@@ -1,6 +1,4 @@
 ﻿
-
-
 using Autodesk.AutoCAD.Colors;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.Civil.ApplicationServices;
@@ -8,12 +6,12 @@ using Autodesk.Civil.DatabaseServices.Styles;
 
 namespace C3DSurfacesDemo
 {
-    public class SurfaceStyleManager 
+    public class SurfaceStyleManager
     {
         public static bool Exists(string styleName)
         {
             return (GetStyleId(styleName) != ObjectId.Null);
-            
+
         }
 
         public static ObjectId GetStyleId(string styleName)
@@ -54,7 +52,7 @@ namespace C3DSurfacesDemo
                 minorContours.Visible = true;
                 minorContours.Color = Color.FromRgb(0, 255, 0);
                 DisplayStyle triangles = style.GetDisplayStylePlan(SurfaceDisplayStyleType.Triangles);
-                
+
                 tr.Commit();
             }
         }

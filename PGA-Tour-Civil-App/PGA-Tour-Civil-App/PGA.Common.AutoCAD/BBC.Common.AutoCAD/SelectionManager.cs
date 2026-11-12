@@ -9,7 +9,6 @@ using global::Autodesk.AutoCAD.Geometry;
 
 #endregion
 
-
 namespace BBC.Common.AutoCAD
 {
     public class SelectionManager
@@ -104,8 +103,6 @@ namespace BBC.Common.AutoCAD
             PGA.MessengerManager.MessengerManager.AddLog("Start GetSelectionSet");
             var currentDoc = Application.DocumentManager.MdiActiveDocument;
             var editor = currentDoc.Editor;
-
-
 
             var options = new PromptSelectionOptions();
             if (string.IsNullOrEmpty(prompt))

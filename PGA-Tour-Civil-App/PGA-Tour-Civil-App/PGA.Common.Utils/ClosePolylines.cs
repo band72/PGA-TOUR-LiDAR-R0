@@ -151,7 +151,6 @@ namespace PGA.Autodesk.Utils
         {
             SelectionSet selection = null;
 
-
             #region Database
 
             var doc = Application.DocumentManager.MdiActiveDocument;
@@ -197,7 +196,7 @@ namespace PGA.Autodesk.Utils
                     "\nError deleting polylines."
                 );
             }
- 
+
         }
 
         private static bool MoveDuplicatePolylines(ObjectId pobj)
@@ -299,7 +298,6 @@ namespace PGA.Autodesk.Utils
                                    (id.ObjectClass == RXObject.GetClass(typeof(Polyline3d)));
                         }).ToArray();
 
-
                         foreach (var obj in selection)
                         {
                             if (obj.IsErased)
@@ -350,7 +348,6 @@ namespace PGA.Autodesk.Utils
             var db = doc.Database;
             var tr = db.TransactionManager.StartTransaction();
 
-
             using (tr)
             {
                 var obj =
@@ -364,7 +361,6 @@ namespace PGA.Autodesk.Utils
                     LayerManager.ChangeLayerColor
                         (db, lwp.Layer, PLineToLayers.AssignLayerColor(lwp));
                 }
-
 
                 tr.Commit();
             }
@@ -413,7 +409,6 @@ namespace PGA.Autodesk.Utils
             var db = doc.Database;
             var tr = db.TransactionManager.StartTransaction();
 
-
             using (tr)
             {
                 var obj =
@@ -444,7 +439,6 @@ namespace PGA.Autodesk.Utils
             var db = doc.Database;
             var tr = db.TransactionManager.StartTransaction();
 
-
             using (tr)
             {
                 var obj1 =
@@ -452,7 +446,6 @@ namespace PGA.Autodesk.Utils
 
                 var obj2 =
                     tr.GetObject(obase, OpenMode.ForWrite);
-
 
                 var lwp1 = obj1 as Polyline;
                 var lwp2 = obj2 as Polyline;
@@ -468,10 +461,8 @@ namespace PGA.Autodesk.Utils
                 tr.Commit();
             }
 
-
             return false;
         }
-
 
         private static void RemoveObjectFromDatabase(ObjectId obase)
         {
@@ -480,12 +471,10 @@ namespace PGA.Autodesk.Utils
             var db = doc.Database;
             var tr = db.TransactionManager.StartTransaction();
 
-
             using (tr)
             {
                 var obj =
                     tr.GetObject(obase, OpenMode.ForWrite);
-
 
                 var lwp = obj as Polyline;
 
@@ -497,7 +486,6 @@ namespace PGA.Autodesk.Utils
                 tr.Commit();
             }
         }
-
 
         public static void InteratePolyLines(ObjectId selectedObjectId)
         {
@@ -515,7 +503,6 @@ namespace PGA.Autodesk.Utils
             {
                 var obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
-
 
                 // If a "lightweight" (or optimized) polyline
 

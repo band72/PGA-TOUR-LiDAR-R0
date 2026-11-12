@@ -69,7 +69,6 @@ namespace PGA.SurfaceManager
         /// </summary>
         public static int iterations = 0;
 
-
         /// <summary>
         /// Gets the surfaces.
         /// </summary>
@@ -216,7 +215,6 @@ namespace PGA.SurfaceManager
             return thePolylines;
         }
 
-
         /// <summary>
         /// Gets the terrain surface properties.
         /// </summary>
@@ -307,7 +305,7 @@ namespace PGA.SurfaceManager
         {
             try
             {
-                
+
                 var p = GetTerrainSurfaceProperties(theSurface);
                 var tin = GetTinSurfaceProperties(theSurface);
 
@@ -363,7 +361,6 @@ namespace PGA.SurfaceManager
                     var MaxElev = p.MaximumElevation;
                     var MinElev = p.MinimumElevation;
 
-
                     if (Math.Abs(MaxElev - MinElev) > 50.0)
                     {
                         COMS.MessengerManager.AddLog("Elev-Exceeded-"
@@ -415,7 +412,7 @@ namespace PGA.SurfaceManager
                             COMS.MessengerManager.AddLog("Checking..." + theSurface.Name);
                             DisableSurfaceBoundaries(theSurface, gCount);
                         }
-                       
+
                         gCount++;
                     }
                 }
@@ -441,7 +438,6 @@ namespace PGA.SurfaceManager
                     var sbd = theSurface.BoundariesDefinition;
 
                     num = sbd.Count;
-
 
                     for (var i = gCount; i < num; i++)
                     {
@@ -479,8 +475,6 @@ namespace PGA.SurfaceManager
                     if (gOuterArea == 0.0)
                         CreateOuterArea(sbd[index]
                             .Cast<SurfaceBoundary>().FirstOrDefault());
-                
-
 
                     if (sbd[index].BoundaryType != SurfaceBoundaryType.Outer)
                     {
@@ -508,7 +502,6 @@ namespace PGA.SurfaceManager
                     else
                         CreateOuterArea(sbd[index]
                             .Cast<SurfaceBoundary>().FirstOrDefault());
-
 
                     PGA.MessengerManager.MessengerManager.AddLog
                         ("Ending Disable Inner Surface for " + theSurface.Name);
@@ -557,14 +550,12 @@ namespace PGA.SurfaceManager
 
                             }
 
-                        } 
-                                                                                    
+                        }
+
                     }
-                   
 
                     COMS.MessengerManager.AddLog("Inner Area Check =" + InnerArea);
                     COMS.MessengerManager.AddLog("Outer Area Check =" + OuterArea);
-
 
                 }
                 catch (Exception ex)
@@ -574,7 +565,6 @@ namespace PGA.SurfaceManager
                 tr.Commit();
             }
         }
-
 
         /// <summary>
         /// Disables the surface.
@@ -590,7 +580,7 @@ namespace PGA.SurfaceManager
                 var OuterLayer = theSurface.Layer;
                 try
                 {
-                   
+
                     var sbd = theSurface.BoundariesDefinition;
 
                     for (var i = 0; i < sbd.Count; i++)
@@ -626,7 +616,6 @@ namespace PGA.SurfaceManager
                     COMS.MessengerManager.AddLog("Inner Area Check =" + InnerArea);
                     COMS.MessengerManager.AddLog("Outer Area Check =" + OuterArea);
 
-
                 }
                 catch (Exception ex)
                 {
@@ -635,7 +624,6 @@ namespace PGA.SurfaceManager
                 tr.Commit();
             }
         }
-
 
         /// <summary>
         /// Creates the inner area.
@@ -655,7 +643,6 @@ namespace PGA.SurfaceManager
 
             return 0.0;
         }
-
 
         /// <summary>
         /// Creates the outer area.
@@ -762,8 +749,6 @@ namespace PGA.SurfaceManager
                 }
                 else
                     COMS.MessengerManager.AddLog("ISOLATED PARENT==> NO: " + item.Name);
-  
-
 
                 COMS.MessengerManager.AddLog("*******End Testing*********");
 
@@ -845,7 +830,6 @@ namespace PGA.SurfaceManager
             {
                 thePolylines = GetPolylineList();
 
-
                 var layer = theSurface.Layer;
                 var outerboundary = GetOuterBoundaryCollection(theSurface);
 
@@ -881,7 +865,7 @@ namespace PGA.SurfaceManager
                         if (PointInPolyline(outerboundary,p))
                         {
                             COMS.MessengerManager.AddLog
-                                ("We Do NOT have Isolated Parent! " 
+                                ("We Do NOT have Isolated Parent! "
                                 + theSurface.Name);
 
                             COMS.MessengerManager.AddLog
@@ -892,7 +876,7 @@ namespace PGA.SurfaceManager
 
                     }
                     COMS.MessengerManager.AddLog
-                        ("We DO have Isolated Parent! Running Correction " 
+                        ("We DO have Isolated Parent! Running Correction "
                         + theSurface.Name);
 
                     CorrectIsolatedParent(theSurface)
@@ -924,27 +908,22 @@ namespace PGA.SurfaceManager
                 {
                     COMS.MessengerManager.AddLog("Starting CorrectIsolatedParent" + theSurface.Name);
 
-
                     using (var tr = Active.StartTransaction())
                     {
                         thePolylines = GetPolylineList();
 
-
                         var sbd = theSurface.BoundariesDefinition;
                         var allSurface = GetTerrainSurfaceProperties("All");
                         var allArea = allSurface.SurfaceArea2D;
-                        var curArea =  GetTerrainSurfaceProperties(theSurface.Name).SurfaceArea2D; 
-                        
-                        Point2dCollection pnts = new Point2dCollection();
+                        var curArea =  GetTerrainSurfaceProperties(theSurface.Name).SurfaceArea2D;
 
+                        Point2dCollection pnts = new Point2dCollection();
 
                         if (theSurface.Name == "All")
                             continue;
 
-
                         var roughcal = Math.Abs((allArea - curArea) / allArea) * 100;
                         var result   = roughcal < 0.10? true: false;
-
 
                         if (result)
                         {
@@ -955,7 +934,6 @@ namespace PGA.SurfaceManager
 
                             if (outerboundary == null)
                                 return;
-
 
                             RemoveOuterBoundary(theSurface);
 
@@ -994,8 +972,6 @@ namespace PGA.SurfaceManager
 
         }
 
-
-
         /// <summary>
         /// Corrects the isolated parent by scaling.
         /// </summary>
@@ -1013,8 +989,6 @@ namespace PGA.SurfaceManager
                     COMS.MessengerManager.AddLog("Starting CorrectIsolatedParentByScaling-Triangles " + theSurface.Triangles.Count);
                     COMS.MessengerManager.AddLog("Starting CorrectIsolatedParentByScaling-BoundaryDefinitions " + theSurface.BoundariesDefinition.Count);
 
-
-
                     using (var tr = Active.StartTransaction())
                     {
                         thePolylines = GetPolylineList();
@@ -1028,18 +1002,14 @@ namespace PGA.SurfaceManager
                         {
                             curArea = GetTerrainSurfaceProperties(theSurface.Name).SurfaceArea2D;
                         }
-                        
 
                         Point2dCollection pnts = new Point2dCollection();
-
 
                         if (theSurface.Name == "All")
                             continue;
 
-
                         var roughcal = Math.Abs((allArea - curArea) / allArea) * 100;
                         var result = roughcal < 10 ? true : false;
-
 
                         if (result)
                         {
@@ -1059,7 +1029,7 @@ namespace PGA.SurfaceManager
 
                             Polyline poly = thePolylines.Find(p => p.Layer == theSurface.Layer && Math.Abs(p.Area - bndyarea) < 0.1);
 
-                            PGA.OffsetPolylines.Program.ScaleObject(poly.ObjectId);                     
+                            PGA.OffsetPolylines.Program.ScaleObject(poly.ObjectId);
                         }
                         else
                         {
@@ -1087,7 +1057,6 @@ namespace PGA.SurfaceManager
 
         }
 
-
         /// <summary>
         /// Corrects the isolated parent when no error thrown.
         /// </summary>
@@ -1098,12 +1067,10 @@ namespace PGA.SurfaceManager
             try
             {
                 COMS.MessengerManager.AddLog("Starting CorrectIsolatedParent" + theSurface.Name);
-                
 
                 using (var tr = Active.StartTransaction())
                 {
                     thePolylines = GetPolylineList();
-
 
                     var sbd = theSurface.BoundariesDefinition;
                     var allSurface = GetTerrainSurfaceProperties("All");
@@ -1112,13 +1079,10 @@ namespace PGA.SurfaceManager
 
                     Point2dCollection pnts = new Point2dCollection();
 
-
                     if (theSurface.Name == "All")
                         return;
 
-
                     var result = Math.Abs((allArea - curArea)/allArea)*100 < 0.10;
-
 
                     if (result)
                     {
@@ -1253,7 +1217,6 @@ namespace PGA.SurfaceManager
             throw new NullReferenceException("GetOuterBoundaryArea");
         }
 
-
         /// <summary>
         /// Removes the outer boundary.
         /// </summary>
@@ -1276,7 +1239,7 @@ namespace PGA.SurfaceManager
                         if (sbd[i].BoundaryType == SurfaceBoundaryType.Outer)
                         {
                             COMS.MessengerManager.AddLog("Removed Outer Boundary");
-                            sbd.RemoveAt(i); 
+                            sbd.RemoveAt(i);
                         }
                     }
 
@@ -1289,11 +1252,9 @@ namespace PGA.SurfaceManager
                 }
                 tr.Commit();
 
-
             }
 
         }
-
 
         /// <summary>
         /// Gets the outer boundary collection.
@@ -1368,7 +1329,7 @@ namespace PGA.SurfaceManager
                     COMS.MessengerManager.AddLog("Starting Checking For Hide Boundary" + theSurface.Name);
 
                     var sbd = theSurface.BoundariesDefinition;
- 
+
                     for (var i = 0; i < sbd.Count; i++)
                     {
                         if (sbd[i].BoundaryType == SurfaceBoundaryType.Hide)
@@ -1412,7 +1373,7 @@ namespace PGA.SurfaceManager
                             COMS.MessengerManager.AddLog("Found Outer Boundary");
 
                             sbd[i].Enabled = false;
-                            
+
                             tr.Commit();
 
                             return true;
@@ -1430,7 +1391,6 @@ namespace PGA.SurfaceManager
             }
             return false;
         }
-
 
         /// <summary>
         /// Gets the centroid of outer boundary.
@@ -1485,7 +1445,6 @@ namespace PGA.SurfaceManager
             return p2dc;
         }
 
-
         /// <summary>
         /// Points the in poly.
         /// </summary>
@@ -1539,7 +1498,6 @@ namespace PGA.SurfaceManager
                 if (c) return c; //break if point is inside poly
             }
 
-
             return c;
         }
 
@@ -1554,8 +1512,6 @@ namespace PGA.SurfaceManager
             var db = Active.Database;
             var doc = Active.Document;
             var ed = Active.Editor;
-
-
 
             try
             {
@@ -1610,6 +1566,3 @@ namespace PGA.SurfaceManager
 
     }
 }
-
-
-

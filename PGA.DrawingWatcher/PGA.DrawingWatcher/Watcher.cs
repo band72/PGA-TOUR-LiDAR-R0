@@ -56,7 +56,7 @@ namespace PGA.DrawingWatcher
         private static int MaxDXFs   = 0;
         private static int TotalDWGs = 0;
 
-        private static Sv.PostAudit.PostAudit _postAudit 
+        private static Sv.PostAudit.PostAudit _postAudit
             = new Sv.PostAudit.PostAudit();
 
         // This is the method to run when the timer is raised.
@@ -65,13 +65,12 @@ namespace PGA.DrawingWatcher
         {
             try
             {
-                
 
                 myTimer.Enabled = false;
                 PGA.DrawingManager.Commands.ForceCloseAllButActiveDocuments();
                 using (DatabaseCommands commands = new DatabaseCommands())
                 {
-                    if (TotalDWGs ==0)  
+                    if (TotalDWGs ==0)
                         TotalDWGs = commands.DWGCountExportToCAD();
                     if (TotalDWGs == 0)
                         return;
@@ -84,7 +83,6 @@ namespace PGA.DrawingWatcher
                     }
                     if (commands.AllCompletedFlagsExportToCad())
                     {
-
 
                         COMS.MessengerManager.AddLog("Starting Post Audit!");
 
@@ -109,9 +107,8 @@ namespace PGA.DrawingWatcher
                         commands.SetS3TimerInfo(MaxDXFs);
                     }
                 }
-           
-                COMS.MessengerManager.AddLog("Ending Tm_Elasped...");
 
+                COMS.MessengerManager.AddLog("Ending Tm_Elasped...");
 
                 myTimer.Enabled = true;
             }
@@ -124,7 +121,7 @@ namespace PGA.DrawingWatcher
             {
                 COMS.MessengerManager.LogException(ex2);
             }
-     
+
         }
 
         public static void WrapUpOperations()
@@ -161,7 +158,7 @@ namespace PGA.DrawingWatcher
 
             try
             {
-             
+
                 TotalDWGs = 0;
                 MaxDWGs = 0;
                 MaxDXFs = 0;
@@ -180,15 +177,12 @@ namespace PGA.DrawingWatcher
 
                 OpenandCloseDwgs.CloseDocuments();
 
-
             }
             catch (Exception ex)
             {
                 COMS.MessengerManager.LogException(ex);
             }
         }
-        
-
 
         public TimerClass()
         {
@@ -208,7 +202,6 @@ namespace PGA.DrawingWatcher
 
         }
 
- 
     }
 
 }

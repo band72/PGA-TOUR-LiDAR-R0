@@ -21,7 +21,7 @@ using DBObject = Autodesk.AutoCAD.DatabaseServices.DBObject;
 using Entity = Autodesk.AutoCAD.DatabaseServices.Entity;
 using Exception = System.Exception;
 using ObjectId = Autodesk.AutoCAD.DatabaseServices.ObjectId;
-using ObjectIdCollection = Autodesk.AutoCAD.DatabaseServices.ObjectIdCollection; 
+using ObjectIdCollection = Autodesk.AutoCAD.DatabaseServices.ObjectIdCollection;
 #endregion
 
 namespace PGA.Breaklines
@@ -40,7 +40,7 @@ namespace PGA.Breaklines
         private string _drawingName;
         private IList<string> _listDwgs;
         private List<Polyline3d> _polylines;
-        public ObjectIdCollection _originalPolys; 
+        public ObjectIdCollection _originalPolys;
         #endregion
 
         public Breaklines(DateTime time, IList<string> listDwgs)
@@ -50,7 +50,7 @@ namespace PGA.Breaklines
             _drawingName = "";
             _listDwgs = new List<string>(listDwgs);
             _polylines = new List<Polyline3d>();
-            _originalPolys = new ObjectIdCollection(); 
+            _originalPolys = new ObjectIdCollection();
             #endregion
         }
 
@@ -171,7 +171,6 @@ namespace PGA.Breaklines
             var directory = Path.GetDirectoryName(name);
             var filename = Path.GetFileName(name);
             name = Path.Combine(directory, "BL_" + filename);
-
 
             return name;
         }
@@ -309,7 +308,7 @@ namespace PGA.Breaklines
         {
             if (String.IsNullOrEmpty(drawingname))
                 throw new ArgumentException
-                ("Argument is null or empty", 
+                ("Argument is null or empty",
                 nameof(drawingname)        );
 
             using (DatabaseCommands commands = new DatabaseCommands())
@@ -326,7 +325,6 @@ namespace PGA.Breaklines
             try
             {
                 if (drawingName == null) throw new ArgumentNullException(nameof(drawingName));
-
 
                 using (Autodesk.AutoCAD.DatabaseServices.Database db =
                     new Autodesk.AutoCAD.DatabaseServices.Database(false, false))
@@ -346,7 +344,7 @@ namespace PGA.Breaklines
                         foreach (ObjectId so in selected)
                         {
                             // Open one at a time
-                           
+
                             Entity ent =
                                 (Entity) tr.GetObject(
                                     so,
@@ -394,7 +392,7 @@ namespace PGA.Breaklines
                     var path = Path.GetDirectoryName(drawingName);
                     var file = Path.GetFileName(drawingName);
                     var output = Path.Combine(path, "ACAD-" + file);
-                    db.SaveAs(output, DwgVersion.Current); 
+                    db.SaveAs(output, DwgVersion.Current);
                 }
             }
             catch (Exception ex)
@@ -406,7 +404,6 @@ namespace PGA.Breaklines
         /// <exclude />
         public void CreateLayersInDB(Autodesk.AutoCAD.DatabaseServices.Database db, List<Polyline3d> polys)
         {
-           
 
             using (Transaction tr = db.TransactionManager.StartTransaction())
             {
@@ -480,7 +477,6 @@ namespace PGA.Breaklines
                 feature.AssignElevationsFromSurface(SurfaceId, true);
                 var p3Dcollection = feature.GetPoints(FeatureLinePointType.AllPoints);
 
-
                 C3DLandDb.TinSurface surface = SurfaceId.GetObject(OpenMode.ForWrite) as C3DLandDb.TinSurface;
 
                 surface.BreaklinesDefinition.AddStandardBreaklines(p3Dcollection, 1.0, 2.0, 1.0, 0.0);
@@ -514,8 +510,6 @@ namespace PGA.Breaklines
             return site;
         }
 
-            
-
         public void SetCrossingPolylinesSetting()
         {
             try
@@ -548,7 +542,7 @@ namespace PGA.Breaklines
             {
                 using (Transaction tr = CivilApplicationManager.StartTransaction())
                 {
-    
+
                     C3DLandDb.TinSurface surface = surfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
                     surface.UpgradeOpen();
                     surface.BreaklinesDefinition.AddStandardBreaklines(featureIds, 1.0, 2.0, 2.0, 0.0);
@@ -592,7 +586,7 @@ namespace PGA.Breaklines
 
                         surface.UpgradeOpen();
                         ///Todo:Handle Breaklines for Water and Bulkhead
-                        /// 
+                        ///
                         surface.BuildOptions.NeedConvertBreaklines = true;
                         surface.BuildOptions.ExecludeMinimumElevation = true;
                         surface.BuildOptions.MinimumElevation = 0.1;
@@ -620,8 +614,6 @@ namespace PGA.Breaklines
 
             }
         }
-
-
 
         [CommandMethod("RemovePaste")]
         public void RemovePastecommandByCmd()
@@ -721,21 +713,19 @@ namespace PGA.Breaklines
             }
         }
 
-
         public object OpenFeatureLineForSave(ObjectId featureId)
         {
             Debug.WriteLine("Starting OpenFeatureLineForSave");
 
             using (Transaction tr = CivilApplicationManager.StartTransaction())
             {
-                var feature = (C3DLandDb.FeatureLine)featureId.GetObject(OpenMode.ForWrite, false, true);                
+                var feature = (C3DLandDb.FeatureLine)featureId.GetObject(OpenMode.ForWrite, false, true);
                 var p3Dcollection = feature.GetPoints(FeatureLinePointType.AllPoints);
-                
+
                 var poly3d = new Polyline3d(Poly3dType.SimplePoly, p3Dcollection, true);
                 poly3d.Layer = feature.Layer;
                 poly3d.Color = feature.Color;
                 _polylines.Add(poly3d);
-
 
                 tr.Commit();
                 Debug.WriteLine("Ending OpenFeatureLineForSave");
@@ -751,7 +741,7 @@ namespace PGA.Breaklines
             {
                 var feature = (C3DLandDb.FeatureLine)featureId.GetObject(OpenMode.ForRead, false, true);
                 var siteid  = feature.SiteId;
- 
+
                 Debug.WriteLine("Ending GetFeatureLineSiteId");
                 return siteid;
             }

@@ -20,8 +20,6 @@ namespace PGA.Database.Tests
             var test = commands.GetTasksProjectName();
             //var tasks = (from p in context.TaskManager
 
-
-
             Assert.AreEqual(1,1);
         }
 
@@ -42,13 +40,13 @@ namespace PGA.Database.Tests
         [TestMethod()]
         public void TestDatabaseMethodSkipDXF()
         {
-             
+
             DatabaseCommands commands = new DatabaseCommands();
             IList<ExcludedFeatures> excludedfeatures;
             var datetime = (from p in commands.GetSettingsCustom()
                 select p.DateStamp).Distinct().FirstOrDefault();
             var resultdxf = commands.IsSkipDXFByDate(date:Convert.ToDateTime(datetime));
-            
+
         }
     }
 }

@@ -67,7 +67,7 @@ namespace PGA.DatabaseMaintenance
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cmdClear_Click(object sender, RoutedEventArgs e)
         {
-           
+
             using (DatabaseCommands commands = new DatabaseCommands())
             {
                 commands.DeleteDataFromAllTables();

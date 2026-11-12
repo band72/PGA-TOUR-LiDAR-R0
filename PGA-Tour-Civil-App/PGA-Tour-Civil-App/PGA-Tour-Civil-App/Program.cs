@@ -32,7 +32,6 @@ namespace PGA_Tour_Civil_App
             {
             }
 
-
             [CommandMethod("PGA-CHECK")]
             public void CheckDrawing()
             {
@@ -41,7 +40,6 @@ namespace PGA_Tour_Civil_App
                     AcadUtilities.WriteMessage("Starting Audit \n\n");
 
                     AcadUtilities.SendStringToExecute("_.AUDIT Y \n\n");
-
 
                 }
                 catch (Exception ex)
@@ -72,7 +70,7 @@ namespace PGA_Tour_Civil_App
                 try
                 {
                     AcadUtilities.SendStringToExecute("_.AeccCreatePointCloud \n");
-            
+
                 }
                 catch (Exception ex)
                 {
@@ -233,7 +231,6 @@ namespace PGA_Tour_Civil_App
 
                 }
             }
-
 
             [CommandMethod("PGA-LOADINSERT", CommandFlags.Session)]
             public void LoadByComandInsertTemplate()

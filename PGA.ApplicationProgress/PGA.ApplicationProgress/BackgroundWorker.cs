@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 namespace PGA.ApplicationProgress
 {
 
-
     public class BackgroundWorker
     {
-
 
         private int _total;
         public int total
@@ -105,7 +103,6 @@ namespace PGA.ApplicationProgress
         }
 
         // This is the method to run when the timer is raised.
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

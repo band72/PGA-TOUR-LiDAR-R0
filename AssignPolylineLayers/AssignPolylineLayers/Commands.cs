@@ -13,7 +13,6 @@ namespace AssignPolylineLayers
     using global::Autodesk.AutoCAD.Runtime;
     using Application = global::Autodesk.AutoCAD.ApplicationServices.Core.Application;
 
-
     public static class Commands
     {
         [CommandMethod("PGA-ChangeLayers2")]
@@ -26,7 +25,7 @@ namespace AssignPolylineLayers
 
                 using (DocumentLock dlock = doc.LockDocument())
                 {
-                    
+
                     ObjectIdCollection collection = Layers.GetIdsByTypeTypeValue("POLYLINE", "LWPOLYLINE", "POLYLINE2D", "POLYLINE3D");
 
                     Layers.ProcessLayers(collection);
@@ -38,7 +37,6 @@ namespace AssignPolylineLayers
                 DatabaseLogs.FormatLogs(string.Format("ChangesLayers: {0}", ex.Message));
             }
         }
-
 
     }
 }

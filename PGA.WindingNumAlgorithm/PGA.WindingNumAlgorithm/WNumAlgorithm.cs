@@ -11,10 +11,8 @@ namespace PGA.WindingNumAlgorithm
         // liable for any real or imagined damage resulting from its use.
         // Users of this code must verify correctness for their application.
 
-
         // a Point is defined by its coordinates {int x, y;}
         //===================================================================
-
 
         // isLeft(): tests if a point is Left|On|Right of an infinite line.
         //    Input:  three points P0, P1, and P2
@@ -28,7 +26,6 @@ namespace PGA.WindingNumAlgorithm
                     - (P2.X - P0.X) * (P1.Y - P0.Y));
         }
         //===================================================================
-
 
         // cn_PnPoly(): crossing number test for a point in a polygon
         //      Input:   P = a point,
@@ -55,7 +52,6 @@ namespace PGA.WindingNumAlgorithm
 
         }
         //===================================================================
-
 
         // wn_PnPoly(): winding number test for a point in a polygon
         //      Input:   P = a point,

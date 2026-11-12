@@ -102,8 +102,6 @@ namespace PGA.Common.AutoCAD
             Document currentDoc = Active.MdiDocument;
             Editor editor = currentDoc.Editor;
 
-
-
             PromptSelectionOptions options = new PromptSelectionOptions();
             if ( string.IsNullOrEmpty(prompt))
             {
@@ -469,4 +467,3 @@ namespace PGA.Common.AutoCAD
 
     }
 }
-

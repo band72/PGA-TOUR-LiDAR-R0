@@ -10,7 +10,7 @@ namespace BBC.AutoCAD.Trans
     {
         public void Translate()
         {
-            
+
         }
 
         public void Rotate()
@@ -26,6 +26,6 @@ namespace BBC.AutoCAD.Trans
 
     public class Selection
     {
-        
+
     }
 }

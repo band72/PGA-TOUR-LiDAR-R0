@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathNet.Numerics.LinearAlgebra;
- 
+
 namespace BBC.SurfOffet
 {
     public class Tests
@@ -17,7 +17,6 @@ namespace BBC.SurfOffet
             Vector<double> p1 = Vector<double>.Build.DenseOfArray(new[] {1.0, 0, 2});
             Vector<double> p2 = Vector<double>.Build.DenseOfArray(new[] {-1.0, 1, 2});
             Vector<double> p3 = Vector<double>.Build.DenseOfArray(new[] {5.0, 0, 3});
-
 
             //Build the Actual Vectors
             Vector<double> v1 = PlaneGeometry.GetVector(p1, p2);
@@ -36,7 +35,6 @@ namespace BBC.SurfOffet
             var Zcorrected = PlaneGeometry.ZCoordCorrected(cross, p1, p2, 1.0);
             var triangleCenter  = PlaneGeometry.FindTriangleCenter(p1, p2, p3, cross);
         }
-
 
     }
 }

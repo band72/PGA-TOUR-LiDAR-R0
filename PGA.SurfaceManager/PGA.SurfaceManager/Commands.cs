@@ -19,12 +19,10 @@ namespace PGA.SurfaceManager
             {
                 var theSurfaces = SurfaceManager.GetSurfacesList();
 
-
                 foreach (var theSurface in theSurfaces)
                 {
                     var t   = SurfaceManager.GetTerrainSurfaceProperties(theSurface);
                     var tin = SurfaceManager.GetTinSurfaceProperties(theSurface);
- 
 
                     SurfaceManager.gCount = 0;
                     SurfaceManager.gError = 0;
@@ -33,15 +31,14 @@ namespace PGA.SurfaceManager
                     COMS.MessengerManager.AddLog
                       ("Audit Zero Areas: " + theSurface.Name);
 
-                        SurfaceManager.ProcessSurfaceOps(theSurface);                       
+                        SurfaceManager.ProcessSurfaceOps(theSurface);
 
                         theSurface.Rebuild();
-
 
                 }
                 Active.Editor.Regen();
             }
-        
+
             catch (System.Exception ex)
             {
                 COMS.MessengerManager.LogException(ex);

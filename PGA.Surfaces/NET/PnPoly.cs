@@ -1,4 +1,4 @@
-﻿ 
+﻿
 using System.Collections.Generic;
 using Autodesk.AutoCAD.Geometry;
 using Autodesk.Civil;
@@ -6,8 +6,6 @@ using Autodesk.Civil;
 public class PnPoly
 {
     #region Teigha Implementation
-
-
 
     //            (test.x < (points[j].x - points[i].x)*(test.y - points[i].y)/(points[j].y - points[i].y) + points[i].x))
 
@@ -72,7 +70,6 @@ public class PnPoly
 
             if (c) return c; //break if point is inside poly
         }
-      
 
         return c;
     }

@@ -25,15 +25,11 @@ namespace PGA.AutoLoader
 
                 // Get the assembly, its name and location
 
-
-
                 Assembly assem = Assembly.GetExecutingAssembly();
 
                 string name = assem.GetName().Name;
 
                 string path = assem.Location;
-
-
 
                 // We'll collect information on the commands
 
@@ -45,19 +41,13 @@ namespace PGA.AutoLoader
 
                 // number of each with possibly fewer groups)
 
-
-
                 List<string> globCmds = new List<string>();
 
                 List<string> locCmds = new List<string>();
 
                 List<string> groups = new List<string>();
 
-
-
                 // Iterate through the modules in the assembly
-
-
 
                 Module[] mods = assem.GetModules(true);
 
@@ -67,8 +57,6 @@ namespace PGA.AutoLoader
 
                     // Within each module, iterate through the types
 
-
-
                     Type[] types = mod.GetTypes();
 
                     foreach (Type type in types)
@@ -77,19 +65,13 @@ namespace PGA.AutoLoader
 
                         // We may need to get a type's resources
 
-
-
                         ResourceManager rm =
 
                           new ResourceManager(type.FullName, assem);
 
                         rm.IgnoreCase = true;
 
-
-
                         // Get each method on a type
-
-
 
                         MethodInfo[] meths = type.GetMethods();
 
@@ -98,8 +80,6 @@ namespace PGA.AutoLoader
                         {
 
                             // Get the methods custom command attribute(s)
-
-
 
                             object[] attbs =
 
@@ -127,21 +107,15 @@ namespace PGA.AutoLoader
 
                                     // about each command
 
-
-
                                     string globName = cma.GlobalName;
 
                                     string locName = globName;
 
                                     string lid = cma.LocalizedNameId;
 
-
-
                                     // If we have a localized command ID,
 
                                     // let's look it up in our resources
-
-
 
                                     if (lid != null)
 
@@ -152,8 +126,6 @@ namespace PGA.AutoLoader
                                         // Failure just means we use the global
 
                                         // name twice (the default)
-
-
 
                                         try
 
@@ -167,17 +139,11 @@ namespace PGA.AutoLoader
 
                                     }
 
-
-
                                     // Add the information to our data structures
-
-
 
                                     globCmds.Add(globName);
 
                                     locCmds.Add(locName);
-
-
 
                                     if (cma.GroupName != null &&
 
@@ -195,25 +161,17 @@ namespace PGA.AutoLoader
 
                 }
 
-
-
                 // Let's register the application to load on demand (12)
 
                 // if it contains commands, otherwise we will have it
 
                 // load on AutoCAD startup (2)
 
-
-
                 int flags = (globCmds.Count > 0 ? 12 : 2);
-
-
 
                 // By default let's create the commands in HKCU
 
                 // (pass false if we want to create in HKLM)
-
-
 
                 CreateDemandLoadingEntries(
 
@@ -223,8 +181,6 @@ namespace PGA.AutoLoader
 
             }
 
-
-
             public static void UnregisterForDemandLoading()
 
             {
@@ -233,11 +189,7 @@ namespace PGA.AutoLoader
 
             }
 
-
-
             // Helper functions
-
-
 
             private static void CreateDemandLoadingEntries(
 
@@ -261,17 +213,11 @@ namespace PGA.AutoLoader
 
                 // Choose a Registry hive based on the function input
 
-
-
                 RegistryKey hive =
 
                   (currentUser ? Microsoft.Win32.Registry.CurrentUser : Microsoft.Win32.Registry.LocalMachine);
 
-
-
                 // Open the main AutoCAD (or vertical) and "Applications" keys
-
-
 
                 RegistryKey ack =
 
@@ -295,8 +241,6 @@ namespace PGA.AutoLoader
 
                         // Already registered? Just return
 
-
-
                         string[] subKeys = appk.GetSubKeyNames();
 
                         foreach (string subKey in subKeys)
@@ -313,11 +257,7 @@ namespace PGA.AutoLoader
 
                         }
 
-
-
                         // Create the our application's root key and its values
-
-
 
                         RegistryKey rk = appk.CreateSubKey(name);
 
@@ -337,11 +277,7 @@ namespace PGA.AutoLoader
 
                             rk.SetValue("MANAGED", 1, RegistryValueKind.DWord);
 
-
-
                             // Create a subkey if there are any commands...
-
-
 
                             if ((globCmds.Count == locCmds.Count) &&
 
@@ -371,11 +307,7 @@ namespace PGA.AutoLoader
 
                             }
 
-
-
                             // And the command groups, if there are any
-
-
 
                             if (groups.Count > 0)
 
@@ -407,8 +339,6 @@ namespace PGA.AutoLoader
 
             }
 
-
-
             private static void RemoveDemandLoadingEntries(bool currentUser)
 
             {
@@ -419,8 +349,6 @@ namespace PGA.AutoLoader
 
                     // Choose a Registry hive based on the function input
 
-
-
                     RegistryKey hive =
 
                       (currentUser ?
@@ -429,11 +357,7 @@ namespace PGA.AutoLoader
 
                         Registry.LocalMachine);
 
-
-
                     // Open the main AutoCAD (vertical) and "Applications" keys
-
-
 
                     RegistryKey ack =
 
@@ -454,8 +378,6 @@ namespace PGA.AutoLoader
 
                             // Delete the key with the same name as this assembly
 
-
-
                             appk.DeleteSubKeyTree(
 
                               Assembly.GetExecutingAssembly().GetName().Name
@@ -475,4 +397,3 @@ namespace PGA.AutoLoader
         }
 
     }
-

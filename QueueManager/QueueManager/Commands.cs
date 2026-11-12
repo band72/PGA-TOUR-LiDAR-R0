@@ -9,7 +9,7 @@ using Autodesk.AutoCAD.Runtime;
 
 namespace QueueManager
 {
- 
+
     public class Commands
     {
 
@@ -55,7 +55,7 @@ namespace QueueManager
             doc.UnknownCommand += OnUnknownCommand;
             doc.CommandWillStart += OnCommandSomething;
             doc.CommandEnded += OnCommandSomething;
-           
+
             // autoComplete and autocorrect cause problems with
             // this, so let's turn them off (we may want to warn
             // the user or reset the values, afterwards)

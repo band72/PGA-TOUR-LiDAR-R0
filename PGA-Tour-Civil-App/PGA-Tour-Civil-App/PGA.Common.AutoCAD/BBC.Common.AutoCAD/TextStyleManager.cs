@@ -6,7 +6,6 @@ using global::Autodesk.AutoCAD.DatabaseServices;
 
 #endregion
 
-
 namespace BBC.Common.AutoCAD
 {
     public class TextStyleManager

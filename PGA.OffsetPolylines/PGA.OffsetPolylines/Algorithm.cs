@@ -23,7 +23,6 @@ namespace PGA.OffsetPolylines
             var s = step;
             var F = step;
 
-
             return (F + s*n);
         }
 
@@ -45,9 +44,6 @@ namespace PGA.OffsetPolylines
 
             return (Math.Ceiling(n));
         }
-
-
-
 
     }
 }

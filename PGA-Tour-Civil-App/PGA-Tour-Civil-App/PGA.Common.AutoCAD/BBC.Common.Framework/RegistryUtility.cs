@@ -95,7 +95,6 @@ namespace Pge.Common.Framework
             }
         }
 
-
         /// <summary>
         ///     Switch to the specified AutoCAD profile
         /// </summary>

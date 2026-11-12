@@ -57,17 +57,13 @@ namespace PGA.FeaturelineManager
 
                     //============================================================//
 
-
                     //Use lambda extension method
-
-
 
                     #endregion
 
                     ids = (from id in b
                         where id.ObjectClass.DxfName.ToUpper() == "AECC_FEATURE_LINE"
                         select id).ToList();
-
 
                     tran.Commit();
                 }
@@ -93,7 +89,6 @@ namespace PGA.FeaturelineManager
                 var featurelines = GetFeatureLines();
 
                 COMS.MessengerManager.AddLog("Start RecurseElevFromSurface");
-
 
                 using (Application.DocumentManager.MdiActiveDocument.LockDocument())
                 {
@@ -155,7 +150,6 @@ namespace PGA.FeaturelineManager
 
                 if (fl == null) throw new ArgumentNullException(nameof(fl));
 
-
                 COMS.MessengerManager.AddLog("Start CheckElevFromFeatureLine");
 
                 using (Application.DocumentManager.MdiActiveDocument.LockDocument())
@@ -169,7 +163,6 @@ namespace PGA.FeaturelineManager
 
                         if (!feature.IsWriteEnabled)
                             feature.UpgradeOpen();
-
 
                         if (feature != null)
                         {
@@ -214,7 +207,6 @@ namespace PGA.FeaturelineManager
             }
         }
 
-
         private static bool ZeroElevation(FeatureLine fl)
         {
             try
@@ -250,7 +242,6 @@ namespace PGA.FeaturelineManager
             {
                 if (mean <= 0) throw new ArgumentOutOfRangeException(nameof(mean));
 
-
                 fl.UpgradeOpen();
                 COMS.MessengerManager.AddLog("Start ApplyElevationCorrection");
 
@@ -262,7 +253,6 @@ namespace PGA.FeaturelineManager
                     for (int i = 0; i < pointsOnFL.Count; i++)
                     {
                         Point3d p = pointsOnFL[i];
-
 
                         var diff = Math.Abs(flMaxElevation - p.Z);
                         if (diff > MaxDiff)
@@ -370,7 +360,6 @@ namespace PGA.FeaturelineManager
 
                     MessengerManager.MessengerManager.AddLog("Mean After: " + mean);
 
-
                     if (Math.Abs(mean) < 0.01)
                     {
                         median = MathNet.Numerics.Statistics.Statistics.Median(vals);
@@ -406,13 +395,11 @@ namespace PGA.FeaturelineManager
 
                 var mypoints = new List<double>();
 
-
                 foreach (Point3d item in pointsOnFL)
                 {
                     if (Math.Abs(item.Z) > 0.01)
                         mypoints.Add(item.Z);
                 }
-
 
                 return mypoints.ToArray();
             }
@@ -586,5 +573,5 @@ namespace PGA.FeaturelineManager
             COMS.MessengerManager.AddLog("End CheckElevFromFeatureLine");
 
         }
-    }  
+    }
 }

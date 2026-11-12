@@ -242,7 +242,6 @@ namespace PGA.Notifications
 
                 }
 
-
                 icm.PaletteManager.ShowBalloon(ri); //Show Upper Pallets Note
                 ShowBalloon(ri.Category, ri.Title); //Show Windows Note
             }
@@ -273,7 +272,7 @@ namespace PGA.Notifications
             ti.ToolTipText = appName;
 
             ti.Icon =
-               
+
                 statusBar.TrayItems[0].Icon;
 
             statusBar.TrayItems.Add(ti);
@@ -283,8 +282,6 @@ namespace PGA.Notifications
                 new TrayItemBubbleWindow();
 
             bw.Title = title;
-
-
 
             bw.Text = title;
 
@@ -333,7 +330,3 @@ namespace PGA.Notifications
         }
     }
 }
-
-
-
-

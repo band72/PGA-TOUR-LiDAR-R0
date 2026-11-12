@@ -14,7 +14,7 @@ namespace PGA.Sv.PostAudit
 
         public SettingsRepository()
         {
-            
+
         }
         public Settings GetSettings()
         {
@@ -31,6 +31,5 @@ namespace PGA.Sv.PostAudit
             return _settings;
         }
 
- 
     }
 }

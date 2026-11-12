@@ -16,7 +16,6 @@ namespace PGA.DatabaseManager
         void ClearRedBorderOnEmpties(MainWindow view);
     }
 
-
     public class Validate : IValidate
     {
         public void SetRedBorderOnEmpties(MainWindow mainWindow)
@@ -42,7 +41,7 @@ namespace PGA.DatabaseManager
         {
             foreach (var item in _textBoxes)
             {
-                if (item.Text == "" && 
+                if (item.Text == "" &&
                     item.Name !="txtStartTime" &&
                     item.Name != "txtEndTime"  &&
                     item.Name != "txtElapsedTime")
@@ -67,7 +66,7 @@ namespace PGA.DatabaseManager
 
     public static class Extentions
     {
-        
+
         public static IList<Control> GetControls(this DependencyObject parent)
         {
             var result = new List<Control>();

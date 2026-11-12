@@ -37,7 +37,6 @@ namespace PGA.Autodesk.Utils
                     Path.GetFileNameWithoutExtension(db.Filename) +
                     "-ACAD2007" + Path.GetExtension(db.Filename);
 
-
                 db.SaveAs(output, DwgVersion.AC1021);
                 tr.Commit();
             }
@@ -54,7 +53,6 @@ namespace PGA.Autodesk.Utils
             var ed = doc.Editor;
 
             #endregion
-
 
             try
 
@@ -101,7 +99,6 @@ namespace PGA.Autodesk.Utils
                 if (selectionRes.Status == PromptStatus.OK)
                 {
 
-
                     try
                     {
 
@@ -127,7 +124,7 @@ namespace PGA.Autodesk.Utils
                     {
                         MessengerManager.MessengerManager.AddLog(ex.Message);
                     }
-                 
+
                 }
             }
             catch { }
@@ -318,9 +315,6 @@ namespace PGA.Autodesk.Utils
             return null;
         }
 
-
-
-
         private bool AssignPolyLinesToLayers()
         {
             return false;
@@ -357,7 +351,6 @@ namespace PGA.Autodesk.Utils
             {
                 var obj =
                     tr.GetObject(selectedObjectId, OpenMode.ForRead);
-
 
                 // If a "lightweight" (or optimized) polyline
 
@@ -445,7 +438,6 @@ namespace PGA.Autodesk.Utils
             }
         }
 
-
         public class LayerStatesBLL
         {
             public virtual string Bridge { get; set; } = "OBR:S-BRIDGES";
@@ -498,7 +490,6 @@ namespace PGA.Autodesk.Utils
 
             public virtual uint LayerStateID { get; set; }
         }
-
 
         private static string AssignPolyLinesToLayers(Polyline lwp)
         {
@@ -620,7 +611,7 @@ namespace PGA.Autodesk.Utils
 
         //3. iterate and assign colors to layers
 
-        //4. or move to that layer 
+        //4. or move to that layer
 
         #endregion
     }

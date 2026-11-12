@@ -12,16 +12,16 @@
 // in such License Agreement provided that the above copyright
 // notice appears in all authorized copies and that both that
 // copyright notice and the limited warranty and
-// restricted rights notice below appear in all supporting 
+// restricted rights notice below appear in all supporting
 // documentation.
 //
-// AUTODESK PROVIDES THIS PROGRAM "AS IS" AND WITH ALL FAULTS. 
+// AUTODESK PROVIDES THIS PROGRAM "AS IS" AND WITH ALL FAULTS.
 // AUTODESK SPECIFICALLY DISCLAIMS ANY IMPLIED WARRANTY OF
 // MERCHANTABILITY OR FITNESS FOR A PARTICULAR USE.  AUTODESK, INC.
 // DOES NOT WARRANT THAT THE OPERATION OF THE PROGRAM WILL BE
 // UNINTERRUPTED OR ERROR FREE.
 //
-// Use, duplication, or disclosure by the U.S. Government is subject to 
+// Use, duplication, or disclosure by the U.S. Government is subject to
 // restrictions set forth in FAR 52.227-19 (Commercial Computer
 // Software - Restricted Rights) and DFAR 252.227-7013(c)(1)(ii)
 // (Rights in Technical Data and Computer Software), as applicable.
@@ -93,7 +93,6 @@ namespace Autodesk.Consulting.AutoCAD.Utilities
             return id;
         }
 
-        
         public ObjectId CreateLayerTrans(bool commit)
         {
             // create the layer with a transaction
@@ -122,7 +121,7 @@ namespace Autodesk.Consulting.AutoCAD.Utilities
 
             // create the layer with a transaction
             LayerManager.DeleteLayer(this.Database, this.Transaction, "NewLayerName");
-            
+
             try
             {
                 if (LayerManager.GetLayerId(this.Database, "NewLayerName").IsValid)
@@ -148,7 +147,7 @@ namespace Autodesk.Consulting.AutoCAD.Utilities
             Debug.Assert(LayerManager.IsLocked(this.Database, layerTableRecord.Name));
 
             Debug.Assert(layerTableRecord.IsLocked);
-            layerTableRecord.Dispose();   
+            layerTableRecord.Dispose();
         }
     }
 }

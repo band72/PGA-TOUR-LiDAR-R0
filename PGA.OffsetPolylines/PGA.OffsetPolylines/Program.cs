@@ -44,12 +44,6 @@ namespace PGA.OffsetPolylines
             {
                 var pids = GetAllPolylines();
 
-
-
-
-
-
-
                 var offset = -0.0001;
                 var posOffset = 0.0001;
 
@@ -157,7 +151,6 @@ namespace PGA.OffsetPolylines
                                 }
                             }
 
-
                             acTrans.Commit();
                         }
                     }
@@ -170,7 +163,6 @@ namespace PGA.OffsetPolylines
             }
 
         }
-
 
         public static Acaddb.ObjectId ScaleNewPolylineObject(Point2dCollection points)
         {
@@ -219,7 +211,6 @@ namespace PGA.OffsetPolylines
                             var scaleFac = 1 + (offset/Math.Abs(radius));
                             acPoly.TransformBy(Matrix3d.Scaling(scaleFac, new Point3d(centroid.X, centroid.Y, 0)));
 
-
                             SendPolylineMessage("Length Info After", acPoly);
 
                             // Add the new object to the block table record and the transaction
@@ -251,7 +242,6 @@ namespace PGA.OffsetPolylines
             try
             {
                 MessengerManager.MessengerManager.AddLog("Start Scaling");
- 
 
                 var pids = GetAllPolylines();
                 var pidsToDelete = new Acaddb.ObjectIdCollection();
@@ -262,7 +252,6 @@ namespace PGA.OffsetPolylines
                 foreach (Acaddb.ObjectId oid in pids)
                 {
                     offset = -0.001;
-
 
                     using (doc.LockDocument())
                     {
@@ -292,7 +281,6 @@ namespace PGA.OffsetPolylines
                                     var scaleFac = 1 + (offset/Math.Abs(radius));
                                     polyline.TransformBy(Matrix3d.Scaling(scaleFac,
                                         new Point3d(centroid.X, centroid.Y, 0)));
-
 
                                     SendPolylineMessage("Length Info After", polyline);
 
@@ -341,7 +329,6 @@ namespace PGA.OffsetPolylines
             {
                 MessengerManager.MessengerManager.AddLog("Start Scaling");
 
-
                 var pids = GetAllPolylines();
                 var pidsToDelete = new Acaddb.ObjectIdCollection();
 
@@ -350,8 +337,6 @@ namespace PGA.OffsetPolylines
                 foreach (Acaddb.ObjectId oid in pids)
                 {
                     offset = -0.001;
-
-
 
                     using (var acTrans = Application.DocumentManager.MdiActiveDocument
                         .TransactionManager.StartTransaction())
@@ -378,7 +363,6 @@ namespace PGA.OffsetPolylines
                                 var radius = polyline.GetDistAtPoint(closepnt);
                                 var scaleFac = 1 + (offset / Math.Abs(radius));
                                 polyline.TransformBy(Matrix3d.Scaling(scaleFac, new Point3d(centroid.X, centroid.Y, 0)));
-
 
                                 SendPolylineMessage("Length Info After", polyline);
 
@@ -415,8 +399,6 @@ namespace PGA.OffsetPolylines
 
         }
 
-
-
         /// <summary>
         /// Sends the polyline message.
         /// </summary>
@@ -441,7 +423,6 @@ namespace PGA.OffsetPolylines
                 var pidsToDelete = new Acaddb.ObjectIdCollection();
                 var pids = GetAllPolylines();
 
-
                 foreach (Acaddb.ObjectId oid in pids)
                 {
                    var  offset = -0.001;
@@ -450,7 +431,6 @@ namespace PGA.OffsetPolylines
 
                     if (polyline == null)
                         throw new ArgumentNullException("Polyline is Null");
-                    
 
                     if (polyline.Layer != "OWA")
                         continue;
@@ -512,8 +492,6 @@ namespace PGA.OffsetPolylines
                 var pidsToDelete = new Acaddb.ObjectIdCollection();
                 var pids = GetAllPolylines();
 
-
-
                 var offset = -0.0001; //inital start value
 
                 foreach (Acaddb.ObjectId oid in pids)
@@ -523,7 +501,7 @@ namespace PGA.OffsetPolylines
                     Acaddb.Polyline polyline = GetPolyline((oid));
 
                     if (polyline == null)
-                        throw new ArgumentNullException("Polyline is Null"); 
+                        throw new ArgumentNullException("Polyline is Null");
 
                     if (polyline.Layer != name.ToUpper())
                         continue;
@@ -570,7 +548,6 @@ namespace PGA.OffsetPolylines
                 MessengerManager.MessengerManager.AddLog("End Offset Features");
             }
         }
-
 
         /// <summary>
         /// Gets all polylines.
@@ -640,7 +617,6 @@ namespace PGA.OffsetPolylines
 
         }
 
-
         /// <summary>
         /// Gets the polyline points.
         /// </summary>
@@ -670,14 +646,13 @@ namespace PGA.OffsetPolylines
                             Point2d pt = lwp.GetPoint2dAt(i);
                             points.Add(pt);
                         }
-                    }            
+                    }
                 }
-  
+
             }
 
             return points;
         }
-
 
         /// <summary>
         /// Gets the polyline.
@@ -800,8 +775,6 @@ namespace PGA.OffsetPolylines
             return null;
         }
 
-
-
         /// <summary>
         /// Gets the object.
         /// </summary>
@@ -814,7 +787,6 @@ namespace PGA.OffsetPolylines
             {
                 var obj =
                     tr.GetObject(polyoid, Acaddb.OpenMode.ForRead);
-
 
                 // If a "lightweight" (or optimized) polyline
 
@@ -904,7 +876,6 @@ namespace PGA.OffsetPolylines
                                 var scaleFac = 1 + (offset / Math.Abs(radius));
                                 polyline.TransformBy(Matrix3d.Scaling(scaleFac, new Point3d(centroid.X, centroid.Y, 0)));
 
-
                                 SendPolylineMessage("Length Info After", polyline);
 
                                 MessengerManager.MessengerManager.AddLog
@@ -937,6 +908,5 @@ namespace PGA.OffsetPolylines
             }
         }
     }
-
 
 }

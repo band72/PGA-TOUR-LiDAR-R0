@@ -9,7 +9,6 @@ using Exception = System.Exception;
 
 #endregion
 
-
 namespace BBC.Common.AutoCAD
 {
     public class RasterManager
@@ -76,11 +75,6 @@ namespace BBC.Common.AutoCAD
         //    // Note that this function references the Raster Studio API.
 
         //    // TODO: Expect that the trans should not be passed as the COM operation will commit the insert...
-
-
-
-
-
 
         /// <summary>
         ///     Sets the raster image clip frame.

@@ -17,9 +17,6 @@ namespace PGA.SimplifyPolylines
 
         //    unsafe
 
-
-
-
         /// <summary>
         /// Douglases the peucker reduction.
         /// </summary>
@@ -97,8 +94,7 @@ namespace PGA.SimplifyPolylines
 
                     }
                 }
-       
-             
+
             if (maxDistance > tolerance && indexFarthest != 0)
             {
                 //Add the largest point that exceeds the tolerance
@@ -107,7 +103,7 @@ namespace PGA.SimplifyPolylines
                 DouglasPeuckerReduction(points, firstPoint, points[indexFarthest], tolerance, ref pointIndexsToKeep);
                 DouglasPeuckerReduction(points, points[indexFarthest], lastPoint, tolerance, ref pointIndexsToKeep);
             }
-       
+
         }
 
         public static int GetIndex(Point2d[] points, Point2d point)
@@ -158,7 +154,6 @@ namespace PGA.SimplifyPolylines
 
                 return height;
 
-
             }
             catch
             {
@@ -169,12 +164,11 @@ namespace PGA.SimplifyPolylines
             return height;
         }
 
-
         public static bool Equals(Point2d first, Point2d second)
         {
             if ((Math.Abs(first.X - (second.X)) < .0001) && (Math.Abs(first.Y - (second.Y)) < .0001))
                 return true;
-            
+
             return false;
         }
     }
