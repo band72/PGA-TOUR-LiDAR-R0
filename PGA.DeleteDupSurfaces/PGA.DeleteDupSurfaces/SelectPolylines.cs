@@ -113,12 +113,17 @@ namespace PGA.DeleteDupSurfaces
         }
         public static Polyline GetPolyLineObject(ObjectId selectedObjectId, global::Autodesk.AutoCAD.DatabaseServices.Database db)
         {
-            //Document doc = Application.DocumentManager.MdiActiveDocument;
-            //Editor ed = doc.Editor;
-            //Database db = doc.Database;
-            Transaction tr = db.TransactionManager.StartTransaction();
+            // Callers hold an outer transaction and use the returned object after this
+            // method returns. Opening it in a nested transaction that is disposed here
+            // would close it, so reuse the outer transaction when one exists.
+            var top = db.TransactionManager.TopTransaction;
+            if (top != null)
+            {
+                var poly = top.GetObject(selectedObjectId, OpenMode.ForRead) as Polyline;
+                return poly != null && poly.Closed ? poly : null;
+            }
 
-            // Get the current UCS
+            Transaction tr = db.TransactionManager.StartTransaction();
 
             using (tr)
             {
@@ -143,6 +148,23 @@ namespace PGA.DeleteDupSurfaces
 
             return null;
         }
+
+        /// <summary>
+        /// Returns the layer name of any entity, or null if the id is not an entity.
+        /// Safe replacement for GetPolyLineObject(id, db).Layer, which threw for
+        /// anything other than a closed lightweight polyline.
+        /// </summary>
+        public static string GetEntityLayer(ObjectId selectedObjectId, global::Autodesk.AutoCAD.DatabaseServices.Database db)
+        {
+            using (var tr = db.TransactionManager.StartTransaction())
+            {
+                var ent = tr.GetObject(selectedObjectId, OpenMode.ForRead) as Entity;
+                var layer = ent == null ? null : ent.Layer;
+                tr.Commit();
+                return layer;
+            }
+        }
+
         public static  List<ObjectId> GetPolylineEntityIDs()
 
         {
@@ -167,8 +189,7 @@ namespace PGA.DeleteDupSurfaces
  
 
                     ids = (from id in b
-                           where id.ObjectClass.DxfName.ToUpper() == "POLYLINE" &&
-                                 id.ObjectClass.DxfName.ToUpper() == "POLYLINE2D"
+                           where id.ObjectClass.Name == "AcDb2dPolyline" // DXF "POLYLINE" covers 2D and 3D; class name distinguishes them
 
                            select id).ToList();
 

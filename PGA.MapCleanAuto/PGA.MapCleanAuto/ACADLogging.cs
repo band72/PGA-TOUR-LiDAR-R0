@@ -70,7 +70,7 @@ namespace PGA.Common.Logging
             string time = DateTime.Now.ToString(CultureInfo.InvariantCulture);
             if (message != null)
             {
-                SystemTracerLogMyExceptions(String.Format("{1} {2} {3}\n", time, message, exception));
+                SystemTracerLogMyExceptions(String.Format("{0} {1} {2}\n", time, message, exception));
             }
             return true;
         }

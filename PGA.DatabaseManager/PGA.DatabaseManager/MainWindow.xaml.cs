@@ -578,9 +578,6 @@ namespace PGA.DatabaseManager
             try
             {
                 int len = version.Length;
-                version.Substring(9, 2);
-                version.Substring(6, 2);
-                version.Substring(0, 2);
                 string BuildDay = version.Substring(0, 5);
                 string BuildMin = "";
                 BuildMin = (len != 15 ? version.Substring(12, len - 12) : version.Substring(12, 3));

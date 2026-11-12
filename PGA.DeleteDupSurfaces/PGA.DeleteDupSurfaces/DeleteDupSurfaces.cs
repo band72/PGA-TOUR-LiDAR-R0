@@ -94,8 +94,8 @@ namespace PGA.DeleteDupSurfaces
                                 {
                                     System.Diagnostics.Debug.WriteLine(String.Format("Entering Equals--> M={0},C={1}",
                                         masterArea, comparerArea));
-                                    var masterLayer = SelectPolylines.GetPolyLineObject(master, db).Layer;
-                                    var comparerLayer = SelectPolylines.GetPolyLineObject(comparer, db).Layer;
+                                    var masterLayer = SelectPolylines.GetEntityLayer(master, db);
+                                    var comparerLayer = SelectPolylines.GetEntityLayer(comparer, db);
 
                                     //Get Rank and exclude secondary poly
                                     if (commands.GetFeatureRankByCode(masterLayer) >
@@ -212,7 +212,8 @@ namespace PGA.DeleteDupSurfaces
 
                                 System.Diagnostics.Debug.WriteLine(String.Format("M={0},C={1}", masterArea, comparerArea));
 
-                                if (comparerArea == null || masterArea == null)
+                                if (comparerArea == null || masterArea == null
+                                    || masterpolyline == null || comparerpolyline == null)
                                     continue;
 
                                 //Get Internal Polylines to Interate
@@ -229,8 +230,8 @@ namespace PGA.DeleteDupSurfaces
                                     // We are looking for isolated polylines with no internal objects
                                     // on same layer.
 
-                                    var masterLayer = SelectPolylines.GetPolyLineObject(master, db).Layer;
-                                    var comparerLayer = SelectPolylines.GetPolyLineObject(comparer, db).Layer;
+                                    var masterLayer = SelectPolylines.GetEntityLayer(master, db);
+                                    var comparerLayer = SelectPolylines.GetEntityLayer(comparer, db);
 
                                     //filter out largest ORO polyline
                                     if (masterLayer == "ORO" && master.Equals(MaxORO))
@@ -250,7 +251,7 @@ namespace PGA.DeleteDupSurfaces
                                     //continue searching if has internal with same layer
                                     #region Exclude matching layers
 
-                                    if (masterLayer.Equals(comparerLayer))
+                                    if (masterLayer == comparerLayer)
                                     {
                                         continue;
                                     }
@@ -309,12 +310,12 @@ namespace PGA.DeleteDupSurfaces
             ObjectId pid = ObjectId.Null;
             foreach (ObjectId master in polylines)
             {
-                var masterLayer = SelectPolylines.GetPolyLineObject(master, db).Layer;
+                var masterLayer = SelectPolylines.GetEntityLayer(master, db);
                 var masterArea = SelectPolylines.GetPolyLineArea(master, db);
 
-                if ((double) masterArea == 0) continue;
+                if (masterArea == null || masterArea == 0) continue;
                  
-                if (masterLayer.Equals("ORO"))
+                if (masterLayer == "ORO")
                 {
                     if (masterArea > MaxArea)
                     {
@@ -332,12 +333,12 @@ namespace PGA.DeleteDupSurfaces
             ObjectId pid = ObjectId.Null;
             foreach (ObjectId master in polylines)
             {
-                var masterLayer = SelectPolylines.GetPolyLineObject(master, db).Layer;
+                var masterLayer = SelectPolylines.GetEntityLayer(master, db);
                 var masterArea = SelectPolylines.GetPolyLineArea(master, db);
 
-                if ((double)masterArea == 0) continue;
+                if (masterArea == null || masterArea == 0) continue;
 
-                if (masterLayer.Equals("OIR"))
+                if (masterLayer == "OIR")
                 {
                     if (masterArea < MaxArea)
                     {
@@ -355,12 +356,12 @@ namespace PGA.DeleteDupSurfaces
             ObjectId pid = ObjectId.Null;
             foreach (ObjectId master in polylines)
             {
-                var masterLayer = SelectPolylines.GetPolyLineObject(master, db).Layer;
+                var masterLayer = SelectPolylines.GetEntityLayer(master, db);
                 var masterArea = SelectPolylines.GetPolyLineArea(master, db);
 
-                if ((double)masterArea == 0) continue;
+                if (masterArea == null || masterArea == 0) continue;
 
-                if (masterLayer.Equals("OCO"))
+                if (masterLayer == "OCO")
                 {
                     if (masterArea < MaxArea)
                     {

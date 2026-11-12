@@ -204,8 +204,7 @@ namespace PGA.SelectionManager
 
 
                     ids = (from id in b
-                           where id.ObjectClass.DxfName.ToUpper() == "POLYLINE" &&
-                                 id.ObjectClass.DxfName.ToUpper() == "POLYLINE2D"
+                           where id.ObjectClass.Name == "AcDb2dPolyline" // DXF "POLYLINE" covers 2D and 3D; class name distinguishes them
 
                            select id).ToList();
 
@@ -388,7 +387,7 @@ namespace PGA.SelectionManager
  
 
                     ids = (from id in b
-                           where id.ObjectClass.DxfName.ToUpper() == "Polyline3d"
+                           where id.ObjectClass.Name == "AcDb3dPolyline"
                            select id).ToList();
 
 

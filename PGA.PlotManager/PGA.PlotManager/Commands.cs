@@ -115,7 +115,7 @@ namespace PGA.PlotManager
             foreach (ObjectId vpId in vpIds)
             {
                 var vp = tr.GetObject(vpId, OpenMode.ForWrite) as Viewport;
-                if (vp != null || vp.Number == vpNum)
+                if (vp != null && vp.Number == vpNum)
                 {
                     // We have found our viewport
                     if (Math.Abs(vp.Width - 15.03) < 0.1)
