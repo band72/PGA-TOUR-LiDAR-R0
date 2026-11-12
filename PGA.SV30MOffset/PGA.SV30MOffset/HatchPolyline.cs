@@ -16,7 +16,6 @@ namespace PGA.SV30MOffset
     public class HatchPolyline
     {
 
-        //[CommandMethod("PGA-Hatch")]
         static public void TestHatch(Polyline poly)
         {
             if (poly == null) throw new ArgumentNullException(nameof(poly));
@@ -61,7 +60,6 @@ namespace PGA.SV30MOffset
             }
             catch (System.Exception ex)
             {
-               // throw;
             }
 
         }

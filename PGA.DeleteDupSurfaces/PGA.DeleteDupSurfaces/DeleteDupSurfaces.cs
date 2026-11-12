@@ -47,14 +47,6 @@ namespace PGA.DeleteDupSurfaces
                 DatabaseCommands commands = new DatabaseCommands();
                 var excludedpolys = new List<Handle>();
                 ObjectIdCollection polylines = null;
-                //var features = commands.GetAllFeatures();
-                #region Testing for Opening DWGs
-                //var filename = OpenDwg.file;
-                //Document doc = Application.DocumentManager.Open(filename, true);
-                //Application.DocumentManager.MdiActiveDocument = doc;
-                //var db = doc.Database;
-                //var ed = doc.Editor; 
-                #endregion
 
                 Document doc = Application.DocumentManager.MdiActiveDocument;
                 global::Autodesk.AutoCAD.DatabaseServices.Database db = doc.Database;
@@ -66,7 +58,6 @@ namespace PGA.DeleteDupSurfaces
                     {
                         PGA.SimplifyPolylines.Commands.SimplifyPolylinesTest();
 
-                        //polylines = SelectPolylines.GetAllPolylines();
                         polylines = ACADUTIL.GetAllObjectIdsInModel(db, trans, false);
 
                         foreach (ObjectId master in polylines)
@@ -168,18 +159,9 @@ namespace PGA.DeleteDupSurfaces
             {
                 COMS.AddLog("Entering Remove Duplicate Surfaces V2!");
                 DatabaseCommands commands = new DatabaseCommands();
-                // var filename = OpenDwg.file;
                 ObjectIdCollection polylines = null;
                 var excludedpolys = new List<Handle>();
-                //var features = commands.GetAllFeatures();
 
-                #region For Testing Open File
-                //Document doc = OpenDwg.OpenDwgForWork(filename);
-                //Application.DocumentManager.MdiActiveDocument = doc;
-                //var db = doc.Database;
-                //var ed = doc.Editor;
-
-                #endregion
 
                 Document doc = Application.DocumentManager.MdiActiveDocument;
                 global::Autodesk.AutoCAD.DatabaseServices.Database db = doc.Database;
@@ -241,13 +223,6 @@ namespace PGA.DeleteDupSurfaces
                                         excludedpolys.Add(master.Handle);
                                         continue;
                                     }
-                                    #region Removed-5.14.16
-                                    //if (masterLayer == "OIR" && master.Equals(MinOIR))
-                                    //{
-                                    //    excludedpolys.Add(master.Handle);
-                                    //    continue;
-                                    //} 
-                                    #endregion
                                     //continue searching if has internal with same layer
                                     #region Exclude matching layers
 

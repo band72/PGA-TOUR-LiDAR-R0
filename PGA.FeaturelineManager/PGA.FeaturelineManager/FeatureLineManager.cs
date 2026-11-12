@@ -60,9 +60,7 @@ namespace PGA.FeaturelineManager
 
                     //Use lambda extension method
 
-                    //ids = b.Where(id => id.ObjectClass.DxfName.ToUpper() == "LINE" ||
 
-                    //    id.ObjectClass.DxfName.ToUpper() == "LWPOLYLINE").ToList<ObjectId>();
 
                     #endregion
 
@@ -90,7 +88,6 @@ namespace PGA.FeaturelineManager
 
                 var surfaceId = Acaddb.ObjectId.Null;
                 var siteId = Acaddb.ObjectId.Null;
-                //var ElevDiff = 0.0;
                 var mean = 0.0;
 
                 var featurelines = GetFeatureLines();
@@ -127,7 +124,6 @@ namespace PGA.FeaturelineManager
 
                                 if (fId.Layer.Contains("S-WATER"))
                                 {
-                                    //CorrectWaterFeaturelines(fId, mean);
                                 }
 
                                 SendMessage(fId);
@@ -197,7 +193,6 @@ namespace PGA.FeaturelineManager
 
                             if (feature.Layer.Contains("S-WATER"))
                             {
-                                // CorrectWaterFeaturelines(fl, mean);
                             }
 
                             SendMessage(feature);
@@ -352,7 +347,6 @@ namespace PGA.FeaturelineManager
 
             var nodes = 0;
             var mean = 0.0;
-            //var total = 0.0;
             var median = 0.0;
             var max = 0.0;
             var min = 0.0;

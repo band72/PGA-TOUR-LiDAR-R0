@@ -14,45 +14,10 @@ namespace PGA.SimplifyPolylines
     public class DouglasPeuckerImplementation
     {
         public static int Counter = 0;
-        //internal static void DouglasPeuckerReduction(Point2dCollection points, Point2d firstPoint, Point2d lastPoint,
-        //    Double toleranceSquared, ref List<Point2d> pointIndexsToKeep)
-        //{
-        //    float maxDistanceSquared = 0, tmp = 0, areaSquared = 0;
-        //    double X = 0;
-        //    float Y = 0, bottomSquared = 0, distanceSquared = 0;
-        //    int indexFarthest = 0;
 
         //    unsafe
-        //    {
-        //        foreach (var point in points)
-        //            {
-        //                //Perpendicular distance 
-        //                tmp = 0.5f*
-        //                      ((lastPoint.Y - i)*(firstPoint - i) +
-        //                       (*(samples + lastPoint) - *(samples + i))*(*(samples + firstPoint) - *(samples + i)));
-        //                //Abs
-        //                areaSquared = tmp*tmp;
-        //                X = (firstPoint.X - lastPoint.X);
-        //                Y = (*(samples + firstPoint) - *(samples + lastPoint));
-        //                bottomSquared = X*X + Y*Y;
-        //                distanceSquared = areaSquared/bottomSquared;
 
-        //                if (distanceSquared > maxDistanceSquared)
-        //                {
-        //                    maxDistanceSquared = distanceSquared;
-        //                    indexFarthest = i;
-        //                }
-        //            }
-        //    }
 
-        //    if (maxDistanceSquared > toleranceSquared && indexFarthest != 0)
-        //    {
-        //        //Add the largest point that exceeds the tolerance
-        //        DouglasPeuckerReduction(points, firstPoint, indexFarthest, toleranceSquared, ref pointIndexsToKeep);
-        //        pointIndexsToKeep.Add(indexFarthest);
-        //        DouglasPeuckerReduction(points, indexFarthest, lastPoint, toleranceSquared, ref pointIndexsToKeep);
-        //    }
-        //}
 
 
         /// <summary>
@@ -88,7 +53,6 @@ namespace PGA.SimplifyPolylines
                     Tolerance, ref pointIndexsToKeep);
 
                 Point2dCollection returnPoints = new Point2dCollection();
-                //pointIndexsToKeep.Sort();
                 foreach (var point in pointIndexsToKeep)
                 {
                     returnPoints.Add(point);

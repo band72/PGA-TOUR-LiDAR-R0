@@ -9,7 +9,6 @@ using global::Autodesk.AutoCAD.Geometry;
 
 #endregion
 
-//using Common.Logging;
 
 namespace BBC.Common.AutoCAD
 {
@@ -106,13 +105,7 @@ namespace BBC.Common.AutoCAD
             var currentDoc = Application.DocumentManager.MdiActiveDocument;
             var editor = currentDoc.Editor;
 
-            //PromptPointResult ppr1 = editor.GetPoint("Select first corner of window: ");
-            //if (ppr1.Status != PromptStatus.OK)
-            //    return null;
 
-            //PromptPointResult ppr2 = editor.GetCorner("Select opposite corner of window: ", ppr1.Value);
-            //if (ppr2.Status != PromptStatus.OK)
-            //    return null;
 
             var options = new PromptSelectionOptions();
             if (string.IsNullOrEmpty(prompt))

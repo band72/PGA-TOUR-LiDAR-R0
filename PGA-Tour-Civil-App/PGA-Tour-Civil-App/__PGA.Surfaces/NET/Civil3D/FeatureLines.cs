@@ -10,11 +10,6 @@ namespace PGA.Surfaces.Civil3D
 {
     class FeatureLines
     {
-        //        public static void GetFeatureLine(string name ,Transaction trans,Autodesk.Civil.DatabaseServices.Entity entRes)
-        //        {
-        //          using trans Transaction = HostApplicationServices.WorkingDatabase.TransactionManager.StartTransaction()
-        //          {
-        //          }
 
         //  Try
 
@@ -90,22 +85,8 @@ namespace PGA.Surfaces.Civil3D
 
         ////End Using
 
-        //        }
-        //         public static void CreateFeatureLine(string name ,Transaction trans,Autodesk.Civil.DatabaseServices.Entity entRes)
-        //        {
-        //          FeatureLine fl = (FeatureLine)trans.GetObject(entRes.ObjectId, OpenMode.ForWrite);
 
-        //                       Autodesk.AECC.Interop.Land.AeccLandFeatureLine oFtrLn = (Autodesk.AECC.Interop.Land.AeccLandFeatureLine)fl​.AcadObject;
-        //                       foreach (Point3d pt in ListaNuevosVertices)
-        //                       {
-        //                           double[] punto = new double[3];
-        //                           punto[0] = pt.X;
-        //                           punto[1] = pt.Y;
-        //                           punto[2] = pt.Z;
 
-        //                           oFtrLn.InsertFeaturePoint((object)punto, AeccLandFeatureLinePointType.aeccLandFeatureLinePo​intPI);
 
-        //    }
-        //}
     }
 }

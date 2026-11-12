@@ -118,7 +118,6 @@ namespace PGA.WindingNumAlgorithm
                                 {
                                     COMS.MessengerManager.AddLog("Point is Inside" + tpnt.ToString());
                                     AddCircle(tpnt);
-                                    //return true;
                                 }
                             }
 

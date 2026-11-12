@@ -375,18 +375,15 @@ namespace C3DSurfacesDemo
         {
             string surfaceName = EditorUtils.PromptForString("\nEnter surface name: ");
             if (String.IsNullOrEmpty(surfaceName)) surfaceName = "OVERALLSURFACE";
-            // if (surfaceName == String.Empty) EditorUtils.Write("\nERROR: Invalid name for surface.");
 
 
             string surfaceStyleName = EditorUtils.PromptForString("\nEnter surface style name: ");
-            // if (surfaceStyleName == String.Empty) EditorUtils.Write("\nERROR: Invalid style name for surface style.");
 
 
             if (!SurfaceStyleManager.Exists(surfaceStyleName))
             {
                 string msg = String.Format("\nSurface Style '{0}' doesn't exist. Creating it with default values.",
                     surfaceStyleName);
-                //  EditorUtils.Write(msg);
                 SurfaceStyleManager.CreateDefault(surfaceStyleName);
             }
             CivilTinSurface surface = new CivilTinSurface(surfaceName, surfaceStyleName);
@@ -532,8 +529,6 @@ namespace C3DSurfacesDemo
             using (Transaction tr = CivilApplicationManager.StartTransaction())
             {
                 //1. Create new surface if no existing surface passed in 
-                // if (surface == null)
-                //   surface = m_TheSurfaceId.GetObject(OpenMode.ForRead) as Autodesk.Civil.DatabaseServices.TinSurface;
                 //2. Store boundary
                 ObjectIdCollection boundaryEntities = new ObjectIdCollection();
                 boundaryEntities = GetObjectIdCollectionFromEntity(polyId);
@@ -549,49 +544,19 @@ namespace C3DSurfacesDemo
                 tr.Commit();
 
 
-                //surface = trans.GetObject(surfaceId, OpenMode.ForWrite) as C3DLandDb.TinSurface;
 
                 //// Add the selected polyline's ObjectId to a collection
-                //ObjectIdCollection boundaryEntities = new ObjectIdCollection();
-                //boundaryEntities.Add(plineId);
             }
         }
 
-        //public bool AddAsInnerBoundary(ObjectId pLines, CivilTinSurface surface)
-        //{
-        //    AddStandardBoundary(pLines, "", surface);
-        //    return true;
-        //}
-
-        //private void AddStandardBoundary(ObjectId pLines, string surfacename, CivilTinSurface surface)
-        //{
-        //    using (Transaction tr = CivilApplicationManager.StartTransaction())
-        //    {
-        //        //1. Create new surface if no existing surface passed in 
-        //        // if (surface == null)
-        //        //   surface = m_TheSurfaceId.GetObject(OpenMode.ForRead) as Autodesk.Civil.DatabaseServices.TinSurface;
-        //        //2. Store boundary
-        //        ObjectIdCollection boundaryEntities = new ObjectIdCollection();
-        //        boundaryEntities = GetObjectIdCollectionFromEntity(pLines);
-        //        //TinSurface sur = surface. as Autodesk.Civil.DatabaseServices.TinSurface;
-        //        //3. Access the BoundariesDefinition object from the surface object
-        //        Autodesk.Civil.DatabaseServices.SurfaceDefinitionBoundaries surfaceBoundaries = surface.BoundariesDefinition;
-
-        //        //4. now add the boundary to the surface
-        //        surfaceBoundaries.AddBoundaries(boundaryEntities, 1.0, SurfaceBoundaryType.Hide, true);
 
 
-        //        tr.Commit();
 
 
-        //        //surface = trans.GetObject(surfaceId, OpenMode.ForWrite) as C3DLandDb.TinSurface;
 
-        //        //// Add the selected polyline's ObjectId to a collection
-        //        //ObjectIdCollection boundaryEntities = new ObjectIdCollection();
-        //        //boundaryEntities.Add(plineId);
 
-        //    }
-        //}
+
+
 
         public bool AddSelectedLineAsOuterBoundary(Autodesk.AutoCAD.DatabaseServices.ObjectId id)
         {
@@ -605,10 +570,8 @@ namespace C3DSurfacesDemo
                 ACADLogging.LogMyExceptions("Start CreateSelectedSurface Method");
                 string surfaceName = GetPolyLayerFromOid((oid));
                 string surfaceStyleName = GetPolyLayerFromOid((oid)); //layer and style name are the same name.
-                // m_polylinesurfaces = new Dictionary<ObjectId, string>();
 
                 int i = 0;
-                //string tempSurface = "s-" + surfaceName.ToLower();
                 string tempSurface = surfaceName.ToUpper();
                 while (CivilTinSurface.FindCivilTinSurfaceByName(tempSurface, ""))
                 {
@@ -619,7 +582,6 @@ namespace C3DSurfacesDemo
                 {
                     string msg = String.Format("\nSurface Style '{0}' doesn't exist. Creating it with default values.",
                         surfaceStyleName);
-                    //EditorUtils.Write(msg);
                     SurfaceStyleManager.CreateDefault(surfaceStyleName);
                 }
                 CivilTinSurface surface = new CivilTinSurface(surfaceName, surfaceStyleName);
@@ -880,44 +842,19 @@ namespace C3DSurfacesDemo
             return String.Empty;
         }
 
-        //public static ObjectId CastObjectReverseId(Database db, Autodesk.AutoCAD.DatabaseServices.ObjectId objectId)
-        //{
-        //    ObjectId oid = new ObjectId();
 
-        //    db.TryGetObjectId(objectId.Id.Handle, out oid);
 
-        //    if (!oid.IsValid)
-        //        throw new System.Exception("CastObjectReverseId: Threw an exception!");
 
-        //    return oid;
-        //}
 
-        //public static ObjectId CastObjectReverseId(Autodesk.AutoCAD.DatabaseServices.ObjectId objectId, Database db)
-        //{
-        //    ObjectId oid;
-        //    using (Document doc = Application.DocumentManager.MdiActiveDocument)
-        //    {
-        //        if (db == null) db = CivilApplicationManager.WorkingDatabase;
 
-        //        db.TryGetObjectId(objectId.Id.Handle, out oid);
 
-        //        if (!oid.IsValid)
-        //            throw new System.Exception("CastObjectReverseId: Threw an exception!");
-        //    }
-        //    return oid;
-        //}
 
         public Polyline GetPolyFromObjId(Autodesk.AutoCAD.DatabaseServices.ObjectId oid, Database db)
         {
-            //using (Document doc = Application.DocumentManager.MdiActiveDocument)
-            //{
-            //Editor ed = doc.Editor;
-            //Database db = doc.Database;
 
             // Get the current UCS
 
             //CoordinateSystem3d ucs =
-            //    ed.CurrentUserCoordinateSystem.CoordinateSystem3d;
 
             try
             {
@@ -953,7 +890,6 @@ namespace C3DSurfacesDemo
             {
                 PGA.Civil.Logging.ACADLogging.LogMyExceptions("GETPOLYFROMOBJID:" + e.Message);
             }
-            //}
             return null;
         }
         public  Polyline GetPolyFromObjId(Autodesk.AutoCAD.DatabaseServices.ObjectId oid)
@@ -1000,12 +936,6 @@ namespace C3DSurfacesDemo
             return null;
         }
 
-        //public static Autodesk.AutoCAD.DatabaseServices.ObjectId CastObjectId(
-        //    Autodesk.AutoCAD.DatabaseServices.ObjectId objectId)
-        //{
-        //    Autodesk.AutoCAD.DatabaseServices.ObjectId oid = new Autodesk.AutoCAD.DatabaseServices.ObjectId(objectId);
-        //    return oid;
-        //}
 
         public ObjectIdCollection GetObjectIdCollectionFromEntity(ObjectId polyId)
         {
@@ -1061,79 +991,43 @@ namespace C3DSurfacesDemo
 
                 #region Comments
 
-                //else
-                //{
 
-                //    // If an old-style, 2D polyline
 
-                //    Polyline2d p2d = obj as Polyline2d;
 
-                //    if (p2d != null)
-                //    {
 
-                //        // Use foreach to get each contained vertex
 
-                //        foreach (ObjectId vId in p2d)
-                //        {
 
                 //            Vertex2d v2d =
 
-                //                (Vertex2d)tr.GetObject(
 
-                //                    vId,
 
-                //                    OpenMode.ForRead
 
-                //                    );
 
-                //            ed.WriteMessage(
 
                 //                "\n" + v2d.Position.ToString()
 
-                //                );
 
-                //        }
 
-                //    }
 
-                //    else
-                //    {
 
-                //        // If an old-style, 3D polyline
 
-                //        Polyline3d p3d = obj as Polyline3d;
 
-                //        if (p3d != null)
-                //        {
 
-                //            // Use foreach to get each contained vertex
 
-                //            foreach (ObjectId vId in p3d)
-                //            {
 
                 //                PolylineVertex3d v3d =
 
-                //                    (PolylineVertex3d)tr.GetObject(
 
-                //                        vId,
 
-                //                        OpenMode.ForRead
 
-                //                        );
 
-                //                ed.WriteMessage(
 
                 //                    "\n" + v3d.Position.ToString()
 
-                //                    );
 
-                //            }
 
-                //        }
 
-                // }
 
-                //}
 
                 #endregion
 

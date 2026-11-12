@@ -18,7 +18,6 @@ namespace PGA.CrossingPolygons
         [CommandMethodAttribute("RTP")]
         public static void RegionToPolyline()
         {
-            //CrossingPolygonsManager.RegionToPolyline();
             CrossingPolygonsManager.RegionToPolylineTest();
         }
     }

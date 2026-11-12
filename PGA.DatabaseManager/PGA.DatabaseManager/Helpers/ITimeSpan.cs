@@ -19,7 +19,6 @@ namespace PGA.DatabaseManager.Helpers
             System.TimeSpan ts = (d1 - d2);
             return string.Format("{0:%d} days, {0:%h}:{0:%m}:{0:%s}", ts);
 
-            //string.Format("{0:%d} days, {0:%h} hours, {0:%m} minutes, {0:%s} seconds", ts);
         }
     }
 }

@@ -93,21 +93,8 @@ namespace PGA.SV30MOffset
         public void CheckLicense()
         {
 
-            //string validationKey = "AMAAMACXzj93e8s9bIS8UuZvusf/D7IO1UWpAxWh2vC8Nut3IW+jb2AoeFqfZHqET987518DAAEAAQ==";
 
             //CryptoLicense license =
-            //    new CryptoLicense(
-            //        "FgYgAQZR4Lqr+9EBLQAtAI4L6uQ0C+iPK4/csW+OUek71NG7zna74lhnvRQ2NH2bdP4rieW+618T4iORCVO9sg==",
-            //        validationKey);
-            //if (license.Status != LicenseStatus.Valid)
-            //{
-            //    throw new ApplicationException("License validation failed");
-            //}
-            //else
-            //{
-            //    UnlockCommands(Active.Document);
-            //    SetVars();
-            //}
 
         }
 
@@ -141,17 +128,6 @@ namespace PGA.SV30MOffset
         {
             try
             {
-                #region Comments
-
-                //var doc = (Document)sender;
-                //if (doc.CommandInProgress == "DeleteDuplicates")
-                //{
-                //    if (Stopwatch.Elapsed > MaxWait)
-                //    Counter++;
-                //    doc.Editor.Command("PGA-StartSportVisionSynch");
-                //} 
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -285,7 +261,6 @@ namespace PGA.SV30MOffset
                 ed.Document.SendStringToExecute(".PGA-PB\n", true, false, true);
                 AcadUtilities.SendStringToExecute(".ZoomExtents\n");
                 ed.Document.SendStringToExecute(".PGA-SaveAS\n", true, false, true);
-                //ed.Document.SendStringToExecute(".PGA-CloseActiveDWG\n", true, false, true);
                 ed.Document.SendStringToExecute(".PGA-SV-Timer-Enable\n", true, false, true);
                 ResetVars();
             }
@@ -305,7 +280,6 @@ namespace PGA.SV30MOffset
             {
                 var ed = Application.DocumentManager.MdiActiveDocument.Editor;
 
-                // ed.Command(".PGA-SportVision", 1, 1, 0);
 
                 AcadUtilities.SendStringToExecute(".ZoomExtents\n");
 
@@ -372,7 +346,6 @@ namespace PGA.SV30MOffset
                             db.SaveAs(path, Acaddb.DwgVersion.Current);
                         }
 
-                        // Active.Document.CloseAndDiscard();
                     }
                 }
             }
@@ -394,7 +367,6 @@ namespace PGA.SV30MOffset
                 var ordered = OrderPolylines(polyoId);
                 foreach (var p in ordered)
                 {
-                    //var polyline = GetObject(oid);
 
                     if (p == null) continue;
 
@@ -1140,9 +1112,7 @@ namespace PGA.SV30MOffset
 
                     //Use lambda extension method
 
-                    //ids = b.Where(id => id.ObjectClass.DxfName.ToUpper() == "LINE" ||
 
-                    //    id.ObjectClass.DxfName.ToUpper() == "LWPOLYLINE").ToList<ObjectId>();
 
                     #endregion
 
@@ -2095,8 +2065,6 @@ namespace PGA.SV30MOffset
                 #region Comments
 
                 // z->p0 + p1*tanh(x) + p2*tanh(y) + p3*x + p4*x*y;
-                //double[][] xy = new[] { new[] { x1, y1 }, new[] { x2, y2 }, new[] { x3, y3 }, ...  };
-                //double[] z = new[] { z1, z2, z3, ... }; 
 
                 #endregion
 
@@ -2154,7 +2122,6 @@ namespace PGA.SV30MOffset
 
                 // This allows AutoCAD to repaint
 
-                //Application.DoEvents();
                 Application.UpdateScreen();
 
             }

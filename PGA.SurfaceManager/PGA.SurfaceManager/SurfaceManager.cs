@@ -806,8 +806,6 @@ namespace PGA.SurfaceManager
             {
                 using (var tr = Active.StartTransaction())
                 {
-                    //if (!surface.IsWriteEnabled)
-                    //    surface.UpgradeOpen();
 
                     {
                         var styleId = GetStyleId("NO-DISPLAY");
@@ -1221,7 +1219,6 @@ namespace PGA.SurfaceManager
         /// GetOuterBoundaryArea</exception>
         public static double GetOuterBoundaryArea(TinSurface theSurface)
         {
-           // var area = 0.0;
             using (var tr = Active.StartTransaction())
             {
                 try
@@ -1292,7 +1289,6 @@ namespace PGA.SurfaceManager
                 }
                 tr.Commit();
 
-               // theSurface.Rebuild();
 
             }
 

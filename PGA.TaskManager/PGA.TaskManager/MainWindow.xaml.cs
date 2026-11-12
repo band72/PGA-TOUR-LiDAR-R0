@@ -41,20 +41,13 @@ namespace PGA.TaskManager
         {
             using (DatabaseCommands commands = new DatabaseCommands() )
             {
-                //IList<Tasks> tasks = new List<Tasks>();
 
                 dgTasks.ItemsSource = commands.GetSettingsCustom();
 
-                //using (var context = MyContext)
-                //{
                 //    var lsetting =
                 //        from p in context.Settings
-                //            //where p.DateStamp == Convert.ToDateTime(txtDateCreated.Text)
                 //        select new { p.CourseName, p.DateStamp, p.ProjectCreator, p.ProjectName };
 
-                //    dgTasks.ItemsSource = lsetting.ToList();
-                //}
-                //return settings;
             }
 
         }
@@ -83,11 +76,6 @@ namespace PGA.TaskManager
             {
 
                 commands.LoadDrawingStack(DateSelected);
-                //PreparePointCloudFiles(DateSelected);
-                //PreparePolylineFiles(DateSelected);
-                //MergeStacks(PointClouds, Polylines);
-                //CopyFilesToLocal();
-                // InvokeMapClean();
             }
         }
 
@@ -117,20 +105,10 @@ namespace PGA.TaskManager
 
                 //var lsetting =
                 //    from p in context.CommandStack
-                //    //where p.DateStamp == Convert.ToDateTime(txtDateCreated.Text)
                 //    select new { p.CourseName, p.DateStamp, p.ProjectCreator, p.ProjectName };
 
-                //dgTasks.ItemsSource = lsetting.ToList();
 
-                //foreach (var val in settings)
-                //{
-                //    DateCreated = DateTime.Now;
-                //    txtDateCreated.Text = DateCreated.ToString();
-                //    return true;
-                //}
-                // settings =   lsetting;
 
-                //return settings;
             }
         }
 
@@ -198,28 +176,20 @@ namespace PGA.TaskManager
                             "{0},{1},{2},{3},{4}", order, pointFile, polyfile.FirstOrDefault(), destination, timestamp);
 
 
-                        //stack.Commands = command;
-                        //context.CommandStack.InsertOnSubmit(stack);
                     }
                     context.SubmitChanges();
                 }
             }
         }
 
-        //public void LoadDrawingStack()
-        //{
-        //    using (var context = GetDataBasePath.GetSql4Connection())
-        //    {
 
         //        var polylines =
         //            (from p in context.PolylineDWGS
         //                where (p.DateStamp == Convert.ToDateTime(DateSelected))
-        //                select p);
 
         //        var pointclouds =
         //            (from p in context.PointCloud
         //                where (p.DateStamp == Convert.ToDateTime(DateSelected))
-        //                select p);
 
 
         //        var drawingstack =
@@ -228,29 +198,9 @@ namespace PGA.TaskManager
         //                where (p.DateStamp == pl.DateStamp)
         //                select
         //                    new
-        //                    {
-        //                        DateStamp = pl.DateStamp,
-        //                        PolylineName = pl.DrawingName,
-        //                        PolylineID = pl.Id,
-        //                        PointCloudName = p.DrawingName
-        //                    }
-        //                );
 
 
-        //        foreach (var val in drawingstack)
-        //        {
-        //            DrawingStack stack = new DrawingStack();
-        //            stack.DateStamp = val.DateStamp;
-        //            stack.PointCloudDwgName = val.PointCloudName;
-        //            stack.PolylineDwgName = val.PolylineName;
-        //            stack.SourcePolylineDwgID = val.PolylineID;
-        //            stack.Hole = lOrder(val.PointCloudName);
-        //            context.DrawingStack.InsertOnSubmit(stack);
-        //            context.SubmitChanges();
-        //        }
 
-        //    }
-        //}
 
         private void cmdCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -373,7 +323,6 @@ namespace PGA.TaskManager
                         val.DateStamp);
                     stack.Function = command;
                     context.DrawingStack.InsertOnSubmit(stack);
-                    // PointClouds.Add(stack);
                 }
 
                 context.SubmitChanges();
@@ -525,7 +474,6 @@ namespace PGA.TaskManager
  
         public static void CopyFiles(string source, string destination, string fileName)
         {
-            //source = System.IO.Path.Combine(source, fileName);
             destination = System.IO.Path.Combine(destination, fileName);
             var test = System.IO.Path.GetDirectoryName(destination);
            

@@ -17,14 +17,5 @@
         }
 
 
-        //public static Settings ConvertSettings(object v)
-        //{
-        //    Settings context = new Settings();
-        //    if (v != null)
-        //    {
-        //        context = v (DataContext.Settings);
-        //    }
-        //    return null;
-        //}
     }
 }

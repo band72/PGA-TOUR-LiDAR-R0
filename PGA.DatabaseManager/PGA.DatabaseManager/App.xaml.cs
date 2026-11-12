@@ -26,14 +26,9 @@ namespace PGA.DatabaseManager
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             //on start stuff here
-           // PGA.DataContext.Settings GSettings = new PGA.DataContext.Settings();
         }
 
         //public Settings MySettings
-        //{
-        //    get {return GSettings;}
-        //    set { GSettings = value ;}
-        //}
      
     }
 }

@@ -5,7 +5,6 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Reflection;
-//using Common.Logging;
 
 
 namespace Pge.Common.Framework
@@ -293,7 +292,6 @@ namespace Pge.Common.Framework
             }
             catch
             {
-                //_logger.Info("Error loading Config file...");
                 throw;
             }
 
@@ -316,7 +314,6 @@ namespace Pge.Common.Framework
                 Type thisType = classObject.GetType();
                 xmlDoc.Load(xmlFilename);
 
-                //XmlSerializer serializer = new XmlSerializer(thisType, new Type[] { typeof(RangeTableBlockMapping) });
 
                 XmlSerializer serializer = new XmlSerializer(thisType, supportingClassObjects);
                 using (StringReader stringReader = new StringReader(xmlDoc.InnerXml))
@@ -341,7 +338,6 @@ namespace Pge.Common.Framework
             }
             catch
             {
-                //_logger.Info("Error loading Config file...");
                 throw;
             }
 

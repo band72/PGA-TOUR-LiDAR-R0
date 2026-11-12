@@ -9,13 +9,11 @@ using Exception = System.Exception;
 
 #endregion
 
-//using Common.Logging;
 
 namespace BBC.Common.AutoCAD
 {
     public class RasterManager
     {
-        //private static readonly ILog _logger = LogManager.GetLogger(typeof(RasterManager));
 
         const string _aecImageInsertWorldFileCorrelationSource = "World File";
         const string rasterStudioArxPath = @"C:\Program Files\AutoCAD Raster Design 2009";
@@ -75,65 +73,14 @@ namespace BBC.Common.AutoCAD
         ///// <param name="layerName">Name of the layer.</param>
         ///// <param name="colorIndex">Index of the color.</param>
         ///// <returns></returns>
-        //public static ObjectId InsertRasterImageUsingTfw(Database db, string imageFileName, string layerName, int colorIndex)
-        //{
         //    // Note that this function references the Raster Studio API.
-        //    // The API will not demand load. Raster Studio must be initialized in case it is not loaded at startup
-        //    // Reference LoadRasterStudioApi
 
         //    // TODO: Expect that the trans should not be passed as the COM operation will commit the insert...
 
-        //    PGA.MessengerManager.MessengerManager.AddLog("Start InsertRasterImageUsingTfw");
-        //    ObjectId rasterId = new ObjectId();
 
-        //    try
-        //    {
-        //        string imageFolder = System.IO.Path.GetDirectoryName(imageFileName);
-        //        string worldFileName = String.Empty;
-        //        worldFileName = System.IO.Path.GetFileNameWithoutExtension(imageFileName);
-        //        worldFileName += ".tfw";
-        //        worldFileName = System.IO.Path.Combine(imageFolder, worldFileName);
 
-        //        // Verify image file exists
-        //        if (!System.IO.File.Exists(imageFileName))
-        //        {
-        //            return rasterId;
-        //        }
 
-        //        // Verify world correlation file exists
-        //        if (!System.IO.File.Exists(worldFileName))
-        //        {
-        //            return rasterId;
-        //        }
 
-        //        using (Transaction trans = db.TransactionManager.StartTransaction())
-        //        {
-        //            // Create new image object
-        //            AecImageInsert imageInsert = new AecImageInsert();
-        //            // Set image object to reference correlation file
-        //            imageInsert.CorrelationSource = _aecImageInsertWorldFileCorrelationSource;
-        //            // Insert a new image and get an Object Id back as integer (COM cannot return an ObjectId)
-        //            IntPtr oidInteger = (IntPtr)imageInsert.Insert(imageFileName);
-        //            // Convert integer oid to full oid
-        //            rasterId = new ObjectId(oidInteger);
-        //            // Get the new image object from the rasterId
-        //            RasterImage rasterImage = trans.GetObject(rasterId, OpenMode.ForRead) as RasterImage;
-        //            //RasterImage rasterImage = trans.GetObject(rasterId, OpenMode.ForWrite) as RasterImage;
-        //            // Set layer and color
-        //            rasterImage.UpgradeOpen();
-        //            rasterImage.Layer = layerName;
-        //            rasterImage.ColorIndex = colorIndex;
-        //            trans.Commit();
-        //        }
-        //    }
-        //    catch (System.Exception ex)
-        //    {
-        //        PGA.MessengerManager.MessengerManager.AddLog("Error in InsertRasterImageUsingTfw", ex);
-        //        throw;
-        //    }
-        //    PGA.MessengerManager.MessengerManager.AddLog("End InsertRasterImageUsingTfw");
-        //    return rasterId;
-        //}
 
         /// <summary>
         ///     Sets the raster image clip frame.

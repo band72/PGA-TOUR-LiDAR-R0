@@ -20,14 +20,6 @@ namespace PGA.TransFormReports
                 ServiceManager sm = new ServiceManager(new DateTime(636090130330970000));
 
                 #endregion
-                #region Live Mode
-
-                //var dateStamp = new DateTime(Convert.ToInt64(args[0]));
-
-                //PGA.MessengerManager.MessengerManager.AddLog("Searching for Tasks: " + dateStamp);
-
-                //ServiceManager sm = new ServiceManager(dateStamp); 
-                #endregion
 
                 try
                 {

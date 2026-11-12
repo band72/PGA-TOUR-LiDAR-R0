@@ -102,13 +102,7 @@ namespace PGA.Common.AutoCAD
             Document currentDoc = Active.MdiDocument;
             Editor editor = currentDoc.Editor;
 
-            //PromptPointResult ppr1 = editor.GetPoint("Select first corner of window: ");
-            //if (ppr1.Status != PromptStatus.OK)
-            //    return null;
 
-            //PromptPointResult ppr2 = editor.GetCorner("Select opposite corner of window: ", ppr1.Value);
-            //if (ppr2.Status != PromptStatus.OK)
-            //    return null;
 
             PromptSelectionOptions options = new PromptSelectionOptions();
             if ( string.IsNullOrEmpty(prompt))

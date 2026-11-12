@@ -56,7 +56,6 @@ namespace PGA.SelectionManager
 
                 throw;
             }
-            //_logger.Debug("End AddToPickSet");
             return retVal;
 
         }
@@ -344,9 +343,7 @@ namespace PGA.SelectionManager
 
                     //Use lambda extension method
 
-                    //ids = b.Where(id => id.ObjectClass.DxfName.ToUpper() == "LINE" ||
 
-                    //    id.ObjectClass.DxfName.ToUpper() == "LWPOLYLINE").ToList<ObjectId>();
 
                     #endregion
 

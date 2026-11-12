@@ -157,16 +157,6 @@ namespace PGA.Autodesk.Utils
                     // Is Polyline Closed
                     if (lwp.Closed)
                     {
-                        #region Color Change
-
-                        //PGA.MessengerManager.MessengerManager.AddLog(lwp.Layer);
-                        //lwp.UpgradeOpen();
-                        //if (IsLayerDefined(db, AssignPolyLinesToLayers(lwp)))
-                        //    lwp.Color = AssignLayerColor(lwp) ?? lwp.Color;
-                        //lwp.DowngradeOpen();
-                        //PGA.MessengerManager.MessengerManager.AddLog(lwp.Layer); 
-
-                        #endregion
 
                         #region Layer Assign
 
@@ -329,18 +319,7 @@ namespace PGA.Autodesk.Utils
         }
 
 
-        //private static LayerStatesBLL GetLayerStates()
-        //{
-        //    IModel model = new Model.BLL.Model();
-        //    return model.GetDataFromRegistry();
-        //}
 
-        //public Model.DAL.PGALayerStates LoadData()
-        //{
-        //    IModel model = new Model.BLL.Model();
-        //    _view.LoadDataSet(model.GetDataFromRegistry());
-        //    return null;
-        //}
 
         private bool AssignPolyLinesToLayers()
         {

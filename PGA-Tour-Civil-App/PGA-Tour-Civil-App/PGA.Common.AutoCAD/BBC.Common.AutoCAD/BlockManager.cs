@@ -6,7 +6,6 @@ using global::Autodesk.AutoCAD.ApplicationServices.Core;
 using global::Autodesk.AutoCAD.DatabaseServices;
 using global::Autodesk.AutoCAD.Geometry;
 using global::Autodesk.AutoCAD.Runtime;
-//using Common.Logging;
 using AcadApplication = Autodesk.AutoCAD.ApplicationServices.Application;
 
 #endregion

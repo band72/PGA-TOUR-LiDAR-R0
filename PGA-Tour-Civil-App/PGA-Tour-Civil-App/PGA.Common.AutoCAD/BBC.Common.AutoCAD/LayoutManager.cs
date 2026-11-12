@@ -6,7 +6,6 @@ using global::Autodesk.AutoCAD.DatabaseServices;
 
 #endregion
 
-//using Common.Logging;
 
 namespace BBC.Common.AutoCAD
 {
@@ -385,7 +384,6 @@ namespace BBC.Common.AutoCAD
 
             // Load the source database as side database
             using (var sourceDb = AcadUtilities.LoadSideDatabase(sourceLayoutDrawingName, true))
-                //if (sourceDb != null)
             {
                 var sourceObjectIdCollection = new ObjectIdCollection();
 
@@ -544,18 +542,6 @@ namespace BBC.Common.AutoCAD
         /// <param name="pointList">The point list.</param>
         /// <param name="viewportObjectId">The viewport object id.</param>
         /// <returns></returns>
-        //public static bool CreateViewportFromPointList(Database db, string layoutName, string layerName, IList<GemsPoint2d> pointList, ref ObjectId viewportObjectId)
-        //{
-        //    PGA.MessengerManager.MessengerManager.AddLog("Start CreateViewportFromPointList");
-        //    bool retval = false;
-        //    using (Transaction trans = db.TransactionManager.StartTransaction())
-        //    {
-        //        retval = CreateViewportFromPointList(db, trans, layoutName, layerName, pointList, ref viewportObjectId);
-        //        trans.Commit();
-        //    }
-        //    PGA.MessengerManager.MessengerManager.AddLog("End CreateViewportFromPointList");
-        //    return retval;
-        //}
 
         /// <summary>
         /// Creates a new paper space viewport using the point list to define a clip entity
@@ -567,62 +553,12 @@ namespace BBC.Common.AutoCAD
         /// <param name="pointList">The point list.</param>
         /// <param name="viewportObjectId">The viewport object id.</param>
         /// <returns></returns>
-        //public static bool CreateViewportFromPointList(Database db, Transaction trans, string layoutName, string layerName, IList<GemsPoint2d> pointList, ref ObjectId viewportObjectId)
-        //{
-        //    PGA.MessengerManager.MessengerManager.AddLog("Start CreateViewportFromPointList");
-        //    bool retval = false;
 
-        //    layoutName = layoutName.ToUpper();
-        //    if(IsLayoutDefined(db, trans, layoutName) == true)
-        //    {
-        //        ObjectId layoutId = GetLayoutId(db, trans, layoutName);
-        //        Layout oneLayout = null;
-        //        oneLayout = trans.GetObject(layoutId, OpenMode.ForRead) as Layout;
-        //        if (oneLayout != null)
-        //        {
-        //            using (BlockTableRecord layoutBtr = trans.GetObject(oneLayout.BlockTableRecordId, OpenMode.ForWrite, false) as BlockTableRecord)
-        //            {
-        //                // Create target layer
-        //                LayerManager.CreateLayer(db, trans, layerName);
 
-        //                int pointIndex = 0;
-        //                int pointCount = pointList.Count;
-        //                Polyline plineObject = new Polyline(pointCount);
-        //                foreach (GemsPoint2d onePoint in pointList)
-        //                {
-        //                    plineObject.AddVertexAt(pointIndex, new Point2d(onePoint.X, onePoint.Y), 0, 0, 0);
-        //                    pointIndex++;
-        //                }
-        //                plineObject.Closed = true;
-        //                plineObject.Layer = layerName;
 
-        //                Entity ent = plineObject as Entity;
-        //                if (ent != null)
-        //                {
-        //                    // Create clipping pline
-        //                    ObjectId plineObjectId = layoutBtr.AppendEntity(plineObject); // layoutBtr.AppendEntity(plineObject);
-        //                    trans.AddNewlyCreatedDBObject(plineObject, true);
 
-        //                    // Create viewport
-        //                    Viewport vp = new Viewport();
-        //                    layoutBtr.AppendEntity(vp);
-        //                    trans.AddNewlyCreatedDBObject(vp, true);
 
-        //                    // Set the vp boundary entity and turn the viewport clipping on
-        //                    vp.NonRectClipEntityId = plineObjectId;
-        //                    vp.NonRectClipOn = true;
-        //                    vp.Layer = layerName;
-        //                    //vp.On = true;
 
-        //                    viewportObjectId = vp.ObjectId;
-        //                    retval = true;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    PGA.MessengerManager.MessengerManager.AddLog("End CreateViewportFromPointList");
-        //    return retval;
-        //}
 
         /// <summary>
         /// Sets the viewport view.
@@ -632,22 +568,6 @@ namespace BBC.Common.AutoCAD
         /// <param name="vpOid">The vp oid.</param>
         /// <param name="pointList">The point list.</param>
         /// <returns></returns>
-        //public static bool SetViewportView(Database db, Transaction trans, ObjectId vpOid, IList<GemsPoint2d> pointList)
-        //{
-        //    PGA.MessengerManager.MessengerManager.AddLog("Start SetViewportView");
-        //    using (Viewport vp = trans.GetObject(vpOid, OpenMode.ForWrite, false) as Viewport)
-        //    {
-        //        GemsPoint2d centerPoint = CoordinateService.GetCentroidFromPolygon(pointList);
-        //        GemsPoint2d minPoint = CoordinateService.GetMinFromPolygon(pointList);
-        //        GemsPoint2d maxPoint = CoordinateService.GetMaxFromPolygon(pointList);
-        //        double width = maxPoint.X - minPoint.X;
-        //        double height = maxPoint.Y - minPoint.Y;
-        //        vp.ViewCenter = new Point2d(centerPoint.X, centerPoint.Y);
-        //        vp.ViewHeight = height;
-        //    }
-        //    PGA.MessengerManager.MessengerManager.AddLog("End SetViewportView");
-        //    return true;
-        //}
 
         #endregion
     }

@@ -71,20 +71,12 @@ namespace PGA.DatabaseManager
         }
 
 
-        //public void LoadSettingsData(PGAContext source)
-        //{
 
-        //   //DateCreated = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
 
-        //    //Settings myseSettings = new Settings();
 
-        //    //myseSettings.DateStamp = DateTime.Now;
 
-        //    //source.Settings.InsertOnSubmit(myseSettings);
-        //    //source.SubmitChanges();
                 
        
-        //}
 
 
         private void cmdPointPath_Click(object sender, RoutedEventArgs e)
@@ -127,8 +119,6 @@ namespace PGA.DatabaseManager
                     settings.SeverPath = txtServerPath.Text;
                     settings.ProjectName = txtProjectName.Text;
                     settings.TemplateDWG = txtTemplatePath.Text;
-                    //myseSettings.StartTime = String.Empty;
-                    //myseSettings.EndTime   =  String.Empty;
                 }
                 
                 DatabaseCommands commands = new DatabaseCommands();
@@ -235,7 +225,6 @@ namespace PGA.DatabaseManager
             TestAccess(txtTemplatePath.Text);
             TestAccess(txtNewDWGPath.Text);
             TestAccess(txtNewDXFPath.Text);
-            //TestAccess(txtServerPath.Text);
 
             MessageBox.Show("Test Completed!");
         }
@@ -293,7 +282,6 @@ namespace PGA.DatabaseManager
     {
         public void Dispose()
         {
-            //Console.WriteLine("Execute  Second");
         }
     }
 

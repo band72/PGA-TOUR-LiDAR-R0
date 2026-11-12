@@ -61,9 +61,6 @@ namespace PGA.Sv.PostAudit
 
         private void TestingExportToCad()
         {
-            //_datetime= new DateTime?();
-            //_directory = @"C:\Civil 3D Projects\2016Muirfield-Village\2016Muirfield-Village\SPORTVISION-20160624-194936";
-            //_directory = @"C:\Users\m4800\Downloads\2016Bay-Hill\2016Bay-Hill\TINSURF-20160529-155100";
         }
 
         private void InitializeExportToCad()
@@ -252,28 +249,8 @@ namespace PGA.Sv.PostAudit
             }
         }
 
-        //public string GetRFile(string[] files)
-        //{
-        //    foreach (var file in files)
-        //    {
-        //        var filename = System.IO.Path.GetFileName(file);
-        //        var ext = System.IO.Path.GetExtension(file);
 
-        //        if (filename.StartsWith("R") && filename.Contains(ext))
-        //        {
-        //            //replace "R" with dynamic value
-        //            var tourcode = _settings.GetSettings(_datetime.Value).TourCode;
 
-        //            if (String.IsNullOrEmpty(tourcode))
-        //                return Path.GetFileNameWithoutExtension(file);
-        //            else
-        //            {
-        //                return Path.GetFileNameWithoutExtension(tourcode + file.Substring(1, file.Length - 1));
-        //            }
-        //        }
-        //    }
-        //    return string.Empty;
-        //}
 
         public string GetRFile(string[] files)
         {

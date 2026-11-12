@@ -10,7 +10,6 @@ using PGA.MessengerManager;
 using PGA.SurfaceManager;
 using Application = Autodesk.AutoCAD.ApplicationServices.Core.Application;
 using C3DLandDb = Autodesk.Civil.DatabaseServices;
-//using PGA.SurfaceManager;
 
 namespace C3DSurfacesDemo
 {
@@ -242,11 +241,8 @@ namespace C3DSurfacesDemo
 
                
 
-                    //surface = trans.GetObject(surfaceId, OpenMode.ForWrite) as C3DLandDb.TinSurface;
 
                     //// Add the selected polyline's ObjectId to a collection
-                    //ObjectIdCollection boundaryEntities = new ObjectIdCollection();
-                    //boundaryEntities.Add(plineId);
 
                 }
             }
@@ -532,43 +528,12 @@ namespace C3DSurfacesDemo
     /// <summary>
     /// Illustrates Smoothing a TIN Surface
     /// </summary>
-    //public void SmoothTinSurface()
-    //{
-    //    using (Transaction ts = Application.DocumentManager.MdiActiveDocument.Database.TransactionManager.StartTransaction())
-    //    {
-    //        try
-    //        {
-    //            // Select a TIN Surface:     
-    //            ObjectId surfaceId = promptForEntity("Select a TIN surface to smooth\n", typeof(TinSurface));
-    //            TinSurface oSurface = surfaceId.GetObject(OpenMode.ForWrite) as TinSurface;
 
-    //            // Select a polyline to define the output region:
-    //            ObjectId polylineId = promptForEntity("Select a polyline to define the output region\n", typeof(Polyline));
-    //            Point3dCollection points = new Point3dCollection();
-    //            Polyline polyline = polylineId.GetObject(OpenMode.ForRead) as Polyline;
 
-    //            // Convert the polyline into a collection of points:
-    //            int count = polyline.NumberOfVertices;
-    //            for (int i = 0; i < count; i++)
-    //            {
-    //                points.Add(polyline.GetPoint3dAt(i));
-    //            }
 
-    //            // Set the options:
-    //            SurfacePointOutputOptions output = new SurfacePointOutputOptions();
-    //            output.OutputLocations = SurfacePointOutputLocationsType.Centroids;
-    //            output.OutputRegions = new Point3dCollection[] { points };
 
-    //            SurfaceOperationSmooth op = oSurface.SmoothSurfaceByNNI(output);
 
-    //            editor.WriteMessage("Output Points: {0}\n", op.OutPutPoints.Count);
 
-    //            // Commit the transaction
-    //            ts.Commit();
-    //        }
-    //        catch (System.Exception e) { editor.WriteMessage(e.Message); }
-    //    }
-    //}
 
 
     public class Point3dEnumerable  : IEnumerable<Point3d>

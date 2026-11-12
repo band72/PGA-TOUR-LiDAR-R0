@@ -53,15 +53,11 @@ namespace PGA.DeleteDupSurfaces
 
         public static double? GetPolyLineArea(ObjectId selectedObjectId, global::Autodesk.AutoCAD.DatabaseServices.Database db)
         {
-            //Document doc = Application.DocumentManager.MdiActiveDocument;
-            //Editor ed = doc.Editor;
-            //Database db = doc.Database;
             Transaction tr = db.TransactionManager.StartTransaction();
 
             // Get the current UCS
 
             //CoordinateSystem3d ucs =
-            //    ed.CurrentUserCoordinateSystem.CoordinateSystem3d;
 
             using (tr)
             {

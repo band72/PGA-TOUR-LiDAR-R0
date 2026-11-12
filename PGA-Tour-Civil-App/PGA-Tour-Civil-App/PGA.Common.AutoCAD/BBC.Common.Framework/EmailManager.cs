@@ -4,7 +4,6 @@ using System.Text;
 using System.Net;
 using System.Net.Mail;
 
-//using Common.Logging;
 
 namespace BBC.Common.Framework
 {

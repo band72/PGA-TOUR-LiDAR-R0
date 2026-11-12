@@ -26,7 +26,6 @@ namespace PGA.ApplicationProgress
         static bool exitFlag = false;
 
         //public static System.Windows.Forms.Timer myTimer = 
-        //    new System.Windows.Forms.Timer();
 
         public static ApplicationProgress.BackgroundWorker worker = 
             new PGA.ApplicationProgress.BackgroundWorker();

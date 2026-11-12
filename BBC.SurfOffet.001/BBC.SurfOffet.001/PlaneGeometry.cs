@@ -82,7 +82,6 @@ namespace BBC.SurfOffet
             return v;
         }
 
-        //using DLA = MathNet.Numerics.LinearAlgebra.Double;
 
         /// <summary>
         /// Crosses the specified left.

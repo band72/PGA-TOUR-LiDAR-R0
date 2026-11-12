@@ -462,7 +462,6 @@ namespace PGA.Autodesk.Utils
                     if ((lwp2.EndPoint.X == lwp1.EndPoint.X) &&
                         (lwp2.EndPoint.Y == lwp1.EndPoint.Y))
                     {
-                        // lwp2.Erase();
                         return true;
                     }
                 }

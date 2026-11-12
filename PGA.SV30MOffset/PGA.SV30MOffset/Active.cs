@@ -59,9 +59,6 @@ namespace PGA.SV30MOffset
         /// </summary>
         /// <value>The active civil document.</value>
         //public static CivilDocument ActiveCivilDocument
-        //{
-        //    get { return CivilApplication.ActiveDocument; }
-        //}
 
         /// <summary>
         /// Gets the working database.

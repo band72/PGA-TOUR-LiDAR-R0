@@ -21,15 +21,9 @@ namespace PGA.SportVision
                 Editor ed = doc.Editor;
 
                 //PromptEntityOptions peo =
-                //  new PromptEntityOptions("\nSelect a region:");
-                //peo.SetRejectMessage("\nMust be a region.");
-                //peo.AddAllowedClass(typeof(Region), true);
 
                 //PromptEntityResult per =
-                //  ed.GetEntity(peo);
 
-                //if (per.Status != PromptStatus.OK)
-                //    return;
 
                 Transaction tr =
                   doc.TransactionManager.StartTransaction();

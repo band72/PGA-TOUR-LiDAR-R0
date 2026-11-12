@@ -5,7 +5,6 @@ using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.Runtime;
 using System;
 using System.IO;
-//using PGA.OpenDWG.DgnPurger;
 using ACADDB = Autodesk.AutoCAD.DatabaseServices;
 using ACADRT = Autodesk.AutoCAD.Runtime;
 namespace PGA.OpenDWG

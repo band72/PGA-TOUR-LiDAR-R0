@@ -7,7 +7,6 @@ using global::Autodesk.AutoCAD.DatabaseServices;
 
 #endregion
 
-//using Common.Logging;
 
 namespace BBC.Common.AutoCAD
 {
@@ -143,7 +142,6 @@ namespace BBC.Common.AutoCAD
             if (string.IsNullOrEmpty(layername))
                 throw new ArgumentNullException("layername", "The argument 'layername' was null or empty.");
 
-            //var erased = false;
             try
             {
                 using (var layerTable = (LayerTable) trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))
@@ -184,7 +182,6 @@ namespace BBC.Common.AutoCAD
             if (string.IsNullOrEmpty(layername))
                 throw new ArgumentNullException("layername", "The argument 'layername' was null or empty.");
 
-           // var erased = false;
             try
             {
                 using (var layerTable = (LayerTable) trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))

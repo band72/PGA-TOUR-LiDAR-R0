@@ -33,10 +33,8 @@ namespace PGA.Common.Registry
             {
                 Debug.WriteLine("Registry Keys are empty!");
                 throw new NoNullAllowedException(string.Format("Registry Keys are empty! Key{0},Path{1}", key, Path));
-                //return;
             }
 
-            //RegistryKey regKeyAppRoot = Registry.LocalMachine.CreateSubKey(settings.Path);
             var rs = new RegistrySecurity();
 
 
@@ -196,7 +194,6 @@ namespace PGA.Common.Registry
                 return false;
             }
 
-            //RegistryKey regKeyAppRoot            = Registry                                             .LocalMachine.CreateSubKey(settings.Path);
             var rs = new RegistrySecurity();
 
 
@@ -243,20 +240,7 @@ namespace PGA.Common.Registry
         /// </summary>
         /// <param name="txt">The TXT                                     .</param>
         /// <remarks></remarks>
-        //public void WriteToRegistry(TextBox txt)
-        //{
-        //    var settings                         = new Settings();
 
-        //    try
-        //    {
-        //        GlobalWriteToRegistry("Key", Encryption                                             .ComputerSHA1Hash(txt.Text), settings.Path);
-        //        GlobalWriteToRegistry("PassCode", Encryption                                        .ComputerMD5Hash(txt.Text), settings.Path);
-        //    }
-        //    catch (NullReferenceException ex)
-        //    {
-        //        Helper                                                                              .InfoMessageBox((String.Format("MSG103007: {0}", ex.Message)));
-        //    }
-        //}
         public IList<string> RegistryValues()
         {
             IList<string> myRegVals = new List<string>();

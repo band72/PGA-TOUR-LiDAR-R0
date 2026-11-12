@@ -56,103 +56,10 @@ namespace PGA.Model.BLL
                 CleanDataFromRegistry("Water", AcadSettings.RegistryPath, states.Water);
                 CleanDataFromRegistry("WaterDrop", AcadSettings.RegistryPath, states.WaterDrop);
 
-                //string value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("Bridge",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
                 //if(!String.IsNullOrEmpty(value)) {states.Bridge = value;}
 
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("Building",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
                 //if (!String.IsNullOrEmpty(value)) { states.Building = value; }
 
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("Bunker",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.Bunker = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("BushOutline",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.BushOutline = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("CartPath",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.CartPath = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("Collar",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.Collar = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("DirtOutline",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.DirtOutline = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("Fairway",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.Fairway = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("Green",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.Green = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("GreenSideBunker",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.GreenSideBunker = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("IntMedRough",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.IntMedRough = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("LandScaping",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.LandScaping = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("NativeArea",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.NativeArea = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("Other",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.Other = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("Path",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.Path = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("RockOutline",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.RockOutline = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("RoughOutline",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.RoughOutline = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("Steps",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.Steps = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("TeeBox",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.TeeBox = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("TreeOutline",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.TreeOutline = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("WalkStrip",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.WalkStrip = value; }
-                //value = "";WaterDrop
-                //value = RegistryFunctions.GlobalReadFromRegistry("Wall",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.Wall = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("Water",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
-                //if (!String.IsNullOrEmpty(value)) { states.Water = value; }
-                //value = "";
-                //value = RegistryFunctions.GlobalReadFromRegistry("",
-                //    PGA.Autodesk.Settings.AcadSettings.RegistryPath);
                 //if (!String.IsNullOrEmpty(value)) { states.WaterDrop = value; }
 
 
@@ -182,7 +89,6 @@ namespace PGA.Model.BLL
         public LayerStatesBLL GetPathDataFromRegistry()
         {
             // TODO: Implement this method
-            //throw new NotImplementedException();
             return null;
         }
 

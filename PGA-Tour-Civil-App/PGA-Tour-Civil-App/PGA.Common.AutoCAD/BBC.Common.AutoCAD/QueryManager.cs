@@ -493,11 +493,9 @@ namespace Pge.Common.AutoCAD
         /// <returns></returns>
         private bool DefineQuery(QueryModel queryModel)
         {
-            //_logger.Info("Defining AutoCAD Map Query...");
 
             bool retVal = false;
 
-            //_logger.Debug("Start DefineQuery");
             try
             {
                 // create query branch
@@ -512,7 +510,6 @@ namespace Pge.Common.AutoCAD
                 //
                 if (this.UseBoundry)
                 {
-                    //_logger.Info("Defining AutoCAD Map Location Query...");
                     // define the window based on the users selection points
                     //
                     LocationCondition qryCondition = new LocationCondition();
@@ -528,7 +525,6 @@ namespace Pge.Common.AutoCAD
                 //
                 if (this.ObjectFilters.Count == 0)
                 {
-                    //_logger.Info("Defining AutoCAD Map Property * Query...");
                     PropertyCondition propCondition = new PropertyCondition();
                     propCondition.JoinOperator = JoinOperator.OperatorAnd;
                     propCondition.PropertyType = PropertyType.EntityType;
@@ -543,7 +539,6 @@ namespace Pge.Common.AutoCAD
                     int lastIndex = 0;
 
                     firstIndex = queryBranch.OperandCount;
-                    //_logger.Info("Defining AutoCAD Map Property Query...");
                     foreach (string objectFilter in this.ObjectFilters)
                     {
                         PropertyCondition propCondition = new PropertyCondition();
@@ -580,7 +575,6 @@ namespace Pge.Common.AutoCAD
                     int lastIndex = 0;
 
                     firstIndex = queryBranch.OperandCount;
-                    //_logger.Info("Defining AutoCAD Map Block Name Query...");
                     foreach (string blockNameFilter in this.BlockNameFilters)
                     {
                         PropertyCondition propCondition = new PropertyCondition();
@@ -635,11 +629,8 @@ namespace Pge.Common.AutoCAD
             }
             catch (System.Exception ex)
             {
-                //_logger.Error("Error defining query", ex);
                 throw;
-                //AcadUtilities.WriteMessage("\nError defining query");
             }
-            //_logger.Debug("End DefineQuery");
             return retVal;
         }
 
@@ -649,11 +640,9 @@ namespace Pge.Common.AutoCAD
         /// <param name="queryModel">The query model.</param>
         private bool DefinePropertyAlterations(QueryModel queryModel)
         {
-            //_logger.Info("Defining AutoCAD Map Property Alterations...");
 
             bool retVal = false;
 
-            //_logger.Debug("Start DefinePropertyAlterations");
             try
             {
                 // Clear any defined property alterations
@@ -746,11 +735,8 @@ namespace Pge.Common.AutoCAD
             }
             catch (System.Exception ex)
             {
-                //_logger.Error("Error defining property alterations", ex);
                 throw;
-                //AcadUtilities.WriteMessage("\nError defining property alterations");
             }
-            //_logger.Debug("End DefinePropertyAlterations");
             return retVal;
         }
 
@@ -762,7 +748,6 @@ namespace Pge.Common.AutoCAD
         {
             bool retVal = true;
 
-            //_logger.Debug("Start DefineAllTargetBlocks");
             Database db = _projectModel.Database;
             using (Transaction trans = db.TransactionManager.StartTransaction())
             {
@@ -780,7 +765,6 @@ namespace Pge.Common.AutoCAD
             }
             retVal = true;
 
-            //_logger.Debug("End DefineAllTargetBlocks");
             return retVal;
         }
 
@@ -789,9 +773,7 @@ namespace Pge.Common.AutoCAD
         /// </summary>
         public ObjectIdCollection ExecuteQuery()
         {
-            //_logger.Info("Executing AutoCAD Map Query...");
 
-            //_logger.Debug("Start ExecuteQuery");
             ObjectIdCollection oids = new ObjectIdCollection();
 
             // create a new query
@@ -820,7 +802,6 @@ namespace Pge.Common.AutoCAD
             queryModel.Clear();
             queryModel.Dispose();
 
-            //_logger.Debug("End ExecuteQuery");
             return oids;
         }
 
@@ -829,9 +810,7 @@ namespace Pge.Common.AutoCAD
         /// </summary>
         public void RunQuery()
         {
-            //_logger.Info("Running AutoCAD Map Query...");
 
-            //_logger.Debug("Start RunQuery");
             // create a new query
             //
             QueryModel queryModel = this.ProjectModel.CreateQuery(true);
@@ -851,7 +830,6 @@ namespace Pge.Common.AutoCAD
             // clean up
             queryModel.Clear();
             queryModel.Dispose();
-            //_logger.Debug("End RunQuery");
         }
 
         #region DrawingSet
@@ -862,9 +840,7 @@ namespace Pge.Common.AutoCAD
         /// <param name="drawingNames">The drawing names.</param>
         public void ActivateDrawings(IList<string> drawingNames)
         {
-            //_logger.Info("Actvating drawings...");
 
-            //_logger.Debug("Start ActivateDrawings");
             // loop through all the drawing in the list
             // if the drawing is attached and inactive, activate it
             //
@@ -880,12 +856,9 @@ namespace Pge.Common.AutoCAD
                 }
                 catch (System.Exception ex)
                 {
-                    //_logger.Error("Error activating drawing: " + dwg, ex);
                     throw;
-                    // AcadUtilities.WriteMessage("\nError activating drawing: " + dwg);
                 }
             }
-            //_logger.Debug("End ActivateDrawings");
         }
 
         /// <summary>
@@ -894,9 +867,7 @@ namespace Pge.Common.AutoCAD
         /// <param name="drawingNames">The drawing names.</param>
         public void DeActivateDrawings(IList<string> drawingNames)
         {
-            //_logger.Info("DeActvating drawings...");
 
-            //_logger.Debug("Start DeActivateDrawings");
             // loop through all the drawing in the list
             // if the drawing is attached and active, DeActivate it
             //
@@ -912,12 +883,9 @@ namespace Pge.Common.AutoCAD
                 }
                 catch (System.Exception ex)
                 {
-                    //_logger.Error("Error DeActivating drawing: " + dwg, ex);
                     throw;
-                    //AcadUtilities.WriteMessage("\nError deactivating drawing: " + dwg);
                 }
             }
-            //_logger.Debug("End DeActivateDrawings");
         }
 
         /// <summary>
@@ -925,9 +893,7 @@ namespace Pge.Common.AutoCAD
         /// </summary>
         public void AttachDrawings(IList<string> drawingNames)
         {
-            //_logger.Info("Attaching drawings...");
 
-            //_logger.Debug("Start AttachDrawings");
             _attachedDwgs = new List<string>();
 
             // loop through all the drawing in the config file
@@ -944,18 +910,14 @@ namespace Pge.Common.AutoCAD
                     }
                     else
                     {
-                        //_logger.Debug("Could not find the drawing to attach: " + dwg);
                         AcadUtilities.WriteMessage("\nCould not find the drawing to attach: " + dwg);
                     }
                 }
                 catch (System.Exception ex)
                 {
-                    //_logger.Error("Error attaching drawing: " + dwg, ex);
                     throw;
-                    //AcadUtilities.WriteMessage("\nError attaching drawing: " + dwg);
                 }
             }
-            //_logger.Debug("End AttachDrawings");
         }
 
         /// <summary>
@@ -963,15 +925,7 @@ namespace Pge.Common.AutoCAD
         /// </summary>
         public void DetachDrawings(IList<string> drawingNames)
         {
-            //_logger.Info("Detaching drawings...");
 
-            //_logger.Debug("Start DetachDrawings");
-            // turn off the logging
-            //
-            //int logFileActiveValue = _mapApp.GetIntOptionValue("LogFileActive");
-            //int logMessageLevelValue = _mapApp.GetIntOptionValue("LogMessageLevel");
-            //_mapApp.SetIntOptionValue("LogFileActive", 1);
-            //_mapApp.SetIntOptionValue("LogMessageLevel", 0);
 
             foreach (string dwg in drawingNames)
             {
@@ -981,17 +935,12 @@ namespace Pge.Common.AutoCAD
                 }
                 catch (System.Exception ex)
                 {
-                    //_logger.Error("Error detaching drawing: " + dwg, ex);
                     throw;
-                    //AcadUtilities.WriteMessage("Error detaching drawing: " + dwg);
                 }
             }
 
             // reset the logging
             //
-            //_mapApp.SetIntOptionValue("LogMessageLevel", logMessageLevelValue);
-            //_mapApp.SetIntOptionValue("LogFileActive", logFileActiveValue);
-            //_logger.Debug("End DetachDrawings");
 
         }
 
@@ -1002,14 +951,12 @@ namespace Pge.Common.AutoCAD
         /// <returns></returns>
         public AttachedDrawing GetAttachedDrawingByName(string drawingName)
         {
-            //_logger.Debug("Start GetAttachedDrawingByName");
             AttachedDrawing foundAttachedDrawing = null;
             AttachedDrawing attachedDrawing = this.ProjectModel.DrawingSet.DirectAttachedDrawings[drawingName];
             if (attachedDrawing != null)
             {
                 foundAttachedDrawing = attachedDrawing;
             }
-            //_logger.Debug("End GetAttachedDrawingByName");
             return foundAttachedDrawing;
         }
 
@@ -1023,9 +970,7 @@ namespace Pge.Common.AutoCAD
         /// <param name="oids">The oids.</param>
         public void AddObjectsToSaveSet(ObjectIdCollection oids)
         {
-            //_logger.Debug("Start AddObjectsToSaveSet");
             this.ProjectModel.SaveSet.AddObjects(oids);
-            //_logger.Debug("End AddObjectsToSaveSet");
         }
 
         /// <summary>
@@ -1033,13 +978,11 @@ namespace Pge.Common.AutoCAD
         /// </summary>
         public void RemoveAllObjectsFromSaveSet()
         {
-            //_logger.Debug("Start RemoveAllObjectsFromSaveSet");
             ObjectIdCollection oids = GetAllObjectsInSaveSet();
             if (oids.Count > 0)
             {
                 this.ProjectModel.SaveSet.RemoveObjects(oids);
             }
-            //_logger.Debug("End RemoveAllObjectsFromSaveSet");
         }
 
         /// <summary>
@@ -1048,9 +991,7 @@ namespace Pge.Common.AutoCAD
         /// <param name="oids">The oids.</param>
         public void RemoveObjectsFromSaveSet(ObjectIdCollection oids)
         {
-            //_logger.Debug("Start RemoveObjectsFromSaveSet");
             this.ProjectModel.SaveSet.RemoveObjects(oids);
-            //_logger.Debug("End RemoveObjectsFromSaveSet");
         }
 
         /// <summary>
@@ -1059,7 +1000,6 @@ namespace Pge.Common.AutoCAD
         /// <returns></returns>
         public ObjectIdCollection GetAllObjectsInSaveSet()
         {
-            //_logger.Debug("Start GetAllObjectsInSaveSet");
             ObjectIdCollection oids = new ObjectIdCollection();
             if (this.ProjectModel.SaveSet.GetObjectsCount(SaveSetObjectTypes.NewlyCreated) > 0)
             {
@@ -1085,7 +1025,6 @@ namespace Pge.Common.AutoCAD
                     oids.Add(oid);
                 }
             }
-            //_logger.Debug("End GetAllObjectsInSaveSet");
             return oids;
         }
 
@@ -1100,7 +1039,6 @@ namespace Pge.Common.AutoCAD
         /// </summary>
         public void Dispose()
         {
-            //_logger.Debug("Start Dispose");
             if (_mapApp != null)
             {
                 _mapApp.Dispose();
@@ -1109,7 +1047,6 @@ namespace Pge.Common.AutoCAD
             {
                 _projectModel.Dispose();
             }
-            //_logger.Debug("End Dispose");
         }
 
         #endregion

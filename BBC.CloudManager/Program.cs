@@ -36,13 +36,10 @@ namespace BBC.CloudManager
         {
             # region OAuth
             // Connect with Oauth2 Ask user for permission
-            //String CLIENT_ID = "40682712771-98klh9ien3jf82bk6jsh6o0tt0l0hufr.apps.googleusercontent.com";
-            //DriveService service = Authentication.AuthenticateOauth(CLIENT_ID, CLIENT_SECRET, Environment.UserName);  
             # endregion
 
             string TOP_LEVEL_DIR = "DatabaseManager-*";
 
-           // File CurrentVersion = null;
              // connect with a Service Account
 
             string ServiceAccountEmail = "bbc-gen-svc-p12@cloudupdate-1331.iam.gserviceaccount.com";
@@ -68,7 +65,6 @@ namespace BBC.CloudManager
 
                 Console.WriteLine("Contacting Google Cloud!");
 
-                //string Q = "title contains " + "'" + "*" + "'" + " and mimeType != 'application/vnd.google-apps.folder'";
                 string Q = "title contains " + "'" + TOP_LEVEL_DIR + "'" + " and mimeType != 'application/vnd.google-apps.folder'";
 
                 var _Files = GoogleDriveHelper.GetFiles(service, Q);
@@ -125,37 +121,13 @@ namespace BBC.CloudManager
 
                 # region MyRegion
                 //// If there isn't a directory with this name lets create one.
-                //if (_Files.Count == 0)
-                //{
-                //    _Files.Add(GoogleDriveHelper.createDirectory(service, "Update_1.1", "Update_1.1", "root"));
-                //    // Assign Permissions
-                //    GoogleDriveHelper.InsertPermission(service, _Files[0].Id, "dsb6063@gmail.com", "user", "owner");
-                //}
 
                 // We should have a directory now because we either had it to begin with or we just created one.
-                //if (_Files.Count != 0)
-                //{
 
-                //    // This is the ID of the directory 
-                //   // string directoryId = _Files[0].Id;
 
-                //    ////Upload a file
-                //    //File newFile = GoogleDriveHelper.uploadFile(service, @"c:\GoogleDevelop\PGASurfLog.txt", directoryId);
-                //    //// Assign Permissions
-                //    GoogleDriveHelper.InsertPermission(service, CurrentVersion.Id, "dsb6063@gmail.com", "user", "owner");
-                //    //// Update The file
-                //    //File UpdatedFile = GoogleDriveHelper.updateFile(service, @"c:\GoogleDevelop\PGASurfLog.txt", directoryId, newFile.Id);
-                //    // Download the file
-                //    CurrentVersion.DownloadUrl = CurrentVersion.AlternateLink;
-                //    GoogleDriveHelper.downloadFile(service, CurrentVersion, String.Format( @"c:\GoogleDevelop\{0}.zip",CurrentVersion.Title));
-                //    // delete The file
-                //    //FilesResource.DeleteRequest request = service.Files.Delete(newFile.Id);
-                //    //request.Execute();
-                //}  
 # endregion
 
                 // Getting a list of ALL a users Files (This could take a while.)
-                //_Files = GoogleDriveHelper.GetFiles(service, null);
                 if (selected.FirstOrDefault() != null)
                 {
                     foreach (File item in selected)
@@ -400,11 +372,6 @@ namespace BBC.CloudManager
                               String.Format("{0}.{1}", p.majbuild, p.minbuild)).FirstOrDefault();
                 #region Advanced
                 //	
-                //	var build        =   b.Split(new char[] {'.'}, 5); 
-                //	var majbuild     =   build[0].Dump("maj");
-                //	var dbversion    =   build[1].Dump("db");
-                //	var civilversion =   build[2].Dump("civilversion");
-                //	var minbuild     =   build[3].Dump("minbuild");
                 #endregion
                 
                 var selected =  String.Format("DatabaseManager-{0}.exe", ordered.build);

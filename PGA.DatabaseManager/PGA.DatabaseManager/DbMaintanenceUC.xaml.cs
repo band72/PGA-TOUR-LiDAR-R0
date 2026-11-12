@@ -60,7 +60,6 @@ namespace PGA.DbMaintanenceUC
                     ConnectionStringSettings conSetting = new ConnectionStringSettings();
                     conSetting = ConfigHelper.save_new_connection(commands.GetConnectionString());
 
-                   // engine.Repair(conSetting.ConnectionString, RepairOption.RecoverAllPossibleRows);
                      await CallEngineRepairAsync();                   
                 }
             }
@@ -119,7 +118,6 @@ namespace PGA.DbMaintanenceUC
                 {
                     DatabaseLogs.FormatLogs("cmdClear_Click: " + ex1.Message);
                 }
-                // PGA.MessengerManager.MessengerManager.ShowMessage(("Complete!"));
 
             });
             t.Wait();

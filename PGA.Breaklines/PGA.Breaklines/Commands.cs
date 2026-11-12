@@ -286,7 +286,6 @@ namespace PGA.Breaklines
             var acDoc = acDocMgr.Add(strTemplatePath);
 
             acDocMgr.MdiActiveDocument = acDoc;
-            //AcadUtilities.AcadUtilities.SendStringToExecute("._PGA-RegEvent001\n");
             AcadUtilities.AcadUtilities.SendStringToExecute("._PGA-OpenDWG\n");
             AcadUtilities.AcadUtilities.SendStringToExecute("._PGA-AddBreaklines\n");
         }
@@ -298,7 +297,6 @@ namespace PGA.Breaklines
         public static void OpenDrawing()
         {
             //var name = @"C:\Civil 3D Projects\PGA-SPORTSVISION\TINSURF-20160429-174844\SportVision\HOLE01\" +
-            //          "SV-TPC-Louisiana-Clipped-For-SV01.DWG";
             var strFileName = GetDrawingNameFromDB();
             var acDocMgr = Application.DocumentManager;
 
@@ -358,27 +356,6 @@ namespace PGA.Breaklines
             OpenDrawingForProcessing(name);
 
 
-            //if (!IsLocked())
-            //{
-            //    EnableLock();
-            //    //debug only
-            //    //usedDrawings.Clear();
-            //    foreach (var dwg in _ListofDrawings)
-            //    {
-            //        //if (usedDrawings.Contains(dwg))
-            //        //    continue;
-            //        //usedDrawings.Add(dwg);
-            //        OpenDrawingForProcessing(dwg);
-            //        goto End;
-            //    }
-            //    End:
-            //    DisableLock();
-            //}
-            //else
-            //{
-            //   PGA.MessengerManager.MessengerManager.
-            //        AddLog("Drawing is Locked!");
-            //}
         }
 
         /// <summary>
@@ -392,12 +369,6 @@ namespace PGA.Breaklines
             {
                 using (var doc = docMgr.Open(filename, false))
                 {
-                    //using (doc.LockDocument())
-                    //{
-                    //    Application.DocumentManager.MdiActiveDocument = doc;
-                    //    var db = doc.Database;
-                    //    var ed = doc.Editor;
-                    //}
                 }
             }
         }
@@ -598,9 +569,7 @@ namespace PGA.Breaklines
 
                     //Use lambda extension method
 
-                    //ids = b.Where(id => id.ObjectClass.DxfName.ToUpper() == "LINE" ||
 
-                    //    id.ObjectClass.DxfName.ToUpper() == "LWPOLYLINE").ToList<ObjectId>();
 
                     #endregion
 
@@ -636,24 +605,16 @@ namespace PGA.Breaklines
 
                 var exfeaturelines = GetSurfaceEntityIDs(CivilApplicationManager.WorkingDatabase);
 
-                //var poly3DCollection = new List<Polyline3d>();
 
                 using (Application.DocumentManager.MdiActiveDocument.LockDocument())
                 {
                     foreach (var featurelineId in exfeaturelines)
                     {
-                        //if (usedFeatureLines.Contains(featurelineId))
-                        //    continue;
 
-                        //usedFeatureLines.Add(featurelineId);
                         breaklines.AddStandardBreakline(surfaceId, featurelineId, "");
                         //var poly3d = breaklines.AddCivil2016ElevationsToFeature
-                        //    (surfaceId, featurelineId, siteId, null);
 
-                        //poly3DCollection.Add(poly3d);
-                        //poly3d.Dispose();
 
-                        // break;
                     }
                 }
             }
@@ -715,7 +676,6 @@ namespace PGA.Breaklines
         {
             try
             {
-                // HideAmbientSettingsShowEvntVwer();
 
                 var surfaceId = breaklines.FindCivilTinSurface("All");
                 var siteId = breaklines.GetSiteId(surfaceId);
@@ -727,33 +687,18 @@ namespace PGA.Breaklines
 
                 var poly3DCollection = new List<Polyline3d>();
 
-                //using (Application.DocumentManager.MdiActiveDocument.LockDocument())
-                //{
                 foreach (var featurelineId in exfeaturelines)
                 {
-                    //return;
-                    // usedFeatureLines.Clear();
                     if (usedFeatureLines.Contains(featurelineId))
                         return;
 
                     usedFeatureLines.Add(featurelineId);
 
                     //var poly3d = breaklines.AddCivil2016ElevationsToFeature
-                    //    (surfaceId, featurelineId, siteId, null);
 
-                    //if (Math.Abs(poly3d.StartPoint.Z) < 0.01)
-                    //{
-                    //    MessengerManager.MessengerManager.AddLog("Z-Value not Extracted! " + featurelineId);
-                    //}
 
-                    //poly3DCollection.Add(poly3d);
-                    //poly3d.Dispose();
                     break;
                 }
-                //}
-                // SetAmbientSettingsShowEvntVwer();
-                //AcadUtilities.AcadUtilities.SendStringToExecute
-                //    ("._PGA-AddFeatureLinesElevBySurf\n");
             }
             catch (Exception ex)
             {
@@ -775,11 +720,8 @@ namespace PGA.Breaklines
                     GetIdsByTypeTypeValue("POLYLINE",
                         "LWPOLYLINE", "POLYLINE2D");
                 // Get the document
-                //var doc = Application.DocumentManager.MdiActiveDocument;
 
                 //// Get the editor to make the selection
-                //Editor oEd = doc.Editor;
-                //oEd.Command();
                 AcadUtilities.AcadUtilities.SendStringToExecute
                     ("._CreateFeatureLines\n");
 
@@ -828,16 +770,10 @@ namespace PGA.Breaklines
 
                         {
                             //var poly3d = breaklines.AddCivil2016ElevationsToFeature
-                            //    (surfaceId, featurelineId, siteId, null);
 
-                            //if (Math.Abs(poly3d.StartPoint.Z) < 0.01)
-                            //{
-                            //    MessengerManager.MessengerManager.AddLog("Z-Value not Extracted! " + featurelineId);
-                            //}
                             tr.Commit();
                         }
                     }
-                    // break;
                 }
                 SetAmbientSettingsShowEvntVwer();
             }
@@ -862,7 +798,6 @@ namespace PGA.Breaklines
                     var dir = Path.GetDirectoryName(filepath);
                     var file = "SV-3DP-" + filename;
                     var output = Path.Combine(dir, file);
-                    //filepath = filepath.Replace("SV", "SV-3DP");
                     _drawingName = output;
                     AddPoly3DToSideDB();
                 }
@@ -920,7 +855,6 @@ namespace PGA.Breaklines
         {
             try
             {
-                // HideAmbientSettingsShowEvntVwer();
 
                 var surfaceId = breaklines.FindCivilTinSurface("All");
                 var siteId = breaklines.GetSiteId(surfaceId);
@@ -941,7 +875,6 @@ namespace PGA.Breaklines
             }
         }
 
-        // [CommandMethod("PGA-OpenDrawingForProcessing",CommandFlags.Session)]
         /// <summary>
         /// Initializes the timer v2.
         /// </summary>
@@ -949,32 +882,14 @@ namespace PGA.Breaklines
         {
             try
             {
-                //_time = time;
-                //_drawingName = name;
-                //_directory = Path.GetDirectoryName(name);
 
-                //_polyCollection = new ObjectIdCollection();
-                // Breaklines breaklines = new Breaklines(_time,_ListofDrawings);
-                //SelectPolylines selectPolylines = new SelectPolylines();
-                //CreateTINSurface surface = new CreateTINSurface();
                 OpenDrawingForProcessing();
-                //using (Application.DocumentManager.MdiActiveDocument.LockDocument())
-                //{
 
-                //var surfaceId = breaklines.FindCivilTinSurface("All");
-                //surface.SetSurfaceStyleToStandard(surfaceId);
-                //var siteId = breaklines.GetSiteId(surfaceId);
-                //var polycollection = selectPolylines.GetIdsByTypeTypeValue("POLYLINE", "LWPOLYLINE", "POLYLINE2D");
 
-                //_siteId = siteId;
-                //_surObjectId = surfaceId;
-                //_polyCollection = polycollection;
 
 
                 ////breaklines.GetDrawingName(time, name);
-                //AddBreaklinesByCommandLine();
 
-                //}
             }
             catch (Exception ex)
             {

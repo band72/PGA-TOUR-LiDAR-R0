@@ -29,12 +29,6 @@ namespace TestFeatureLineIssues
                         surface.BoundariesDefinition;
                     if (points.Count == 0)
                     {
-                        //throw new ArgumentException(
-                        //    String.Format("Len={0} Nodes={1} Layer={2} Oid={3}",
-                        //    poly.Length.ToString(),
-                        //    poly.NumberOfVertices.ToString(),
-                        //    poly.Layer.ToString(),
-                        //    poly.ObjectId.ToString()), "AddStandardBoundary");
                     }
                     else
                     {

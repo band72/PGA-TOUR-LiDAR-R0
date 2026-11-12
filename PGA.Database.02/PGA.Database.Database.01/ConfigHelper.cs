@@ -10,17 +10,12 @@ namespace PGA.Database
     {
         public static void WriteToConfigFile(string filename)
         {
-            //string ConStrng = ConfigurationSettings.AppSettings["ConnectionString"];
             var ConStrng = ConfigurationManager.AppSettings["ConnectionString"];
-            //var sss = "Data Source=";
-            //var xxx = ";Initial Catalog=AlfalahScholarship;Integrated Security=True";
-            //ConfigurationSettings.AppSetting;
             var config =
                 ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             //Get the appSettings section.
             var appSettings = (AppSettingsSection) config.GetSection("appSettings");
             appSettings.Settings.Remove("ConnectionString");
-            // appSettings.Settings.Add("ConnectionString", sss + txtServerName.Text + xxx);
             appSettings.Settings.Add("ConnectionString", filename);
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection(config.AppSettings.SectionInformation.Name);

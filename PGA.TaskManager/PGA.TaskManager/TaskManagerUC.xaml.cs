@@ -258,7 +258,6 @@ namespace PGA.TaskManager
                         val.DateStamp);
                     stack.Function = command;
                     context.DrawingStack.InsertOnSubmit(stack);
-                    // PointClouds.Add(stack);
                 }
 
                 context.SubmitChanges();

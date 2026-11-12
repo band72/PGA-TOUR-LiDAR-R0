@@ -45,7 +45,6 @@ namespace PGA.SportVision
     /// </summary>
     /// <seealso cref="IExtensionApplication" />
     /// <seealso cref="IExtensionApplication" />
-    //[Guid("BD0E85E0-A337-46AF-AB37-0361A29E4793")]
     public class Program : IExtensionApplication
     {
         /// <summary>
@@ -88,31 +87,14 @@ namespace PGA.SportVision
         /// </summary>
         public void Initialize()
         {
-            //CheckLicense();        
             UnlockCommands(Active.Document);
             SetVars();
         }
 
-        //public void CheckLicense()
-        //{
 
-        //    string validationKey = "AMAAMACXzj93e8s9bIS8UuZvusf/D7IO1UWpAxWh2vC8Nut3IW+jb2AoeFqfZHqET987518DAAEAAQ==";
 
         //    CryptoLicense license =
-        //        new CryptoLicense(
-        //            "FgYgAQZR4Lqr+9EBLQAtAI4L6uQ0C+iPK4/csW+OUek71NG7zna74lhnvRQ2NH2bdP4rieW+618T4iORCVO9sg==",
-        //            validationKey);
-        //    if (license.Status != LicenseStatus.Valid)
-        //    {
-        //        throw new ApplicationException("License validation failed");
-        //    }
-        //    else
-        //    {
-        //        UnlockCommands(Active.Document);
-        //        SetVars();
-        //    }
 
-        //}
 
         /// <summary>
         ///     Terminates this instance.
@@ -144,17 +126,6 @@ namespace PGA.SportVision
         {
             try
             {
-                #region Comments
-
-                //var doc = (Document)sender;
-                //if (doc.CommandInProgress == "DeleteDuplicates")
-                //{
-                //    if (Stopwatch.Elapsed > MaxWait)
-                //    Counter++;
-                //    doc.Editor.Command("PGA-StartSportVisionSynch");
-                //} 
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -167,7 +138,6 @@ namespace PGA.SportVision
         /// </summary>
         private static void SetVars()
         {
-            //Application.SetSystemVariable("SURFACEASSOCIATIVITY", 0);
             Application.SetSystemVariable("FILEDIA", 0);
             Application.SetSystemVariable("NOMUTT", 0);
             Application.SetSystemVariable("CMDECHO", 0);
@@ -192,7 +162,6 @@ namespace PGA.SportVision
         /// </summary>
         private static void ResetVars()
         {
-            //Application.SetSystemVariable("SURFACEASSOCIATIVITY", 3);
             Application.SetSystemVariable("FILEDIA", 1);
             Application.SetSystemVariable("NOMUTT", 0);
             Application.SetSystemVariable("CMDECHO", 1);
@@ -260,7 +229,6 @@ namespace PGA.SportVision
                 ed.Document.SendStringToExecute(".PGA-RefinePolylines\n", true, false, true);
                 AcadUtilities.SendStringToExecute(".ZoomExtents\n");
                 ed.Document.SendStringToExecute(".PGA-SaveAS\n", true, false, true);
-                //ed.Document.SendStringToExecute(".PGA-CloseActiveDWG\n", true, false, true);
                 ed.Document.SendStringToExecute(".PGA-SV-Timer-Enable\n", true, false, true);
                 ResetVars();
             }
@@ -280,7 +248,6 @@ namespace PGA.SportVision
             {
                 var ed = Application.DocumentManager.MdiActiveDocument.Editor;
 
-                // ed.Command(".PGA-SportVision", 1, 1, 0);
 
                 AcadUtilities.SendStringToExecute(".ZoomExtents\n");
 
@@ -356,7 +323,6 @@ namespace PGA.SportVision
                             db.SaveAs(path, Acaddb.DwgVersion.Current);
                         }
 
-                        // Active.Document.CloseAndDiscard();
                     }
                 }
             }
@@ -378,7 +344,6 @@ namespace PGA.SportVision
                 var ordered = OrderPolylines(polyoId);
                 foreach (var p in ordered)
                 {
-                    //var polyline = GetObject(oid);
 
                     if (p == null) continue;
 
@@ -1124,9 +1089,7 @@ namespace PGA.SportVision
 
                     //Use lambda extension method
 
-                    //ids = b.Where(id => id.ObjectClass.DxfName.ToUpper() == "LINE" ||
 
-                    //    id.ObjectClass.DxfName.ToUpper() == "LWPOLYLINE").ToList<ObjectId>();
 
                     #endregion
 
@@ -2069,8 +2032,6 @@ namespace PGA.SportVision
                 #region Comments
 
                 // z->p0 + p1*tanh(x) + p2*tanh(y) + p3*x + p4*x*y;
-                //double[][] xy = new[] { new[] { x1, y1 }, new[] { x2, y2 }, new[] { x3, y3 }, ...  };
-                //double[] z = new[] { z1, z2, z3, ... }; 
 
                 #endregion
 
@@ -2123,7 +2084,6 @@ namespace PGA.SportVision
                 {
                     ed.Command(".PGA-StartSportVisionSynch", 1, 1, 0);
                 }
-                //break;
             }
         }
 
@@ -2140,8 +2100,6 @@ namespace PGA.SportVision
             {
                 var selectedfile = Drawings.Skip(Counter).Take(1).FirstOrDefault();
 
-                //foreach (var filename in selectedfile)
-                //{
                 var doc = Application.DocumentManager.Open(selectedfile, true);
                 Application.DocumentManager.MdiActiveDocument = doc;
                 var db = doc.Database;
@@ -2150,7 +2108,6 @@ namespace PGA.SportVision
                 {
                     ed.Command(".PGA-StartSportVisionSynch", 1, 1, 0);
                 }
-                //}
             }
         }
 

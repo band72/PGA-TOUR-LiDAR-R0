@@ -31,21 +31,7 @@ namespace PGA_Tour_Civil_App
             public void Terminate()
             {
             }
-            //[CommandMethod("PGA-STARTCOALESCING", CommandFlags.Session)]
-            //public void StartCoalescing()
-            //{
-            //    try
-            //    {
-            //        AcadUtilities.WriteMessage("Starting StartCoalescing \n\n");
-            //        PGA.CourseCoalesceProject.Coalesce.LoadandProcessPolys();
 
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        AcadUtilities.WriteMessage(ex.Message);
-            //        PGA.MessengerManager.MessengerManager.AddLog(ex.Message);
-            //    }
-            //}
 
             [CommandMethod("PGA-CHECK")]
             public void CheckDrawing()

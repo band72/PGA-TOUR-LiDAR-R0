@@ -238,7 +238,6 @@ namespace PGA.DatabaseManager
                 try
                 {
                     string curr = MainWindow.Version.ToString();
-                    //string curr = commands.GetCurrentBuild();
                     string prev = commands.GetCurrentInstalledBuild();
                     if (curr != prev)
                     {
@@ -328,7 +327,6 @@ namespace PGA.DatabaseManager
                 this.txtTemplatePath.Text = string.Empty;
                 this.txtServerPath.Text = string.Empty;
                 this.txtNewDWGPath.Text = string.Empty;
-               // this.txtNewDXFPath.Text = string.Empty;
                 this.txtManager.Text = string.Empty;
                 this.txtPrjectCity.Text = string.Empty;
                 this.txtProjectName.Text = string.Empty;
@@ -517,7 +515,6 @@ namespace PGA.DatabaseManager
                     this.TestAccess(this.txtPolylinePath.Text);
                     this.TestAccess(this.txtTemplatePath.Text);
                     this.TestAccess(this.txtNewDWGPath.Text);
-                    //this.TestAccess(this.txtNewDXFPath.Text);
                     if ((string.IsNullOrEmpty(this.txtCourseName.Text) || string.IsNullOrEmpty(this.txtManager.Text) || string.IsNullOrEmpty(this.txtPrjectCity.Text) || string.IsNullOrEmpty(this.txtState.Text) || string.IsNullOrEmpty(this.txtSurveyor.Text) || string.IsNullOrEmpty(this.txtProjectName.Text) ? false : !string.IsNullOrEmpty(this.txtCourseCode.Text)))
                     {
                         this.Testing = true;
@@ -533,8 +530,6 @@ namespace PGA.DatabaseManager
                 else
                 {
                     LoadCourseInfoToTextboxes();
-                    //this.CourseCode = "000";
-                    //this.txtCourseCode.Text = "000";
                     PGA.MessengerManager.MessengerManager.ShowMessage("Please enter the 3 digit Course Code!");
                     this.ErrorMessage = "Please enter the 3 digit Course Code!";
                 }
@@ -763,7 +758,6 @@ namespace PGA.DatabaseManager
                 chk3DPolys.IsChecked = GSettings.Out3DPolys == true ? true : false;
                 chkProbing.IsChecked = GSettings.Probing == true ? true : false;
                 chkCreate2013DXF.IsChecked = GSettings.CreateDXF == true ? true : false;
-                //chkSimplifyPolylines.IsChecked = GSettings.SimplifyPlines == true ? true : false;
                 chkOmitSDXF.IsChecked = GSettings.SkipSDxf == true ? true : false;
                 chkCreateBL.IsChecked = GSettings.CreateBreaklines == true ? true : false;
                 chkDuplicates.IsChecked = GSettings.DuplicateSurfaces == true ? true : false;
@@ -776,7 +770,6 @@ namespace PGA.DatabaseManager
                 txtTemplatePath.Text = GSettings.TemplateDWG;
                 txtServerPath.Text = GSettings.SeverPath;
                 txtNewDWGPath.Text = GSettings.DestinationFolder;
-                //txtNewDXFPath.Text = GSettings.DestDXFFolder;
                 txtCourseCode.Text = GSettings.CourseCode.ToString();
                 txtCourseName.Text = GSettings.CourseName;
                 txtUserName.Text = GSettings.ProjectCreator;
@@ -909,8 +902,6 @@ namespace PGA.DatabaseManager
                         settings.CourseName = txtCourseName.Text;
                         settings.SkipSDxf = GetValueFromCheckBox(chkOmitSDXF);
                         settings.CreateDXF = GetValueFromCheckBox(chkCreate2013DXF);
-                        //settings.CreateHolesXX = GetValueFromCheckBox(chkCreateHoles);
-                        //settings.Smoothing = GetValueFromCheckBox(chkSmoothing);
                         settings.PDFReport = GetValueFromCheckBox(chkPDFReport);
                         settings.Out3DPolys = GetValueFromCheckBox(chk3DPolys);
                         settings.SimplifyPlines = GetValueFromCheckBox(chkSimplifyPolylines);
@@ -921,7 +912,6 @@ namespace PGA.DatabaseManager
                         settings.SportVision = GetValueFromCheckBox(chkSportVision);
                         settings.Probing = GetValueFromCheckBox(chkProbing);
                         settings.DuplicateSurfaces = GetValueFromCheckBox(chkDuplicates);
-                        //settings.DestDXFFolder = txtNewDXFPath.Text;
                         settings.DestinationFolder = txtNewDWGPath.Text;
                         settings.GlobalPointFilePath = txtPointPath.Text;
                         settings.GlobalPolylineFilePath = txtPolylinePath.Text;
@@ -930,10 +920,8 @@ namespace PGA.DatabaseManager
                         settings.ProjectDate = DateCreated;
                         settings.ProjectManager = txtManager.Text;
                         settings.ProjectSurveyor = txtSurveyor.Text;
-                        //settings.SeverPath = txtServerPath.Text;
                         settings.ProjectName = txtProjectName.Text;
                         settings.ProjectState = txtState.Text;
-                        //settings.TemplateDWG = txtTemplatePath.Text;
                         settings.CourseCode = txtCourseCode.Text;
                         settings.TourCode = txtTOURCode.Text; //PGA.CourseName.UserControl1._courseTOURCode;
                         settings.SimplifyValue = UC_Simplify.SimplifyValue;

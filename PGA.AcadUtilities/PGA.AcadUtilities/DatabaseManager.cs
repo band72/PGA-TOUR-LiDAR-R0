@@ -26,7 +26,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static ObjectId AddPolyline(Transaction trans, Point2dCollection points, string layername, bool isClosed)
         {
-            //_logger.Debug("Start AddPolyline");
             ObjectId id = ObjectId.Null;
            Autodesk.AutoCAD.DatabaseServices.Database db = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Database;
             Autodesk.AutoCAD.DatabaseServices.TransactionManager tm = db.TransactionManager;
@@ -48,7 +47,6 @@ namespace PGA.AcadUtilities
                 pline.Closed = isClosed;
                 id = AddToDatabase(db, pline, trans);
             }
-            //_logger.Debug("End AddPolyline");
             return id;
         }
 
@@ -63,7 +61,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static ObjectId AddPolyline(Transaction trans, Point2dCollection points, string layername, bool isClosed, int colorIndex)
         {
-            //_logger.Debug("Start AddPolyline");
             ObjectId id = ObjectId.Null;
            Autodesk.AutoCAD.DatabaseServices.Database db = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Database;
             Autodesk.AutoCAD.DatabaseServices.TransactionManager tm = db.TransactionManager;
@@ -88,7 +85,6 @@ namespace PGA.AcadUtilities
                 pline.Closed = isClosed;
                 id = AddToDatabase(db, pline, trans);
             }
-            //_logger.Debug("End AddPolyline");
             return id;
         }
 
@@ -103,7 +99,6 @@ namespace PGA.AcadUtilities
         /// <returns>ObjectId.</returns>
         public static ObjectId AddPolyline3d(Autodesk.AutoCAD.DatabaseServices.Database sidedb, Polyline3d pline, string layername, bool isClosed, int colorIndex)
         {
-            //_logger.Debug("Start AddPolyline");
             ObjectId id = ObjectId.Null;
            Autodesk.AutoCAD.DatabaseServices.Database db = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Database;
             HostApplicationServices.WorkingDatabase = sidedb;
@@ -123,7 +118,6 @@ namespace PGA.AcadUtilities
                     {
                         pline.ColorIndex = colorIndex;
                     }
-                    //int index = 0;
 
                     pline.Closed = isClosed;
                     id = AddToDatabase(sidedb, pline, tr);
@@ -131,7 +125,6 @@ namespace PGA.AcadUtilities
                     tr.Commit();
                 }
             }
-            //_logger.Debug("End AddPolyline");
             return id;
         }
 
@@ -147,7 +140,6 @@ namespace PGA.AcadUtilities
         /// <returns>ObjectId.</returns>
         public static ObjectId AddPolyline3d(Autodesk.AutoCAD.DatabaseServices.Database sidedb, Point3dCollection points, string layername, bool isClosed, int colorIndex)
         {
-            //_logger.Debug("Start AddPolyline");
             ObjectId id = ObjectId.Null;
            Autodesk.AutoCAD.DatabaseServices.Database db = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Database;
             HostApplicationServices.WorkingDatabase = sidedb;
@@ -164,8 +156,6 @@ namespace PGA.AcadUtilities
                     {
                         pline.ColorIndex = colorIndex;
                     }
-                   // int index = 0;
-                   // double width = 0.0;
 
                     foreach (PolylineVertex3d pt in points)
                     {
@@ -178,7 +168,6 @@ namespace PGA.AcadUtilities
                     tr.Commit();
                 }
             }
-            //_logger.Debug("End AddPolyline");
             return id;
         }
 
@@ -194,7 +183,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static ObjectId AddPredefinedHatch(Transaction trans, Point2dCollection points, string layername, bool isClosed, string patternName)
         {
-            //_logger.Debug("Start AddPredefinedHatch");
             ObjectId id = ObjectId.Null;
            Autodesk.AutoCAD.DatabaseServices.Database db = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Database;
             Autodesk.AutoCAD.DatabaseServices.TransactionManager tm = db.TransactionManager;
@@ -207,7 +195,6 @@ namespace PGA.AcadUtilities
                 id = AddToDatabase(db, hatch, trans);
 
                 hatch.UpgradeOpen();
-                //hatch.HatchStyle = HatchStyle.Outer;
                 hatch.Associative = true;
                 hatch.PatternScale = 100.0;
                 hatch.SetHatchPattern(HatchPatternType.PreDefined, patternName);
@@ -223,7 +210,6 @@ namespace PGA.AcadUtilities
                 hatch.AppendLoop(loop);
                 hatch.EvaluateHatch(true);
             }
-            //_logger.Debug("End AddPredefinedHatch");
             return id;
         }
 
@@ -234,13 +220,11 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static Point3d GetHatchMidPoint(Hatch hatch)
         {
-            //_logger.Debug("Start GetHatchMidPoint");
             // get the middle of the extents
             //
             double midPointX = hatch.GeometricExtents.MinPoint.X + ((hatch.GeometricExtents.MaxPoint.X - hatch.GeometricExtents.MinPoint.X) * 0.5);
             double midPointY = hatch.GeometricExtents.MinPoint.Y + ((hatch.GeometricExtents.MaxPoint.Y - hatch.GeometricExtents.MinPoint.Y) * 0.5);
 
-            //_logger.Debug("End GetHatchMidPoint");
             return new Point3d(midPointX, midPointY, hatch.GeometricExtents.MaxPoint.Z);
         }
 
@@ -278,7 +262,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static ObjectId AddMText(Transaction trans, Point3d insert, string text, string layer, string textStyle, double height, double rotation)
         {
-            //_logger.Debug("Start AddMText");
             try
             {
                Autodesk.AutoCAD.DatabaseServices.Database db = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Database;
@@ -307,7 +290,6 @@ namespace PGA.AcadUtilities
 
                 id = AddToDatabase(db, itemText, trans);
 
-                //_logger.Debug("End AddMText");
                 return id;
             }
             catch (System.Exception ex)
@@ -331,7 +313,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static ObjectId AddMText(Transaction trans, Point3d insert, string text, string layer, string textStyle, double height, double rotation, int colorIndex)
         {
-            //_logger.Debug("Start AddMText");
             try
             {
                Autodesk.AutoCAD.DatabaseServices.Database db = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Database;
@@ -361,7 +342,6 @@ namespace PGA.AcadUtilities
 
                 id = AddToDatabase(db, itemText, trans);
 
-                //_logger.Debug("End AddMText");
                 return id;
             }
             catch (System.Exception ex)
@@ -385,7 +365,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static ObjectId AddDBText(Transaction trans, Point3d insert, string text, string layer, string textStyle, double height, double rotation, TextHorizontalMode horizontalMode)
         {
-            //_logger.Debug("Start AddDBText");
             try
             {
                Autodesk.AutoCAD.DatabaseServices.Database db = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Database;
@@ -419,7 +398,6 @@ namespace PGA.AcadUtilities
 
                 id = AddToDatabase(db, itemText, trans);
 
-                //_logger.Debug("End AddDBText");
                 return id;
             }
             catch(System.Exception ex)
@@ -442,7 +420,6 @@ namespace PGA.AcadUtilities
         public static ObjectId AddToDatabase(Autodesk.AutoCAD.DatabaseServices.Database db, Entity databaseObject, Transaction trans)
         {
             ObjectId id = ObjectId.Null;
-            //_logger.Debug("Start AddToDatabase");
             try
             {
                 using (BlockTable blockTable = (BlockTable)trans.GetObject(db.BlockTableId, OpenMode.ForRead))
@@ -453,14 +430,8 @@ namespace PGA.AcadUtilities
                         trans.AddNewlyCreatedDBObject(databaseObject, true);
                     }
                 }
-                //_logger.Debug("End AddToDatabase");
                 return id;
             }
-            //catch (Autodesk.AutoCAD.Runtime.Exception arex)
-            //{
-            //    ////_logger.Debug("Object already in database", arex);
-            //    //System.Diagnostics.Debug.WriteLine(databaseObject.GetType().Name + " already in database");
-            //}
 
             catch (System.Exception ex)
             {
@@ -478,7 +449,6 @@ namespace PGA.AcadUtilities
         /// <param name="xData">The x data.</param>
         public static void SetXData(Transaction transaction, ObjectId objectId, string applicationName, ResultBuffer xData)
         {
-            //_logger.Debug("Start SetXData");
             if (transaction == null) throw new ArgumentNullException("transaction");
             if (transaction.IsDisposed) throw new ArgumentException("transaction is disposed", "transaction");
 
@@ -493,7 +463,6 @@ namespace PGA.AcadUtilities
 
             Entity entity = transaction.GetObject(objectId, OpenMode.ForWrite) as Entity;
             entity.XData = xData;
-            //_logger.Debug("End SetXData");
         }
 
         /// <summary>
@@ -505,7 +474,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static TypedValue[] GetXData(Transaction transaction, ObjectId objectId, string applicationName)
         {
-            //_logger.Debug("Start GetXData");
             if (transaction == null) throw new ArgumentNullException("transaction");
             if (transaction.IsDisposed) throw new ArgumentException("transaction is disposed", "transaction");
 
@@ -530,7 +498,6 @@ namespace PGA.AcadUtilities
         /// <returns>The XData value or null if not found or error caught</returns>
         public static TypedValue[] GetXData(Entity entity, string applicationName)
         {
-            //_logger.Debug("Start GetXData");
             if (entity == null) throw new NullReferenceException("entity is null");
             if (string.IsNullOrEmpty(applicationName)) throw new NullReferenceException("applicationName is null");
 
@@ -552,7 +519,6 @@ namespace PGA.AcadUtilities
         /// <returns>Empty dictionary if no EED found for application</returns>
         public static Dictionary<string, string> GetEED(Entity entity, string applicationName)
         {
-            //_logger.Debug("Start GetEED");
             Dictionary<string, string> eedDict = new Dictionary<string, string>();
             TypedValue[] resArr = GetXData(entity, applicationName);
 
@@ -574,7 +540,6 @@ namespace PGA.AcadUtilities
                 }
 
             }
-            //_logger.Debug("End GetEED");
             return eedDict;
         }
 
@@ -585,7 +550,6 @@ namespace PGA.AcadUtilities
         /// <param name="eedDict">The key-value pair of the EED data.</param>
         public static void SetEED(Transaction trans, ObjectId objId, Dictionary<string, string> eedDict, string appname)
         {
-            //_logger.Debug("Start SetEED");
             using (ResultBuffer resBuffer = new ResultBuffer())
             {
                 resBuffer.Add(new TypedValue((int)DxfCode.ExtendedDataRegAppName, appname));
@@ -601,7 +565,6 @@ namespace PGA.AcadUtilities
 
                 SetXData(trans, objId, appname, resBuffer);
             }
-            //_logger.Debug("End SetEED");
         }
 
         /// <summary>
@@ -622,7 +585,6 @@ namespace PGA.AcadUtilities
         /// <param name="sendToTop">The draw order.</param>
         public static void SetDisplayOrder(Transaction transaction, ObjectIdCollection oids, bool sendToTop)
         {
-            //_logger.Debug("Start SetDisplayOrder");
             if (oids == null) throw new NullReferenceException("oids is null");
 
             // verify the arguments
@@ -678,7 +640,6 @@ namespace PGA.AcadUtilities
                 trans.Commit();
                 trans.Dispose();
             }
-            //_logger.Debug("End SetDisplayOrder");
         }
     }
 }

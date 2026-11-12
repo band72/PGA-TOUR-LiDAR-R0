@@ -76,35 +76,9 @@ namespace PGA.Database
         }
 
 
-        //public IQueryable<PGA.DataContext.Logs> FilterLogsForErrors()
-        //{
-        //    try
-        //    {
-        //        IQueryable<PGA.DataContext.Logs> results = null;
-        //        using (var context = GetDataBasePath.GetSql4Connection())
-        //        {
         //            var logs = (from p in context.Logs
-        //                        select p);
 
-        //            if (logs.FirstOrDefault() != null)
-        //            {
-        //                results = logs.Where(p => p.Issue.Contains("Alert") ||
-        //                        p.Issue.Contains("Exception") ||
-        //                        p.Issue.Contains("Error") ||
-        //                        p.Issue.Contains("Locked") ||
-        //                        p.Issue.Contains("Runtime"));
-        //                ;
-        //            }
-        //        }
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        PGA.Database.DatabaseLogs
-        //            .FormatLogs(ex.Message);
-        //    }
-        //    return null;
-        //}
 
         public List<Logs> FilterLogsForErrors()
         {
@@ -1551,18 +1525,7 @@ namespace PGA.Database
                         #region Single Task is Deprecated
 
                         //var tasks = (from p in context.TaskManager
-                        //    where p.Started == true &&
-                        //          p.Completed == false
-                        //    select p);
 
-                        //if (tasks != null)
-                        //{
-                        //    var dwgs = (from p in context.DrawingStack
-                        //        where p.DateStamp.Equals(tasks.DateStamp)
-                        //        select p);
-                        //    if (dwgs != null)
-                        //        return dwgs.ToList();
-                        //}  
 
                         #endregion
                     }
@@ -2454,7 +2417,6 @@ namespace PGA.Database
             using (var context = GetDataBasePath.GetSql4Connection())
             {
                 //Todo Add Task this when we condense
-                // var task = new Tasks();
 
 
                 foreach (var file in PolyLinefiles)
@@ -2480,11 +2442,7 @@ namespace PGA.Database
                     context.PointCloud.InsertOnSubmit(points);
                 }
 
-                //task.TimeStarted = dateCreated;
-                //task.IsCancelled = false;
-                //task.IsPaused = true;
 
-                //context.Tasks.InsertOnSubmit(task);
 
                 // submit changes
                 context.SubmitChanges();

@@ -311,7 +311,6 @@ namespace PGA.PlotManager
             {
                 // Create and select a new layout tab
 
-                //var id = LayoutManager.Current.CreateAndMakeLayoutCurrent("PGA-OUTPUT");
                 var id = LayoutManager.Current.GetLayoutId("TOUR-PUBLISH");
 
                 // Open the created layout
@@ -338,7 +337,6 @@ namespace PGA.PlotManager
               // Use the standard 10% margin around the viewport
               // (found by measuring pixels on screenshots of Layout1, etc.)
 
-              //vp.ResizeViewport(ext, 0.8);
 
               // Adjust the view so that the model contents fit
               if (ValidDbExtents(db.Extmin, db.Extmax))
@@ -348,7 +346,6 @@ namespace PGA.PlotManager
 
               // Finally we lock the view to prevent meddling
 
-              //vp.Locked = true;
                   }
                 );
 
@@ -403,7 +400,6 @@ namespace PGA.PlotManager
                       "DWF6 ePlot.pc3"
                     );
 
-                    //ext = lay.GetMaximumExtents();
 
                     lay.ApplyToViewport(
                       tr, 2,
@@ -417,14 +413,9 @@ namespace PGA.PlotManager
                       vp.ResizeViewport(ext, 0.8);
 
                       // Adjust the view so that the model contents fit
-                      //if (ValidDbExtents(db.Extmin, db.Extmax))
-                      //    {
-                      //        vp.FitContentToViewport(new Extents3d(db.Extmin, db.Extmax), 0.9);
-                      //    }
 
                       // Finally we lock the view to prevent meddling
 
-                      //vp.Locked = true;
                   }
                     );
 
@@ -481,7 +472,6 @@ namespace PGA.PlotManager
                 using (DsdEntry dsdDwgFile1 = new DsdEntry())
                 {
                     // Set the file name and layout
-                    //dsdDwgFile1.DwgName = filename;
                     dsdDwgFile1.DwgName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) 
                                           + @"\Autodesk\ApplicationPlugins\PGA-CivilTinSurf2018.bundle\Contents\Template\PGA_TOUR_PRINT.dwt";
                     dsdDwgFile1.Layout = "PGA-TOUR";  //"PGA-OUTPUT";
@@ -499,19 +489,8 @@ namespace PGA.PlotManager
                 #region Define Second Layout
 
                 //// Define the second layout
-                //using (DsdEntry dsdDwgFile2 = new DsdEntry())
-                //{
-                //    // Set the file name and layout
-                //    dsdDwgFile2.DwgName = "C:\\AutoCAD\\Samples\\Sheet Sets\\Architectural\\A-02.dwg";
-                //    dsdDwgFile2.Layout = "ELEVATIONS";
-                //    dsdDwgFile2.Title = "A-02 ELEVATIONS";
 
-                //    // Set the page setup override
-                //    dsdDwgFile2.Nps = "";
-                //    dsdDwgFile2.NpsSourceDwg = "";
 
-                //    dsdDwgFiles.Add(dsdDwgFile2);
-                //} 
                 #endregion
 
                 // Set the properties for the DSD file and then write it out
@@ -581,19 +560,8 @@ namespace PGA.PlotManager
                 #region Define Second Layout
 
                 //// Define the second layout
-                //using (DsdEntry dsdDwgFile2 = new DsdEntry())
-                //{
-                //    // Set the file name and layout
-                //    dsdDwgFile2.DwgName = "C:\\AutoCAD\\Samples\\Sheet Sets\\Architectural\\A-02.dwg";
-                //    dsdDwgFile2.Layout = "ELEVATIONS";
-                //    dsdDwgFile2.Title = "A-02 ELEVATIONS";
 
-                //    // Set the page setup override
-                //    dsdDwgFile2.Nps = "";
-                //    dsdDwgFile2.NpsSourceDwg = "";
 
-                //    dsdDwgFiles.Add(dsdDwgFile2);
-                //} 
                 #endregion
 
 
@@ -619,8 +587,6 @@ namespace PGA.PlotManager
                 {
                     dsdFileData.PromptForDwfName = false;
                     // Set the target information for publishing
-                    //dsdFileData.DestinationName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\PGA-Publish.pdf";
-                    //dsdFileData.ProjectPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\";
                     dsdFileData.DestinationName = completepath;    //PGA-Publish.pdf;
                     dsdFileData.ProjectPath = Path.GetDirectoryName(completepath);
 
@@ -630,12 +596,10 @@ namespace PGA.PlotManager
                     dsdFileData.SetDsdEntryCollection(dsdDwgFiles);
 
                     // Set the general publishing properties
-                    //dsdFileData.LogFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\myBatch.txt";
                     dsdFileData.LogFilePath = Path.ChangeExtension(path, "txt"); // "\\myBatch.txt";
 
 
                     // Create the DSD file
-                    //dsdFileData.WriteDsd(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\batchdrawings2.dsd");
                     dsdFileData.WriteDsd(Path.ChangeExtension(path, "dsd")); //"\\batchdrawings2.dsd");
                     try
                     {
@@ -644,7 +608,6 @@ namespace PGA.PlotManager
 
                         using (DsdData dsdDataFile = new DsdData())
                         {
-                            //dsdDataFile.ReadDsd(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\batchdrawings2.dsd");
                             dsdDataFile.ReadDsd(Path.ChangeExtension(path, "dsd")); // + "\\batchdrawings2.dsd");
                             // Get the DWG to PDF.pc3 and use it as a 
                             // device override for all the layouts

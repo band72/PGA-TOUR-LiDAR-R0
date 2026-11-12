@@ -43,7 +43,6 @@ namespace BBC.UCSHelper
                         acUCSTbl.Add(acUCSTblRec);
                         acTrans.AddNewlyCreatedDBObject(acUCSTblRec, true);
 
-                        //acUCSTblRec.Dispose();
                     }
                     else
                     {

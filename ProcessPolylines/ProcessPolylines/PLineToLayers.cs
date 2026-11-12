@@ -84,15 +84,11 @@ namespace PGA.Autodesk.Utils
 
         private static void InteratePolyLines(ObjectId selectedObjectId, Database db)
         {
-            //Document doc = Application.DocumentManager.MdiActiveDocument;
-            //Editor ed = doc.Editor;
-            //Database db = doc.Database;
             Transaction tr = db.TransactionManager.StartTransaction();
 
             // Get the current UCS
 
             //CoordinateSystem3d ucs =
-            //    ed.CurrentUserCoordinateSystem.CoordinateSystem3d;
 
             using (tr)
             {
@@ -109,12 +105,10 @@ namespace PGA.Autodesk.Utils
                     // Is Polyline Closed
                     if (lwp.Closed)
                     {
-                        //Common.Logging.ACADLogging.LogMyExceptions(lwp.Layer);
                         lwp.UpgradeOpen();
                         if (IsLayerDefined(db, AssignPolyLinesToLayers(lwp).ToUpper()))
                             lwp.Layer = AssignPolyLinesToLayers(lwp).ToUpper() ?? lwp.Layer;
                         lwp.DowngradeOpen();
-                        //Common.Logging.ACADLogging.LogMyExceptions(lwp.Layer);
                     }
                     // Use a for loop to get each vertex, one by one
 
@@ -126,7 +120,6 @@ namespace PGA.Autodesk.Utils
 
                         Point2d pt = lwp.GetPoint2dAt(i);
 
-                        //ed.WriteMessage("\n" + pt.ToString());
                     }
                 }
 
@@ -148,9 +141,6 @@ namespace PGA.Autodesk.Utils
                                     OpenMode.ForRead
                                     );
 
-                            //ed.WriteMessage(
-                            //    "\n" + v2d.Position.ToString()
-                            //    );
                         }
                     }
 
@@ -172,9 +162,6 @@ namespace PGA.Autodesk.Utils
                                         OpenMode.ForRead
                                         );
 
-                                //ed.WriteMessage(
-                                //    "\n" + v3d.Position.ToString()
-                                //    );
                             }
                         }
                     }

@@ -155,47 +155,27 @@ namespace PGA.EditCogoPoints
             }
         }
 
-        //public static void AccessSurveyDB()
-        //{
-        //    // Get the AutoCAD Editor
-
-
-        //    // Get the Survey Application and AeccSurveyDatabase
-
-        //    AeccSurveyApplication aeccSurveyApp = new AeccSurveyApplication();
-
-        //    aeccSurveyApp.Init((AcadApplication)AcadApp.AcadApplication);
-
-        //    AeccSurveyDatabase aeccSurveydb = (AeccSurveyDatabase)aeccSurveyApp.ActiveDocument.Database;
-
-        //    AeccSurveyProjects surveyProjs = aeccSurveydb.Projects;
 
 
 
-        //    // Accessing a Particular Survey Project
-
-        //    // IAeccSurveyProjects:: FindItem
-
-        //    // Gets the Survey Project with the given name.
 
 
 
-        //    AeccSurveyProject surveyProj = surveyProjs.FindItem("Test_Survey_DB");
 
-        //    if (surveyProj != null)
 
-        //    {
 
-        //        // now we can access the various Props of AeccSurveyProject object           
 
-        //        ed.WriteMessage("\nSurvey Project Name :  " + surveyProj.Name.ToString());
 
-        //        ed.WriteMessage("\nSurvey Project Path :  " + surveyProj.Path.ToString());
 
-        //        ed.WriteMessage("\nNext available point number   : " + surveyProj.GetNextWritablePointNumber().ToString());
 
-        //    }
-        //}
+
+
+
+
+
+
+
+
     }
 
 

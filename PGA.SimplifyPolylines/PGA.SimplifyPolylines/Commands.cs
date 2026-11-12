@@ -32,7 +32,6 @@ namespace PGA.SimplifyPolylines
     public static class Commands
     {
 
-        // [CommandMethod("PGA-SimplifyPolylines")]
         /// <summary>
         /// Simplifies the polylines.
         /// </summary>
@@ -83,7 +82,6 @@ namespace PGA.SimplifyPolylines
 
                         sortedCollection = SortModified(list, ConvertCollections(reducedPoints));
                         // Add Reduced Polylines to Database
-                        //CreateSimplifiedPolylines(layername, counter, sortedCollection);
                         ModifyPolylineVertices(sortedCollection, collection[index]);
                         //Store Polyline Information
 
@@ -96,16 +94,8 @@ namespace PGA.SimplifyPolylines
 
                      
                     //Get Point Collection of Polylines
-                    //foreach (ObjectId obj in collection)
-                    //{
-                    //    int index  = collection.IndexOf(obj);
-                    //    string layername = GetPolylineName(obj);
 
-                    //    //Point2dCollection points = OriginalPointCollection.ElementAt(index);
-                    //    CreateSimplifiedPolylines(layername,index,sortedCollection);
-                    //}
                 }
-                //DeleteOldPolylines(collection);
             }
             catch (System.Exception ex)
             {
@@ -139,26 +129,9 @@ namespace PGA.SimplifyPolylines
                         OpenMode.ForWrite) as BlockTableRecord;
 
                     PGA.AcadUtilities.AcadUtilities.DeleteObjects(collection);
-                    //foreach (ObjectId selectedObjectId in collection)
-                    //{
-                    //    var obj = acTrans.GetObject(selectedObjectId, OpenMode.ForWrite);
 
-                    //    var p2d = obj as Polyline2d;
 
-                    //    if (p2d != null && p2d.Color == Color.FromColorIndex(ColorMethod.ByAci, 0))
-                    //    {
-                    //        p2d.Erase(true);
-                    //    }
-                    //    else
-                    //    {
-                    //        var lwp = obj as Polyline;
 
-                    //        if (lwp != null && lwp.Color == Color.FromColorIndex(ColorMethod.ByAci, 0))
-                    //        {
-                    //            lwp.Erase(true);
-                    //        }
-                    //    }
-                    //}
                     acTrans.Commit();
                 }
             }
@@ -202,17 +175,7 @@ namespace PGA.SimplifyPolylines
                         OpenMode.ForWrite) as BlockTableRecord;
 
 
-                    //DoubleCollection bulges = new DoubleCollection();
-                    //double[] bulgelist = new double[] { };
-                    //Point3dCollection p3DCollection = new Point3dCollection();
-                    //int i = 0;
-                    //foreach (var point in points)
-                    //{
-                    //    Point3d p3D = new Point3d(point.X, point.Y, 0.0);
-                    //    p3DCollection.Add(p3D);
 
-                    //    bulges.Add(0);
-                    //}
 
                     Polyline polyline = new Polyline();
 
@@ -227,17 +190,6 @@ namespace PGA.SimplifyPolylines
                     acTrans.AddNewlyCreatedDBObject(polyline, true);
 
 
-                    #region Polyline2d
-
-                    //Polyline2d polyline2D = new Polyline2d(Poly2dType.SimplePoly, points3D, 0, true, 0, 0, null);
-                    //polyline2D.Color = Color.FromColorIndex(ColorMethod.ByAci, 1);
-                    //polyline2D.Layer = layername;
-                    //acBlkTblRec.AppendEntity(polyline2D);
-                    //acTrans.AddNewlyCreatedDBObject(polyline2D, true);
-
-
-
-                    #endregion
 
                     #endregion         
 
@@ -351,7 +303,6 @@ namespace PGA.SimplifyPolylines
 
                         sortedCollection = SortModified(list, ConvertCollections(reducedPoints));
                         // Add Reduced Polylines to Database
-                        //CreateNewPolyliness(null, sortedCollection);
                         ModifyPolylineVertices(sortedCollection, collection[index]);
                         //Store Polyline Information
 
@@ -551,7 +502,6 @@ namespace PGA.SimplifyPolylines
 
                     acTrans.Commit();
                 }
-                //    // Unlock the document 
             }
         }
 
@@ -649,7 +599,6 @@ namespace PGA.SimplifyPolylines
                                     OpenMode.ForRead
                                     );
 
-                           // Points.Add(v2d.Position.Convert2d(plane));
                             Points.Add((new Point2d(v2d.Position.X, v2d.Position.Y)));
                         }
                     }
@@ -672,9 +621,6 @@ namespace PGA.SimplifyPolylines
                                         OpenMode.ForRead
                                         );
 
-                                //ed.WriteMessage(
-                                //    "\n" + v3d.Position.ToString()
-                                //    );
                             }
                         }
                     }
@@ -890,7 +836,6 @@ namespace PGA.SimplifyPolylines
         public static Point2dCollection SortModified(List<Point2d> original, Point2dCollection reduced )
         {
             IList<Point2d> sorted = new List<Point2d>();
-            //original.CopyTo(sorted.ToArray(),original.Count);
             sorted = original.ToList();
             if (original.Count < 2) return null;
 
@@ -982,9 +927,6 @@ namespace PGA.SimplifyPolylines
             Document doc = Application.DocumentManager.MdiActiveDocument;
             Autodesk.AutoCAD.DatabaseServices.Database db = doc.Database;
             Editor ed = doc.Editor;
-            //PromptPointResult ppr = ed.GetPoint("\nSpecify a point: ");
-            //if (ppr.Status != PromptStatus.OK) return;
-            //Point3d pt = ppr.Value.TransformBy(ed.CurrentUserCoordinateSystem);
             Point3d pt = point3D;
             using (Transaction tr = db.TransactionManager.StartTransaction())
             {
@@ -1127,7 +1069,6 @@ namespace PGA.SimplifyPolylines
             double distance = Math.Sqrt(dx * dx + dy * dy);
 
             return distance;
-            //return (double)Math.Round(distance, MidpointRounding.AwayFromZero);
         }
     }
 }

@@ -17,7 +17,6 @@ namespace PGA.Autodesk.Utils
     public class PolylineUtilities
 
     {
-        //[CommandMethod("PolylineToCSV", "plcsv", CommandFlags.Modal | CommandFlags.UsePickSet)]
         public static void ExportPolyPointsToCSV()
         {
             var doc = Application.DocumentManager.MdiActiveDocument;
@@ -91,7 +90,6 @@ namespace PGA.Autodesk.Utils
         }
 
 
-        //[CommandMethod("gi")]
         public static void GetIntersections()
         {
             var db = HostApplicationServices.WorkingDatabase;
@@ -126,7 +124,6 @@ namespace PGA.Autodesk.Utils
 
                         if (ent == null) return;
 
-                        //Polyline poly = (Polyline)ent as Polyline;
                         var curv = ent as Curve;
 
                         var pcurves = new DBObjectCollection();
@@ -229,7 +226,6 @@ namespace PGA.Autodesk.Utils
 
         // based on article by Wayne Brill
         // http://adndevblog.typepad.com/autocad/2012/06/use-getclosestpointto-and-onsegat-to-locate-a-polyline-vertex-near-a-point.html
-        //[CommandMethod("oseg")]
         public static void TEST_PointOnPoly()
         {
             var db = Application.DocumentManager.MdiActiveDocument.Database;
@@ -323,53 +319,17 @@ namespace PGA.Autodesk.Utils
             }
         }
 
-        // [CommandMethod("wblockclone", CommandFlags.Session)]
-        //static public void wblockclone()
-        //{
-        //    Document doc = Application.DocumentManager.MdiActiveDocument;
-        //    Database db = doc.Database;
-        //    Editor ed = doc.Editor;
 
-        //    //PromptEntityOptions peo = new PromptEntityOptions("\nSelect entity to copy: ");
 
-        //    //PromptEntityResult per = ed.GetEntity(peo);
 
-        //    //if (per.Status != PromptStatus.OK)
-        //    //    return;
-        //    Application.
-        //    using (DocumentLock doclock = doc.LockDocument())
-        //    {
-        //        ObjectIdCollection ObjectcIds = new ObjectIdCollection();
-        //        ObjectcIds.Add(per.ObjectId);
 
-        //        Database destDb = new Database(false, true);
-        //        destDb.ReadDwgFile(@"C:\Users\Daryl Banks\Downloads\doraltest\2014Doral\Doral-Closed-Polygons\Doral06.DWG", System.IO.FileShare.Read, true, "");
 
-        //        using (Transaction Tx = destDb.TransactionManager.StartTransaction())
-        //        {
-        //            BlockTable bt = Tx.GetObject(
-        //                destDb.BlockTableId,
-        //                OpenMode.ForRead) as BlockTable;
 
-        //            BlockTableRecord btr = Tx.GetObject(
         //                bt[BlockTableRecord.ModelSpace],
-        //                OpenMode.ForWrite) as BlockTableRecord;
 
-        //            IdMapping oIdMap = new IdMapping();
 
-        //            destDb.WblockCloneObjects(
-        //                ObjectcIds,
-        //                btr.ObjectId,
-        //                oIdMap,
-        //                DuplicateRecordCloning.Ignore,
-        //                false);
 
-        //            Tx.Commit();
-        //        }
 
-        //        destDb.SaveAs(destDb.Filename, DwgVersion.Current);
-        //    }
-        //}
 
         public static void GetComplexity()
         {
@@ -405,7 +365,6 @@ namespace PGA.Autodesk.Utils
 
                         if (ent == null) return;
 
-                        //Polyline poly = (Polyline)ent as Polyline;
                         var curv = ent as Curve;
 
                         var pcurves = new DBObjectCollection();
@@ -461,7 +420,6 @@ namespace PGA.Autodesk.Utils
 
                         if (ent == null) return false;
 
-                        //Polyline poly = (Polyline)ent as Polyline;
                         var curv = ent as Curve;
 
                         var pcurves = new DBObjectCollection();

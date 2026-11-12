@@ -39,7 +39,6 @@ namespace PGA.DatabaseManager
         /// <param name="unknown">if set to <c>true</c> [unknown].</param>
         public QueueManager(bool unknown)
         {
-            //_contentLoaded = unknown;
             InitializeComponent();
             dgTasks.CanUserAddRows = false;
             dgTasks.CanUserDeleteRows = false;

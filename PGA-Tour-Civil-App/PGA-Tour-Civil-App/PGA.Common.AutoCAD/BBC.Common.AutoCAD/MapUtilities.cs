@@ -31,7 +31,6 @@ namespace Pge.Common.AutoCAD
         {
             bool retval = false;
 
-            //_logger.Debug("Start MapBreak");
             GemsPoint2d minPoint = CoordinateService.GetMinFromPolygon(polyPoints);
             GemsPoint2d maxPoint = CoordinateService.GetMaxFromPolygon(polyPoints);
 
@@ -56,7 +55,6 @@ namespace Pge.Common.AutoCAD
             AcadUtilities.SendStringToExecute(acadCmd.ToString());
             retval = true;
 
-            //_logger.Debug("End MapBreak");
             return retval;
         }
 
@@ -72,7 +70,6 @@ namespace Pge.Common.AutoCAD
         {
             string mapcscode = String.Empty;
 
-            //_logger.Debug("Start GetMapCSCode");
             try
             {
                 MapApplication AcMap;
@@ -83,10 +80,8 @@ namespace Pge.Common.AutoCAD
             }
             catch (System.Exception ex)
             {
-                //_logger.Error("Error in GetMapCSCode", ex);
                 throw;
             }
-            //_logger.Debug("End GetMapCSCode");
             return mapcscode;
         }
 
@@ -98,7 +93,6 @@ namespace Pge.Common.AutoCAD
         {
             string wktextcs = String.Empty;
 
-            //_logger.Debug("Start GetWKTextCS");
             try
             {
                 string mapcscode = GetMapCSCode();
@@ -110,10 +104,8 @@ namespace Pge.Common.AutoCAD
             }
             catch (System.Exception ex)
             {
-                //_logger.Error("Error in GetWKTextCS", ex);
                 throw;
             }
-            //_logger.Debug("End GetWKTextCS");
             return wktextcs;
         }
 
@@ -129,26 +121,18 @@ namespace Pge.Common.AutoCAD
         {
             bool retVal = false;
 
-            //_logger.Debug("Start SetMapCSCode");
             try
             {
                 // Note that setting the coordinate system code causes a zoom window command to be piped to the command line
                 // This is getting sent in a manner that causes AutoCAD to get confused
                 // Replacing with SendStringToExecute is a work around
                 AcadUtilities.SendStringToExecute("ADESETCRDSYS S " + mapCsCode + " X ");
-                //MapApplication AcMap;
-                //Autodesk.Gis.Map.Project.ProjectModel AcMapProject;
-                //AcMap = HostMapApplicationServices.Application;
-                //AcMapProject = AcMap.ActiveProject;
-                //AcMapProject.Projection = mapCsCode;
                 retVal = true;
             }
             catch (System.Exception ex)
             {
-                //_logger.Error("Error in SetMapCSCode", ex);
                 throw;
             }
-            //_logger.Debug("End SetMapCSCode");
             return retVal;
         }
 
@@ -164,7 +148,6 @@ namespace Pge.Common.AutoCAD
         {
             bool retVal = false;
 
-            //_logger.Debug("Start SetMapCSCode_API");
             try
             {
                 MapApplication AcMap;
@@ -176,10 +159,8 @@ namespace Pge.Common.AutoCAD
             }
             catch (System.Exception ex)
             {
-                //_logger.Error("Error in SetMapCSCode_API", ex);
                 throw;
             }
-            //_logger.Debug("End SetMapCSCode_API");
             return retVal;
         }
 
@@ -191,7 +172,6 @@ namespace Pge.Common.AutoCAD
         {
             bool retVal = false;
 
-            //_logger.Debug("Start ClearErrorStack");
             try
             {
                 MapApplication AcMap = HostMapApplicationServices.Application;
@@ -200,10 +180,8 @@ namespace Pge.Common.AutoCAD
             }
             catch (System.Exception ex)
             {
-                //_logger.Error("Error in ClearErrorStack", ex);
                 throw;
             }
-            //_logger.Debug("End ClearErrorStack");
             return retVal;
         }
 
@@ -228,7 +206,6 @@ namespace Pge.Common.AutoCAD
         {
             bool RetVal = false;
 
-            //_logger.Debug("Start TransformPoint2d");
             try
             {
                 //Creating coordinate system factory
@@ -253,10 +230,8 @@ namespace Pge.Common.AutoCAD
             }
             catch (System.Exception ex)
             {
-                //_logger.Error("Error in TransformPoint2d", ex);
                 throw;
             }
-            //_logger.Debug("End TransformPoint2d");
             return RetVal;
         }
 
@@ -275,7 +250,6 @@ namespace Pge.Common.AutoCAD
         {
             bool RetVal = false;
 
-            //_logger.Debug("Start TransformPoint2d");
             try
             {
                 //Creating coordinate system factory
@@ -298,10 +272,8 @@ namespace Pge.Common.AutoCAD
             }
             catch (System.Exception ex)
             {
-                //_logger.Error("Error in TransformPoint2d", ex);
                 throw;
             }
-            //_logger.Debug("End TransformPoint2d");
             return RetVal;
         }
 
@@ -317,7 +289,6 @@ namespace Pge.Common.AutoCAD
         {
             string sdoString = String.Empty;
 
-            //_logger.Debug("Start FormatPolygonToSDO");
             try
             {
                 //SDO_GTYPE is formatted as: DLTT - where D:2 Dimensional, L:0 No 3rd Dimensional content TT: 03 Polygon
@@ -333,24 +304,7 @@ namespace Pge.Common.AutoCAD
                 SDO_ORDINATES = "SDO_ORDINATE_ARRAY(";
                 string pointString = FormatPolygonToPointString(polyPoints);
                 SDO_ORDINATES += pointString;
-                //foreach (GemsPoint2d onePoint in polyPoints)
-                //{
-                //    SDO_ORDINATES += onePoint.X.ToString() + "," + onePoint.Y.ToString();
-                //    SDO_ORDINATES += ",";
-                //}
                 ////Verifying polygon is closed (first point == last point)
-                //GemsPoint2d firstPoint = polyPoints[0];
-                //GemsPoint2d lastPoint = polyPoints[polyPoints.Count - 1];
-                //if ((firstPoint.X == lastPoint.X) && (firstPoint.Y == lastPoint.Y))
-                //{
-                //    //Drop the comma
-                //    SDO_ORDINATES = SDO_ORDINATES.Substring(0, SDO_ORDINATES.Length - 1);
-                //}
-                //else
-                //{
-                //    //Add first point as closing point
-                //    SDO_ORDINATES += firstPoint.X.ToString() + "," + firstPoint.Y.ToString();
-                //}
                 SDO_ORDINATES += ")";
 
                 //Concatenating SDO object strings to SDO Geometry string"
@@ -365,10 +319,8 @@ namespace Pge.Common.AutoCAD
             }
             catch (System.Exception ex)
             {
-                //_logger.Error("Error in FormatPolygonToSDO", ex);
                 throw;
             }
-            //_logger.Debug("End FormatPolygonToSDO");
             return sdoString;
         }
 
@@ -381,7 +333,6 @@ namespace Pge.Common.AutoCAD
         {
             string pointString = String.Empty;
 
-            //_logger.Debug("Start FormatPolygonToPointString");
             try
             {
                 foreach (GemsPoint2d onePoint in polyPoints)
@@ -405,10 +356,8 @@ namespace Pge.Common.AutoCAD
             }
             catch (System.Exception ex)
             {
-                //_logger.Error("Error in FormatPolygonToPointString", ex);
                 throw;
             }
-            //_logger.Debug("End FormatPolygonToPointString");
             return pointString;
         }
 
@@ -421,7 +370,6 @@ namespace Pge.Common.AutoCAD
         {
             IList<GemsPoint2d> polyPoints = new List<GemsPoint2d>();
 
-            //_logger.Debug("Start ExtractPointsFromString");
             try
             {
                 string[] coordinates = pointString.Split(',');
@@ -445,10 +393,8 @@ namespace Pge.Common.AutoCAD
             }
             catch (System.Exception ex)
             {
-                //_logger.Error("Error in ExtractPointsFromString", ex);
                 throw;
             }
-            //_logger.Debug("End ExtractPointsFromString");
             return polyPoints;
         }
 

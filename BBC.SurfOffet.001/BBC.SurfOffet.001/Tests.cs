@@ -12,17 +12,12 @@ namespace BBC.SurfOffet
 
         public void Test()
         {
-            //	Matrix<double> m = Matrix<double>.Build.DenseOfColumnArrays(new[] {2.0, 3.0,3.0}, new[] {4.0, 5.0,3.0},new[] {4.0, 5.0,3.0});
 
             //Points only stored as Vector
             Vector<double> p1 = Vector<double>.Build.DenseOfArray(new[] {1.0, 0, 2});
             Vector<double> p2 = Vector<double>.Build.DenseOfArray(new[] {-1.0, 1, 2});
             Vector<double> p3 = Vector<double>.Build.DenseOfArray(new[] {5.0, 0, 3});
 
-            //	Vector<double> p1 = Vector<double>.Build.DenseOfArray(new[] { 1, 3.0, 0 });
-            //	Vector<double> p2 = Vector<double>.Build.DenseOfArray(new[] { 2.0, 2, 0 });
-            //	Vector<double> p3 = Vector<double>.Build.DenseOfArray(new[] { 1.0, 1, 0 });
-            //	Vector<double> p4 = Vector<double>.Build.DenseOfArray(new[] { 1.0, 1, 1 });
 
             //Build the Actual Vectors
             Vector<double> v1 = PlaneGeometry.GetVector(p1, p2);

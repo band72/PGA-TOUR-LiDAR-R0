@@ -72,9 +72,7 @@ namespace PGA.SportVision
             using (var plines = new Polyline())
             {
                 var offsetRight = source.GetOffsetCurves(offsetDist).Cast<Polyline>();
-                //plines.AddRange(offsetRight);
                 var offsetLeft = source.GetOffsetCurves(-offsetDist).Cast<Polyline>();
-                //plines.AddRange(offsetLeft);
 
                 var areaRight = offsetRight.Select(pline => pline.Area).Sum();
                 var areaLeft  = offsetLeft.Select(pline => pline.Area).Sum();
@@ -83,24 +81,6 @@ namespace PGA.SportVision
                 else
                     return offsetRight.Select(pline => pline).FirstOrDefault();
 
-                //switch (side)
-                //{
-                //    case OffsetSide.In:
-                //        return plines.RemoveRange(
-                //            areaRight < areaLeft ? offsetRight : offsetLeft);
-                //    case OffsetSide.Out:
-                //        return plines.RemoveRange(
-                //            areaRight < areaLeft ? offsetLeft : offsetRight);
-                //    case OffsetSide.Left:
-                //        return plines.RemoveRange(offsetLeft);
-                //    case OffsetSide.Right:
-                //        return plines.RemoveRange(offsetRight);
-                //    case OffsetSide.Both:
-                //        plines.Clear();
-                //        return offsetRight.Concat(offsetLeft);
-                //    default:
-                //        return null;
-                // }
             }
         }
 

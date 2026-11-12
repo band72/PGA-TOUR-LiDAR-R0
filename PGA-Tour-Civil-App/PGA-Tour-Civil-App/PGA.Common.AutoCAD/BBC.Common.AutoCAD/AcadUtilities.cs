@@ -460,7 +460,6 @@ namespace BBC.Common.AutoCAD
                         //Cloning one or all un-named text styles crosses wires and corrupts/incorrectly overwrites the shape definitions
                         //This manifests as a corrupted linetype as complex linetypes may reference shapes
                         //Rather than just checking if this is a shape derived textstyle, check to verify the name is not blank bofore cloning.
-                        //if (acTextStyleTableRecTarget.IsShapeFile == false)
                         //*****************************************************************//
                         if (textStyleName != string.Empty)
                         {
@@ -590,7 +589,6 @@ namespace BBC.Common.AutoCAD
         {
             if (points.Count != 4)
             {
-                // throw new ArgumentException("points is not of length 4");
             }
 
             double? minX = null;
@@ -917,7 +915,6 @@ namespace BBC.Common.AutoCAD
                 {
                     var obj = trans.GetObject(id, OpenMode.ForWrite);
                     obj.Erase();
-                    //trans.TransactionManager.QueueForGraphicsFlush();
                 }
             }
         }

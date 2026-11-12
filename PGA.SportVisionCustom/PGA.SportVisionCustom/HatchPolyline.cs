@@ -10,7 +10,6 @@ namespace PGA.SportVision
     public class HatchPolyline
     {
 
-        //[CommandMethod("PGA-Hatch")]
         static public void TestHatch(Polyline poly)
         {
             if (poly == null) throw new ArgumentNullException(nameof(poly));
@@ -29,23 +28,9 @@ namespace PGA.SportVision
                     BlockTableRecord btr = Tx.GetObject(ModelSpaceId,
                                       OpenMode.ForWrite) as BlockTableRecord;
 
-                   // Point2d pt = new Point2d(0.0, 0.0);
                    //ACADDB.Polyline plBox =
-                   //           new ACADDB.Polyline(4);
 
-                   // plBox.Normal = Vector3d.ZAxis;
-                   // plBox.AddVertexAt(0, pt, 0.0, -1.0, -1.0);
-                   // plBox.AddVertexAt(1,
-                   //              new Point2d(pt.X + 10, pt.Y), 0.0, -1.0, -1.0);
-                   // plBox.AddVertexAt(2,
-                   //           new Point2d(pt.X + 10, pt.Y + 5), 0.0, -1.0, -1.0);
-                   // plBox.AddVertexAt(3,
-                   //               new Point2d(pt.X, pt.Y + 5), 0.0, -1.0, -1.0);
-                   // plBox.Closed = true;
 
-                   // ObjectId pLineId;
-                   // pLineId = btr.AppendEntity(plBox);
-                   // Tx.AddNewlyCreatedDBObject(plBox, true);
 
                     ObjectIdCollection ObjIds = new ObjectIdCollection();
                     ObjIds.Add(poly.Id);
@@ -71,7 +56,6 @@ namespace PGA.SportVision
             }
             catch (System.Exception ex)
             {
-               // throw;
             }
 
         }

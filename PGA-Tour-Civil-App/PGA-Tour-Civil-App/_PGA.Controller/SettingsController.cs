@@ -24,15 +24,7 @@ namespace PGA.Controller
             view.SetController(this);
         }
 
-        //public void SetController(SettingsController controller)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
-        //public void SetController(SettingsController controller, object data)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public void Save(LayerStatesBLL changed_states)
         {
@@ -142,13 +134,6 @@ namespace PGA.Controller
             return null;
         }
 
-        //}
-        //    return null;
-        //    //this._view.LoadDataSet(model.GetPathDataFromRegistry());
-        //    _view.LoadDataSet(model.GetDataFromRegistry());
-        //    IModel model = new Model.BLL.Model();
-        //{
 
-        //public Model.DAL.PGALayerStates LoadData()
     }
 }

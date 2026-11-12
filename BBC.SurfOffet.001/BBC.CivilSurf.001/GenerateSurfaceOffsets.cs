@@ -106,197 +106,56 @@ namespace BBC.CivilSurf
             }
         }
 
-        //[CommandMethod("BBC-CreateSurfaceOffsets")]
-        //public static void CreateSurfaceOffsets()
-        //{
-        //    var doc   = Application.DocumentManager;
-        //    var ed = Application.DocumentManager.MdiActiveDocument.Editor;
-
-        //  //  doc.CurrentDocument.CommandEnded += CurrentDocument_CommandEnded;
-
-        //    try
-        //    {
-        //        CoordinateSystem3d ucs = ed.CurrentUserCoordinateSystem.CoordinateSystem3d;
-
-        //        PromptEntityOptions selSurface = new PromptEntityOptions("\nSelect a TIN Surface: ");
-        //        selSurface.SetRejectMessage("\nOnly Tin Surface allowed");
-        //        selSurface.AddAllowedClass(typeof(TinSurface), true);
-        //        PromptEntityResult resSurface = ed.GetEntity(selSurface);
-        //        if (resSurface.Status != PromptStatus.OK) return;
-        //        ObjectId surfaceId = resSurface.ObjectId;
-
-        //        //Add an Offset Distance
-        //        PromptDoubleOptions pIntOpts = new PromptDoubleOptions("");
-        //        pIntOpts.Message = "\nAdd an Offset Distance in Feet: ";
-        //        pIntOpts.AllowNegative = true;
-        //        pIntOpts.AllowZero = false;
-
-        //        PromptDoubleResult doubleResult = ed.GetDouble(pIntOpts);
-        //        if (doubleResult.Status != PromptStatus.OK) return;
-
-        //        //Option to create a Line Normal to Triangle at center
-        //        PromptKeywordOptions selYesNo =
-        //            new PromptKeywordOptions(
-        //                "\nCreate a Test Line from center of Base Triangle Normal to base of Offset Triangle?");
-        //        selYesNo.Keywords.Add("Yes");
-        //        selYesNo.Keywords.Add("No");
-        //        PromptResult resYesNo = ed.GetKeywords(selYesNo);
-        //        if (resYesNo.Status != PromptStatus.OK) return;
-        //        bool createLine = resYesNo.StringResult.Equals("Yes");
-
-        //        //select a polyline
-        //        PromptEntityOptions selPline = new PromptEntityOptions("\nSelect a Polyline Boundary: ");
-        //        selPline.SetRejectMessage("\nOnly 2D Polylines allowed");
-        //        selPline.AddAllowedClass(typeof(Polyline), true);
-        //        PromptEntityResult resPline = ed.GetEntity(selPline);
-        //        if (resPline.Status != PromptStatus.OK) return;
-        //        ObjectId plineId = resPline.ObjectId;
-
-        //        //erase the pline?
-        //        PromptKeywordOptions selYesNopline = new PromptKeywordOptions("\nErase Polyline Boundary?");
-        //        selYesNopline.Keywords.Add("Yes");
-        //        selYesNopline.Keywords.Add("No");
-        //        PromptResult resYesNopline = ed.GetKeywords(selYesNopline);
-        //        if (resYesNopline.Status != PromptStatus.OK) return;
-        //        bool erasePline = resYesNopline.StringResult.Equals("Yes");
-
-        //        bool addboundary = false;
-        //        if (!erasePline)
-        //        {
-        //            //add the pline as the outer boundary?
-        //            PromptKeywordOptions selYesNobndy =
-        //                new PromptKeywordOptions("\nAdd the Polyline as the Outer Boundary?");
-        //            selYesNobndy.Keywords.Add("Yes");
-        //            selYesNobndy.Keywords.Add("No");
-        //            PromptResult resYesNobndy = ed.GetKeywords(selYesNobndy);
-        //            if (resYesNobndy.Status != PromptStatus.OK) return;
-        //            addboundary = resYesNobndy.StringResult.Equals("Yes");
-
-        //        }
-        //        ed.WriteMessage("\nStarting the Program!\n");
-        //        starttime = DateTime.Now;
-
-        //        Database db = Application.DocumentManager.MdiActiveDocument.Database;
-        //        using (Transaction trans = db.TransactionManager.StartTransaction())
-        //        {
-        //            Point3dCollection newsurfacepoints = new Point3dCollection();
-
-        //            TinSurface surface = trans.GetObject(surfaceId, OpenMode.ForRead) as TinSurface;
-
-        //            Polyline pline = trans.GetObject(plineId, OpenMode.ForRead) as Polyline;
-        //            //find all vertices inside a pline area
-        //            var test = surface.ExtractGridded(SurfaceExtractionSettingsType.Model);
-        //            ObjectIdCollection plinesBorder = new ObjectIdCollection();
-        //            plinesBorder.Add(plineId);
-        //            TinSurfaceVertex[] verticesInsidePline = surface.GetVerticesInsidePolylines(plinesBorder);
-
-        //            var triangles = GetTrianglesFromSurface(surface);
 
 
-        //            ed.WriteMessage("\nNumber of Triangles Processes: " + verticesInsidePline.Length + "\n");
 
 
-        //            foreach (var tri in triangles)
-        //            {
-        //                //Filter out or rewrite for Vertices's Not Triangles
 
-        //                if(!( verticesInsidePline.Contains(tri.Vertex1)|| 
-        //                      verticesInsidePline.Contains(tri.Vertex2)|| 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //                      verticesInsidePline.Contains(tri.Vertex3)))
-        //                {
-        //                    continue;
-        //                }
 
-        //                //Set the UCS to Triangle Plane  
 
         //                ///
         //                /// Todo: Implement the correct coordinate rotation for better performance
         //                ///
 
-        //                // Center of Triangle Offset
 
-        //                var surfaceTri = new SurfaceTriangle(tri.Vertex1.Location, tri.Vertex2.Location,
-        //                    tri.Vertex3.Location);
 
-        //                var mathnetTri = new SurfaceTriangleToMathNETFormat(surfaceTri.Vertex1, surfaceTri.Vertex2,
-        //                    surfaceTri.Vertex3);
 
         //                var resulpoint = BBC.SurfOffet.PlaneGeometry.FindOffset
         //                (mathnetTri.Vertex1, mathnetTri.Vertex2,
-        //                    mathnetTri.Vertex3, doubleResult.Value);
-
-        //                var cross = BBC.SurfOffet.PlaneGeometry.Cross(mathnetTri.Vertex1, mathnetTri.Vertex2);
-
-        //                var nativeVec12 = surfaceTri.Vertex1.GetVectorTo(surfaceTri.Vertex2);
-        //                var nativeVec13 = surfaceTri.Vertex1.GetVectorTo(surfaceTri.Vertex3);
-        //                var nativeCross = nativeVec12.CrossProduct(nativeVec13);
-
-        //                var normal = new Vector3d(cross[0], cross[1], cross[2]);
-
-        //                //var areequal = nativeCross.CrossProduct(normal);
-
-        //                var point = new MathNETToPoint3DFormat(resulpoint);
-
-        //                var center = BBC.SurfOffet.PlaneGeometry.FindTriangleCenter(mathnetTri.Vertex1,
-        //                    mathnetTri.Vertex2,
-        //                    mathnetTri.Vertex3, cross);
-
-        //                //Assumption: Z is always positive
-        //                //A point on the normal Z axis
-        //                var p2 = new Point3d(normal.X + center[0], normal.Y + center[1], Math.Abs(normal.Z + center[2]));
 
 
-        //                var centerP3d = new Point3d(center[0], center[1], center[2]);
 
-        //                //EditorExtension.GetZAxisUcs(ed, centerP3d, p2);
-        //                EditorExtension.SetZAxisUcs(ed, centerP3d, p2);
-        //                EditorExtension.GetZAxisUcs(ed, centerP3d, p2);
-        //                //BBC.UCSHelper.UcsHelper.GetZAxisUcsToWorld(ed, centerP3d, p2);
-        //                ed.WriteMessage("\n*************BEFORE***************\n");
-        //                ed.WriteMessage("\nP3d " + tri.Vertex1.Location.X +" "+ tri.Vertex2.Location.Y + " " +  tri.Vertex3.Location.Z);
-        //                UcsHelper.GetZAxisUcsToWorld(ed, new Point3d(tri.Vertex1.Location.X,tri.Vertex2.Location.Y,tri.Vertex3.Location.Z), p2);
 
-        //                if (createLine)
-        //                    SkeletonSurf.SkeletonSurf.CreateLine(centerP3d,
-        //                        new Point3d(point.Vertex1.X, point.Vertex1.Y, point.Vertex1.Z));
 
-        //                newsurfacepoints.Add(new Point3d(tri.Vertex1.Location.X, tri.Vertex1.Location.Y,
-        //                    tri.Vertex1.Location.Z + doubleResult.Value));
-        //                newsurfacepoints.Add(new Point3d(tri.Vertex2.Location.X, tri.Vertex2.Location.Y,
-        //                    tri.Vertex2.Location.Z + doubleResult.Value));
-        //                newsurfacepoints.Add(new Point3d(tri.Vertex3.Location.X, tri.Vertex3.Location.Y,
-        //                    tri.Vertex3.Location.Z + doubleResult.Value));
-        //                newsurfacepoints.Add(new Point3d(centerP3d.X, centerP3d.Y, centerP3d.Z + doubleResult.Value));
 
-        //                ed.WriteMessage("\n*************AFTER***************\n");
-        //                UcsHelper.GetZAxisUcsToWorld(ed, new Point3d(tri.Vertex1.Location.X, tri.Vertex2.Location.Y, tri.Vertex3.Location.Z), p2);
-        //            }
 
-        //            var surfaceOid = TinSurface.Create(db, "AutoSurface");
-        //            var newSurface = trans.GetObject(surfaceOid, OpenMode.ForWrite) as TinSurface;
-        //            newSurface.AddVertices(newsurfacepoints);
 
-        //            if(erasePline)
-        //              EraseObject(pline);
-        //            else
-        //            {
-        //                if (addboundary)
-        //                    AddStandardBoundary(plineId,newSurface.Name,newSurface);
-        //            }
 
-        //            trans.Commit();
 
-        //            ed.CurrentUserCoordinateSystem = Matrix3d.Identity;
-        //            ed.Regen();
 
-        //        }
 
-        //    }
-        //    catch (System.Exception ex)
-        //    {
-        //        ed.WriteMessage("Error " + ex.Message);
-        //    }
-        //}
+
+
+
+
+
+
+
         /// <summary>
         /// Tests the create surface offsets.
         /// </summary>
@@ -860,7 +719,6 @@ namespace BBC.CivilSurf
                                 }
                                 else
                                 {
-                                   // newsurfacepoints.Add(new Point3d(item.X, item.Y, vert.Location.Z + offset));
 
                                     Debug.WriteLine("After Correction (Z outside tol: " + item.Z);
 
@@ -883,7 +741,6 @@ namespace BBC.CivilSurf
 
                                 newsurfacepoints.RemoveAt(0);
 
-                                //Create3DPolyline(newsurfacepoints);
                             }
 
                         }
@@ -895,7 +752,6 @@ namespace BBC.CivilSurf
                     if (newsurfacepoints.Count > 0)
                     {
                         newSurface.AddVertices(newsurfacepoints);
-                        //newSurface.BreaklinesDefinition.AddStandardBreaklines(newsurfacepoints, 1, 1, 1, 1);
                     }
 
 
@@ -2020,9 +1876,7 @@ namespace BBC.CivilSurf
 
                     //Use lambda extension method
 
-                    //ids = b.Where(id => id.ObjectClass.DxfName.ToUpper() == "LINE" ||
 
-                    //    id.ObjectClass.DxfName.ToUpper() == "LWPOLYLINE").ToList<ObjectId>();
 
                     #endregion
 
@@ -2471,242 +2325,57 @@ namespace BBC.CivilSurf
 
         }
 
-        //public class Commands
-        //{
-        //    [CommandMethod("SURFRAY")]
-        //    public void SurfaceRay()
-        //    {
-        //        var doc = Application.DocumentManager.MdiActiveDocument;
-        //        var db = doc.Database;
-        //        var ed = doc.Editor;
 
-        //        // Ask the user to pick a surface
 
-        //        var peo = new PromptEntityOptions("\nSelect a surface");
-        //        peo.SetRejectMessage("\nMust be a surface.");
-        //        peo.AddAllowedClass(typeof(TinSurface), false);
 
-        //        var per = ed.GetEntity(peo);
-        //        if (per.Status != PromptStatus.OK)
-        //            return;
 
         //        var sf =
-        //          new SelectionFilter(
-        //            new TypedValue[] {
-        //    new TypedValue((int)DxfCode.Start, "LINE")
-        //            }
-        //          );
 
-        //        // Ask the user to select some lines
 
-        //        var pso = new PromptSelectionOptions();
-        //        pso.MessageForAdding = "Select lines";
-        //        pso.MessageForRemoval = "Remove lines";
 
-        //        var psr = ed.GetSelection(pso, sf);
-        //        if (psr.Status == PromptStatus.OK && psr.Value.Count > 0)
-        //        {
-        //            using (var tr = db.TransactionManager.StartTransaction())
-        //            {
-        //                // We'll start by getting the block table and modelspace
-        //                // (which are really only needed for results we'll add to
-        //                // the database)
 
         //                var bt =
-        //                  (BlockTable)tr.GetObject(
-        //                    db.BlockTableId, OpenMode.ForRead
-        //                  );
 
         //                var btr =
-        //                  (BlockTableRecord)tr.GetObject(
-        //                    bt[BlockTableRecord.ModelSpace], OpenMode.ForWrite
-        //                  );
 
-        //                // Next we'll get our surface object
 
-        //                var obj = tr.GetObject(per.ObjectId, OpenMode.ForRead);
-        //                var surf = obj as TinSurface;
-        //                if (surf == null)
-        //                {
-        //                    // Should never happen, but anyway
 
-        //                    ed.WriteMessage("\nFirst object must be a surface.");
-        //                }
-        //                else
-        //                {
-        //                    DoubleCollection heights;
-        //                    SubentityId[] ids;
 
-        //                    // Fire ray for each selected line
 
-        //                    foreach (var id in psr.Value.GetObjectIds())
-        //                    {
-        //                        var ln = tr.GetObject(id, OpenMode.ForRead) as Line;
-        //                        if (ln != null)
-        //                        {
-        //                            surf.RayTest(
-        //                              ln.StartPoint,
-        //                              ln.StartPoint.GetVectorTo(ln.EndPoint),
-        //                              0.01,
-        //                              out ids,
-        //                              out heights
-        //                            );
 
-        //                            if (ids.Length == 0)
-        //                            {
-        //                                ed.WriteMessage("\nNo intersections found.");
-        //                            }
-        //                            else
-        //                            {
-        //                                // Highlight each subentity and add point
-        //                                // at intersection
 
-        //                                for (int i = 0; i < ids.Length; i++)
-        //                                {
         //                                    var subEntityPath =
-        //                                      new FullSubentityPath(
-        //                                        new ObjectId[] { per.ObjectId },
-        //                                        ids[i]
-        //                                      );
 
-        //                                    // Highlight the sub entity
 
-        //                                    surf.Highlight(subEntityPath, true);
 
-        //                                    // Create a point at the line-surface
-        //                                    // intersection
 
         //                                    var pt =
-        //                                      new DBPoint(
-        //                                        new Point3d(
-        //                                          ln.StartPoint.X,
-        //                                          ln.StartPoint.Y,
-        //                                          heights[i]
-        //                                        )
-        //                                      );
 
-        //                                    // Add the new object to the block table
-        //                                    // record and the transaction
 
-        //                                    btr.AppendEntity(pt);
-        //                                    tr.AddNewlyCreatedDBObject(pt, true);
-        //                                }
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //                tr.Commit();
-        //            }
-        //        }
-        //    }
 
-        //    [CommandMethod("POXY")]
-        //    public static void PointOnXY()
-        //    {
-        //        var doc = Application.DocumentManager.MdiActiveDocument;
-        //        var db = doc.Database;
-        //        var ed = doc.Editor;
 
-        //        // Ask the user to pick a surface
 
-        //        var peo = new PromptEntityOptions("\nSelect a surface");
-        //        peo.SetRejectMessage("\nMust be a surface.");
-        //        peo.AddAllowedClass(typeof(AcDb.Surface), false);
 
-        //        var per = ed.GetEntity(peo);
-        //        if (per.Status != PromptStatus.OK)
-        //            return;
 
-        //        using (var tr = db.TransactionManager.StartTransaction())
-        //        {
-        //            // We'll start by getting the block table and modelspace
-        //            // (which are really only needed for results we'll add to
-        //            // the database)
 
         //            var bt =
-        //              (BlockTable)tr.GetObject(
-        //                db.BlockTableId, OpenMode.ForRead
-        //              );
 
         //            var btr =
-        //              (BlockTableRecord)tr.GetObject(
-        //                bt[BlockTableRecord.ModelSpace], OpenMode.ForWrite
-        //              );
 
-        //            var obj = tr.GetObject(per.ObjectId, OpenMode.ForRead);
-        //            var surf = obj as AcDb.Surface;
-        //            if (surf == null)
-        //            {
-        //                ed.WriteMessage("\nFirst object must be a surface.");
-        //            }
-        //            else
-        //            {
-        //                DoubleCollection heights;
-        //                SubentityId[] ids;
 
-        //                // Fire ray for each selected line
 
-        //                var ucs = ed.CurrentUserCoordinateSystem;
-        //                PromptPointResult ppr;
-        //                do
-        //                {
-        //                    ppr = ed.GetPoint("\nSelect point beneath surface");
-        //                    if (ppr.Status != PromptStatus.OK)
-        //                    {
-        //                        break;
-        //                    }
 
-        //                    // Our selected point needs to be transformed to WCS
-        //                    // from the current UCS
 
-        //                    var start = ppr.Value.TransformBy(ucs);
 
-        //                    // Fire a ray from the selected point in the direction
-        //                    // of the UCS' Z-axis
 
-        //                    surf.RayTest(
-        //                      start,
-        //                      ucs.CoordinateSystem3d.Zaxis,
-        //                      0.01,
-        //                      out ids,
-        //                      out heights
-        //                    );
 
-        //                    if (ids.Length == 0)
-        //                    {
-        //                        ed.WriteMessage("\nNo intersections found.");
-        //                    }
-        //                    else
-        //                    {
-        //                        // Add point at each intersection found
 
-        //                        for (int i = 0; i < ids.Length; i++)
-        //                        {
-        //                            // Create a point at the intersection
 
         //                            var end =
         //                              start +
-        //                              new Vector3d(0, 0, heights[i]).TransformBy(ucs);
 
-        //                            var pt = new DBPoint(end);
-        //                            var ln = new Line(start, end);
 
-        //                            // Add the new objects to the block table
-        //                            // record and the transaction
 
-        //                            btr.AppendEntity(pt);
-        //                            tr.AddNewlyCreatedDBObject(pt, true);
-        //                            btr.AppendEntity(ln);
-        //                            tr.AddNewlyCreatedDBObject(ln, true);
-        //                        }
-        //                    }
-        //                }
-        //                while (ppr.Status == PromptStatus.OK);
-        //            }
-        //            tr.Commit();
-        //        }
-        //    }
-        //}
     }
 
 

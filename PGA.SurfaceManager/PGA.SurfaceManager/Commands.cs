@@ -19,7 +19,6 @@ namespace PGA.SurfaceManager
             {
                 var theSurfaces = SurfaceManager.GetSurfacesList();
 
-                //PGA.SportVision.Program.RegisterPolys();
 
                 foreach (var theSurface in theSurfaces)
                 {
@@ -35,8 +34,6 @@ namespace PGA.SurfaceManager
                       ("Audit Zero Areas: " + theSurface.Name);
 
                         SurfaceManager.ProcessSurfaceOps(theSurface);                       
-                       // SurfaceManager.DisableSurface(theSurface);
-                       // SurfaceManager.DisableSurfaceByArea(theSurface);
 
                         theSurface.Rebuild();
 

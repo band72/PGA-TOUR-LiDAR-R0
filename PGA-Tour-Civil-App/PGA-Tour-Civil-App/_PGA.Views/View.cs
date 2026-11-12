@@ -454,10 +454,6 @@ namespace PGA.Views
             throw new NotImplementedException();
         }
 
-        //public void SetController(SettingsController controller, PGALayerStates data)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public void SetController()
         {
@@ -467,7 +463,6 @@ namespace PGA.Views
         public void SetController(SettingsController controller)
         {
             _settingsController = controller;
-            //_settingsController.LoadData();
         }
 
         #endregion
@@ -477,7 +472,6 @@ namespace PGA.Views
         private void cmdSave_Click(object sender, EventArgs e)
         {
             _settingsController.Save(GetFormData());
-            // _settingsController.Save(GetPathData());
         }
 
         private LayerStatesBLL GetPathData()

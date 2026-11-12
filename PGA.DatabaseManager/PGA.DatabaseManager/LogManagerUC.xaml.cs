@@ -32,7 +32,6 @@ namespace PGA.LogManagerUC
             }
             catch (Exception)
             {
-               //  PGA.MessengerManager.MessengerManager.AddLog("Log Initialize Constructor: " + ex.Message);
             }
         }
 
@@ -92,7 +91,6 @@ namespace PGA.LogManagerUC
                     {
                         commands.ClearLogFileFromDB();
 
-                        // cmdRefresh_Click(null, null);
                     }
                 }
                 );

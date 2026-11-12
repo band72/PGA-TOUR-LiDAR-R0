@@ -10,11 +10,9 @@ namespace PGA.Controller
     {
         void SetController();
         void SetController(SettingsController controller);
-        //void SetController(SettingsController controller, PGALayerStates data);
         void LoadDataSet(LayerStatesBLL states);
         //string gtxtExportPath { get; set; }
         //LayerStatesBLL gStates { get; set; }
-        //#region Properties
         //string gtxtPointCloudFile { get; set; }
         //string gtxtDrawingTemplate { get; set; }
         //string gtxtFairwayLayer { get; set; }
@@ -67,6 +65,5 @@ namespace PGA.Controller
         //string gtxtGreenCode { get; set; }
 
 
-        //#endregion
     }
 }

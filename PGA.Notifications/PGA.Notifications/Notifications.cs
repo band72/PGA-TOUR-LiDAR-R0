@@ -67,7 +67,6 @@ namespace PGA.Notifications
                         infoCenterBalloon(Convert.ToInt32(result[0]), result[1], result[2]);
                     }
                 }
-                //COMS.MessengerManager.AddLog("Ending Notifications...");
             }
             catch (ACADRT.Exception ex2)
             {
@@ -246,7 +245,6 @@ namespace PGA.Notifications
 
                 icm.PaletteManager.ShowBalloon(ri); //Show Upper Pallets Note
                 ShowBalloon(ri.Category, ri.Title); //Show Windows Note
-                //StatusBarNotifications.StatusBarBalloon(ri.Category, ri.Title); 
             }
             catch (Exception ex)
             {
@@ -286,9 +284,7 @@ namespace PGA.Notifications
 
             bw.Title = title;
 
-            //bw.HyperText = htext;
 
-            //bw.HyperLink = hlink;
 
             bw.Text = title;
 

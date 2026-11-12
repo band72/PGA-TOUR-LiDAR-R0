@@ -25,62 +25,8 @@ namespace PGA.AcadUtilities
         /// <param name="outsidePoint"></param>
         /// <param name="includeTouching"></param>
         /// <returns></returns>
-        //public static bool IsPointInsidePolygon(GemsPoint2d testPoint, IList<GemsPoint2d> polyPoints, bool includeTouching)
-        //{
-        //    GemsPoint2d outsidePoint = new GemsPoint2d();
-        //    GetOutsidePoint(ref outsidePoint, polyPoints);
 
-        //    GemsPoint2d onePoint = null;
-        //    long pointCount = 0;
-        //    long intersectionCount = 0;
-        //    double howClose = 0;
-        //    bool retval = false;
 
-        //    GemsPoint2d startPoint = new GemsPoint2d();
-        //    GemsPoint2d endPoint = new GemsPoint2d();
-        //    GemsPoint2d nearPoint = new GemsPoint2d();
-        //    pointCount = polyPoints.Count;
-        //    for (int i = 0; i < polyPoints.Count - 1; i++)
-        //    {
-        //        onePoint = polyPoints[i];
-        //        startPoint.X = onePoint.X;
-        //        startPoint.Y = onePoint.Y;
-        //        onePoint = polyPoints[i + 1];
-        //        endPoint.X = onePoint.X;
-        //        endPoint.Y = onePoint.Y;
-        //        if ((includeTouching == true))
-        //        {
-        //            howClose = DistanceToSegment(testPoint, startPoint, endPoint, ref nearPoint);
-        //            if (((howClose >= 0) && (howClose <= 1E-08)))
-        //            {
-        //                retval = true;
-        //                break;
-        //            }
-        //        }
-        //        if ((retval == false))
-        //        {
-        //            if ((DoSegmentsIntersect(startPoint, endPoint, outsidePoint, testPoint) == true))
-        //            {
-        //                // Check that testpoint is not on the boundary line
-        //                if ((includeTouching == true))
-        //                {
-        //                    if ((DistanceToSegment(testPoint, startPoint, endPoint, ref nearPoint) > 0))
-        //                    {
-        //                        intersectionCount = (intersectionCount + 1);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //    if ((retval == false))
-        //    {
-        //        if (((intersectionCount % 2) == 1))
-        //        {
-        //            retval = true;
-        //        }
-        //    }
-        //    return retval;
-        //}
 
         /// <summary>
         /// Gets a point outside of a polygon
@@ -88,13 +34,6 @@ namespace PGA.AcadUtilities
         /// <param name="outsidePoint"></param>
         /// <param name="polyPoints"></param>
         /// <returns></returns>
-        //private static bool GetOutsidePoint(ref GemsPoint2d outsidePoint, IList<GemsPoint2d> polyPoints)
-        //{
-        //    GemsPoint2d minPoint = CoordinateService.GetMinFromPolygon(polyPoints);
-        //    outsidePoint.X = minPoint.X - 10;
-        //    outsidePoint.Y = minPoint.Y - 10;
-        //    return true;
-        //}
 
         /// <summary>
         /// Determines if two vectors intersect
@@ -104,28 +43,8 @@ namespace PGA.AcadUtilities
         /// <param name="startPoint2"></param>
         /// <param name="endPoint2"></param>
         /// <returns></returns>
-        //private static bool DoSegmentsIntersect(GemsPoint2d startPoint1, GemsPoint2d endPoint1, GemsPoint2d startPoint2, GemsPoint2d endPoint2)
-        //{
-        //    bool retval = false;
-        //    double deltaX1 = (endPoint1.X - startPoint1.X);
-        //    double deltaY1 = (endPoint1.Y - startPoint1.Y);
-        //    double deltaX2 = (endPoint2.X - startPoint2.X);
-        //    double deltaY2 = (endPoint2.Y - startPoint2.Y);
-        //    if ((((deltaX2 * deltaY1) - (deltaY2 * deltaX1)) == 0))
-        //    {
-        //        //  The segments are parallel.
-        //        return false;
-        //    }
 
-        //    double s = (((deltaX1 * (startPoint2.Y - startPoint1.Y)) + (deltaY1 * (startPoint1.X - startPoint2.X))) / ((deltaX2 * deltaY1) - (deltaY2 * deltaX1)));
-        //    double t = (((deltaX2 * (startPoint1.Y - startPoint2.Y)) + (deltaY2 * (startPoint2.X - startPoint1.X))) / ((deltaY2 * deltaX1) - (deltaX2 * deltaY1)));
 
-        //    if ((s >= 0.0) && (s <= 1.0) && (t >= 0.0) && (t <= 1.0))
-        //    {
-        //        retval = true;
-        //    }
-        //    return retval;
-        //}
 
         /// <summary>
         /// Calculates the distance between a point and a segment.
@@ -136,45 +55,6 @@ namespace PGA.AcadUtilities
         /// <param name="endPoint"></param>
         /// <param name="nearPoint"></param>
         /// <returns></returns>
-        //private static double DistanceToSegment(GemsPoint2d testPoint, GemsPoint2d startPoint, GemsPoint2d endPoint, ref GemsPoint2d nearPoint)
-        //{
-        //    double t;
-        //    double deltaX = (endPoint.X - startPoint.X);
-        //    double deltaY = (endPoint.Y - startPoint.Y);
-        //    if (((deltaX == 0) && (deltaY == 0)))
-        //    {
-        //        //  It's a point not a line segment.
-        //        deltaX = (testPoint.X - startPoint.X);
-        //        deltaY = (testPoint.Y - startPoint.Y);
-        //        nearPoint.X = startPoint.X;
-        //        nearPoint.Y = startPoint.Y;
-        //        return Math.Sqrt(((deltaX * deltaX) + (deltaY * deltaY)));
-        //    }
-        //    //  Calculate the t that minimizes the distance.
-        //    t = ((((testPoint.X - startPoint.X) * deltaX) + ((testPoint.Y - startPoint.Y) * deltaY)) / ((deltaX * deltaX) + (deltaY * deltaY)));
-        //    if ((t < 0))
-        //    {
-        //        deltaX = (testPoint.X - startPoint.X);
-        //        deltaY = (testPoint.Y - startPoint.Y);
-        //        nearPoint.X = startPoint.X;
-        //        nearPoint.Y = startPoint.Y;
-        //    }
-        //    else if ((t > 1))
-        //    {
-        //        deltaX = (testPoint.X - endPoint.X);
-        //        deltaY = (testPoint.Y - endPoint.Y);
-        //        nearPoint.X = endPoint.X;
-        //        nearPoint.Y = endPoint.Y;
-        //    }
-        //    else
-        //    {
-        //        nearPoint.X = (startPoint.X + (t * deltaX));
-        //        nearPoint.Y = (startPoint.Y + (t * deltaY));
-        //        deltaX = (testPoint.X - nearPoint.X);
-        //        deltaY = (testPoint.Y - nearPoint.Y);
-        //    }
-        //    return Math.Sqrt(((deltaX * deltaX) + (deltaY * deltaY)));
-        //}
 
         #endregion
 
@@ -596,7 +476,6 @@ namespace PGA.AcadUtilities
                         //Cloning one or all un-named text styles crosses wires and corrupts/incorrectly overwrites the shape definitions
                         //This manifests as a corrupted linetype as complex linetypes may reference shapes
                         //Rather than just checking if this is a shape derived textstyle, check to verify the name is not blank bofore cloning.
-                        //if (acTextStyleTableRecTarget.IsShapeFile == false)
                         //*****************************************************************//
                         if (textStyleName != String.Empty)
                         {
@@ -705,25 +584,12 @@ namespace PGA.AcadUtilities
         /// </summary>
         /// <param name="points">The points.</param>
         /// <returns></returns>
-        //public static Point3dCollection ConvertTo3dCollection(IList<GemsPoint2d> points)
-        //{
-        //    return ConvertTo3dCollection(points, 0.0);
-        //}
 
         /// <summary>
         /// Converts the to3d collection.
         /// </summary>
         /// <param name="points">The points.</param>
         /// <returns></returns>
-        //public static Point2dCollection ConvertTo2dCollection(IList<GemsPoint2d> points)
-        //{
-        //    Point2dCollection points2d = new Point2dCollection(points.Count);
-        //    foreach (GemsPoint2d pt in points)
-        //    {
-        //        points2d.Add(new Point2d(pt.X, pt.Y));
-        //    }
-        //    return points2d;
-        //}
 
         /// <summary>
         /// Converts the to3d collection.
@@ -731,15 +597,6 @@ namespace PGA.AcadUtilities
         /// <param name="points">The points.</param>
         /// <param name="zValue">The z value.</param>
         /// <returns></returns>
-        //public static Point3dCollection ConvertTo3dCollection(IList<GemsPoint2d> points, double zValue)
-        //{
-        //    Point3dCollection points3d = new Point3dCollection();
-        //    foreach (GemsPoint2d pt in points)
-        //    {
-        //        points3d.Add(new Point3d(pt.X, pt.Y, zValue));
-        //    }
-        //    return points3d;
-        //}
 
         /// <summary>
         /// Gets the hatch mid point.
@@ -765,7 +622,6 @@ namespace PGA.AcadUtilities
         {
             if (points.Count != 4)
             {
-                // throw new ArgumentException("points is not of length 4");
             }
 
             double? minX = null;
@@ -1100,7 +956,6 @@ namespace PGA.AcadUtilities
                 {
                     DBObject obj = trans.GetObject(id, OpenMode.ForWrite);
                     obj.Erase();
-                    //trans.TransactionManager.QueueForGraphicsFlush();
                    
                 }
             }

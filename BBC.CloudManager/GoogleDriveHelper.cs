@@ -278,40 +278,8 @@ namespace BBC.CloudManager
             throw new NotImplementedException();
         }
 
-        //public static void  GetSubFolders(string id, File Files, DriveService mService)
-        //{
-        //    Files.List request = mService.files().list().setQ("'Your Folder ID Here' in parents");
-        //    FileList files = request.execute();
-        //    if (files != null)
-        //    {
-        //        for (File file : files.getItems())
-        //        {
-        //            // Meta data
-        //            Log.i("", "Title: " + file.getTitle());
-        //            Log.i("", "Description: " + file.getDescription());
-        //            Log.i("", "MIME type: " + file.getMimeType());
-        //        }
-        //    }
-        //}
 
-        //public static void GetSubFolders2(string id, File Files, DriveService mService)
-        //{
-        //    List<File> result = new ArrayList<File>();
-        //    Files.List request = null;
 
-        //    try
-        //    {
-        //        request = mService.files().list();//plz replace your FOLDER ID in below linez
-        //        FileList files = request.setQ("'" + MyFoler_Id + "'in parents and trashed=false").execute();
-        //        result.addAll(files.getItems());
-        //        request.setPageToken(files.getNextPageToken());
-        //    }
-        //    catch (IOException e)
-        //    {
-        //        System.out.println("An error occurred: " + e);
-        //        request.setPageToken(null);
-        //    }
-        //}
     }
 
 }

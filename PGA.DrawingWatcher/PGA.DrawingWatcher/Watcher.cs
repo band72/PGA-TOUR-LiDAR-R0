@@ -85,7 +85,6 @@ namespace PGA.DrawingWatcher
                     if (commands.AllCompletedFlagsExportToCad())
                     {
 
-                      //  _postAudit.ProcessFiles();
 
                         COMS.MessengerManager.AddLog("Starting Post Audit!");
 

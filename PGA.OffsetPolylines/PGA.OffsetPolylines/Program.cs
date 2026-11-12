@@ -43,19 +43,11 @@ namespace PGA.OffsetPolylines
             try
             {
                 var pids = GetAllPolylines();
-                //var OGR  = GetGreen(pids);
 
-                //if (OGR == null)
-                //    return;
 
-                //var refcentroid = GetCentroidOfOuterBoundary(GetPolylinePoints(OGR.ObjectId));
-                //var collars  = GetCollar(pids);
 
-                // AdjustCollars(collars);
 
-                // var roughouts = GetRoughOutline(pids);
 
-                // AdjustRoughLayouts(roughouts);
 
 
                 var offset = -0.0001;
@@ -520,7 +512,6 @@ namespace PGA.OffsetPolylines
                 var pidsToDelete = new Acaddb.ObjectIdCollection();
                 var pids = GetAllPolylines();
 
-                //var refcentroid = GetCentroidOfOuterBoundary(GetPolylinePoints(OGR.ObjectId));
 
 
                 var offset = -0.0001; //inital start value

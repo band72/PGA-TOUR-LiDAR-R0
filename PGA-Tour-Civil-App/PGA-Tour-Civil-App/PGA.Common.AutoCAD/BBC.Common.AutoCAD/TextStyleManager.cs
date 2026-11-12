@@ -6,7 +6,6 @@ using global::Autodesk.AutoCAD.DatabaseServices;
 
 #endregion
 
-//using Common.Logging;
 
 namespace BBC.Common.AutoCAD
 {

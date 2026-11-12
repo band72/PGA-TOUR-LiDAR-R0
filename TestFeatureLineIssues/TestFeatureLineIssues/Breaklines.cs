@@ -50,7 +50,6 @@ namespace TestFeatureLineIssues
 
             _time = time;
             _drawingName = "";
-            //_listDwgs = new List<string>(listDwgs);
             _polylines = new List<Polyline3d>();
             _originalPolys = new ObjectIdCollection();
 
@@ -180,13 +179,7 @@ namespace TestFeatureLineIssues
             var filename = Path.GetFileName(name);
             name = Path.Combine(directory, "BL_" + filename);
 
-            //PGA.Database.DatabaseCommands commands = new PGA.Database.DatabaseCommands();
-            //var result = commands.GetSettingsByDate(time);
-            //var drawing = Path.Combine(result.DestinationFolder, "Breaklines");
-            //if (!Directory.Exists(drawing))
-            //    Directory.CreateDirectory(drawing);
 
-            //return Path.Combine(drawing, "BL_" + name);
             return name;
         }
 
@@ -201,7 +194,6 @@ namespace TestFeatureLineIssues
                 using (Transaction tr = db.TransactionManager.StartTransaction())
                 {
                     C3DLandDb.TinSurface surface = surfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
-                    //surface.UpgradeOpen();
                     FeatureLineIssues.AddStandardBoundary(polyId, name, surface);
                     tr.Commit();
                 }
@@ -220,7 +212,6 @@ namespace TestFeatureLineIssues
                 ObjectId featureId = ObjectId.Null;
                 C3DLandDb.FeatureLine feature = null;
 
-                //ObjectId featureId = C3DLandDb.FeatureLine.Create(GetFeatureLineName(), polyId, GetSiteId(ObjectId.Null));
                 var checkPoly = polyId.GetObject(OpenMode.ForRead, false, true) as Polyline;
 
                 if (checkPoly != null)
@@ -230,13 +221,9 @@ namespace TestFeatureLineIssues
                 feature.AssignElevationsFromSurface(SurfaceId, true);
                 var p3Dcollection = feature.GetPoints(FeatureLinePointType.AllPoints);
 
-                //Polyline3d poly = new Polyline3d(Poly3dType.SimplePoly, p3Dcollection, true);
-                //tr.AddNewlyCreatedDBObject(poly,true);
 
                 C3DLandDb.TinSurface surface = SurfaceId.GetObject(OpenMode.ForWrite) as C3DLandDb.TinSurface;
 
-                //ObjectIdCollection entities = new ObjectIdCollection();
-                //entities.Add(poly.ObjectId);
                 surface.BreaklinesDefinition.AddStandardBreaklines(p3Dcollection, 1.0, 2.0, 1.0, 0.0);
                 tr.Commit();
             }
@@ -315,10 +302,8 @@ namespace TestFeatureLineIssues
                         feature.DowngradeOpen();
 
                         //Check and Refine Breakline
-                        //FeatureLineManager.RecurseElevFromSurface();
 
                         var p3Dcollection = feature.GetPoints(FeatureLinePointType.AllPoints);
-                        //var poly3d = new Polyline3d(Poly3dType.SimplePoly, p3Dcollection, true);
 
                         C3DLandDb.TinSurface surface = surfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
                         surface.UpgradeOpen();
@@ -386,12 +371,6 @@ namespace TestFeatureLineIssues
         /// <exception cref="System.ArgumentNullException"></exception>
         public void RemoveBoundaryOperations(ObjectId entRes)
         {
-            #region SDI Non-Session
-
-            // Document doc = Application.DocumentManager.MdiActiveDocument;
-            //Editor ed = doc.Editor; 
-
-            #endregion
 
             CivilDocument doc = CivilDocument.GetCivilDocument(CivilApplicationManager.WorkingDatabase);
 
@@ -465,8 +444,6 @@ namespace TestFeatureLineIssues
                 poly3d.Color = feature.Color;
                 _polylines.Add(poly3d);
 
-                //C3DLandDb.TinSurface surface = surfaceId.GetObject(OpenMode.ForWrite) as C3DLandDb.TinSurface;
-                //surface.BreaklinesDefinition.AddStandardBreaklines(p3Dcollection, 1.0, 2.0, 5.0, 0.0);
 
                 tr.Commit();
                 Debug.WriteLine("Ending OpenFeatureLineForSave");

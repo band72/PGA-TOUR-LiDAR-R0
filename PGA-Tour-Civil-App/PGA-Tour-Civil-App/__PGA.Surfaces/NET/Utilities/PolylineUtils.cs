@@ -15,81 +15,29 @@ namespace C3DSurfacesDemo
 
     {
        
-        //[CommandMethod("PolylineToCSV", "plcsv", CommandFlags.Modal | CommandFlags.UsePickSet)]
-        //public static void ExportPolyPointsToCSV()
-        //{
-        //    Document doc = Application.DocumentManager.MdiActiveDocument;
 
-        //    Database db = doc.Database;
 
-        //    Editor ed = doc.Editor;
 
-        //    try
-        //    {
-        //        using (Transaction tr = db.TransactionManager.StartOpenCloseTransaction())
-        //        {
-        //            string dec = ((short)Application.GetSystemVariable("LUPREC")).ToString();
 
-        //            PromptSelectionOptions pso = new PromptSelectionOptions();
 
-        //            pso.MessageForRemoval = "\n >>  Nothing selected....";
 
-        //            pso.MessageForAdding = "\n  >>  Select a single polyline >> ";
 
-        //            pso.AllowDuplicates = false;
 
-        //            pso.SingleOnly = true;
 
         //            SelectionFilter sf = new SelectionFilter
-        //                (new TypedValue[] { new TypedValue(0, "lwpolyline") });
 
-        //            PromptSelectionResult res = ed.GetSelection(pso, sf);
 
-        //            if (res.Status != PromptStatus.OK) return;
 
-        //            StringBuilder sb = new StringBuilder();
-        //            ObjectId[] ids = res.Value.GetObjectIds();
 
-        //            Polyline poly = (Polyline)tr.GetObject(ids[0], OpenMode.ForRead, false);
-        //            for (int i = 0; i < poly.NumberOfVertices; i++)
-        //            {
-        //                Point2d pt = poly.GetPoint2dAt(i);
-        //                string vexstr = string.Format("{0:f" + dec + "};{1:f" + dec + "}", pt.X, pt.Y);
-        //                sb.AppendLine(vexstr);
-        //            }
-        //            String csvFile = String.Empty;
 
-        //            System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
-        //            sfd.ValidateNames = true;
-        //            sfd.Title = "Save polyline vertices to CSV file";
-        //            sfd.DefaultExt = ".csv";
-        //            sfd.InitialDirectory = @"C:\PGA\";
-        //            sfd.RestoreDirectory = true;
 
-        //            if (sfd.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
 
-        //            csvFile = sfd.FileName;
 
-        //            // write point to defined file
-        //            using (StreamWriter sw = new StreamWriter(csvFile))
-        //            {
-        //                sw.Write(sb.ToString());
 
-        //                sw.Flush();
-        //            }
         //            sfd.Dispose();// non resident object, so kill 'em
 
-        //            tr.Commit();
-        //        }
-        //    }
-        //    catch (AcadRuntime.Exception ex) 
-        //    {
-        //        ed.WriteMessage("\n" + ex.Message + "\n" + ex.Source + "\n" + ex.StackTrace);
-        //    }
-        //}
 
 
-        //[CommandMethod("gi")]
         public static void GetIntersections()
         {
             Database db = HostApplicationServices.WorkingDatabase;
@@ -124,7 +72,6 @@ namespace C3DSurfacesDemo
 
                         if (ent == null) return;
 
-                        //Polyline poly = (Polyline)ent as Polyline;
                         Curve curv = ent as Curve;
 
                         DBObjectCollection pcurves = new DBObjectCollection();
@@ -195,7 +142,6 @@ namespace C3DSurfacesDemo
 
                                 Point3dCollection pts = new Point3dCollection();
 
-                               // curve1.IntersectWith(curve2, Intersect.OnBothOperands, pts, (int)IntPtr.Zero, (int)IntPtr.Zero);
                                 curve1.IntersectWith(curve2, Intersect.OnBothOperands, pts, IntPtr.Zero, IntPtr.Zero);
                                 foreach (Point3d pt in pts)
                                 {
@@ -230,7 +176,6 @@ namespace C3DSurfacesDemo
 
         // based on article by Wayne Brill
         // http://adndevblog.typepad.com/autocad/2012/06/use-getclosestpointto-and-onsegat-to-locate-a-polyline-vertex-near-a-point.html
-        //[CommandMethod("oseg")]
         public static void TEST_PointOnPoly()
         {
 
@@ -345,53 +290,17 @@ namespace C3DSurfacesDemo
 
         }
 
-       // [CommandMethod("wblockclone", CommandFlags.Session)]
-        //static public void wblockclone()
-        //{
-        //    Document doc = Application.DocumentManager.MdiActiveDocument;
-        //    Database db = doc.Database;
-        //    Editor ed = doc.Editor;
 
-        //    //PromptEntityOptions peo = new PromptEntityOptions("\nSelect entity to copy: ");
 
-        //    //PromptEntityResult per = ed.GetEntity(peo);
 
-        //    //if (per.Status != PromptStatus.OK)
-        //    //    return;
-        //    Application.
-        //    using (DocumentLock doclock = doc.LockDocument())
-        //    {
-        //        ObjectIdCollection ObjectcIds = new ObjectIdCollection();
-        //        ObjectcIds.Add(per.ObjectId);
 
-        //        Database destDb = new Database(false, true);
-        //        destDb.ReadDwgFile(@"C:\Users\Daryl Banks\Downloads\doraltest\2014Doral\Doral-Closed-Polygons\Doral06.DWG", System.IO.FileShare.Read, true, "");
 
-        //        using (Transaction Tx = destDb.TransactionManager.StartTransaction())
-        //        {
-        //            BlockTable bt = Tx.GetObject(
-        //                destDb.BlockTableId,
-        //                OpenMode.ForRead) as BlockTable;
 
-        //            BlockTableRecord btr = Tx.GetObject(
         //                bt[BlockTableRecord.ModelSpace],
-        //                OpenMode.ForWrite) as BlockTableRecord;
 
-        //            IdMapping oIdMap = new IdMapping();
 
-        //            destDb.WblockCloneObjects(
-        //                ObjectcIds,
-        //                btr.ObjectId,
-        //                oIdMap,
-        //                DuplicateRecordCloning.Ignore,
-        //                false);
 
-        //            Tx.Commit();
-        //        }
 
-        //        destDb.SaveAs(destDb.Filename, DwgVersion.Current);
-        //    }
-        //}
 
         public static void GetComplexity()
         {
@@ -427,7 +336,6 @@ namespace C3DSurfacesDemo
 
                         if (ent == null) return;
 
-                        //Polyline poly = (Polyline)ent as Polyline;
                         Curve curv = ent as Curve;
 
                         DBObjectCollection pcurves = new DBObjectCollection();
@@ -483,7 +391,6 @@ namespace C3DSurfacesDemo
 
                     if (ent == null) return false;
 
-                    //Polyline poly = (Polyline)ent as Polyline;
                     Curve curv = ent as Curve;
                         
                     DBObjectCollection pcurves = new DBObjectCollection();

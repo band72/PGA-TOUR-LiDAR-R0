@@ -46,7 +46,6 @@ namespace PGA.CrossingPolygons
 
                 {
                     ACADDB.DBObjectCollection acDBObjColl = new ACADDB.DBObjectCollection();
-                    //acDBObjColl.Add((ACADDB.DBObject) polyline.AcadObject);
                     polyline.Explode(acDBObjColl);
                     // Calculate the regions based on each closed loop
                     ACADDB.DBObjectCollection myRegionColl = new ACADDB.DBObjectCollection();
@@ -363,15 +362,6 @@ namespace PGA.CrossingPolygons
 
                             if (plinepoints2.Contains(intpoints[i]))
                                 plinepoints2.Remove(intpoints[i]);
-                            //if (!temp2.Contains(intpoints[i]))
-                            //{
-                            //    if (!plinepoints2.Contains(intpoints[i]))
-                            //        plinepoints2.Insert
-                            //            (startindex2, intpoints[i]);
-                            //}
-                            //if (!plinepoints1.Contains(intpoints[i]))
-                            //   plinepoints1.Insert
-                            //   (startindex1, intpoints[i]);
                         }
 
 
@@ -438,8 +428,6 @@ namespace PGA.CrossingPolygons
 
                             for (int j = 0; j < polylinepoints.Count - 1; j++)
                             {
-                                //if (!outPoints.Contains(polylinepoints[j]))
-                                //    outPoints.Add(polylinepoints[j]);
 
 
                                 var firstpt = polylinepoints[j];
@@ -461,7 +449,6 @@ namespace PGA.CrossingPolygons
                                 if (!passSearchPoint)
                                 {
                                     Debug.WriteLine("Entered GreaterThan");
-                                    // if (firstpt.Y == searchpt.Y)
                                     if (intpoints.Contains(firstpt))
 
                                     {
@@ -492,37 +479,9 @@ namespace PGA.CrossingPolygons
                                         //we need direction
                                         //check if we have passed extents
                                         Debug.WriteLine("Entered Equal");
-                                        //var DistRank = new List<PointIndex>();
-                                        //var ordered = new List<Point2d>();
                                         ////DistRank = GetListofDistances(tempcol,lower,upper);
-                                        //ordered = GetListofDistances(tempcol, firstpt, isYIncreasing);
-                                        //var index = polylinepoints.IndexOf(firstpt);
-                                        //var result = false;
-                                        //foreach (Point2d item in ordered)
-                                        //{
-                                        //    if (WithinExtents(item, extents) && !polylinepoints.Contains(item))
-                                        //    {
-                                        //        if (isYIncreasing)
-                                        //        {
-                                        //            if (polylinepoints[index + 1].Y > item.Y)
-                                        //                result = true;
 
-                                        //        }
-                                        //        else
-                                        //        {
-                                        //            if (polylinepoints[index + 1].Y < item.Y)
-                                        //                result = true;
-                                        //        }
-                                        //        if (result)
-                                        //        {
-                                        //            polylinepoints.Insert(++index, item);
-                                        //            Debug.WriteLine(String.Format("Added Point-{0}-{1},{2}",
-                                        //                polylinepoints.Count,
-                                        //                item.X, item.Y));
-                                        //        }
-                                        //    }
 
-                                        //}
                                     }
 
                                 }
@@ -577,17 +536,9 @@ namespace PGA.CrossingPolygons
             var DistRank = new List<Point2d>();
             var distL = 0.0;
             var distH = 0.0;
-            //var UPPER = tempcol.Count;
             ////var rankings = new List<KeyValuePair<int, double>>();
 
          
-            //for (int i = 0; i < UPPER; i++)
-            //{
-            //    distL = PGA.AcadUtilities.PolygonFunctions.DistanceBetweenPoints(tempcol[i], lower);
-            //    distH = PGA.AcadUtilities.PolygonFunctions.DistanceBetweenPoints(tempcol[i], upper);
-            //    if (distH > distL) rankings.Add(new KeyValuePair<int, double>(i, distL));
-            //    else rankings.Add(new KeyValuePair<int, double>(i, distH));
-            //}
             if (isYCoordIncreasing)
             {
                 var sorted = from p in tempcol.ToArray()
@@ -831,24 +782,13 @@ namespace PGA.CrossingPolygons
         private static Point2d? GetNearestNode(Point2dCollection testvals, Point2d testpt, Point2dCollection polylinepoints)
         {
             ////returns a starting point for comparison with master point list
-            //var test  = PGA.SimplifyPolylines.Commands.NearestNeighbor(testpt, polylinepoints);
             
             ////returns the index to the location of the point
-            //var index = polylinepoints.IndexOf(test);
 
             ////Find the point trend of the near points by index
-            //var upper3 = GetIndicesAbove(index, polylinepoints);
-            //var lower3 = GetIndicesBelow(index, polylinepoints);
-            //if (FindInsertionPoint(upper3, lower3,testpt) != -1);
 
            
 
-            //var sorted = SortMyValues(index, testvals, polylinepoints);
-            //for (int j = 0; j < sorted.Count; j++)
-            //{
-            //    polylinepoints.Insert(index, sorted[j]);
-            //    index++;
-            //}
 
 
             return null;

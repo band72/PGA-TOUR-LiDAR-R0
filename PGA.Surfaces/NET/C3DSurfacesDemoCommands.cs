@@ -80,11 +80,6 @@ namespace PGA.Surfaces
                 // return our new ObjectIdCollection that is "Hopefully" full of the types that we want.
                 return new ObjectIdCollection(promptSelectionResult.Value.GetObjectIds());
             }
-        //    /// <summary>
-        //    /// Gets the object identifier.
-        //    /// </summary>
-        //    /// <param name="handle">The handle.</param>
-        //    /// <returns>ObjectId.</returns>
         public static ObjectId GetObjectId(string handle)
         {
             ObjectId id = ObjectId.Null;
@@ -100,11 +95,6 @@ namespace PGA.Surfaces
             return id;
         }
 
-        //    /// <summary>
-        //    /// Determines whether [is tin excluded] [the specified objectid].
-        //    /// </summary>
-        //    /// <param name="objectid">The objectid.</param>
-        //    /// <returns><c>true</c> if [is tin excluded] [the specified objectid]; otherwise, <c>false</c>.</returns>
         public static bool IsTINExcluded(ObjectId objectid)
         {
 
@@ -149,17 +139,11 @@ namespace PGA.Surfaces
                     if (CivilTinSurface.FindCivilTinSurface("All"))
                     {
 
-                    #region Insert Point Cloud into Overall Surface
-
-
-                    #endregion
 
                     #region get polylines and generate surfaces and boundaries
 
-                        //polylines = surfaceManager.GetAllPolyLines();
                      polylines = GetIdsByTypeTypeValue("POLYLINE", "LWPOLYLINE", "POLYLINE2D", "POLYLINE3D");
                     
-                    //polylines  = surfaceManager.GetIdsByTypeCollection();
 
                     //Create a surface hive to generate a TIN surface
                     if (!surfaceManager.CreateSurfaceForPolylines(polylines))
@@ -393,17 +377,6 @@ namespace PGA.Surfaces
 
                             foreach (KeyValuePair<ObjectId, ObjectIdCollection> boundary in m_dict)
                                 {
-                                #region Removed
-
-                                //#region Create Surface for that Base Polyline and Add outer boundary
-
-                                //if ((lsurface = (surfaceManager.CreateSelectedSurface(baseObj))) == null)
-                                //    throw new Exception("CreateSelectedSurface Failed!");
-
-                                //lsurface.AddStandardBoundary(baseObj, "OuterBoundary");
-                                //#endregion
-
-                                #endregion
 
                                 lsurface = PasteSurfaces.FindSurfaceIdForPolylineV2(boundary.Key);
 
@@ -420,8 +393,6 @@ namespace PGA.Surfaces
                                                 #region Breaklines Deprecated
 
                                                 //Breaklines removed due to overlapping
-                                                //lsurface.AddStandardBreakline
-                                                //    (PasteSurfaces.GetPolyPointsByObjectId(pLines), "Breakline-"); 
 
                                                 #endregion
 
@@ -542,17 +513,6 @@ namespace PGA.Surfaces
                         CivilTinSurface lsurface = null;
                         foreach (KeyValuePair<ObjectId, ObjectIdCollection> innerbdy in m_dict)
                         {
-                            #region Removed
-
-                            //#region Create Surface for that Base Polyline and Add outer boundary
-
-                            //if ((lsurface = (surfaceManager.CreateSelectedSurface(baseObj))) == null)
-                            //    throw new Exception("CreateSelectedSurface Failed!");
-
-                            //lsurface.AddStandardBoundary(baseObj, "OuterBoundary");
-                            //#endregion
-
-                            #endregion
 
                             if (innerbdy.Value == null) continue;
 
@@ -574,8 +534,6 @@ namespace PGA.Surfaces
                                     {
                                     #region Breaklines Deprecated
                                     //Breaklines removed due to overlapping
-                                    //lsurface.AddStandardBreakline
-                                    //    (PasteSurfaces.GetPolyPointsByObjectId(pLines), "Breakline-"); 
                                     #endregion
                                     var layer = PGA.SurfaceManager.SurfaceManager.GetPolylineLayer(pLines);
 
@@ -584,7 +542,6 @@ namespace PGA.Surfaces
                                     catch (NullReferenceException e)
                                     {
                                                             PGA.MessengerManager.MessengerManager.AddLog ("AddAsInnerBoundary Failed: " + e.Message);
-                                        //throw new Exception(e.Message);
                                     }
                                     internalPLines = null;
                                 }

@@ -172,10 +172,7 @@ namespace ProcessPolylines
                             // if the command is called multiple times
 
                             //var output =
-                            //    Path.GetDirectoryName(pfnr.StringResult) + "\\" +
-                            //    Path.GetFileNameWithoutExtension(pfnr.StringResult) +
                             //    "-purged" +
-                            //    Path.GetExtension(pfnr.StringResult);
 
                             // Assume a post-R12 drawing
 
@@ -218,30 +215,16 @@ namespace ProcessPolylines
                                 output = Path.Combine(output, dwg.PolylineDwgName);
                                 doc.Database.SaveAs(output,DwgVersion.Current);
 
-                                //    if (PurgeDgnLinetypesInDb(db, ed))
-                                //    {
-                                //        // Check the version of the drawing to save back to
 
                                 //        var ver =
                                 //            (db.LastSavedAsVersion == DwgVersion.MC0To0
                                 //                ? DwgVersion.Current
                                 //                : db.LastSavedAsVersion
-                                //                );
 
-                                //        // Now we can save
 
-                                //        string output = null;
-                                //        db.SaveAs(output, ver);
 
-                                //        ed.WriteMessage(
-                                //            "\nSaved purged file to \"{0}\".",
-                                //            output
-                                //            );
-                                //    }
 
-                                //    // Still need to reset the working database
 
-                                //    HostApplicationServices.WorkingDatabase = wdb;
                             }
 
                         }
@@ -304,10 +287,7 @@ namespace ProcessPolylines
                             // if the command is called multiple times
 
                             //var output =
-                            //    Path.GetDirectoryName(pfnr.StringResult) + "\\" +
-                            //    Path.GetFileNameWithoutExtension(pfnr.StringResult) +
                             //    "-purged" +
-                            //    Path.GetExtension(pfnr.StringResult);
 
                             // Assume a post-R12 drawing
 
@@ -316,7 +296,6 @@ namespace ProcessPolylines
                                                 
                                 ObjectIdCollection collection = GetIdsByTypeTypeValue("POLYLINE", "LWPOLYLINE", "POLYLINE2D", "POLYLINE3d");
  
-                                //db.Save();
                                 string date = dwg.DateStamp.Value.ToFileTime().ToString();
                                 string output = Path.Combine(commands.GetGlobalDestinationPath(dwg.DateStamp.Value), String.Format("HOLES-{0}", date));
                                 Pge.Common.Framework.FileUtilities.CreateDirectory(output);
@@ -453,61 +432,18 @@ namespace ProcessPolylines
         }
 
 
-       // [CommandMethod("CopyPolylinesBetweenDatabases", CommandFlags.Session)]
         public static void CopyPolylinesBetweenDatabases(Database _sourcedb, ObjectIdCollection _collection)
         {
             ObjectIdCollection acObjIdColl = new ObjectIdCollection();
             acObjIdColl = _collection;
 
             // Get the current document and database 
-            //Document acDoc = Application.DocumentManager.MdiActiveDocument;
             Database acCurDb = _sourcedb;// acDoc.Database;
             // Lock the current document 
-            //using (DocumentLock acLckDocCur = acDoc.LockDocument())
-            //{
-            //    // Start a transaction 
-            //    using (Transaction acTrans = acCurDb.TransactionManager.StartTransaction())
-            //    {
-            //        #region MyRegion
-            //        //// Open the Block table record for read
-            //        //BlockTable acBlkTbl;
-            //        //acBlkTbl = acTrans.GetObject(acCurDb.BlockTableId,
-            //        //    OpenMode.ForRead) as BlockTable;
-            //        //// Open the Block table record Model space for write
-            //        //BlockTableRecord acBlkTblRec;
-            //        //acBlkTblRec = acTrans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace],
-            //        //    OpenMode.ForWrite) as BlockTableRecord;
-            //        //// Create a circle that is at (0,0,0) with a radius of 5
-            //        //Circle acCirc1 = new Circle();
-            //        //acCirc1.Center = new Point3d(0, 0, 0);
-            //        //acCirc1.Radius = 5;
-            //        //// Add the new object to the block table record and the transaction
-            //        //acBlkTblRec.AppendEntity(acCirc1);
-            //        //acTrans.AddNewlyCreatedDBObject(acCirc1, true);
-            //        //// Create a circle that is at (0,0,0) with a radius of 7
-            //        //Circle acCirc2 = new Circle();
-            //        //acCirc2.Center = new Point3d(0, 0, 0);
-            //        //acCirc2.Radius = 7;
-            //        //// Add the new object to the block table record and the transaction
-            //        //acBlkTblRec.AppendEntity(acCirc2);
-            //        //acTrans.AddNewlyCreatedDBObject(acCirc2, true);
-            //        //// Add all the objects to copy to the new document
-            //        //acObjIdColl = new ObjectIdCollection();
-            //        //acObjIdColl.Add(acCirc1.ObjectId);
-            //        //acObjIdColl.Add(acCirc2.ObjectId);
-            //        //// Save the new objects to the database 
-            //        #endregion   
 
 
 
 
-            //        acTrans.Commit();
-            //    }
-            //    // Unlock the document 
-            //}
-            // Change the file and path to match a drawing template on your workstation 
-            //string sLocalRoot = Application.GetSystemVariable("LOCALROOTPREFIX") as string;
-            //string sTemplatePath = sLocalRoot + "Template\\acad.dwt";
             // Create a new drawing to copy the objects to DocumentCollection 
             var acDocMgr = Application.DocumentManager;
             Document acNewDoc = Application.DocumentManager.MdiActiveDocument;
@@ -629,141 +565,37 @@ namespace ProcessPolylines
         // Helper function to be shared between our command
         // implementations
 
-        //private static bool PurgeDgnLinetypesInDb(Autodesk.AutoCAD.DatabaseServices.Database db, Editor ed)
-        //{
-        //    using (var tr = db.TransactionManager.StartTransaction())
-        //    {
-        //        // Start by getting all the "complex" DGN linetypes
-        //        // from the linetype table
 
-        //        var linetypes = CollectComplexLinetypeIds(db, tr);
 
-        //        // Store a count before we start removing the ones
-        //        // that are referenced
 
-        //        var ltcnt = linetypes.Count;
 
-        //        // Remove any from the "to remove" list that need to be
-        //        // kept (as they have references from objects other
-        //        // than anonymous blocks)
 
         //        var ltsToKeep =
-        //            PurgeLinetypesReferencedNotByAnonBlocks(db, tr, linetypes);
 
-        //        // Now we collect the DGN stroke entries from the NOD
 
-        //        var strokes = CollectStrokeIds(db, tr);
 
-        //        // Store a count before we start removing the ones
-        //        // that are referenced
 
-        //        var strkcnt = strokes.Count;
 
-        //        // Open up each of the "keeper" linetypes, and go through
-        //        // their data, removing any NOD entries from the "to
-        //        // remove" list that are referenced
 
-        //        PurgeStrokesReferencedByLinetypes(tr, ltsToKeep, strokes);
 
-        //        // Erase each of the NOD entries that are safe to remove
 
-        //        int erasedStrokes = 0;
 
-        //        foreach (ObjectId id in strokes)
-        //        {
-        //            try
-        //            {
-        //                var obj = tr.GetObject(id, OpenMode.ForWrite);
-        //                obj.Erase();
-        //                if (
-        //                    obj.GetRXClass().Name.Equals("AcDbLSSymbolComponent")
-        //                    )
-        //                {
-        //                    EraseReferencedAnonBlocks(tr, obj);
-        //                }
-        //                erasedStrokes++;
-        //            }
-        //            catch (System.Exception ex)
-        //            {
-        //                ed.WriteMessage(
-        //                    "\nUnable to erase stroke ({0}): {1}",
-        //                    id.ObjectClass.Name,
-        //                    ex.Message
-        //                    );
-        //            }
-        //        }
 
-        //        // And the same for the complex linetypes
 
-        //        int erasedLinetypes = 0;
 
-        //        foreach (ObjectId id in linetypes)
-        //        {
-        //            try
-        //            {
-        //                var obj = tr.GetObject(id, OpenMode.ForWrite);
-        //                obj.Erase();
-        //                erasedLinetypes++;
-        //            }
-        //            catch (System.Exception ex)
-        //            {
-        //                ed.WriteMessage(
-        //                    "\nUnable to erase linetype ({0}): {1}",
-        //                    id.ObjectClass.Name,
-        //                    ex.Message
-        //                    );
-        //            }
-        //        }
 
-        //        // Remove the DGN stroke dictionary from the NOD if empty
 
-        //        bool erasedDict = false;
 
         //        var nod =
-        //            (DBDictionary)tr.GetObject(
-        //                db.NamedObjectsDictionaryId, OpenMode.ForRead
-        //                );
 
-        //        ed.WriteMessage(
-        //            "\nPurged {0} unreferenced complex linetype records" +
-        //            " (of {1}).",
-        //            erasedLinetypes, ltcnt
-        //            );
 
-        //        ed.WriteMessage(
-        //            "\nPurged {0} unreferenced strokes (of {1}).",
-        //            erasedStrokes, strkcnt
-        //            );
 
-        //        if (nod.Contains(dgnLsDictName))
-        //        {
         //            var dgnLsDict =
-        //                (DBDictionary)tr.GetObject(
-        //                    (ObjectId)nod[dgnLsDictName],
-        //                    OpenMode.ForRead
-        //                    );
 
-        //            if (dgnLsDict.Count == 0)
-        //            {
-        //                dgnLsDict.UpgradeOpen();
-        //                dgnLsDict.Erase();
 
-        //                ed.WriteMessage(
-        //                    "\nRemoved the empty DGN linetype stroke dictionary."
-        //                    );
 
-        //                erasedDict = true;
-        //            }
-        //        }
 
-        //        tr.Commit();
 
-        //        // Return whether we have actually found anything to erase
 
-        //        return (
-        //            erasedLinetypes > 0 || erasedStrokes > 0 || erasedDict
-        //            );
-        //    }
-        //}
     }
 }

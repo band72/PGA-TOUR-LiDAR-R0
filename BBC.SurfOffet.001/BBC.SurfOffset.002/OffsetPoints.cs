@@ -63,7 +63,6 @@ namespace BBC.SurfOffset002
                 var ap  = v22.AngleOnPlane(new Plane(tv121, v23.CrossProduct(v22)));
                 var ap2 = v23.AngleOnPlane(new Plane(tv121, v23.CrossProduct(v22)));
 
-                //edge1.Triangle1
 
                 var v1 = tri.Vertex1.Location;
                 var v2 = tri.Vertex2.Location;
@@ -167,9 +166,6 @@ namespace BBC.SurfOffset002
 
                     //Triangle shared at vertex 1, 2, and 3   
 
-                    //sumv = IterateVertexTriangles(NodeTriangles1, p1);
-                    //sumv = IterateVertexTriangles(NodeTriangles1, p2);
-                    //sumv = IterateVertexTriangles(NodeTriangles1, p3);
 
                 }
 
@@ -411,9 +407,6 @@ namespace BBC.SurfOffset002
                         // final points
 
 
-                        //points.Add(offsetvecVertex1);
-                        //points.Add(offsetvecVertex2);
-                        //points.Add(offsetvecVertex3);
                         points.Add(offsetvecCenter);
                     }
                 }
@@ -834,11 +827,7 @@ namespace BBC.SurfOffset002
         }
         public static double ComputeConcaveOffset(Vector<double> vn, Vector<double> v)
         {
-            // ((1.0 + ( r / off)) / (Math.Sin(((3.1415 / 2.0) - angle))) - (r / off)).Dump("ConcaveOffset");
 
-            //	var r = 0.0;
-            //	var off = 0.0;
-            // var angle = Math.Acos(Dot(vn, v) / Magnitude(vn, v));
             var angle = Math.Acos(Dot(vn, v));
             if (Math.Abs(angle - (3.1415/2)) < 0.001)
                 return 1.0;

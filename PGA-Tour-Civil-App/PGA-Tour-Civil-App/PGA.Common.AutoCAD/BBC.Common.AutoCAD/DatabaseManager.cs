@@ -9,7 +9,6 @@ using global::Autodesk.AutoCAD.Runtime;
 
 #endregion
 
-//using Common.Logging;
 
 namespace BBC.Common.AutoCAD
 {
@@ -119,7 +118,6 @@ namespace BBC.Common.AutoCAD
                 id = AddToDatabase(db, hatch, trans);
 
                 hatch.UpgradeOpen();
-                //hatch.HatchStyle = HatchStyle.Outer;
                 hatch.Associative = true;
                 hatch.PatternScale = 100.0;
                 hatch.SetHatchPattern(HatchPatternType.PreDefined, patternName);
@@ -379,11 +377,6 @@ namespace BBC.Common.AutoCAD
                 PGA.MessengerManager.MessengerManager.AddLog("End AddToDatabase");
                 return id;
             }
-            //catch (Autodesk.AutoCAD.Runtime.Exception arex)
-            //{
-            //    //PGA.MessengerManager.MessengerManager.AddLog("Object already in database", arex);
-            //    //System.Diagnostics.Debug.WriteLine(databaseObject.GetType().Name + " already in database");
-            //}
 
             catch (System.Exception ex)
             {

@@ -491,8 +491,6 @@ namespace PGA.CourseCoalesceProject
                                             #endregion
                                             #region Check for Zero Elevations and Isolated Parents
                                             PGA.SurfaceManager.Commands.CheckSurfaceForErrors();
-                                            //PGA.SurfaceManager.SurfaceManager.TestIsolatedParent();
-                                            //PGA.SurfaceManager.SurfaceManager.CorrectIsolatedParent();
                                             PGA.SurfaceManager.SurfaceManager.CorrectIsolatedParentByScaling();
                                             #endregion
 
@@ -515,8 +513,6 @@ namespace PGA.CourseCoalesceProject
 
                                             try
                                             {
-                                               //ACADDB.ObjectId surfaceId = PasteSurfaces.GetSurfaceByName("All");
-                                               //pTinSurface.SetSurfaceStyleToStandard(surfaceId);
                                            }
                                            catch (ACADRT.Exception ex)
                                            {
@@ -557,7 +553,6 @@ namespace PGA.CourseCoalesceProject
                                            if (s.UseSportVision && s.UseBreaklines)
                                            {
                                                COMS.MessengerManager.AddLog("Saving Sport Vision Outputs!");
-                                               //SavesSVCADFile(svPath, acDbNewDoc, dwg);
 
                                                if (s.UseOutput3DPolys)
                                                {
@@ -579,12 +574,6 @@ namespace PGA.CourseCoalesceProject
                                            COMS.MessengerManager.AddLog("End Breakline Outputs!");
 
                                             #endregion
-                                            #region Create PDF Report
-                                            //if (s.UsePDFReport)
-                                            //{
-                                            //    SavesPDFReport(outdwg, dwg);
-                                            //} 
-                                            #endregion
                                             #region Set DWG Completed Flag
 
                                             commands.SetDrawingStackCompletedFlag(dwg);
@@ -602,11 +591,6 @@ namespace PGA.CourseCoalesceProject
                                }
                            }
                        }
-                        #region Snapshot
-                        //Active.Editor.UpdateScreen();
-                        //System.Threading.Thread.SpinWait(1000);
-                        //SnapshotToFile(Drawingpath.Replace("dwg", "png"), VisualStyleType.Wireframe2D); 
-                        #endregion
 
 
                         #region Messaging
@@ -1133,7 +1117,6 @@ namespace PGA.CourseCoalesceProject
                             (dwg, completepath, Convert.ToInt64(hole));
 
                     COMS.MessengerManager.AddLog("completepath = " + completepath);
-                   // PGA.PlotManager.PrintCommands.PublishLayouts(completepath,hole);
 
                 }
             }
@@ -1196,8 +1179,6 @@ namespace PGA.CourseCoalesceProject
                 {
                     var hole = GolfHoles.GetHoles((int)dwg.Hole);
                     if (hole == null) throw new ArgumentNullException(nameof(hole));
-                    //var filepath = Path.GetDirectoryName(outdwg);
-                    //if (filepath == null) throw new ArgumentNullException(nameof(filepath));
                     var savepath = Path.Combine(outdwg, "HOLE" + hole);
 
                     var dirinfo = Utils.FileUtilities.CreateDirectory(savepath);
@@ -1357,7 +1338,6 @@ namespace PGA.CourseCoalesceProject
                             {
                                 ACADDB.Database acDbNewDoc = acNewDoc.Database;
                                 var ed = acNewDoc.Editor;
-                                //var ed = doc.Editor;
 
                                 string gpath = Convert.ToString(GDwgPath);
 

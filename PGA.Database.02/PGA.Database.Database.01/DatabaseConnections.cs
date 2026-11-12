@@ -36,7 +36,6 @@ namespace PGA.Database
                 var codebase = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
                 var exePath = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
                 //Copy the file from the .exe location to the %AppData% folder       
-                //File.Copy(Path.Combine(exePath, fileName), Path.Combine(path, fileName));
 
                 return Path.Combine(path, fileName);
             }
@@ -48,7 +47,6 @@ namespace PGA.Database
             var location = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var codebase = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
 
-            //System.Windows.Forms.MessageBox.Show(string.Format("Location = {0}\nCodeBase = {1}", location, codebase));
         }
 
         public static string GetAppPath()
@@ -69,11 +67,6 @@ namespace PGA.Database
             if (File.Exists(Path.Combine(path, fileName)))
             {
                 //Get path to our .exe, which also has a copy of the database file      
-                //var location = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                //var codebase = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
-                //var exePath = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-                //Copy the file from the .exe location to the %AppData% folder       
-                //File.Copy(Path.Combine(exePath, fileName), Path.Combine(path, fileName));
 
                 return Path.Combine(path, fileName);
             }

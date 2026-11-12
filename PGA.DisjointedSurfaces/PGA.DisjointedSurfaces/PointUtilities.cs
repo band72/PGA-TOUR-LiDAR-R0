@@ -26,23 +26,11 @@ namespace PGA.DisjointedSurfaces
     class PointUtilities
     {
         #region Teigha Implementation
-        //public static bool pnpoly(List<OdGePoint3d> points, OdGePoint3d test)
-        //{
-        //    int nvert = points.Count;
 
-        //    int i, j;
-        //    bool c = false;
 
-        //    for (i = 0, j = nvert - 1; i < nvert; j = i++)
-        //    {
 
-        //        if (((points[i].y > test.y) != (points[j].y > test.y)) &&
         //            (test.x < (points[j].x - points[i].x)*(test.y - points[i].y)/(points[j].y - points[i].y) + points[i].x))
-        //            c = !c;
-        //    }
 
-        //    return c;
-        //} 
         #endregion
 
         #region Autodesk Implementation

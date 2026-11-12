@@ -44,7 +44,6 @@ namespace PGA.TaskManagerUC
         public DateTime DateSelected { get; set; }
         public IList<Files> PointClouds = null;
         public IList<Files> Polylines = null;
-        //public static Settings _settings = null;
         public static object _settings = null;
 
         public static TextBox _TextEventPlaceHolder = null;
@@ -278,28 +277,9 @@ namespace PGA.TaskManagerUC
         }
 
 
-        //private void MergeStacks(IList<Files> pointClouds, IList<Files> polylines)
-        //{
-        //    string order, pointFile, destination, timestamp, command;
 
-        //    try
-        //    {
-        //        using (DatabaseCommands commands = new DatabaseCommands())
 
-        //        // using (PGAContext context = GetDataBasePath.GetSql4Connection())
-        //        {
-        //            var t = "";
 
-        //            for (var i = 1; i < 19; i++)
-        //            {
-        //                if (i < 10)
-        //                {
-        //                    t = "0" + i;
-        //                }
-        //                else
-        //                {
-        //                    t = i.ToString();
-        //                }
         //                var point = from po in pointClouds
         //                            where ((po.Order).Equals(t))
         //                            select po;
@@ -310,35 +290,11 @@ namespace PGA.TaskManagerUC
         //                            select pl;
 
 
-        //                foreach (var po in point)
-        //                {
-        //                    var stack = new DrawingStack();
 
-        //                    order = po.Order;
-        //                    pointFile = Path.Combine(po.SourceFile, po.FileName);
-        //                    if (string.IsNullOrEmpty(po.DestFile))
-        //                        destination = Path.Combine(Path.GetDirectoryName(po.SourceFile),
-        //                            "HOLE" + po.Order);
-        //                    else
-        //                        destination = Path.Combine(po.DestFile, "HOLE" + po.Order);
-        //                    timestamp = po.time.ToString();
 
         //                    var polyfile = from p in pline
         //                                   where order.Equals(p.Order)
-        //                                   select Path.Combine(p.SourceFile, p.FileName);
 
-        //                    command = string.Format(
-        //                        "{0},{1},{2},{3},{4}", order, pointFile, polyfile.FirstOrDefault(), destination, timestamp);
-        //                }
-        //              //  context.SubmitChanges();
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //         PGA.MessengerManager.MessengerManager.LogException(ex);
-        //    }
-        //}
 
  
 
@@ -451,8 +407,6 @@ namespace PGA.TaskManagerUC
                         select p;
 
 
-                    //string command;
-                    //var i = 1;
                     foreach (var val in points)
                     {
                         Files stack = new Files();
@@ -465,7 +419,6 @@ namespace PGA.TaskManagerUC
                         PointClouds.Add(stack);
                     }
 
-                    //context.SubmitChanges();
                 }
             }
             catch (Exception ex)
@@ -494,8 +447,6 @@ namespace PGA.TaskManagerUC
                         select p;
 
 
-                    //string command;
-                    //var i = 1;
                     foreach (var val in points)
                     {
                         Files stack = new Files();
@@ -508,7 +459,6 @@ namespace PGA.TaskManagerUC
                         Polylines.Add(stack);
                     }
 
-                    //context.SubmitChanges();
                 }
             }
             catch (Exception ex)
@@ -536,7 +486,6 @@ namespace PGA.TaskManagerUC
 
 
                     string command;
-                   // var i = 1;
                     foreach (var val in points)
                     {
                         var stack = new DrawingStack();
@@ -546,7 +495,6 @@ namespace PGA.TaskManagerUC
                             val.DateStamp);
                         stack.Function = command;
                         context.DrawingStack.InsertOnSubmit(stack);
-                        // PointClouds.Add(stack);
                     }
 
                     context.SubmitChanges();
@@ -559,9 +507,6 @@ namespace PGA.TaskManagerUC
         }
 
         //private long? lOrder(string file)
-        //{
-        //    return Convert.ToInt64(file.Substring(file.Length - 6, 2));
-        //}
 
         private string Order(string file)
         {
@@ -598,8 +543,6 @@ namespace PGA.TaskManagerUC
 
             if (dataGrid.SelectedValue == null)
             {
-                //MessageBox.Show("select any record from list!", "select at least one record", MessageBoxButton.OKCancel,
-                //    MessageBoxImage.Warning);
             }
             else
             {
@@ -705,7 +648,6 @@ namespace PGA.TaskManagerUC
 
         public static void CopyFiles(string source, string destination, string fileName)
         {
-            //source = System.IO.Path.Combine(source, fileName);
             destination = System.IO.Path.Combine(destination, fileName);
             var test = System.IO.Path.GetDirectoryName(destination);
 

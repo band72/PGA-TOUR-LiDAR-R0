@@ -2,12 +2,7 @@
 using System;
 using System.Globalization;
 using System.IO;
-//using Autodesk.AutoCAD.ApplicationServices;
-//using Autodesk.AutoCAD.DatabaseServices;
-//using Autodesk.AutoCAD.Runtime;
-//using acApp = Autodesk.AutoCAD.ApplicationServices.Application;
 using Exception = System.Exception;
-//using BBC.Common.AutoCAD;
 using SystemLogger = System.Diagnostics;
 
 
@@ -20,10 +15,6 @@ namespace PGA.Common.Logging
         static  SystemLogger.EventLogTraceListener myTraceListener = new SystemLogger.EventLogTraceListener("c:\\myEventLogSource.txt");
         static SystemLogger.TextWriterTraceListener myTextListener = null;
         static Stream myFile = null;
-        //public static void LogException(string message)
-        //{
-        //    BBC.Common.AutoCAD.AcadUtilities.WriteMessage("");
-        //}
         public static bool LogMyExceptions(string message, Exception ex)
         {
             string time = DateTime.Now.ToString(CultureInfo.InvariantCulture);
@@ -42,15 +33,6 @@ namespace PGA.Common.Logging
                 LogTextTraceWriter(String.Format("{0} {1}\n", time, message));
             }
         }
-        //public static void LogMyExceptionsToCommandline(string message)
-        //{
-        //    //Write to Commandline
-        //    string time = DateTime.Now.ToString(CultureInfo.InvariantCulture);
-        //    if (message != null)
-        //    {
-        //        LogMyException(String.Format("{1} {2}\n", time, message));
-        //    }
-        //}
 
         private static void SystemTracerLogMyExceptions(string message)
         {
@@ -79,7 +61,6 @@ namespace PGA.Common.Logging
         public static int LogTextTraceWriter(string message)
         {
             string filename = "c:\\PGALogFile.txt";
-            //string time = DateTime.Now.ToString(CultureInfo.InvariantCulture);
 
             if (!String.IsNullOrEmpty(message))
                 message = string.Format("{0}\n", message);

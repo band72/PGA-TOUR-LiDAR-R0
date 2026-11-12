@@ -64,9 +64,7 @@ namespace PGA.ReportWriter
 
                     //Use lambda extension method
 
-                    //ids = b.Where(id => id.ObjectClass.DxfName.ToUpper() == "LINE" ||
 
-                    //    id.ObjectClass.DxfName.ToUpper() == "LWPOLYLINE").ToList<ObjectId>();
 
                     #endregion
 
@@ -126,9 +124,7 @@ namespace PGA.ReportWriter
 
                     //Use lambda extension method
 
-                    //ids = b.Where(id => id.ObjectClass.DxfName.ToUpper() == "LINE" ||
 
-                    //    id.ObjectClass.DxfName.ToUpper() == "LWPOLYLINE").ToList<ObjectId>();
 
                     #endregion
 
@@ -241,14 +237,6 @@ namespace PGA.ReportWriter
             _write("\n-----------------------");
 
         }
-        #region Testing Implementation
-        //[CommandMethod("PGA-Report",CommandFlags.Session)]
-        //public  void StartReportText()
-        //{
-        //    InitializeReportWriter(
-        //        @"C:\Users\Daryl-Win-8\Downloads\RTJ Grand National_819H11\TINSURF-20160224-131244\HOLE11");
-        //} 
-        #endregion
 
         public void InitializeReportWriter(string fullpath)
         {
@@ -357,7 +345,6 @@ namespace PGA.ReportWriter
                 writer.WriteStartDocument();
                 writer.WriteComment("PGA TOUR Outputs");
                 writer.WriteComment("Active Feature Report");
-                //writer.WriteComment(String.Format("Task Id: {0}", date));
                 writer.WriteComment(String.Format("Date Created: {0}", DateTime.Now));
                 writer.WriteComment(String.Format("Course Name: {0}  Code: {1}",course,code));
                 writer.WriteComment(String.Format("Hole: {0}", hole));
@@ -456,7 +443,6 @@ namespace PGA.ReportWriter
 
         private void AddFooterInfo()
         {
-            // output = Path.Combine(output, "Report.txt");
 
             string fileout = "";
             using (StreamReader reader = new StreamReader(output))
@@ -486,7 +472,6 @@ namespace PGA.ReportWriter
             try
             {
 
-                //output = Path.Combine(_output, "Report.txt");
 
                 using (StreamWriter writer = File.AppendText(output))
                 {
@@ -509,7 +494,6 @@ namespace PGA.ReportWriter
             try
             {
 
-               // output = Path.Combine(output, "Report.txt");
                
                 using (StreamWriter writer = File.AppendText(output))
                 {
@@ -531,7 +515,6 @@ namespace PGA.ReportWriter
             try
             {
 
-                // output = Path.Combine(output, "Report.txt");
 
                 using (StreamWriter writer = File.AppendText(output))
                 {

@@ -57,9 +57,6 @@ namespace PGA.SportVisionAuto
 
             // Add our command handlers
 
-            //doc.CommandEnded += OnCommandEnded;
-            //doc.CommandCancelled += OnCommandEnded;
-            //doc.CommandFailed += OnCommandEnded;
             doc.BeginDocumentClose += Doc_BeginDocumentClose;
         }
 
@@ -99,15 +96,6 @@ namespace PGA.SportVisionAuto
         {
             try
             {
-                #region Comments
-                //var doc = (Document)sender;
-                //if (doc.CommandInProgress == "DeleteDuplicates")
-                //{
-                //    if (stopwatch.Elapsed > MaxWait)
-                //    Counter++;
-                //    doc.Editor.Command("PGA-StartSportVisionSynch");
-                //} 
-                #endregion
             }
             catch (Exception ex)
             {

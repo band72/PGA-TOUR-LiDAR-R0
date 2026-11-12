@@ -57,10 +57,6 @@ namespace C3DSurfacesDemo
                 if (CivilTinSurface.FindCivilTinSurface("All"))
                 {
 
-                    #region Insert Point Cloud into Overall Surface
-
-
-                    #endregion
 
                     #region get polylines and generate surfaces and boundaries
 
@@ -86,7 +82,6 @@ namespace C3DSurfacesDemo
 
                         m_dict.Add(baseObj, internalPLines);
 
-                        //if (internalPLines == null) continue;
 
                         #endregion
                     }
@@ -96,17 +91,6 @@ namespace C3DSurfacesDemo
                     CivilTinSurface lsurface=null;
                     foreach (KeyValuePair<ObjectId, ObjectIdCollection> innerbdy in m_dict)
                     {
-                        #region Removed
-
-                        //#region Create Surface for that Base Polyline and Add outer boundary
-
-                        //if ((lsurface = (surfaceManager.CreateSelectedSurface(baseObj))) == null)
-                        //    throw new Exception("CreateSelectedSurface Failed!");
-
-                        //lsurface.AddStandardBoundary(baseObj, "OuterBoundary");
-                        //#endregion
-
-                        #endregion
 
                         if (innerbdy.Value == null) continue;
 
@@ -129,8 +113,6 @@ namespace C3DSurfacesDemo
                                 {
                                     #region Breaklines Deprecated
                                     //Breaklines removed due to overlapping
-                                    //lsurface.AddStandardBreakline
-                                    //    (PasteSurfaces.GetPolyPointsByObjectId(pLines), "Breakline-"); 
                                     #endregion
                                     lsurface.AddStandardInnerBoundary(pLines, "Boundary-");
                                 }
@@ -184,7 +166,6 @@ namespace C3DSurfacesDemo
             }
         }
 
-        //[CommandMethod("PGA-CreateSingleSurface")]
         public void CreateSingleSurface()
         {
             try
@@ -238,7 +219,6 @@ namespace C3DSurfacesDemo
 
                         m_dict.Add(baseObj, internalPLines);
 
-                        //if (internalPLines == null) continue;
 
                         #endregion
                     }
@@ -248,17 +228,6 @@ namespace C3DSurfacesDemo
                     CivilTinSurface lsurface = null;
                     foreach (KeyValuePair<ObjectId, ObjectIdCollection> innerbdy in m_dict)
                     {
-                        #region Removed
-
-                        //#region Create Surface for that Base Polyline and Add outer boundary
-
-                        //if ((lsurface = (surfaceManager.CreateSelectedSurface(baseObj))) == null)
-                        //    throw new Exception("CreateSelectedSurface Failed!");
-
-                        //lsurface.AddStandardBoundary(baseObj, "OuterBoundary");
-                        //#endregion
-
-                        #endregion
 
                         if (innerbdy.Value == null) continue;
 
@@ -281,8 +250,6 @@ namespace C3DSurfacesDemo
                                 {
                                     #region Breaklines Deprecated
                                     //Breaklines removed due to overlapping
-                                    //lsurface.AddStandardBreakline
-                                    //    (PasteSurfaces.GetPolyPointsByObjectId(pLines), "Breakline-"); 
                                     #endregion
                                     lsurface.AddStandardInnerBoundary(pLines, "Boundary-");
                                 }
@@ -374,17 +341,6 @@ namespace C3DSurfacesDemo
                     CivilTinSurface lsurface = null;
                     foreach (KeyValuePair<ObjectId, ObjectIdCollection> innerbdy in m_dict)
                     {
-                        #region Removed
-
-                        //#region Create Surface for that Base Polyline and Add outer boundary
-
-                        //if ((lsurface = (surfaceManager.CreateSelectedSurface(baseObj))) == null)
-                        //    throw new Exception("CreateSelectedSurface Failed!");
-
-                        //lsurface.AddStandardBoundary(baseObj, "OuterBoundary");
-                        //#endregion
-
-                        #endregion
 
                         if (innerbdy.Value == null) continue;
 
@@ -406,15 +362,12 @@ namespace C3DSurfacesDemo
                                 {
                                     #region Breaklines Deprecated
                                     //Breaklines removed due to overlapping
-                                    //lsurface.AddStandardBreakline
-                                    //    (PasteSurfaces.GetPolyPointsByObjectId(pLines), "Breakline-"); 
                                     #endregion
                                     lsurface.AddStandardInnerBoundary(pLines, "Boundary-");
                                 }
                                 catch (NullReferenceException e)
                                 {
                                     ACADLogging.LogMyExceptions("AddAsInnerBoundary Failed: " + e.Message);
-                                    //throw new Exception(e.Message);
                                 }
                                 internalPLines = null;
                             }
@@ -495,37 +448,13 @@ namespace C3DSurfacesDemo
             }
 
         }
-        //[CommandMethod("PGA-ExportTo3DSMax")]
-        //public static void Export3DSMax()
-        //{
-        //    PasteSurfaces surfaceManager = new PasteSurfaces();
-        //    Database db = Application.DocumentManager.MdiActiveDocument.Database;
-        //    Editor ed = Application.DocumentManager.MdiActiveDocument.Editor;
-
-        //    try
-        //    {
-        //        ObjectIdCollection surfaces = surfaceManager.GetAllSurfaces();
-
-        //        foreach (ObjectId surfaceId in surfaces)
-        //        {
-        //            using (Transaction trans = db.TransactionManager.StartTransaction())
-        //            {
-        //                TinSurface surface = trans.GetObject(surfaceId, OpenMode.ForWrite) as TinSurface;
-
-        //                surface.GetTriangles(true);
 
 
-        //                trans.Commit();
-        //            }
 
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        ACADLogging.LogMyExceptions(e.Message);
-        //    }
 
-        //}
+
+
+
         public static Autodesk.AutoCAD.DatabaseServices.ObjectIdCollection CloseSelectedPolylines()
         {
              

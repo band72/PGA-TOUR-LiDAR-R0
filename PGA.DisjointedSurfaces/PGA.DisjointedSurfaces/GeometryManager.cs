@@ -76,20 +76,7 @@ namespace PGA.DisjointedSurfaces
     
             return multipoint.Serialize();
         }
-        //public static SqlBytes SerializeSqlGeographyMultiPoint(Point2dCollection points2d)
-        //{
-        //    SqlGeometryBuilder buildpoint = new SqlGeometryBuilder();
-        //    buildpoint.SetSrid(0);
-        //    buildpoint.BeginGeometry(OpenGisGeometryType.MultiPoint);
 
-        //    foreach (Point2d point in points2d)
-        //    {
-        //        buildpoint.AddLine(point.X, point.Y, 0, null);
-        //    }
-        //    buildpoint.EndFigure();
-        //    buildpoint.EndGeometry();
-        //    return buildpoint.ConstructedGeometry.Serialize();
-        //}
         public  static Point3dCollection DerializeSqlGeographyMultiPoint(SqlBytes points)
         {
             SqlGeometry wktpoints = SqlGeometry.Deserialize(points);
@@ -113,8 +100,6 @@ namespace PGA.DisjointedSurfaces
 
         internal static byte[] ToBytes(SqlBytes b)
         { 
-           //var shb = SoapHexBinary.Parse(b.ToString());
-           // return shb.Value;
 
 
             byte[] binaryString = b.Buffer;
@@ -123,10 +108,8 @@ namespace PGA.DisjointedSurfaces
             string x = Encoding.ASCII.GetString(binaryString);
 
             //// if the original encoding was UTF-8
-            //string y = Encoding.UTF8.GetString(binaryString);
 
             //// if the original encoding was UTF-16
-            //string z = Encoding.Unicode.GetString(binaryString);
 
             return binaryString;
         }

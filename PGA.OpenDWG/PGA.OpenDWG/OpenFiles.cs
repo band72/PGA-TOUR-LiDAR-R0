@@ -26,7 +26,6 @@ namespace PGA.OpenDWG
 
         }
 
-        //[CommandMethod("DWG_Open")]
         public static void OpenDwgForReadWrite(string fileName)
         {
 
@@ -80,7 +79,6 @@ namespace PGA.OpenDWG
             Application.DocumentManager.MdiActiveDocument = doc;
         }
 
-        //[CommandMethod("DWG_Open")]
             public static
             void OpenDwgFromDatabaseLink(string fileName)
         {
@@ -153,16 +151,6 @@ namespace PGA.OpenDWG
                                 typeString =
                                     typeString.Substring(prefix.Length);
 
-                            //ed.WriteMessage(
-                            //    "\nEntity " +
-                            //    ent.ObjectId.ToString() +
-                            //    " of type " +
-                            //    typeString +
-                            //    " found on layer " +
-                            //    ent.Layer +
-                            //    " with colour " +
-                            //    ent.Color.ToString()
-                            //    );
                         }
                     }
                 }

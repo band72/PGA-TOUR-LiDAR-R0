@@ -20,7 +20,6 @@ namespace C3DSurfacesDemo
                 m_TheSurfaceId = C3DLandDb.TinSurface.Create(CivilApplicationManager.WorkingDatabase, surfaceName);
                 C3DLandDb.TinSurface surface = m_TheSurfaceId.GetObject(OpenMode.ForWrite) as C3DLandDb.TinSurface;
                 surface.Layer = surfaceStyleName;
-                // surface.Material = MaterialManager.GetMaterialForSurfaceName(surfaceName);
                 ObjectId styleId = SurfaceStyleManager.GetStyleId(surfaceStyleName);
                 if (styleId == ObjectId.Null)
                 {
@@ -384,10 +383,6 @@ namespace C3DSurfacesDemo
         {
             throw new NotImplementedException();
         }
-        //internal static bool RebuildSurfaceBySurfaceName(Dictionary<ObjectId, ObjectIdCollection> m_dict)
-        //{
-        //    CivilTinSurface.RebuildSurfaceBySurfaceName(lsurface.Name);
-        //}
     }
 
     public class Point3dEnumerable : IEnumerable<Point3d>

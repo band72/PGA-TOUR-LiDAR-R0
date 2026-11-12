@@ -161,7 +161,6 @@ namespace BBC.SkeletonSurf
                 //at a specific interval
 
                 var start     = extents.MinPoint;
-                //var distance  = start.DistanceTo(new Point3d(extents.MaxPoint.X, extents.MinPoint.Y,0));
                 var distance  = start.DistanceTo(new Point3d(extents.MinPoint.X, extents.MaxPoint.Y, 0));
                 var linterval = interval;
                 int i = 0;

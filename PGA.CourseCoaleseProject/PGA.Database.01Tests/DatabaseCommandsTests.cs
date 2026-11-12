@@ -17,13 +17,8 @@ namespace PGA.Database.Tests
         public void LoadandProcessPolysTest()
         {
             DatabaseCommands commands = new DatabaseCommands();
-           // var dwgs = commands.LoadandProcessPolys();
             var test = commands.GetTasksProjectName();
             //var tasks = (from p in context.TaskManager
-            //             where p.Started.GetValueOrDefault(false).Equals(true) &&
-            //                   p.Completed.Value == null
-            //             //p.Completed.GetValueOrDefault(false).Equals(false)
-            //             select p).FirstOrDefault();
 
 
 
@@ -33,10 +28,6 @@ namespace PGA.Database.Tests
         [TestMethod()]
         public void TestDatabaseMethod()
         {
-            //polylines = GetIdsByTypeTypeValue("POLYLINE", "LWPOLYLINE", "POLYLINE2D", "POLYLINE3d");
-            //IQueryable<string> excludedfeatures=null;
-            //using (DatabaseCommands commands = new DatabaseCommands())
-            //{
                 DatabaseCommands commands = new DatabaseCommands();
                 IList<ExcludedFeatures> excludedfeatures;
                 excludedfeatures = commands.GetAllExcludedFeatures_V2();
@@ -44,15 +35,8 @@ namespace PGA.Database.Tests
                     foreach (var str in excludedfeatures)
                     {
                         Debug.WriteLine(str.Handle.Trim());
-                        //ObjectId compare = GetObjectId(str.Trim());
-                        //if (polylines.Contains(compare))
-                        //{
-                        //    polylines.Remove(compare);
-                        //    PGA.Database.DatabaseLogs.FormatLogs("Filtered Polylines");
-                        //}
                     }
                 }
-            //}
         }
 
         [TestMethod()]

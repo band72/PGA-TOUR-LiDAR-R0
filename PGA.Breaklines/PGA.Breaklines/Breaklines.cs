@@ -172,13 +172,7 @@ namespace PGA.Breaklines
             var filename = Path.GetFileName(name);
             name = Path.Combine(directory, "BL_" + filename);
 
-            //PGA.Database.DatabaseCommands commands = new PGA.Database.DatabaseCommands();
-            //var result = commands.GetSettingsByDate(time);
-            //var drawing = Path.Combine(result.DestinationFolder, "Breaklines");
-            //if (!Directory.Exists(drawing))
-            //    Directory.CreateDirectory(drawing);
 
-            //return Path.Combine(drawing, "BL_" + name);
             return name;
         }
 
@@ -287,7 +281,6 @@ namespace PGA.Breaklines
         {
             try
             {
-                //if (polyCollection == null) throw new ArgumentNullException(nameof(polyCollection));
                 if (_polylines == null) throw new ArgumentNullException(nameof(polyCollection));
 
                 using (Transaction tr = CivilApplicationManager.StartTransaction())
@@ -310,7 +303,6 @@ namespace PGA.Breaklines
                 MessengerManager.MessengerManager.LogException(ex);
             }
 
-            // ExportToCADStack(Commands._drawingName,_time);
         }
 
         private void ExportToCADStack(string drawingname, DateTime date)
@@ -449,9 +441,7 @@ namespace PGA.Breaklines
                 using (Transaction tr = db.TransactionManager.StartTransaction())
                 {
                     C3DLandDb.TinSurface surface = surfaceId.GetObject(OpenMode.ForRead) as C3DLandDb.TinSurface;
-                    //surface.UpgradeOpen();
                     pasteSurfaces.AddStandardBoundary(polyId, name, surface);
-                    //surface.DowngradeOpen();
                     tr.Commit();
                 }
                 return true;
@@ -490,13 +480,9 @@ namespace PGA.Breaklines
                 feature.AssignElevationsFromSurface(SurfaceId, true);
                 var p3Dcollection = feature.GetPoints(FeatureLinePointType.AllPoints);
 
-                //Polyline3d poly = new Polyline3d(Poly3dType.SimplePoly, p3Dcollection, true);
-                //tr.AddNewlyCreatedDBObject(poly,true);
 
                 C3DLandDb.TinSurface surface = SurfaceId.GetObject(OpenMode.ForWrite) as C3DLandDb.TinSurface;
 
-                //ObjectIdCollection entities = new ObjectIdCollection();
-                //entities.Add(poly.ObjectId);
                 surface.BreaklinesDefinition.AddStandardBreaklines(p3Dcollection, 1.0, 2.0, 1.0, 0.0);
                 tr.Commit();
             }
@@ -528,11 +514,7 @@ namespace PGA.Breaklines
             return site;
         }
 
-        //public void SetSurfaceBuildOptions()
-        //{
-        //    CrossingBreaklinesElevationType crossing = CrossingBreaklinesElevationType.UseNone;
             
-        //}
 
         public void SetCrossingPolylinesSetting()
         {
@@ -541,7 +523,6 @@ namespace PGA.Breaklines
                 using (var doc = CivilDocument.GetCivilDocument(CivilApplicationManager.WorkingDatabase))
                 {
                     //var options =
-                    //    doc.Settings.GetSettings<C3DLandDb.SurfaceBuildOptions>();
 
                 }
 
@@ -684,10 +665,6 @@ namespace PGA.Breaklines
         /// <exception cref="System.ArgumentNullException"></exception>
         public void RemoveBoundaryOperations(ObjectId entRes)
         {
-            #region SDI Non-Session
-            // Document doc = Application.DocumentManager.MdiActiveDocument;
-            //Editor ed = doc.Editor; 
-            #endregion
 
             CivilDocument doc = CivilDocument.GetCivilDocument(CivilApplicationManager.WorkingDatabase);
 
@@ -759,8 +736,6 @@ namespace PGA.Breaklines
                 poly3d.Color = feature.Color;
                 _polylines.Add(poly3d);
 
-                //C3DLandDb.TinSurface surface = surfaceId.GetObject(OpenMode.ForWrite) as C3DLandDb.TinSurface;
-                //surface.BreaklinesDefinition.AddStandardBreaklines(p3Dcollection, 1.0, 2.0, 5.0, 0.0);
 
                 tr.Commit();
                 Debug.WriteLine("Ending OpenFeatureLineForSave");

@@ -11,7 +11,6 @@ namespace PGA.Common.AutoCAD
 {
     public class AcadDatabaseManager
     {
-       // private static readonly object DocumentManager;
 
         /// <summary>
         /// Adds the polyline.
@@ -113,7 +112,6 @@ namespace PGA.Common.AutoCAD
                 id = AddToDatabase(db, hatch, trans);
 
                 hatch.UpgradeOpen();
-                //hatch.HatchStyle = HatchStyle.Outer;
                 hatch.Associative = true;
                 hatch.PatternScale = 100.0;
                 hatch.SetHatchPattern(HatchPatternType.PreDefined, patternName);
@@ -362,11 +360,6 @@ namespace PGA.Common.AutoCAD
                 PGA.MessengerManager.MessengerManager.AddLog("End AddToDatabase");
                 return id;
             }
-            //catch (Autodesk.AutoCAD.Runtime.Exception arex)
-            //{
-            //    //PGA.MessengerManager.MessengerManager.AddLog("Object already in database", arex);
-            //    //System.Diagnostics.Debug.WriteLine(databaseObject.GetType().Name + " already in database");
-            //}
 
             catch (System.Exception ex)
             {

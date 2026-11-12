@@ -22,7 +22,6 @@ namespace PGA.Database.Tests
         [TestMethod()]
         public void GetDateTimeFromPolylineDrawingIDTest()
         {
-            //  GetDateTimeFromPolylineDrawingID();
             Assert.AreEqual(1, 1);
         }
 

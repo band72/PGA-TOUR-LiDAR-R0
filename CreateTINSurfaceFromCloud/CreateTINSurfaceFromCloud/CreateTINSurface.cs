@@ -35,71 +35,22 @@ namespace CreateTINSurfaceFromCloud
     public class CreateTINSurface
     {
 
-        //[CommandMethod("CreateFromTIN")]
-        //public void CreateFromTin()
-        //{
-        //    var civildoc = AcadApplictionDocument.GetMdiDocument();
-        //    var editor = civildoc.Editor;
 
-        //    using (
         //        Transaction ts =
         //            Application.DocumentManager.MdiActiveDocument.Database.TransactionManager.StartTransaction())
-        //    {
-        //        // Example TIN surface from Civil Tutorials:
-        //        string tinFile =
-        //            @"C:\Program Files\Autodesk\AutoCAD Civil 3D 2013\Help\Civil Tutorials\Corridor surface.tin";
-        //        try
-        //        {
-        //            Database db = Application.DocumentManager.MdiActiveDocument.Database;
-        //            ObjectId tinSurfaceId = TinSurface.CreateFromTin(db, tinFile);
-        //            editor.WriteMessage("Import succeeded: {0} \n {1}", tinSurfaceId.ToString(), db.Filename);
-        //        }
-        //        catch (System.Exception e)
-        //        {
-        //            // handle bad file path 
-        //            editor.WriteMessage("Import failed: {0}", e.Message);
-        //        }
-
-        //        // commit the transaction
-        //        ts.Commit();
-        //    }
-        //}
-
-        //[CommandMethod("CreateTINSurface")]
-        //public void CreateTINSurfaceByPointCollection()
-        //{
-
-        //    using (Transaction ts = AcadApplictionDocument.GetTransaction())
-        //    {
-        //        var doc = CivilApplicationManager.ActiveCivilDocument;
-
-        //        string surfaceName = "All";
-        //        // Select a style to use 
-
-        //        if (GetSurfaceStyle("pga-tour-style") == null)
-        //            SurfaceStyle();
-
-        //        ObjectId surfaceStyleId = GetSurfaceStyle("pga-tour-style").ObjectId;
-
-        //        if (surfaceStyleId == null) return;
-        //        // Create the surface
-        //        ObjectId surfaceId = TinSurface.Create(surfaceName, surfaceStyleId);
-
-        //        TinSurface surface = surfaceId.GetObject(OpenMode.ForWrite) as TinSurface;
-
-        //        // Add some random points
-        //        Point3dCollection points = new Point3dCollection();
-        //        points = ReadPointCloudFile.ReadFile(
-        //            @"C:\Civil 3D Projects\PGA-8.23.2016\SV", "dtm06.txt");
-
-        //        surface.AddVertices(points);
-
-        //        // commit the create action
-        //        ts.Commit();
-        //    }
 
 
-        //}
+
+
+
+
+
+
+
+
+
+
+
 
         /// <summary>
         /// Creates the tin surface by point collection.
@@ -107,42 +58,16 @@ namespace CreateTINSurfaceFromCloud
         /// <param name="points">The points.</param>
         /// <param name="polylinelayer">The polylinelayer.</param>
         /// <returns>TinSurface.</returns>
-        //public TinSurface CreateTINSurfaceByPointCollection(Point3dCollection points, string polylinelayer)
-        //{
-        //    TinSurface surface;
-
-        //    using (Transaction ts = AcadApplictionDocument.GetTransaction())
-        //    {
-        //        var doc = CivilApplicationManager.ActiveCivilDocument;
-
-        //        string surfaceName = polylinelayer;
-        //        // Select a style to use 
-
-        //        if (GetSurfaceStyle(polylinelayer) == null)
-        //            SurfaceStyle();
-
-        //        ObjectId surfaceStyleId = GetSurfaceStyle(polylinelayer).ObjectId;
-
-        //        // Create the surface
-        //        ObjectId surfaceId = TinSurface.Create(surfaceName, surfaceStyleId);
-
-        //        surface = surfaceId.GetObject(OpenMode.ForWrite) as TinSurface;
-        //        //surface.BuildOptions.MaximumTriangleLength = 20;
-        //        //surface.BuildOptions.UseMaximumTriangleLength = true;
-        //        SetDefaultBuildOptions(surface); ///Todo: 2.20.2017 
-        //        // Add some random points
-        //        //Point3dCollection points = new Point3dCollection();
-        //        //points = ReadPointCloudFile.ReadFile(path, filename);
 
 
-        //        surface.AddVertices(points);
 
-        //        // commit the create action
-        //        ts.Commit();
-        //    }
 
-        //    return surface;
-        //}
+
+
+
+
+
+
 
         /// <summary>
         /// Creates the tin surface by point collection.
@@ -161,13 +86,7 @@ namespace CreateTINSurfaceFromCloud
                 // Select a style to use 
                 ObjectId surfaceStyleId = ObjectId.Null;
                 //NO-DISPLAY
-                //if (GetSurfaceStyle("NO-DISPLAY") != null)
-                //{
-                //    if (GetSurfaceStyle("NO-DISPLAY") == null)
-                //        SurfaceStyle();
 
-                //    surfaceStyleId = GetSurfaceStyle("NO-DISPLAY").ObjectId;
-                //}
                 if (GetSurfaceStyle("Standard") != null)
                 {
                     if (GetSurfaceStyle("Standard") == null)
@@ -184,8 +103,6 @@ namespace CreateTINSurfaceFromCloud
                 SetDefaultBuildOptions(surface); ///Todo: 2.20.2017 
                 surface.UpgradeOpen();
                 
-                //surface.BuildOptions.MaximumTriangleLength = 200;
-                //surface.BuildOptions.UseMaximumTriangleLength = true;
                 //// Add some LiDAR points
                 Point3dCollection points = new Point3dCollection();
                 points = ReadPointCloudFile.ReadFile(path, filename);
@@ -346,16 +263,7 @@ namespace CreateTINSurfaceFromCloud
 
                     using (Transaction ts = CivilApplicationManager.StartTransaction())
                     {
-                        //try
-                        //{
-                        //    if (!surface.IsWriteEnabled)
-                        //        surface.UpgradeOpen();
-                        //}
-                        //catch (System.Exception ex)
-                        //{
-                        //    MessengerManager.AddLog("Open for Write Failed: " + surface.Name);
 
-                        //}
 
                         SurfacePointOutputOptions pointOutputOptions =
                             new SurfacePointOutputOptions();

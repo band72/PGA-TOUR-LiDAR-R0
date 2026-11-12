@@ -92,7 +92,6 @@ namespace PGA.DisjointedSurfaces
                         {
                             ACADDB.Database acDbNewDoc = acNewDoc.Database;
 
-                            //var ed = doc.Editor;
 
                             string gpath = Convert.ToString(GDwgPath);
 
@@ -149,7 +148,6 @@ namespace PGA.DisjointedSurfaces
 
                                         string output = SetOutPutFolder(dwg, commands);
 
-                                        // PLineToLayers.ProcessLayers(collection, wdb);                                     
                                         string fileName = System.IO.Path.GetFileNameWithoutExtension(dwg.PolylineDwgName);
                                         outdxf = Path.Combine(output, String.Format("{0}{1}", fileName, ".dxf"));
                                         outdwg = Path.Combine(output, dwg.PolylineDwgName);
@@ -177,8 +175,6 @@ namespace PGA.DisjointedSurfaces
                         {
                             Document acDocument = ACAD.Core.Application.DocumentManager.MdiActiveDocument;
                             ACADDB.Database acDbNewDoc = acDocument.Database;
-                           // if (collection != null) collection.Clear();
-                            //collection = RefreshSelectionOfPolylines(collection);
                             collection = OriginalCollection;
                             NumberofPolylines = collection.Count;
 
@@ -187,14 +183,9 @@ namespace PGA.DisjointedSurfaces
                             //Change Layer Names
                             AssignNames.ChangeLayers();
 
-                           // collection.Clear();
                             // get the copied collection of this drawing
                             ///collection = RefreshSelectionOfPolylines(collection);
 
-                            //NumberofPolylines = collection.Count;
-                            //Get the Distinct LIDAR Points
-                            //var p3d = ProcessLidarFile(
-                            //    PlineToPoints(collection), datetime, dwg.Hole.ToString());
                             var lidarFile = RetrieveLidarFile(datetime, dwg.Hole.ToString());
 
                             //Get the Nearest Neighbor to add to Point Set
@@ -202,8 +193,6 @@ namespace PGA.DisjointedSurfaces
                             Point3dCollection totalpoints = MergePoint3DCollections(lidarFile, neighbors);
                             var p5d = ProcessLidarFile(
                                 PlineToPoints(collection), datetime, dwg.Hole.ToString(), totalpoints);
-                            //var p5d = ProcessLidarFileSubtractRegions(
-                            //  PlineToPoints(collection), datetime, dwg.Hole.ToString(), totalpoints,collection);
 
      
                             //Insert into DB 
@@ -302,17 +291,8 @@ namespace PGA.DisjointedSurfaces
                                 pointindex = i;
                             }
                         }
-                        //for (int i = 0; i < p3D.Count; i++)
-                        //{
-                        //    if (Equals(p3D[i], outPoint))
-                        //        temPoint3DCollection.Add(p3D[i]);
-                        //}
                         if (maxdist < 5.0)
                             temPoint3DCollection.Add(new Point3d(point.X, point.Y, p3D[pointindex].Z));
-                       // temPoint3DCollection.Add(p3D[pointindex]);
-                        //var matchingIndex = p2d.IndexOf(outPoint);
-                        //if (matchingIndex != -1)
-                        //  temPoint3DCollection.Add(p3D[index][matchingIndex]);
                     }
                 }
                 if(temPoint3DCollection !=null) outCollection.Add(temPoint3DCollection);
@@ -391,7 +371,6 @@ namespace PGA.DisjointedSurfaces
                         pTinSurface = new CreateAllSurface.CreateTINSurface();
                         theSurface = pTinSurface.CreateTINSurfaceByPointCollection(p3D[index], layer);
                         surfaces.AddBoundariesForSurfaces(PlineToPoints(children.Oid), theSurface.ObjectId);
-                       // ACADDB.ObjectId materId = ACADDB.Material.FromAcadObject(theSurface.AcadObject);
                        
                         //adds outer
                         //Adds hide polylines
@@ -404,7 +383,6 @@ namespace PGA.DisjointedSurfaces
                             if (!PGA.AcadUtilities.AcadUtilities.CompareAreasFromPolylines(polys, children.Children[i]))
                             {
                                 surfaces.AddStandardBoundary(children.Children[i], theSurface.Name, theSurface);
-                                //theSurface.Masks.Add(mask);
                             }
                         }
                     }
@@ -479,7 +457,6 @@ namespace PGA.DisjointedSurfaces
 
             if (name == null) throw new ArgumentNullException(nameof(name));
 
-            //Point3dCollection lidarpoints = CreateAllSurface.ReadPointCloudFile.ReadFile(dir, name);
             Point2dCollection points2D = PGA.AcadUtilities.AcadUtilities.ConvertTo2d(lidarpoints);
             IList<Point3dCollection> parsecollection = new List<Point3dCollection>();
 
@@ -557,7 +534,6 @@ namespace PGA.DisjointedSurfaces
 
             if (name == null) throw new ArgumentNullException(nameof(name));
 
-            //Point3dCollection lidarpoints = CreateAllSurface.ReadPointCloudFile.ReadFile(dir, name);
             Point2dCollection points2D = PGA.AcadUtilities.AcadUtilities.ConvertTo2d(lidarpoints);
             IList<Point3dCollection> parsecollection = new List<Point3dCollection>();
 
@@ -598,7 +574,6 @@ namespace PGA.DisjointedSurfaces
                             !(AcadUtilities.AcadUtilities.CompareAreasFromPolylines
                             (subregionoid, maspolyoid)))
                         {
-                            //var outterRegion = ACADDB.Region.FromAcadObject(maspolyoid);
                             var outterRegion = AddRegion(maspolyoid);
                             var innerRegion = AddRegion(subregionoid);
 
@@ -609,23 +584,8 @@ namespace PGA.DisjointedSurfaces
                                 innerRegion.Dispose();
                                
                             }
-                            //Point3dCollection pointstodelete = new Point3dCollection();
 
-                            //int subregloc = polylineCollection.IndexOf(subregionoid);
-                            //if (subregloc != -1)
-                            //{
-                            //    ACADDB.Region.FromAcadObject(maspolyoid);
-                            //    pointstodelete = parsecollection[subregloc];
 
-                            //    for (int j = 0; j < parsecollection[subregloc].Count; j++)
-                            //    {                             
-                            //        foreach (Point3d point in pointstodelete)
-                            //        {
-                            //            if (parsecollection[masterregloc].Contains(point))
-                            //                parsecollection[masterregloc].Remove(point);
-                            //        }
-                            //    }
-                            //}
                         }
                     }
 

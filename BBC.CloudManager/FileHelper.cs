@@ -76,16 +76,6 @@ namespace BBC.CloudManager
         /// <returns>System.String.</returns>
         private static string GetBuildFullText(string civilyear, List<string> files)
         {
-            # region commented
-
-            //var t = new List<string>();
-            //t.Add("Q-Build-16149.9.16.319");
-            //t.Add("Q-Build-16149.9.16.317");
-            //t.Add("Q-Build-16149.9.16.318");
-
-            //var previousbuild = "16148.9.16.000";  
-
-            # endregion
 
             var BuildVersion =
                 from path in files
@@ -103,15 +93,6 @@ namespace BBC.CloudManager
                     minbuild = split[2].Split(new char[] {'.'}, 4)[3]
                 };
 
-            #region commented
-
-            //		 BuildVersion.Dump();
-            //		 BuildVersion.OrderByDescending(p=>p.civil).Dump();
-            //		 BuildVersion.OrderByDescending(p=>p.year).Dump();
-            //		 BuildVersion.OrderByDescending(p=>p.day).Dump();
-            //		 BuildVersion.OrderByDescending(p=>p.majbuild).Dump();  
-
-            # endregion
 
             // largest build with provided civil year 
             var result = BuildVersion.Where(p => p.civil == civilyear).OrderByDescending
@@ -169,14 +150,6 @@ namespace BBC.CloudManager
         /// <returns>System.String.</returns>
         public static string GetBuild(string civilyear, List<string> files )
         {
-            # region commented
-            //var t = new List<string>();
-            //t.Add("Q-Build-16149.9.16.319");
-            //t.Add("Q-Build-16149.9.16.317");
-            //t.Add("Q-Build-16149.9.16.318");
-
-            //var previousbuild = "16148.9.16.000";  
-            # endregion
 
             var BuildVersion =
                     from path in files
@@ -193,13 +166,6 @@ namespace BBC.CloudManager
                         minbuild = split[2].Split(new char[] { '.' }, 4)[3]
                     };
 
-            #region commented
-            //		 BuildVersion.Dump();
-            //		 BuildVersion.OrderByDescending(p=>p.civil).Dump();
-            //		 BuildVersion.OrderByDescending(p=>p.year).Dump();
-            //		 BuildVersion.OrderByDescending(p=>p.day).Dump();
-            //		 BuildVersion.OrderByDescending(p=>p.majbuild).Dump();  
-            # endregion
 
             // largest build with provided civil year 
             var result = BuildVersion.Where(p => p.civil == civilyear).OrderByDescending

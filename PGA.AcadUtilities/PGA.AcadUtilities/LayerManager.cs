@@ -35,13 +35,11 @@ namespace PGA.AcadUtilities
         /// </returns>
         public static bool IsDefined(Autodesk.AutoCAD.DatabaseServices.Database db, string layerName)
         {
-            //_logger.Debug("Start IsDefined");
             bool defined = false;
             using (Transaction trans = db.TransactionManager.StartTransaction())
             {
                 defined = IsDefined(db, trans, layerName);
             }
-            //_logger.Debug("End IsDefined");
             return defined;
         }
 
@@ -56,7 +54,6 @@ namespace PGA.AcadUtilities
         /// </returns>
         public static bool IsDefined(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string layername)
         {
-            //_logger.Debug("Start IsDefined");
             bool defined = false;
             using (LayerTable layerTable = (LayerTable)trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))
             {
@@ -65,7 +62,6 @@ namespace PGA.AcadUtilities
                     defined = true;
                 }
             }
-            //_logger.Debug("End IsDefined");
             return defined;
         }
 
@@ -77,7 +73,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static ObjectId CreateLayer(Autodesk.AutoCAD.DatabaseServices.Database db, string layername)// , string linetype, Color color, PlotStyleDescriptor poltStyle, bool plots, bool frewezeInViewPorts)
         {
-            //_logger.Debug("Start CreateLayer");
             if (db == null)
                 throw new ArgumentNullException("db", "The argument 'db' was null.");
 
@@ -91,7 +86,6 @@ namespace PGA.AcadUtilities
                 id = CreateLayer(db, trans, layername);
                 trans.Commit();
             }
-            //_logger.Debug("End CreateLayer");
             return id;
         }
 
@@ -104,7 +98,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static ObjectId CreateLayer(Autodesk.AutoCAD.DatabaseServices.Database db, string layername, Color color)
         {
-            //_logger.Debug("Start CreateLayer");
             if (db == null)
                 throw new ArgumentNullException("db", "The argument 'db' was null.");
 
@@ -121,7 +114,6 @@ namespace PGA.AcadUtilities
                 id = CreateLayer(db, trans, layername, color);
                 trans.Commit();
             }
-            //_logger.Debug("End CreateLayer");
             return id;
         }
 
@@ -161,7 +153,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static ObjectId CreateLayer(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string layername, Color color, ObjectId linetypeId)
         {
-            //_logger.Debug("Start CreateLayer");
             if (trans == null)
                 throw new ArgumentNullException("trans", "The argument 'trans' was null.");
 
@@ -192,7 +183,6 @@ namespace PGA.AcadUtilities
                 }
             }
 
-            //_logger.Debug("End CreateLayer");
             return id;
         }
 
@@ -205,7 +195,6 @@ namespace PGA.AcadUtilities
         /// <param name="layername">The layername.</param>
         public static void DeleteLayer(Autodesk.AutoCAD.DatabaseServices.Database db, string layername)
         {
-            //_logger.Debug("Start DeleteLayer");
             if (db == null)
                 throw new ArgumentNullException("db", "The argument 'db' was null.");
 
@@ -217,7 +206,6 @@ namespace PGA.AcadUtilities
                 DeleteLayer(db, trans, layername);
                 trans.Commit();
             }
-            //_logger.Debug("End DeleteLayer");
         }
         /// <summary>
         /// Deletes the layer.
@@ -228,7 +216,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static bool DeleteLayer(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string layername) //, ObjectId linetypeId, Color color, ObjectId plotStyleNameId, bool plots, bool frewezeInViewPorts)
         {
-            //_logger.Debug("Start DeleteLayer");
             if (trans == null)
                 throw new ArgumentNullException("trans", "The argument 'trans' was null.");
 
@@ -260,7 +247,6 @@ namespace PGA.AcadUtilities
                 throw;
             }
 
-            //_logger.Debug("End DeleteLayer");
             return erased;
         }
         /// <summary>
@@ -278,7 +264,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static void GetLayerColor(Autodesk.AutoCAD.DatabaseServices.Database db, string layername)
         {
-            //_logger.Debug("Start DeleteLayer");
             if (db == null)
                 throw new ArgumentNullException("db", "The argument 'db' was null.");
 
@@ -290,18 +275,15 @@ namespace PGA.AcadUtilities
                 GetLayerColor(db, trans, layername);
                 trans.Commit();
             }
-            //_logger.Debug("End DeleteLayer");
         }
         public static Color GetLayerColor(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string layername) //, ObjectId linetypeId, Color color, ObjectId plotStyleNameId, bool plots, bool frewezeInViewPorts)
         {
-            //_logger.Debug("Start DeleteLayer");
             if (trans == null)
                 throw new ArgumentNullException("trans", "The argument 'trans' was null.");
 
             if (string.IsNullOrEmpty(layername))
                 throw new ArgumentNullException("layername", "The argument 'layername' was null or empty.");
 
-           // bool erased = false;
             try
             {
                 using (LayerTable layerTable = (LayerTable)trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))
@@ -325,7 +307,6 @@ namespace PGA.AcadUtilities
                 throw;
             }
 
-            //_logger.Debug("End DeleteLayer");
             return null;
         }
 
@@ -337,14 +318,12 @@ namespace PGA.AcadUtilities
         /// <returns>The object id the layer if it exists, otherwise ObjectId.Null</returns>        
         public static ObjectId GetLayerId(Autodesk.AutoCAD.DatabaseServices.Database db, string layername)
         {
-            //_logger.Debug("Start GetLayerId");
             ObjectId layerId = ObjectId.Null;
             using(Transaction trans =  db.TransactionManager.StartTransaction())
             {
                 layerId = GetLayerId(db, trans, layername);
                 trans.Commit();
             }
-            //_logger.Debug("End GetLayerId");
             return layerId;
         }
 
@@ -357,7 +336,6 @@ namespace PGA.AcadUtilities
         /// <returns>The object id the layer if it exists, otherwise ObjectId.Null</returns>
         public static ObjectId GetLayerId(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string layername)
         {
-            //_logger.Debug("Start GetLayerId");
             ObjectId layerId = ObjectId.Null;
             using (LayerTable layerTable = (LayerTable)trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))
             {
@@ -366,7 +344,6 @@ namespace PGA.AcadUtilities
                     layerId = layerTable[layername];
                 }
             }
-            //_logger.Debug("End GetLayerId");
             return layerId;
         }
 
@@ -380,7 +357,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static ObjectIdCollection GetLayerIds(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string layerFilter, bool useWildCard)
         {
-            //_logger.Debug("Start GetLayerIds");
             if (trans == null)
                 throw new ArgumentNullException("trans", "The argument 'trans' was null.");
 
@@ -410,7 +386,6 @@ namespace PGA.AcadUtilities
                     }
                 }
             }
-            //_logger.Debug("End GetLayerIds");
             return layerIds;
         }
 
@@ -421,14 +396,12 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static IList<string> GetLayerNames(Autodesk.AutoCAD.DatabaseServices.Database db)
         {
-            //_logger.Debug("Start GetLayerNames");
             IList<string> layerNames = new List<string>();
             using(Transaction trans =  db.TransactionManager.StartTransaction())
             {
                 layerNames = GetLayerNames(db, trans);
                 trans.Commit();
             }
-            //_logger.Debug("End GetLayerNames");
             return layerNames;
         }
 
@@ -440,7 +413,6 @@ namespace PGA.AcadUtilities
         /// <returns>A list of layer names</returns>
         public static IList<string> GetLayerNames(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans)
         {
-            //_logger.Debug("Start GetLayerNames");
             IList<string> layerNames = new List<string>();
             using (LayerTable layerTable = (LayerTable)trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))
             {
@@ -452,7 +424,6 @@ namespace PGA.AcadUtilities
                     }
                 }
             }
-            //_logger.Debug("End GetLayerNames");
             return layerNames;
         }
         /// <summary>
@@ -465,7 +436,6 @@ namespace PGA.AcadUtilities
         /// <exception cref="System.ArgumentNullException">trans;The argument 'trans' was null.</exception>
         public static Color GetLayerColorByLayerId(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string layername)
         {
-            //_logger.Debug("Start GetLayerNames");
             if (trans == null)
                 throw new ArgumentNullException("trans", "The argument 'trans' was null.");
 
@@ -484,7 +454,6 @@ namespace PGA.AcadUtilities
 
                 }
             }
-            //_logger.Debug("End GetLayerNames");
             return null;
         }
         /// <summary>
@@ -495,7 +464,6 @@ namespace PGA.AcadUtilities
         /// <returns>A list of layer names</returns>
         public static IList<string> GetLayerNames(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string filter)
         {
-            //_logger.Debug("Start GetLayerNames");
             if (trans == null)
                 throw new ArgumentNullException("trans", "The argument 'trans' was null.");
 
@@ -514,7 +482,6 @@ namespace PGA.AcadUtilities
                     }
                 }
             }
-            //_logger.Debug("End GetLayerNames");
             return layerNames;
         }
 
@@ -527,14 +494,12 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static bool IsLocked(Autodesk.AutoCAD.DatabaseServices.Database db, string layerName)
         {
-            //_logger.Debug("Start IsLocked");
             bool locked = false;
             using (Transaction trans = db.TransactionManager.StartTransaction())
             {
                 locked = IsLocked(db, trans, layerName);
                 trans.Commit();
             }
-            //_logger.Debug("End IsLocked");
             return locked;
         }
 
@@ -545,14 +510,12 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static bool IsLocked(Autodesk.AutoCAD.DatabaseServices.Database db, ObjectId layerId)
         {
-            //_logger.Debug("Start IsLocked");
             bool locked = false;
             using (Transaction trans = db.TransactionManager.StartTransaction())
             {
                 locked = IsLocked(db, trans, layerId);
                 trans.Commit();
             }
-            //_logger.Debug("End IsLocked");
             return locked;
         }
 
@@ -564,14 +527,12 @@ namespace PGA.AcadUtilities
         /// <returns>A list of layer names</returns>
         public static bool IsLocked(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string layername)
         {
-            //_logger.Debug("Start IsLocked");
             bool locked = false;
             using (LayerTable layerTable = (LayerTable)trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))
             {
                 ObjectId id = layerTable[layername];
                 locked = IsLocked(db, trans, id);
             }
-            //_logger.Debug("End IsLocked");
             return locked;
         }
 
@@ -583,13 +544,11 @@ namespace PGA.AcadUtilities
         /// <returns>A list of layer names</returns>
         public static bool IsLocked(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, ObjectId layerId)
         {
-            //_logger.Debug("Start IsLocked");
             bool locked = false;             
             using (LayerTableRecord layerTableRecord = trans.GetObject(layerId, OpenMode.ForRead, false) as LayerTableRecord)
             {
                 locked = layerTableRecord.IsLocked;
             }
-            //_logger.Debug("End IsLocked");
             return locked;
         }
 
@@ -602,13 +561,11 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static void LockLayer(Autodesk.AutoCAD.DatabaseServices.Database db, string layerName, bool isLocked)
         {
-            //_logger.Debug("Start IsLocked");
             using (Transaction trans = db.TransactionManager.StartTransaction())
             {
                 LockLayer(db, trans, layerName, isLocked);
                 trans.Commit();
             }
-            //_logger.Debug("End IsLocked");
         }
 
         /// <summary>
@@ -621,7 +578,6 @@ namespace PGA.AcadUtilities
         /// <returns></returns>
         public static void LockLayer(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string layername, bool isLocked)
         {
-            //_logger.Debug("Start IsLocked");
             using (LayerTable layerTable = (LayerTable)trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))
             {
                 if (layerTable.Has(layername) == true)
@@ -634,7 +590,6 @@ namespace PGA.AcadUtilities
                     }
                 }
             }
-            //_logger.Debug("End IsLocked");
         }
 
         /// <summary>
@@ -644,13 +599,11 @@ namespace PGA.AcadUtilities
         /// <param name="isLocked">if set to <c>true</c> [is locked].</param>
         public static void LockAllLayers(Autodesk.AutoCAD.DatabaseServices.Database db, bool isLocked)
         {
-            //_logger.Debug("Start LockAllLayers");
             using (Transaction trans = db.TransactionManager.StartTransaction())
             {
                 LockAllLayers(db, trans, isLocked);
                 trans.Commit();
             }
-            //_logger.Debug("End LockAllLayers");
         }
 
         /// <summary>
@@ -661,7 +614,6 @@ namespace PGA.AcadUtilities
         /// <param name="isLocked">if set to <c>true</c> [is locked].</param>
         public static void LockAllLayers(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, bool isLocked)
         {
-            //_logger.Debug("Start LockAllLayers");
             using (LayerTable layerTable = (LayerTable)trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))
             {
                 foreach (ObjectId id in layerTable)
@@ -672,7 +624,6 @@ namespace PGA.AcadUtilities
                     }
                 }
             }
-            //_logger.Debug("End LockAllLayers");
         }
 
         #endregion
@@ -687,13 +638,11 @@ namespace PGA.AcadUtilities
         /// <param name="isFrozen">if set to <c>true</c> [is frozen].</param>
         public static void FreezeLayer(Autodesk.AutoCAD.DatabaseServices.Database db, string layerName, bool isFrozen)
         {
-            //_logger.Debug("Start FreezeLayer");
             using (Transaction trans = db.TransactionManager.StartTransaction())
             {
                 FreezeLayer(db, trans, layerName, isFrozen);
                 trans.Commit();
             }
-            //_logger.Debug("End FreezeLayer");
         }
 
         /// <summary>
@@ -705,7 +654,6 @@ namespace PGA.AcadUtilities
         /// <param name="isFrozen">if set to <c>true</c> [is frozen].</param>
         public static void FreezeLayer(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string layerName, bool isFrozen)
         {
-            //_logger.Debug("Start FreezeLayer");
             using (LayerTable layerTable = (LayerTable)trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))
             {
 
@@ -728,7 +676,6 @@ namespace PGA.AcadUtilities
                     }
                 }
             }
-            //_logger.Debug("End FreezeLayer");
         }
 
         /// <summary>
@@ -738,13 +685,11 @@ namespace PGA.AcadUtilities
         /// <param name="isFrozen">if set to <c>true</c> [is frozen].</param>
         public static void FreezeAllLayers(Autodesk.AutoCAD.DatabaseServices.Database db, bool isFrozen)
         {
-            //_logger.Debug("Start FreezeAllLayers");
             using (Transaction trans = db.TransactionManager.StartTransaction())
             {
                 FreezeAllLayers(db, trans, isFrozen);
                 trans.Commit();
             }
-            //_logger.Debug("End FreezeAllLayers");
         }
 
         /// <summary>
@@ -755,7 +700,6 @@ namespace PGA.AcadUtilities
         /// <param name="isFrozen">if set to <c>true</c> [is frozen].</param>
         public static void FreezeAllLayers(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, bool isFrozen)
         {
-            //_logger.Debug("Start FreezeAllLayers");
             using (LayerTable layerTable = (LayerTable)trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))
             {
                 string cLayerName = String.Empty;
@@ -775,7 +719,6 @@ namespace PGA.AcadUtilities
                     }
                 }
             }
-            //_logger.Debug("End FreezeAllLayers");
         }
 
         #endregion
@@ -792,14 +735,12 @@ namespace PGA.AcadUtilities
         /// </returns>
         public static bool IsOff(Autodesk.AutoCAD.DatabaseServices.Database db, string layerName)
         {
-            //_logger.Debug("Start IsOff");
             bool off = false;
             using (Transaction trans = db.TransactionManager.StartTransaction())
             {
                 off = IsOff(db, trans, layerName);
                 trans.Commit();
             }
-            //_logger.Debug("End IsOff");
             return off;
         }
 
@@ -813,14 +754,12 @@ namespace PGA.AcadUtilities
         /// </returns>
         public static bool IsOff(Autodesk.AutoCAD.DatabaseServices.Database db, ObjectId layerId)
         {
-            //_logger.Debug("Start IsOff");
             bool off = false;
             using (Transaction trans = db.TransactionManager.StartTransaction())
             {
                 off = IsOff(db, trans, layerId);
                 trans.Commit();
             }
-            //_logger.Debug("End IsOff");
             return off;
         }
 
@@ -835,14 +774,12 @@ namespace PGA.AcadUtilities
         /// </returns>
         public static bool IsOff(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string layername)
         {
-            //_logger.Debug("Start IsOff");
             bool off = false;
             using (LayerTable layerTable = (LayerTable)trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))
             {
                 ObjectId id = layerTable[layername];
                 off = IsOff(db, trans, id);
             }
-            //_logger.Debug("End IsOff");
             return off;
         }
 
@@ -857,13 +794,11 @@ namespace PGA.AcadUtilities
         /// </returns>
         public static bool IsOff(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, ObjectId layerId)
         {
-            //_logger.Debug("Start IsOff");
             bool off = false;
             using (LayerTableRecord layerTableRecord = trans.GetObject(layerId, OpenMode.ForRead, false) as LayerTableRecord)
             {
                 off = layerTableRecord.IsOff;
             }
-            //_logger.Debug("End IsOff");
             return off;
         }
 
@@ -875,13 +810,11 @@ namespace PGA.AcadUtilities
         /// <param name="isOff">if set to <c>true</c> [is off].</param>
         public static void OffLayer(Autodesk.AutoCAD.DatabaseServices.Database db, string layerName, bool isOff)
         {
-            //_logger.Debug("Start OffLayer");
             using (Transaction trans = db.TransactionManager.StartTransaction())
             {
                 OffLayer(db, trans, layerName, isOff);
                 trans.Commit();
             }
-            //_logger.Debug("End OffLayer");
         }
 
         /// <summary>
@@ -893,7 +826,6 @@ namespace PGA.AcadUtilities
         /// <param name="isOff">if set to <c>true</c> [is off].</param>
         public static void OffLayer(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, string layerName, bool isOff)
         {
-            //_logger.Debug("Start OffLayer");
             using (LayerTable layerTable = (LayerTable)trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))
             {
                 if (layerTable.Has(layerName) == true)
@@ -906,7 +838,6 @@ namespace PGA.AcadUtilities
                     }
                 }
             }
-            //_logger.Debug("End OffLayer");
         }
 
         /// <summary>
@@ -916,13 +847,11 @@ namespace PGA.AcadUtilities
         /// <param name="isOff">if set to <c>true</c> [is off].</param>
         public static void OffAllLayers(Autodesk.AutoCAD.DatabaseServices.Database db, bool isOff)
         {
-            //_logger.Debug("Start OffAllLayers");
             using (Transaction trans = db.TransactionManager.StartTransaction())
             {
                 OffAllLayers(db, trans, isOff);
                 trans.Commit();
             }
-            //_logger.Debug("End OffAllLayers");
         }
 
         /// <summary>
@@ -933,7 +862,6 @@ namespace PGA.AcadUtilities
         /// <param name="isOff">if set to <c>true</c> [is off].</param>
         public static void OffAllLayers(Autodesk.AutoCAD.DatabaseServices.Database db, Transaction trans, bool isOff)
         {
-            //_logger.Debug("Start OffAllLayers");
             using (LayerTable layerTable = (LayerTable)trans.GetObject(db.LayerTableId, OpenMode.ForWrite, false))
             {
                 foreach (ObjectId id in layerTable)
@@ -944,7 +872,6 @@ namespace PGA.AcadUtilities
                     }
                 }
             }
-            //_logger.Debug("End OffAllLayers");
         }
 
         #endregion

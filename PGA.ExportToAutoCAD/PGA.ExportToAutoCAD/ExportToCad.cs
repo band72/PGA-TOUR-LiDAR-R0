@@ -30,14 +30,11 @@ namespace PGA.ExportToAutoCAD
     public class ExportToCad
     {
         static int DWGCounter = 0;
-        //[CommandMethod("PGA-ExportToCAD", CommandFlags.Session)]
         public static void ExportDwgs()
         {
             try
             {
                 Application.SetSystemVariable("FILEDIA", 0);
-                //var path = @"C:\Users\Daryl-Win-8\Downloads\RTJ Grand National_819\DISJOINT-HOLES-2015-12-30-014212";
-                //ProcessFiles(path);
             }
             catch
             {
@@ -53,8 +50,6 @@ namespace PGA.ExportToAutoCAD
             {
                 if (file.Contains(".dwg") || file.EndsWith("DWG"))
                 {
-                    //result = Path.Combine((path),
-                    //    "ACAD-s-" + Path.GetFileName(file));
                     ExportToAutoCAD(file);
                     break;
                 }
@@ -73,7 +68,6 @@ namespace PGA.ExportToAutoCAD
                 name = "ACAD-s-" + name;
                 doc.SendStringToExecute("ExportToAutoCAD" + "\n", true, false, false);
                 doc.SendStringToExecute(name + "\n", true, false, false);
-                // doc.CloseAndDiscard();
             }
         }
 
@@ -119,7 +113,6 @@ namespace PGA.ExportToAutoCAD
                 name = "ACAD-z-" + name;
                 doc.SendStringToExecute("-ExportToAutoCAD" + "\n", true, false, false);
                 doc.SendStringToExecute(name + "\n", true, false, false);
-                // doc.CloseAndDiscard();
             }
         }
         public static void ExportZToDXF(string filename)
@@ -134,7 +127,6 @@ namespace PGA.ExportToAutoCAD
                 name = "ACAD-z-" + name;
                 doc.SendStringToExecute("-ExportToAutoCAD" + "\n", true, false, false);
                 doc.SendStringToExecute(name + "\n", true, false, false);
-                // doc.CloseAndDiscard();
             }
         }
         public static void ExportZToAutoCADCurrentDWG(string filename, long? hole)
@@ -147,15 +139,11 @@ namespace PGA.ExportToAutoCAD
                 var name = Path.GetFileName(filename);
                 var dir = Path.GetDirectoryName(filename);
                 var shole = GolfHoles.GetHoles((int) hole);
-                //dir = Path.Combine(dir, "HOLE" + shole);
                 name = "ACAD-" + name;
                 var completepath = Path.Combine(dir, name);
 
-              //  doc.SendStringToExecute("-ExportToAutoCAD" + "\n", true, false, false);
-               // doc.SendStringToExecute("-ExportToAutoCAD 2013 YES INSERT ACAD-  test" + "\n\n", true, false, false);
 
                  doc.SendStringToExecute("ExportToAutoCAD " + completepath + "\n", true, false, false);
-                //doc.CloseAndDiscard();
             }
         }
 
@@ -166,10 +154,7 @@ namespace PGA.ExportToAutoCAD
             {
                 if (commands.DWGCountExportToCAD() <= ++DWGCounter)
                 {
-                    //using (doc.LockDocument())
-                    //{
                         doc.SendStringToExecute("PGA-SendAsyncExportDWGs" + "\n", true, false, false);
-                //    }
                 }
             }
        }
@@ -180,10 +165,7 @@ namespace PGA.ExportToAutoCAD
             {
                 if (commands.DWGCountExportToCAD() <= ++DWGCounter)
                 {
-                    //using (doc.LockDocument())
-                    //{
                         doc.SendStringToExecute("PGA-CloseAllButActiveDWGs" + "\n", true, false, false);
-                    //}
                 }
             }
         }
@@ -258,36 +240,13 @@ namespace PGA.ExportToAutoCAD
                                         {
 
 
-                                           //PGA.MessengerManager.MessengerManager.AddLog("Starting Snapshot!");
 
                                             
-                                           // try
-                                           // {
-                                           //     PGA.PlotManager.PrintCommands.PublishLayouts(file.CompletePath,
-                                           //         file.Hole.ToString());
 
-                                           // }
-                                           // catch (System.Exception ex)
-                                           // {
-                                           //     PGA.MessengerManager.MessengerManager.AddLog(ex.Message);
-                                           // }
 
-                                           // try
-                                           // {
 
-                                           //     PGA.PlotManager.PlotCommands.SnapshotToFile(
-                                           //         Path.ChangeExtension(file.CompletePath, "png"),
-                                           //         VisualStyleType.Wireframe2D);
 
-                                           //     PGA.PlotManager.PlotCommands.SnapShotFromPrintScreen(
-                                           //         Path.ChangeExtension(file.CompletePath, "jpg"));
-                                           // }
-                                           // catch (System.Exception ex)
-                                           // {
-                                           //     PGA.MessengerManager.MessengerManager.AddLog(ex.Message);
-                                           // }
 
-                                           // PGA.MessengerManager.MessengerManager.AddLog("Ending Snapshot!");
 
                                         }
                                         catch (System.Exception ex)
@@ -394,8 +353,6 @@ namespace PGA.ExportToAutoCAD
 
                                     using (doc.LockDocument())
                                     {
-                                        //PGA.DrawingManager.Commands.
-                                        //CloseAllButActiveDocuments();
 
                                         if (IsZDrawing(modifiedname))
                                         {
@@ -576,11 +533,9 @@ namespace PGA.ExportToAutoCAD
                     }
                     trans.Commit();
                 }
-                //db.Save();
             }
             catch
             {
-                //db?.Dispose();
             }
         }
 
@@ -600,7 +555,6 @@ namespace PGA.ExportToAutoCAD
             string name = "";
             var doc = Application.DocumentManager.MdiActiveDocument;
             //Autodesk.AutoCAD.DatabaseServices.Database db =
-            //    Application.DocumentManager.MdiActiveDocument.Database;
             try
             {
 
@@ -718,86 +672,18 @@ namespace PGA.ExportToAutoCAD
             return new ObjectIdCollection(promptSelectionResult.Value.GetObjectIds());
         }
 
-        //public static DBObjectCollection ExtractFaces(this TinSurface surf)
-        //{
-        //    var faces = new DBObjectCollection();
-        //    foreach (var triangle in surf.GetTriangles(false))
-        //    {
-        //        var face = new Face(triangle.Vertex1.Location, triangle.Vertex2.Location, triangle.Vertex3.Location,
-        //            true, true, true, true);
-        //        faces.Add(face);
-        //    }
-        //    return faces;
-        //}
 
-        //public static void ExtractContours(ObjectId surfaceId)
-        //{
-        //    Autodesk.AutoCAD.DatabaseServices.Database db =
-        //        Application.DocumentManager.MdiActiveDocument.Database;
-        //    using (Transaction trans = db.TransactionManager.StartTransaction())
-        //    {
-        //        TinSurface surface = trans.GetObject(surfaceId, OpenMode.ForRead) as TinSurface;
 
-        //        // Extract contours from the TinSurface
-        //        ObjectIdCollection contourIds;
-        //        double contourInterval = 10.0;
-        //        contourIds = surface.ExtractContours(contourInterval);
-        //        for (int i = 0; i < contourIds.Count; i++)
-        //        {
-        //            ObjectId contourId = contourIds[i];
-        //            // Contours are lightweight Polyline objects:
 
-        //            DBObject contour = contourId.GetObject(OpenMode.ForWrite);
-        //            Polyline c = (Polyline) contour;
-        //            // Let's set a color and highlight the extracted polylines
-        //            //contour.ColorIndex = i + 1;
-        //            //contour.Highlight();
 
-        //        }
 
-        //        // Extract Triangles from the TinSurface
-        //        ObjectIdCollection triangleIds;
-        //        triangleIds = surface.ExtractGridded(SurfaceExtractionSettingsType.Model);
-        //        for (int i = 0; i < triangleIds.Count; i++)
-        //        {
-        //            ObjectId triangleId = triangleIds[i];
-        //            // Contours are lightweight Polyline objects:
-        //            Face contour = triangleId.GetObject(OpenMode.ForWrite) as Face;
-        //            // Let's set a color and highlight the extracted polylines
-        //            //contour.ColorIndex = i + 1;
-        //            //contour.Highlight();
 
-        //        }
 
-        //    }
-        //}
 
-        //public static void ExtractBorder(ObjectId surfaceId)
-        //{
-        //    Autodesk.AutoCAD.DatabaseServices.Database db =
-        //        Application.DocumentManager.MdiActiveDocument.Database;
-        //    using (Transaction trans = db.TransactionManager.StartTransaction())
-        //    {
-        //        TinSurface surface = trans.GetObject(surfaceId, OpenMode.ForRead) as TinSurface;
 
-        //        // Extract Border from the TinSurface
-        //        // The extracted entities can be Polyline, Polyline3d, or Face.
 
-        //        ObjectIdCollection entityIds;
-        //        entityIds = surface.ExtractBorder(Autodesk.Civil.SurfaceExtractionSettingsType.Model);
-        //        for (int i = 0; i < entityIds.Count; i++)
-        //        {
-        //            ObjectId entityId = entityIds[i];
-        //            if (entityId.ObjectClass == RXClass.GetClass(typeof (Polyline3d)))
-        //            {
-        //                Polyline3d border = entityId.GetObject(OpenMode.ForWrite) as Polyline3d;
-        //                // Do what you want with the extrated 3d-polyline
-        //            }
 
-        //        }
 
-        //    }
-        //}
 
         double Area(Point3d p1, Point3d p2, Point3d p3)
         {
