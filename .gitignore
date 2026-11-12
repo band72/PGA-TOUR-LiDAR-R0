@@ -259,3 +259,8 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+# Obfuscator de-obfuscation maps, AutoCAD crash dumps, VS hosting process
+*.obproj.map
+*.obproj.*.map
+acad.err
+*.vshost.exe

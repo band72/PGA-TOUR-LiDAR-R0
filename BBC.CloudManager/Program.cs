@@ -37,7 +37,6 @@ namespace BBC.CloudManager
             # region OAuth
             // Connect with Oauth2 Ask user for permission
             //String CLIENT_ID = "40682712771-98klh9ien3jf82bk6jsh6o0tt0l0hufr.apps.googleusercontent.com";
-            //String CLIENT_SECRET = "zeE-FwAoy_Ja6JrJmE7jDPQ6";      
             //DriveService service = Authentication.AuthenticateOauth(CLIENT_ID, CLIENT_SECRET, Environment.UserName);  
             # endregion
 
