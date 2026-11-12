@@ -45,9 +45,9 @@ namespace PGA.Sv.PostAudit
 
                 InitializeExportToCad();
             }
-            catch (Exception)
+            catch (Exception swallowedEx)
             {
-
+                if (_logger != null) _logger.LogException(swallowedEx);
             }
 
         }

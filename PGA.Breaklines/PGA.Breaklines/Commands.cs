@@ -1049,8 +1049,9 @@ namespace PGA.Breaklines
             {
                 sb.Append(val);
             }
-            catch (Exception)
+            catch (Exception swallowedEx)
             {
+                MessengerManager.MessengerManager.LogException(swallowedEx);
             }
             return sb.ToString();
         }

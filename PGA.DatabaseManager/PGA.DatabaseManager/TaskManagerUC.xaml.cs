@@ -74,9 +74,9 @@ namespace PGA.TaskManagerUC
                 _dataGrid.ItemsSource = null;
 
             }
-            catch (Exception)
+            catch (Exception swallowedEx)
             {
-
+                PGA.MessengerManager.MessengerManager.LogException(swallowedEx);
             }
         }
 

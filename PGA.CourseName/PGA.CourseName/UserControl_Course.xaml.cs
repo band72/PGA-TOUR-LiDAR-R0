@@ -43,9 +43,9 @@ namespace PGA.CourseName
                     LoadCourses();
                 }
             }
-            catch (Exception)
+            catch (Exception swallowedEx)
             {
-                 
+                PGA.MessengerManager.MessengerManager.LogException(swallowedEx);
             }
         }
 

@@ -205,9 +205,9 @@ namespace PGA.PolylineManager
                 }
 
             }
-            catch (System.Exception)
+            catch (System.Exception swallowedEx)
             {
-
+                PGA.MessengerManager.MessengerManager.LogException(swallowedEx);
             }
             return false;
         }

@@ -170,10 +170,9 @@ namespace PGA.Notifications
                 bubble.Visible = false;
                 bubble.Dispose();
             }
-            catch (Exception)
+            catch (Exception swallowedEx)
             {
-
-                
+                COMS.MessengerManager.LogException(swallowedEx);
             }
         }
 

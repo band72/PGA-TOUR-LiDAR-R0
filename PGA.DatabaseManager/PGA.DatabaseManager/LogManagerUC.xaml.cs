@@ -55,9 +55,9 @@ namespace PGA.LogManagerUC
                 cmdRefreshCtrl();
 
             }
-            catch (Exception)
+            catch (Exception swallowedEx)
             {
-
+                PGA.MessengerManager.MessengerManager.LogException(swallowedEx);
             }
         }
 

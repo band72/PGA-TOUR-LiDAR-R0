@@ -191,9 +191,11 @@ namespace PGA.SportVisionAuto
             }
             catch (ACADRT.Exception ex2)
             {
+                COMS.MessengerManager.LogException(ex2);
             }
             catch (Exception ex2)
             {
+                COMS.MessengerManager.LogException(ex2);
             }
 
         }
