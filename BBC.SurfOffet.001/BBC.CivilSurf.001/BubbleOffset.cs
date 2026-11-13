@@ -41,6 +41,21 @@ namespace BBC.CivilSurf
     }
 
     /// <summary>
+    /// One closed loop of the outline of a surface.
+    /// </summary>
+    public sealed class BubbleBoundaryLoop
+    {
+        /// <summary>The loop's corners in order, without repeating the first.</summary>
+        public readonly List<BubblePoint> Points = new List<BubblePoint>();
+
+        /// <summary>
+        /// How many other loops contain this one: 0 for an outer edge, 1 for a
+        /// hole, 2 for an island inside a hole, and so on.
+        /// </summary>
+        public int Depth;
+    }
+
+    /// <summary>
     /// Evaluates the true offset of a triangle mesh that is a height field.
     /// </summary>
     public sealed class BubbleOffsetSurface
@@ -310,6 +325,181 @@ namespace BBC.CivilSurf
             }
 
             return points;
+        }
+
+        /// <summary>
+        /// Finds the outline of the original surface: every closed loop of edges
+        /// that belong to only one triangle. Each loop carries its nesting depth
+        /// (0 = an outer edge, 1 = a hole, 2 = an island inside a hole, ...) and
+        /// its points carry the offset elevation.
+        /// </summary>
+        public List<BubbleBoundaryLoop> GetFootprintLoops()
+        {
+            // Count how many triangles use each edge. Corners are matched by
+            // position, so triangles do not need to share vertex objects.
+            var cornerIds = new Dictionary<long, int>();
+            var cornerIndex = new List<int>(); // id -> index into _x/_y
+            var edgeUse = new Dictionary<long, int>();
+
+            for (int t = 0; t < _triangleCount; t++)
+            {
+                if (!_hasNormal[t])
+                    continue;
+
+                int ia = CornerId(3 * t, cornerIds, cornerIndex);
+                int ib = CornerId(3 * t + 1, cornerIds, cornerIndex);
+                int ic = CornerId(3 * t + 2, cornerIds, cornerIndex);
+
+                CountEdge(ia, ib, edgeUse);
+                CountEdge(ib, ic, edgeUse);
+                CountEdge(ic, ia, edgeUse);
+            }
+
+            // Border edges, as neighbours of each corner.
+            var neighbours = new Dictionary<int, List<int>>();
+            foreach (KeyValuePair<long, int> edge in edgeUse)
+            {
+                if (edge.Value != 1)
+                    continue;
+
+                int p = (int)(edge.Key >> 32);
+                int q = (int)(edge.Key & 0xFFFFFFFFL);
+                AddNeighbour(neighbours, p, q);
+                AddNeighbour(neighbours, q, p);
+            }
+
+            // Walk the border edges into closed loops.
+            var loops = new List<BubbleBoundaryLoop>();
+            var used = new HashSet<long>();
+
+            foreach (KeyValuePair<int, List<int>> start in neighbours)
+            {
+                for (int k = 0; k < start.Value.Count; k++)
+                {
+                    if (used.Contains(EdgeKey(start.Key, start.Value[k])))
+                        continue;
+
+                    var ids = new List<int>();
+                    int current = start.Value[k];
+                    used.Add(EdgeKey(start.Key, current));
+                    ids.Add(start.Key);
+
+                    while (current != start.Key)
+                    {
+                        ids.Add(current);
+
+                        int next = -1;
+                        List<int> options = neighbours[current];
+                        for (int m = 0; m < options.Count; m++)
+                        {
+                            if (!used.Contains(EdgeKey(current, options[m])))
+                            {
+                                next = options[m];
+                                break;
+                            }
+                        }
+                        if (next < 0)
+                            break; // open chain: not a valid outline, dropped below
+
+                        used.Add(EdgeKey(current, next));
+                        current = next;
+                    }
+
+                    if (current != start.Key || ids.Count < 3)
+                        continue;
+
+                    var loop = new BubbleBoundaryLoop();
+                    for (int m = 0; m < ids.Count; m++)
+                    {
+                        int v = cornerIndex[ids[m]];
+                        double z;
+                        TryGetElevation(_x[v], _y[v], out z);
+                        loop.Points.Add(new BubblePoint(_x[v], _y[v], z));
+                    }
+                    loops.Add(loop);
+                }
+            }
+
+            // Depth = number of other loops that contain this one. The midpoint
+            // of an edge is used as the test point: loops can touch each other
+            // at a corner, but never along an edge.
+            for (int i = 0; i < loops.Count; i++)
+            {
+                List<BubblePoint> points = loops[i].Points;
+                double testX = (points[0].X + points[1].X) / 2.0;
+                double testY = (points[0].Y + points[1].Y) / 2.0;
+
+                int depth = 0;
+                for (int j = 0; j < loops.Count; j++)
+                {
+                    if (j != i && IsInsideLoop(loops[j].Points, testX, testY))
+                        depth++;
+                }
+                loops[i].Depth = depth;
+            }
+
+            return loops;
+        }
+
+        private int CornerId(int corner, Dictionary<long, int> cornerIds, List<int> cornerIndex)
+        {
+            long keyX = (long)Math.Round((_x[corner] - _minX) * 1e6);
+            long keyY = (long)Math.Round((_y[corner] - _minY) * 1e6);
+            long key = unchecked((keyX << 32) ^ (keyY & 0xFFFFFFFFL));
+
+            int id;
+            if (!cornerIds.TryGetValue(key, out id))
+            {
+                id = cornerIndex.Count;
+                cornerIds.Add(key, id);
+                cornerIndex.Add(corner);
+            }
+            return id;
+        }
+
+        private static long EdgeKey(int p, int q)
+        {
+            int low = Math.Min(p, q);
+            int high = Math.Max(p, q);
+            return ((long)low << 32) | (uint)high;
+        }
+
+        private static void CountEdge(int p, int q, Dictionary<long, int> edgeUse)
+        {
+            if (p == q)
+                return;
+
+            long key = EdgeKey(p, q);
+            int count;
+            edgeUse.TryGetValue(key, out count);
+            edgeUse[key] = count + 1;
+        }
+
+        private static void AddNeighbour(Dictionary<int, List<int>> neighbours, int from, int to)
+        {
+            List<int> list;
+            if (!neighbours.TryGetValue(from, out list))
+            {
+                list = new List<int>();
+                neighbours.Add(from, list);
+            }
+            list.Add(to);
+        }
+
+        private static bool IsInsideLoop(List<BubblePoint> loop, double x, double y)
+        {
+            bool inside = false;
+
+            for (int i = 0, j = loop.Count - 1; i < loop.Count; j = i++)
+            {
+                if ((loop[i].Y > y) != (loop[j].Y > y) &&
+                    x < (loop[j].X - loop[i].X) * (y - loop[i].Y) / (loop[j].Y - loop[i].Y) + loop[i].X)
+                {
+                    inside = !inside;
+                }
+            }
+
+            return inside;
         }
 
         private void AddSample(double x, double y, List<BubblePoint> points, HashSet<long> seen)

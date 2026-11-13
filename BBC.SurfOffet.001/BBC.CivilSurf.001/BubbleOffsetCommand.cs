@@ -131,6 +131,21 @@ namespace BBC.CivilSurf
                         newSurface.BoundariesDefinition.AddBoundaries(
                             boundaryIds, 0.2, SurfaceBoundaryType.Outer, true);
                     }
+                    else
+                    {
+                        // Without a boundary the new TIN would fill the convex
+                        // hull of its points and bridge across any concave part
+                        // of the site. Give it the outline of the original.
+                        try
+                        {
+                            AddFootprintBoundaries(newSurface, bubble.GetFootprintLoops(), bubble.Radius);
+                        }
+                        catch (System.Exception boundaryError)
+                        {
+                            ed.WriteMessage("\nWarning: the surface was created without its outline (" +
+                                            boundaryError.Message + "). Add an outer boundary manually.");
+                        }
+                    }
 
                     trans.Commit();
 
@@ -144,6 +159,82 @@ namespace BBC.CivilSurf
             {
                 ed.WriteMessage("\nBBC-CreateBubbleOffset error: " + ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Limits a surface to the outline of the surface it was offset from.
+        /// Loops are applied from the outside in: outer edges first, then holes
+        /// (hidden), then islands inside holes (shown again), and so on.
+        /// </summary>
+        private static void AddFootprintBoundaries(TinSurface surface, List<BubbleBoundaryLoop> loops, double margin)
+        {
+            if (loops.Count == 0)
+                return;
+
+            loops.Sort(delegate(BubbleBoundaryLoop a, BubbleBoundaryLoop b) { return a.Depth.CompareTo(b.Depth); });
+
+            int outerCount = 0;
+            foreach (BubbleBoundaryLoop loop in loops)
+            {
+                if (loop.Depth == 0)
+                    outerCount++;
+            }
+
+            SurfaceDefinitionBoundaries boundaries = surface.BoundariesDefinition;
+
+            // A surface takes only one outer boundary. A site made of several
+            // separate pieces is instead hidden as a whole and each piece shown.
+            bool singleOuter = outerCount == 1;
+            if (!singleOuter)
+                boundaries.AddBoundaries(EnclosingRectangle(loops, margin + 1.0), 0.2, SurfaceBoundaryType.Hide, true);
+
+            foreach (BubbleBoundaryLoop loop in loops)
+            {
+                SurfaceBoundaryType type;
+                if (loop.Depth == 0)
+                    type = singleOuter ? SurfaceBoundaryType.Outer : SurfaceBoundaryType.Show;
+                else
+                    type = loop.Depth % 2 == 1 ? SurfaceBoundaryType.Hide : SurfaceBoundaryType.Show;
+
+                boundaries.AddBoundaries(ToClosedCollection(loop.Points), 0.2, type, true);
+            }
+        }
+
+        private static Point3dCollection ToClosedCollection(List<BubblePoint> points)
+        {
+            var collection = new Point3dCollection();
+            foreach (BubblePoint point in points)
+                collection.Add(new Point3d(point.X, point.Y, point.Z));
+
+            // Repeat the first point so the loop is explicitly closed.
+            collection.Add(new Point3d(points[0].X, points[0].Y, points[0].Z));
+            return collection;
+        }
+
+        private static Point3dCollection EnclosingRectangle(List<BubbleBoundaryLoop> loops, double margin)
+        {
+            double minX = double.MaxValue, minY = double.MaxValue;
+            double maxX = double.MinValue, maxY = double.MinValue;
+            double z = loops[0].Points[0].Z;
+
+            foreach (BubbleBoundaryLoop loop in loops)
+            {
+                foreach (BubblePoint point in loop.Points)
+                {
+                    if (point.X < minX) minX = point.X;
+                    if (point.Y < minY) minY = point.Y;
+                    if (point.X > maxX) maxX = point.X;
+                    if (point.Y > maxY) maxY = point.Y;
+                }
+            }
+
+            var rectangle = new Point3dCollection();
+            rectangle.Add(new Point3d(minX - margin, minY - margin, z));
+            rectangle.Add(new Point3d(maxX + margin, minY - margin, z));
+            rectangle.Add(new Point3d(maxX + margin, maxY + margin, z));
+            rectangle.Add(new Point3d(minX - margin, maxY + margin, z));
+            rectangle.Add(new Point3d(minX - margin, minY - margin, z));
+            return rectangle;
         }
 
         /// <summary>
