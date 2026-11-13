@@ -11,7 +11,7 @@ namespace PGA.DeleteDupSurfaces
     public class OpenDwg
     {
 
-        public static string file = @"C:\Users\Daryl-Win-8\Downloads\BayHill_01\BayHill_01\BAY-HILL01.DWG";
+        public static string file = string.Empty;
 
         public static Document OpenDwgForWork(string filename)
         {

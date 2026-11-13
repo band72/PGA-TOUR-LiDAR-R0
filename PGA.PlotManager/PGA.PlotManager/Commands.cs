@@ -570,7 +570,8 @@ namespace PGA.PlotManager
 
                     // Set the page setup override
                     dsdDwgFile2.Nps = "";
-                    dsdDwgFile2.NpsSourceDwg = @"C:\Users\m4800\AppData\Roaming\Autodesk\ApplicationPlugins\PGA-CivilTinSurf2016.bundle\Contents\Template\PGA_PRINT_TMPLT.dwg";
+                    dsdDwgFile2.NpsSourceDwg = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+                                      + @"\Autodesk\ApplicationPlugins\PGA-CivilTinSurf2018.bundle\Contents\Template\PGA_PRINT_TMPLT.dwg";
                     dsdDwgFiles.Add(dsdDwgFile2);
                 }
                 #endregion
