@@ -11,7 +11,7 @@ namespace PGA.Civil.Logging
     {
 
         // Create a trace listener for the event log.
-        static readonly SystemLogger.EventLogTraceListener myTraceListener = new SystemLogger.EventLogTraceListener("c:\\myEventLogSource.txt");
+        static readonly SystemLogger.EventLogTraceListener myTraceListener = new SystemLogger.EventLogTraceListener("PGA.Common.Logging");
         static SystemLogger.TextWriterTraceListener myTextListener = null;
         static Stream myFile = null;
         public static bool LogMyExceptions(string message, Exception ex)
@@ -35,15 +35,22 @@ namespace PGA.Civil.Logging
 
         private static void SystemTracerLogMyExceptions(string message)
         {
+            try
+            {
+                // Register once; adding on every call duplicated each message N times.
+                if (!SystemLogger.Trace.Listeners.Contains(myTraceListener))
+                    SystemLogger.Trace.Listeners.Add(myTraceListener);
 
-            // Add the event log trace listener to the collection.
-            // Register once; adding on every call duplicated each message N times.
-            if (!SystemLogger.Trace.Listeners.Contains(myTraceListener))
-                SystemLogger.Trace.Listeners.Add(myTraceListener);
-
-            // Write output to the event log.
-            SystemLogger.Trace.WriteLine(message);
-
+                // Write output to the event log.
+                SystemLogger.Trace.WriteLine(message);
+            }
+            catch (System.Exception)
+            {
+                // Writing to the event log needs a registered source, which needs
+                // administrator rights. Without them, log to the text file instead.
+                SystemLogger.Trace.Listeners.Remove(myTraceListener);
+                LogTextTraceWriter(message);
+            }
         }
 
         public static bool LogMyExceptions(string message, string exception)
@@ -57,6 +64,27 @@ namespace PGA.Civil.Logging
             return true;
         }
 
+        /// <summary>
+        /// Creates the log file at the preferred path, falling back to the user's
+        /// temp folder when that location is not writable (the root of C: is not,
+        /// for users without administrator rights).
+        /// </summary>
+        private static Stream CreateLogFile(string preferredPath)
+        {
+            try
+            {
+                return File.Create(preferredPath, 4096, FileOptions.RandomAccess);
+            }
+            catch (System.Exception ex)
+            {
+                if (!(ex is UnauthorizedAccessException) && !(ex is IOException))
+                    throw;
+
+                string fallback = Path.Combine(Path.GetTempPath(), Path.GetFileName(preferredPath));
+                return File.Create(fallback, 4096, FileOptions.RandomAccess);
+            }
+        }
+
         public static int LogTextTraceWriter(string message)
         {
             string filename = "c:\\PGASurfLog.txt";
@@ -67,7 +95,7 @@ namespace PGA.Civil.Logging
             // Create a file for output named TestFile.txt.
             if (myFile == null)
             {
-                myFile = File.Create(filename, 4096, FileOptions.RandomAccess);
+                myFile = CreateLogFile(filename);
             }
             if (myTextListener == null)
             {
