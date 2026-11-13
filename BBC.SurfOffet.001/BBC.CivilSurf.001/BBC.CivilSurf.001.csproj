@@ -82,6 +82,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BubbleOffset.cs" />
+    <Compile Include="BubbleOffsetCommand.cs" />
     <Compile Include="GenerateSurfaceOffsets.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
