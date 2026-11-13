@@ -82,7 +82,9 @@ namespace ProcessPolylines
             PromptSelectionResult promptSelectionResult = oEd.SelectAll(selectionFilter);
 
             // return our new ObjectIdCollection that is "Hopefully" full of the types that we want.
-            return new ObjectIdCollection(promptSelectionResult.Value.GetObjectIds());
+            return (promptSelectionResult.Value == null
+                ? new ObjectIdCollection() // nothing matched the filter
+                : new ObjectIdCollection(promptSelectionResult.Value.GetObjectIds()));
         }
 
         public static ObjectIdCollection GetIdsByTypeCollection()

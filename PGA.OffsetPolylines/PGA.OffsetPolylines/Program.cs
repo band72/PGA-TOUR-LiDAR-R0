@@ -595,7 +595,9 @@ namespace PGA.OffsetPolylines
             PromptSelectionResult promptSelectionResult = oEd.SelectAll(selectionFilter);
 
             // return our new ObjectIdCollection that is "Hopefully" full of the types that we want.
-            return new Acaddb.ObjectIdCollection(promptSelectionResult.Value.GetObjectIds());
+            return (promptSelectionResult.Value == null
+                ? new Acaddb.ObjectIdCollection() // nothing matched the filter
+                : new Acaddb.ObjectIdCollection(promptSelectionResult.Value.GetObjectIds()));
         }
 
         /// <summary>

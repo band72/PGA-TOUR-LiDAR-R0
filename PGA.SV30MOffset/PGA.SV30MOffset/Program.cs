@@ -1832,7 +1832,8 @@ namespace PGA.SV30MOffset
         /// <returns>Acaddb.ObjectIdCollection.</returns>
         public static Acaddb.ObjectIdCollection Get3DPolylines()
         {
-            return Process.GetIdsByTypeTypeValue("POLYLINE3D");
+            // 3D polylines have DXF type "POLYLINE" (shared with 2D); callers filter by class.
+            return Process.GetIdsByTypeTypeValue("POLYLINE");
         }
 
         /// <summary>
@@ -1851,7 +1852,8 @@ namespace PGA.SV30MOffset
                     foreach (Acaddb.ObjectId o in oids)
                     {
                         var v = tr.GetObject(o, Acaddb.OpenMode.ForRead) as Acaddb.Polyline3d;
-                        outids.Add(v);
+                        if (v != null)
+                            outids.Add(v);
                     }
                     tr.Commit();
                 }
@@ -1867,7 +1869,8 @@ namespace PGA.SV30MOffset
         }
 
         /// <summary>
-        ///     Corrects the polylines.
+        ///     Corrects 3D polylines that contain vertices at elevation zero by
+        ///     interpolating those elevations from the neighbouring vertices.
         /// </summary>
         [CommandMethod("CorrectZeroPolylines")]
         public static void CorrectPolylines()
@@ -1875,15 +1878,17 @@ namespace PGA.SV30MOffset
             try
             {
                 var objects = Get3DPolylines();
-                var polylines = Convert3DPolylines(objects);
-                foreach (var pl in polylines)
+
+                using (var tr = Active.StartTransaction())
                 {
-                    using (var tr = Active.StartTransaction())
+                    foreach (Acaddb.ObjectId id in objects)
                     {
-                        var p = tr.GetObject(pl.ObjectId, Acaddb.OpenMode.ForWrite) as Acaddb.Polyline3d;
-                        CorrectPolylines(p);
-                        tr.Commit();
+                        // DXF "POLYLINE" also matches 2D polylines; the cast keeps the 3D ones.
+                        var p = tr.GetObject(id, Acaddb.OpenMode.ForRead) as Acaddb.Polyline3d;
+                        if (p != null)
+                            CorrectPolylines(p);
                     }
+                    tr.Commit();
                 }
             }
             catch (Exception ex)
@@ -1893,68 +1898,42 @@ namespace PGA.SV30MOffset
         }
 
         /// <summary>
-        ///     Corrects the polylines.
+        ///     Replaces zero elevations on the vertices of a 3D polyline with values
+        ///     interpolated from the nearest non-zero vertices.
         /// </summary>
-        /// <param name="poly">The poly.</param>
-        /// <returns>Acaddb.Polyline3d.</returns>
+        /// <param name="poly">The polyline, open in an active transaction.</param>
+        /// <returns>The polyline, or null if it could not be corrected.</returns>
         public static Acaddb.Polyline3d CorrectPolylines(Acaddb.Polyline3d poly)
         {
-            var SElev = 0.0;
-            var EElev = 0.0;
-            var SPoint = new Point3d();
-            var EPoint = new Point3d();
-            var SElevPoint = new Point3d();
-            var EElevPoint = new Point3d();
-            var collection = new Point3dCollection();
-            var updatable = new Point3dCollection();
-            var keypoints = new Point3dCollection();
-            var endpoints = new Point3dCollection();
+            if (poly == null)
+                return null;
 
             try
             {
                 using (var tr = Active.StartTransaction())
                 {
-                    foreach (Acaddb.Polyline3d p in poly)
+                    var vertices = new List<Acaddb.PolylineVertex3d>();
+                    foreach (Acaddb.ObjectId vId in poly)
                     {
-                        var pl = tr.GetObject(p.ObjectId, Acaddb.OpenMode.ForWrite) as Acaddb.Polyline3d;
-                        foreach (Acaddb.DBObjectCollection n in pl.GetOffsetCurves(0.0001))
-                        {
-                            collection = Get3DPFromPoly(n);
-
-                            var t = collection.Count;
-                            var c = 0;
-                            foreach (Point3d pnt in collection)
-                            {
-                                if (pnt.Z == 0.0)
-                                {
-                                    if (c++ == 0)
-                                    {
-                                        SElev = pnt.Z;
-                                        EElev = pnt.Z;
-                                        SPoint = pnt;
-                                        EPoint = pnt;
-                                    }
-                                    else
-                                    {
-                                        EPoint = pnt;
-                                        EElev = pnt.Z;
-                                    }
-                                    updatable.Add(pnt);
-                                }
-                                else
-                                {
-                                    keypoints.Add(pnt);
-                                }
-                            }
-                            SElevPoint = GetStartPointByIndex(SPoint, collection);
-                            EElevPoint = GetEndPointByIndex(EPoint, collection);
-
-                            endpoints.Add(SElevPoint);
-                            endpoints.Add(EElevPoint);
-                            LinearInterpolation(endpoints);
-                        }
+                        var v = tr.GetObject(vId, Acaddb.OpenMode.ForRead) as Acaddb.PolylineVertex3d;
+                        if (v != null)
+                            vertices.Add(v);
                     }
+
+                    var points = vertices.Select(v => v.Position).ToList();
+                    var elevations = InterpolateZeroElevations(points);
+
+                    for (var i = 0; i < vertices.Count; i++)
+                    {
+                        if (elevations[i] == points[i].Z)
+                            continue;
+
+                        vertices[i].UpgradeOpen();
+                        vertices[i].Position = new Point3d(points[i].X, points[i].Y, elevations[i]);
+                    }
+                    tr.Commit();
                 }
+                return poly;
             }
             catch (Exception ex)
             {
@@ -1964,120 +1943,69 @@ namespace PGA.SV30MOffset
         }
 
         /// <summary>
-        ///     Gets the start index of the point by.
+        ///     Computes corrected elevations for a run of points. Every point at
+        ///     elevation zero is linearly interpolated, by horizontal distance along
+        ///     the path, between the nearest non-zero points before and after it.
+        ///     Zero points at either end take the elevation of the nearest non-zero
+        ///     point. If no point has an elevation, nothing changes.
         /// </summary>
-        /// <param name="sPoint">The s point.</param>
-        /// <param name="collection">The collection.</param>
-        /// <returns>Point3d.</returns>
-        private static Point3d GetStartPointByIndex(Point3d sPoint, Point3dCollection collection)
+        /// <param name="points">The points in path order.</param>
+        /// <returns>One elevation per input point.</returns>
+        public static double[] InterpolateZeroElevations(IList<Point3d> points)
         {
-            var result = collection.Count;
+            const double zeroTolerance = 1e-9;
 
-            try
-            {
-                var s = collection.IndexOf(sPoint) - 1;
-                return collection[s];
-            }
-            catch (Exception ex)
-            {
-                COMS.MessengerManager.LogException(ex);
-            }
-            return collection[0];
-        }
+            var count = points.Count;
+            var elevations = new double[count];
+            var station = new double[count];
 
-        /// <summary>
-        ///     Gets the end index of the point by.
-        /// </summary>
-        /// <param name="sPoint">The s point.</param>
-        /// <param name="collection">The collection.</param>
-        /// <returns>Point3d.</returns>
-        private static Point3d GetEndPointByIndex(Point3d sPoint, Point3dCollection collection)
-        {
-            var result = collection.Count;
-            try
+            for (var i = 0; i < count; i++)
             {
-                var f = collection.IndexOf(sPoint) + 1;
-                return collection[f];
-            }
-            catch (Exception ex)
-            {
-                COMS.MessengerManager.LogException(ex);
-            }
-            return collection[result];
-        }
-
-        /// <summary>
-        ///     Get3s the dp from poly.
-        /// </summary>
-        /// <param name="o">The o.</param>
-        /// <returns>Point3dCollection.</returns>
-        private static Point3dCollection Get3DPFromPoly(Acaddb.DBObjectCollection o)
-        {
-            var collection = new Point3dCollection();
-
-            using (var tr = Active.StartTransaction())
-            {
-                foreach (Acaddb.DBObject dbob in o)
+                elevations[i] = points[i].Z;
+                if (i > 0)
                 {
-                    var p3d = dbob as Acaddb.Polyline3d;
-                    if (p3d != null)
+                    var dx = points[i].X - points[i - 1].X;
+                    var dy = points[i].Y - points[i - 1].Y;
+                    station[i] = station[i - 1] + Math.Sqrt(dx * dx + dy * dy);
+                }
+            }
+
+            var previous = -1; // index of the last non-zero point seen
+            for (var i = 0; i < count; i++)
+            {
+                if (Math.Abs(points[i].Z) > zeroTolerance)
+                {
+                    previous = i;
+                    continue;
+                }
+
+                var next = -1;
+                for (var j = i + 1; j < count; j++)
+                {
+                    if (Math.Abs(points[j].Z) > zeroTolerance)
                     {
-                        foreach (Acaddb.ObjectId vId in p3d)
-                        {
-                            var v3d =
-                                (Acaddb.PolylineVertex3d)tr.GetObject(
-                                    vId,
-                                    Acaddb.OpenMode.ForRead
-                                    );
-                            collection.Add(v3d.Position);
-                        }
+                        next = j;
+                        break;
                     }
-                    tr.Commit();
                 }
-            }
-            return collection;
-        }
 
-        /// <summary>
-        ///     Linears the interpolation.
-        /// </summary>
-        /// <param name="p">The p.</param>
-        public static void LinearInterpolation(Point3dCollection p)
-        {
-            try
-            {
-                #region Comments
-
-                // z->p0 + p1*tanh(x) + p2*tanh(y) + p3*x + p4*x*y;
-
-                #endregion
-
-                var n = 0;
-                var c = p.Count;
-                var xy = new double[c][];
-                var z = new double[c];
-
-                foreach (Point3d point in p)
+                if (previous >= 0 && next >= 0)
                 {
-                    var _x = point.X;
-                    var _y = point.Y;
-                    var _z = point.Z;
-
-                    xy[n] = new[] { _x, _y };
-                    z[n] = _z;
+                    var span = station[next] - station[previous];
+                    var ratio = span > 0.0 ? (station[i] - station[previous]) / span : 0.0;
+                    elevations[i] = points[previous].Z + (points[next].Z - points[previous].Z) * ratio;
                 }
+                else if (previous >= 0)
+                {
+                    elevations[i] = points[previous].Z;
+                }
+                else if (next >= 0)
+                {
+                    elevations[i] = points[next].Z;
+                }
+            }
 
-                var result = Fit.LinearMultiDim(xy, z,
-                    d => 1.0, // p0*1.0
-                    d => Math.Tanh(d[0]), // p1*tanh(x)
-                    d => Math.Tanh(d[1]), // p2*tanh(y)
-                    d => d[0], // p3*x
-                    d => d[0] * d[1]); // p4*x*y
-            }
-            catch (Exception ex)
-            {
-                COMS.MessengerManager.LogException(ex);
-            }
+            return elevations;
         }
 
         [CommandMethod("PGA-PB")]

@@ -658,7 +658,9 @@ namespace PGA.ExportToAutoCAD
             PromptSelectionResult promptSelectionResult = oEd.SelectAll(selectionFilter);
 
             // return our new ObjectIdCollection that is "Hopefully" full of the types that we want.
-            return new ObjectIdCollection(promptSelectionResult.Value.GetObjectIds());
+            return (promptSelectionResult.Value == null
+                ? new ObjectIdCollection() // nothing matched the filter
+                : new ObjectIdCollection(promptSelectionResult.Value.GetObjectIds()));
         }
 
         double Area(Point3d p1, Point3d p2, Point3d p3)
